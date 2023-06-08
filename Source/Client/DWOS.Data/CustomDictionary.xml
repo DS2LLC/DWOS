@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>PlugIn</Word>
+      <Word>Dwos</Word>
+    </Recognized>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>DWOS</Acronym>
+      <Acronym>COC</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

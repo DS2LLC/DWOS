@@ -1,0 +1,187 @@
+﻿<local:CalculatorWindow x:Class="DWOS.UI.Utilities.Calculators.MarkupWindow"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                        xmlns:ig="http://schemas.infragistics.com/xaml"
+                        xmlns:igEditors="http://infragistics.com/Editors"
+                        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+                        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+                        xmlns:local="clr-namespace:DWOS.UI.Utilities.Calculators"
+                        mc:Ignorable="d"
+                        Loaded="CalculatorWindow_Loaded"
+                        Title="Markup"
+                        Icon="/DWOS.UI;component/Resources/images/Calculator_16.png"
+                        WindowStartupLocation="CenterScreen"
+                        Width="350"
+                        Height="300">
+    <local:CalculatorWindow.Resources>
+        <igEditors:ComboBoxItemsProvider x:Key="markupTypes">
+            <igEditors:ComboBoxDataItem DisplayText="Fixed"
+                                        Value="Fixed" />
+            <igEditors:ComboBoxDataItem DisplayText="Percentage"
+                                        Value="Percentage" />
+        </igEditors:ComboBoxItemsProvider>
+
+        <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type igWPF:XamNumericEditor}"
+               x:Key="percentEditor">
+            <Setter Property="Mask"
+                    Value="-nnnn.nnnn %" />
+        </Style>
+
+        <Style TargetType="{x:Type igWPF:XamCurrencyEditor}"
+               x:Key="currencyEditor">
+            <Setter Property="Mask"
+                    Value="{}{currency:-6.4}" />
+        </Style>
+    </local:CalculatorWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Add & Remove Buttons-->
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="5">
+            <Button Margin="0,0,3,0"
+                    Command="{Binding AddCommand}">
+                <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                       Style="{StaticResource buttonImage}"></Image>
+            </Button>
+            <Button Command="{Binding RemoveCommand}">
+                <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                       Style="{StaticResource buttonImage}"></Image>
+            </Button>
+        </StackPanel>
+
+        <!-- Markup Items Grid -->
+        <igWPF:XamDataGrid Grid.Row="1"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           DataSource="{Binding MarkupItems}"
+                           SelectedDataItems="{Binding SelectedItems}"
+                           SelectedDataItemsScope="RecordsOrCells"
+                           GroupByAreaLocation="None"
+                           Margin="5,0,5,5"
+                           InitializeRecord="DataGrid_InitializeRecord">
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                           SelectionTypeRecord="Single" />
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+            <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout>
+                    <igWPF:Field Name="Name"
+                                 Label="Name"
+                                 Width="Auto" />
+                    <igWPF:Field Name="Amount"
+                                 Label="Amount"
+                                 Width="*" />
+                    <igWPF:Field Name="MarkupType"
+                                 Label=" Markup Type"
+                                 Width="Auto"
+                                 EditorType="{x:Type igEditors:XamComboEditor}">
+                        <igWPF:Field.Settings>
+                            <igWPF:FieldSettings EditorType="{x:Type igEditors:XamComboEditor}"
+                                                 DataItemUpdateTrigger="OnCellValueChange">
+                                <igWPF:FieldSettings.EditorStyle>
+                                    <Style TargetType="{x:Type igEditors:XamComboEditor}">
+                                        <Setter Property="ItemsProvider"
+                                                Value="{StaticResource markupTypes}" />
+                                    </Style>
+                                </igWPF:FieldSettings.EditorStyle>
+                            </igWPF:FieldSettings>
+                        </igWPF:Field.Settings>
+                    </igWPF:Field>
+                </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+
+        <!-- Total -->
+        <Grid Grid.Row="2"
+              Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="Total Cost Per Part:" />
+
+            <igWPF:XamNumericEditor Grid.Row="0"
+                                    Grid.Column="1"
+                                    IsReadOnly="True"
+                                    IsTabStop="False"
+                                    Mask="{}{currency:-6.4:c}"
+                                    ValueType="{x:Type sys:Decimal}"
+                                    Value="{Binding TotalCost, Mode=OneWay}">
+                <igWPF:XamNumericEditor.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Total Cost Per Part"
+                                             ToolTipText="The total cost of a single part" />
+                </igWPF:XamNumericEditor.ToolTip>
+            </igWPF:XamNumericEditor>
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="0,5,0,0"
+                   FontWeight="Bold"
+                   Content="Total Markup Per Part:" />
+
+            <igWPF:XamNumericEditor Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontWeight="Bold"
+                                    Margin="0,5,0,0"
+                                    IsReadOnly="True"
+                                    IsTabStop="False"
+                                    Mask="{}{currency:-6.4:c}"
+                                    ValueType="{x:Type sys:Decimal}"
+                                    Value="{Binding TotalMarkup, Mode=OneWay}">
+
+                <igWPF:XamNumericEditor.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Total Markup Per Part"
+                                             ToolTipText="The total markup to charge for a single part" />
+                </igWPF:XamNumericEditor.ToolTip>
+            </igWPF:XamNumericEditor>
+        </Grid>
+
+        <!-- OK & Cancel -->
+        <StackPanel Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Style="{StaticResource buttonStandard}"
+                    IsDefault="True"
+                    Content="OK"
+                    Click="OKButton_Click" />
+
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</local:CalculatorWindow>

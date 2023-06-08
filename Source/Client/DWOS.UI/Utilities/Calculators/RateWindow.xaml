@@ -1,0 +1,324 @@
+﻿<local:CalculatorWindow x:Class="DWOS.UI.Utilities.Calculators.RateWindow"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:ig="http://schemas.infragistics.com/xaml"
+                        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+                        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+                        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                        xmlns:local="clr-namespace:DWOS.UI.Utilities.Calculators"
+                        mc:Ignorable="d"
+                        Height="270"
+                        Width="525"
+                        WindowStartupLocation="CenterScreen"
+                        Icon="/DWOS.UI;component/Resources/images/Calculator_16.png"
+                        Title="Rate Calculator"
+                        Loaded="CalculatorWindow_Loaded">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Style.Triggers>
+                    <Trigger Property="IsReadOnly"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="mathSign"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontWeight"
+                        Value="Bold" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="FontSize"
+                        Value="18" />
+            </Style>
+
+            <Style x:Key="fieldLabel"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontWeight"
+                        Value="Bold" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Padding"
+                        Value="0" />
+            </Style>
+
+            <Style x:Key="totalFieldLabel"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource fieldLabel}">
+                <Setter Property="FontSize"
+                        Value="14" />
+            </Style>
+
+            <Style x:Key="totalField"
+                   TargetType="{x:Type igWPF:XamNumericEditor}"
+                   BasedOn="{StaticResource {x:Type igWPF:XamNumericEditor}}">
+                <Setter Property="FontSize"
+                        Value="18" />
+                <Setter Property="FontWeight"
+                        Value="Bold" />
+            </Style>
+
+            <Style x:Key="middleSeparator"
+                   TargetType="{x:Type Separator}">
+                <Setter Property="Margin"
+                        Value="0, 5, 0, 5" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ig:ThemeManager.Theme>
+            <ig:Office2013Theme />
+        </ig:ThemeManager.Theme>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="0">
+            <Grid Grid.Row="0"
+                  HorizontalAlignment="Right"
+                  Margin="10,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Minutes Per Hour -->
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Minutes Per Hour" />
+                <igWPF:XamNumericEditor Grid.Row="1"
+                                        Grid.Column="0"
+                                        IsReadOnly="True"
+                                        IsTabStop="False"
+                                        Value="60"
+                                        Mask="nn"
+                                        ValueType="{x:Type sys:Int32}" />
+
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Style="{StaticResource mathSign}"
+                       Content="×" />
+
+                <!-- Feet Per Minute -->
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Feet Per Minute" />
+                <igWPF:XamNumericEditor Grid.Row="1"
+                                        Grid.Column="2"
+                                        EditModeStarted="Editor_EditModeStarted"
+                                        ValueType="{x:Type sys:Decimal}"
+                                        Value="{Binding FeetPerMinute}"
+                                        Margin="1"
+                                        Mask="-n,nnn,nnn,nnn.nn">
+                    <igWPF:XamNumericEditor.ValueConstraint>
+                        <igWPF:ValueConstraint MinInclusive="0" />
+                    </igWPF:XamNumericEditor.ValueConstraint>
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Feet Per Minute"
+                                                 ToolTipText="The production line's speed" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+
+                <Label Grid.Row="1"
+                       Grid.Column="3"
+                       Style="{StaticResource mathSign}"
+                       Content="÷" />
+
+                <!-- Rack Spacing -->
+                <Label Grid.Row="0"
+                       Grid.Column="4"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Rack Spacing (Feet)" />
+                <igWPF:XamNumericEditor Grid.Row="1"
+                                        Grid.Column="4"
+                                        EditModeStarted="Editor_EditModeStarted"
+                                        ValueType="{x:Type sys:Decimal}"
+                                        Value="{Binding RackSpacing}"
+                                        Mask="-n,nnn,nnn,nnn.nn">
+                    <igWPF:XamNumericEditor.ValueConstraint>
+                        <igWPF:ValueConstraint MinInclusive="0" />
+                    </igWPF:XamNumericEditor.ValueConstraint>
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Rack Spacing"
+                                                 ToolTipText="Distance (in feet) between racks on line" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+                <Label Grid.Row="1"
+                       Grid.Column="5"
+                       Style="{StaticResource mathSign}"
+                       Content="=" />
+
+                <!-- Racks Per Hour -->
+                <Label Grid.Row="0"
+                       Grid.Column="6"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Racks Per Hour" />
+                <igWPF:XamNumericEditor Grid.Row="1"
+                                        Grid.Column="6"
+                                        IsReadOnly="True"
+                                        IsTabStop="False"
+                                        ValueType="{x:Type sys:Decimal}"
+                                        Value="{Binding RacksPerHour, Mode=OneWay}"
+                                        Mask="-n,nnn,nnn,nnn.nn">
+
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Racks Per Hour"
+                                                 ToolTipText="The number of racks processed in an hour" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+
+                <Separator Grid.Row="2"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="7"
+                           Style="{StaticResource middleSeparator}" />
+
+                <!-- Bars Per Rack -->
+                <Label Grid.Row="3"
+                       Grid.Column="2"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Bars Per Rack" />
+                <igWPF:XamNumericEditor Grid.Row="4"
+                                        Grid.Column="2"
+                                        EditModeStarted="Editor_EditModeStarted"
+                                        ValueType="{x:Type sys:Int32}"
+                                        Value="{Binding BarsPerRack}">
+                    <igWPF:XamNumericEditor.ValueConstraint>
+                        <igWPF:ValueConstraint MinInclusive="0" />
+                    </igWPF:XamNumericEditor.ValueConstraint>
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Bars Per Rack"
+                                                 ToolTipText="The number of bars for each rack" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+
+                <Label Grid.Row="4"
+                       Grid.Column="3"
+                       Style="{StaticResource mathSign}"
+                       Content="×" />
+
+                <!-- Parts Per Bar -->
+                <Label Grid.Row="3"
+                       Grid.Column="4"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Parts Per Bar" />
+                <igWPF:XamNumericEditor Grid.Row="4"
+                                        Grid.Column="4"
+                                        EditModeStarted="Editor_EditModeStarted"
+                                        ValueType="{x:Type sys:Int32}"
+                                        Value="{Binding PartsPerBar}">
+                    <igWPF:XamNumericEditor.ValueConstraint>
+                        <igWPF:ValueConstraint MinInclusive="0" />
+                    </igWPF:XamNumericEditor.ValueConstraint>
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Parts Per Bar"
+                                                 ToolTipText="The number of parts racked on each bar" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+
+                <Label Grid.Row="4"
+                       Grid.Column="5"
+                       Style="{StaticResource mathSign}"
+                       Content="=" />
+
+                <!-- Parts Per Rack -->
+                <Label Grid.Row="3"
+                       Grid.Column="6"
+                       Style="{StaticResource fieldLabel}"
+                       Content="Parts Per Rack" />
+                <igWPF:XamNumericEditor Grid.Row="4"
+                                        Grid.Column="6"
+                                        IsReadOnly="True"
+                                        IsTabStop="False"
+                                        ValueType="{x:Type sys:Int32}"
+                                        Value="{Binding PartsPerRack, Mode=OneWay}">
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Parts Per Rack"
+                                                 ToolTipText="The number of parts racked on all bars in a rack" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+
+                <Separator Grid.Row="5"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="7"
+                           Style="{StaticResource middleSeparator}" />
+
+                <Label Grid.Row="7"
+                       Grid.Column="2"
+                       Grid.ColumnSpan="3"
+                       HorizontalAlignment="Right"
+                       Style="{StaticResource totalFieldLabel}"
+                       Content="Racks Per Hour × Parts Per Rack" />
+
+                <Label Grid.Row="7"
+                       Grid.Column="5"
+                       Style="{StaticResource mathSign}"
+                       Content="=" />
+
+                <!-- Parts Per Hour -->
+                <Label Grid.Row="6"
+                       Grid.Column="6"
+                       Style="{StaticResource totalFieldLabel}"
+                       Content="Parts Per Hour" />
+                <igWPF:XamNumericEditor Grid.Row="7"
+                                        Grid.Column="6"
+                                        IsReadOnly="True"
+                                        IsTabStop="False"
+                                        Style="{StaticResource totalField}"
+                                        ValueType="{x:Type sys:Decimal}"
+                                        Value="{Binding PartsPerHour, Mode=OneWay}"
+                                        Mask="-n,nnn,nnn,nnn.nn">
+                    <igWPF:XamNumericEditor.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Parts Per Hour"
+                                                 ToolTipText="The number of parts produced in an hour" />
+                    </igWPF:XamNumericEditor.ToolTip>
+                </igWPF:XamNumericEditor>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- OK & Cancel -->
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Style="{StaticResource buttonStandard}"
+                    IsDefault="True"
+                    Content="OK"
+                    Click="OKButton_Click" />
+
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</local:CalculatorWindow>

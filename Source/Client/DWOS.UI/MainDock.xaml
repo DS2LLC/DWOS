@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="DWOS.UI.MainDock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"  
+             xmlns:local="clr-namespace:DWOS.UI.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" KeyDown="MainDock_OnKeyDown">
+    <Grid>
+        <igWPF:XamDockManager x:Name="dockManager" Theme="Office2013">
+            <igWPF:DocumentContentHost>
+                <igWPF:SplitPane>
+                    <igWPF:TabGroupPane x:Name="primaryTabGroup">
+                    </igWPF:TabGroupPane>
+                </igWPF:SplitPane>
+            </igWPF:DocumentContentHost>
+        </igWPF:XamDockManager>
+    </Grid>
+</UserControl>

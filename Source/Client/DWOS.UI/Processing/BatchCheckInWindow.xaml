@@ -1,0 +1,56 @@
+﻿<Window x:Class="DWOS.UI.Processing.BatchCheckInWindow"
+        xmlns:igThemes="http://infragistics.com/Themes"
+        xmlns:igEditors="http://infragistics.com/Editors"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        xmlns:ig="http://schemas.infragistics.com/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Height="150"
+        Width="400"
+        Title="Batch Check In"
+        WindowStartupLocation="CenterScreen"
+        Initialized="MetroWindow_Initialized"
+        Icon="/DWOS.UI;component/Resources/images/Batch16.png"
+        Style="{StaticResource ToolWindow}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="batchInfo" Grid.Row="0" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+          
+            <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Batch:</Label>
+            <igEditors:XamComboEditor x:Name="cboBatch" DisplayMemberPath="BatchID" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="2" ToolTip="Select the batch to check-in to the current department." VerticalAlignment="Center" >
+                <igEditors:XamComboEditor.ComboBoxStyle>
+                    <Style TargetType="{x:Type ComboBox}">
+                        <Setter Property="IsTextSearchEnabled" Value="True"/>
+                    </Style>
+                </igEditors:XamComboEditor.ComboBoxStyle>
+            </igEditors:XamComboEditor>
+            
+            <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Department:</Label>
+            <igEditors:XamTextEditor x:Name="txtDepartment" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="2" Text="" Foreground="DarkGray"/>
+        </Grid>
+
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+            <Button Name="btnOK" Width="75" Height="25" Grid.Row="1" Grid.Column="0" Margin="5" IsDefault="True" Click="btnOK_Click">OK</Button>
+            <Button Width="75" Height="25" Grid.Row="1" Grid.Column="0" Margin="5" IsCancel="True">CANCEL</Button>
+        </StackPanel>
+    </Grid>
+</Window>

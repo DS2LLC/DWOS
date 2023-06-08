@@ -1,0 +1,61 @@
+﻿<Window x:Class="DWOS.UI.Admin.ReportScheduleManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:reportSchedule="clr-namespace:DWOS.UI.Admin.ReportSchedule"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        mc:Ignorable="d"
+        Width="450"
+        Height="250"
+        Loaded="Window_Loaded"
+        Title="Notification Schedule Manager"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource ToolWindow}">
+    <Window.DataContext>
+        <reportSchedule:DialogViewModel x:Name="ViewModel"
+                                        Accepted="ViewModel_Accepted" />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type reportSchedule:ReportScheduleItem}">
+            <utilities:ReportScheduleEditor ReportName="{Binding ReportName}"
+                                            Schedule="{Binding Schedule}" />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="100"
+                                  Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0"
+                     ItemsSource="{Binding Items}"
+                     SelectedItem="{Binding SelectedItem}"
+                     IsEnabled="{Binding IsValid}"
+                     DisplayMemberPath="ReportName" />
+            <ScrollViewer Grid.Column="1"
+                          VerticalScrollBarVisibility="Auto">
+                <ContentPresenter Content="{Binding SelectedItem}"
+                                  Margin="5"/>
+            </ScrollViewer>
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Save"
+                    Style="{StaticResource buttonStandard}"
+                    Command="{Binding Save}" />
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,428 @@
+﻿<Window x:Class="DWOS.UI.Sales.BatchOrderPanels.BatchEditorWindow"
+        xmlns:igThemes="http://infragistics.com/Themes"
+        xmlns:igEditors="http://infragistics.com/Editors"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        xmlns:ig="http://schemas.infragistics.com/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:DWOS.UI.Sales.BatchOrderPanels"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Height="500"
+        Width="600"
+        Title="Batch Editor"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded"
+        SnapsToDevicePixels="True"
+        Style="{StaticResource ToolWindow}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="5, 0, 5, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="{StaticResource colorbrushMain}">BATCH
+                </Label>
+                <Separator Margin="5,0,5,0" Grid.Column="1" VerticalAlignment="Center" Background="{StaticResource colorbrushMain}"/>
+            </Grid>
+
+            <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Batch:</Label>
+            <TextBox x:Name="txtBatch" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="2" Text="" Foreground="DarkGray">
+                <TextBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Batch Id" ToolTipText="The system defined number of the batch."></utilities:HeaderToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">Status:</Label>
+            <TextBox x:Name="txtStatus"
+                     Grid.Row="1"
+                     Grid.Column="3"
+                     IsReadOnly="True"
+                     Margin="2"
+                     Text=""
+                     Foreground="DarkGray">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Status"
+                                             ToolTipText="The status of the batch." />
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <Label Grid.Row="2" Grid.Column="0" Margin="0" VerticalAlignment="Center">Fixture:</Label>
+            <TextBox x:Name="txtFixture"
+                     Grid.Row="2"
+                     Margin="2"
+                     Grid.Column="1"
+                     Text="">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Fixture"
+                                             ToolTipText="The ID of the rack containing the batch." />
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <Label Grid.Row="2" Grid.Column="2" VerticalAlignment="Center">Location:</Label>
+            <TextBox x:Name="txtLocation"
+                     Grid.Row="2"
+                     Margin="2"
+                     Grid.Column="3"
+                     IsReadOnly="True"
+                     Text=""
+                     Foreground="DarkGray">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Location"
+                                             ToolTipText="The department location of the batch." />
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <Label Grid.Row="3" Grid.Column="0" x:Name="lblLine" VerticalAlignment="Center">Line:</Label>
+            <ComboBox x:Name="cboLine"
+                      Grid.Row="3"
+                      Margin="2"
+                      Grid.Column="1"
+                      IsReadOnly="True"
+                      DisplayMemberPath="Name">
+                <ComboBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Line"
+                                             ToolTipText="The current line of the batch." />
+                </ComboBox.ToolTip>
+            </ComboBox>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Margin="5, 0, 5, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="{StaticResource colorbrushMain}">ORDERS</Label>
+                <Separator Margin="5,0,5,0" Grid.Column="1" VerticalAlignment="Center" Background="{StaticResource colorbrushMain}" />
+            </Grid>
+
+            <Button x:Name="btnAddOrder" Width="24" Height="24" Grid.Row="1" Grid.Column="0" Margin="0,3,0,0" Click="AddOrder_Click">
+                <Image Source="/DWOS.UI;component/Resources/images/Add_16.png" Style="{StaticResource buttonImage}"></Image>
+                <Button.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Add Order" ToolTipText="Add a new order to the batch."></utilities:HeaderToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="btnDeleteOrder" Width="24" Height="24" Grid.Row="2" Grid.Column="0" Margin="0,3,0,0" Click="btnRemoveOrder_Click" ToolTipService.ShowOnDisabled="True">
+                <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png" Style="{StaticResource buttonImage}"></Image>
+                <Button.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Remove Order" ToolTipText="Remove the selected order from the batch."></utilities:HeaderToolTip>
+                </Button.ToolTip>
+            </Button>
+
+             <Button x:Name="btnSplitOrder" Width="24" Height="24" Grid.Row="3" Grid.Column="0" Margin="0,3,0,0" Click="btnSplitOrder_Click" ToolTipService.ShowOnDisabled="True">
+                <Image Source="/DWOS.UI;component/Resources/images/Order_Split_16.png" Style="{StaticResource buttonImage}"></Image>
+                <Button.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Split Order" ToolTipText="Split the order into two orders so each order can be processed individually."></utilities:HeaderToolTip>
+                </Button.ToolTip>
+            </Button>
+            
+            <ToggleButton x:Name="btnCalculator" Grid.Row="4" Grid.Column="0" Margin="0,3,0,3" VerticalAlignment="Bottom">
+                <Grid>
+                    <Image Source="/DWOS.UI;component/Resources/images/Calculator_16.png" Width="16" Height="16"></Image>
+                    <Popup x:Name="settingPopUp" Placement="RelativePoint" PopupAnimation="Slide" StaysOpen="False" IsOpen="{Binding IsChecked, ElementName=btnCalculator}" AllowsTransparency="True" Opened="calculator_Opened">
+                        <Border Background="White" BorderBrush="DarkGray" BorderThickness="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.Resources>
+                                    <SolidColorBrush x:Key="BlackBrush" Color="Black" />
+                                </Grid.Resources>
+                                
+                                <Label Grid.Column="0" Grid.Row="0" Margin="0" FontSize="12">AMPERAGE CALCULATOR</Label>
+                                <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Source="/DWOS.UI;component/Resources/images/info_16.png" Width="16" Margin="3,0,5,0">
+                                    <Image.ToolTip>
+                                        <utilities:HeaderToolTip ToolTipHeader="Amperage Calculator" ToolTipText="The amperage calculator helps determine the total amperage based on the amps required per square foot and total surface area."></utilities:HeaderToolTip>
+                                    </Image.ToolTip>
+                                </Image>
+
+                                <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Margin="15,0,0,5" Orientation="Horizontal">
+                                    <TextBox x:Name="txtTotalSurfaceArea" Width="80" Margin="3,3,0,3" VerticalAlignment="Center" IsEnabled="False"  HorizontalContentAlignment="Center" Text="1">
+                                        <TextBox.ToolTip>
+                                            <utilities:HeaderToolTip ToolTipHeader="Total Surface Area" ToolTipText="The total surface area of all orders in the batch."></utilities:HeaderToolTip>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <Label  VerticalAlignment="Center" Margin="-2,3,0,3">ft²</Label>
+                                    
+                                    <Label VerticalAlignment="Center" FontWeight="Bold">X</Label>
+                                    <TextBox x:Name="txtAmpsSF" Width="80" Margin="3,3,0,3" VerticalAlignment="Center" TextChanged="txtAmpsSF_TextChanged" HorizontalContentAlignment="Center">
+                                        <TextBox.ToolTip>
+                                            <utilities:HeaderToolTip ToolTipHeader="Amps per Square Foot" ToolTipText="The desired amps per square foot required for the batch"></utilities:HeaderToolTip>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <Label  VerticalAlignment="Center" Margin="-2,3,0,3">amps/ft²</Label>
+                                    
+                                    <Label VerticalAlignment="Center">=</Label>
+
+                                    <TextBox x:Name="txtTotalAmps" Width="80" Margin="3,3,0,3" VerticalAlignment="Center" TextChanged="txtTotalAmps_TextChanged"  HorizontalContentAlignment="Center" Text="300">
+                                        <TextBox.ToolTip>
+                                            <utilities:HeaderToolTip ToolTipHeader="Total Amps" ToolTipText="The total amps required to acheived desired amps per square foot based on the batch's surface area."></utilities:HeaderToolTip>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <Label  VerticalAlignment="Center" Margin="-2,3,0,3">amps</Label>
+                                </StackPanel> 
+                            </Grid>
+                        </Border>
+                    </Popup>
+                    <Grid.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Calculators" ToolTipText="Click to view the calculators."></utilities:HeaderToolTip>
+                    </Grid.ToolTip>
+                </Grid>
+            </ToggleButton>
+
+            <igWPF:XamDataGrid x:Name="grdOrders"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               Grid.RowSpan="4"
+                               MinHeight="125"
+                               Margin="3"
+                               SelectedItemsChanged="grdOrders_SelectedItemsChanged"
+                               BorderBrush="{StaticResource Highlight}"
+                               BorderThickness="1"
+                               GroupByAreaLocation="None"
+                               UpdateMode="OnCellChangeOrLostFocus"
+                               InitializeRecord="grdOrders_InitializeRecord">
+                <igWPF:XamDataGrid.Resources>
+                    <Style TargetType="{x:Type igEditors:XamNumericEditor}" x:Key="fieldWeightStyle">
+                        <Setter Property="Mask" Value="nnn,nnn.n lbs" />
+                    </Style>
+
+                    <Style TargetType="{x:Type igEditors:XamNumericEditor}" x:Key="fieldAreaStyle">
+                        <Setter Property="Mask" Value="nnn,nnn.n i\n2" />
+                    </Style>
+                   
+                    <Style TargetType="{x:Type igWPF:XamDateTimeEditor}">
+                        <Setter Property="Format" Value="MM/dd/yyyy" />
+                    </Style>
+
+                    <Style x:Key="normalRecordStyle" TargetType="{x:Type igWPF:DataRecordCellArea}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.DataRecordCellArea}">
+                        <Setter Property="BackgroundAlternate" Value="#C8eeeeee"/>
+                        <Setter Property="Background" Value="#C8ffffff"/>
+                    </Style>
+
+                    <Style x:Key="generalCenterFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" >
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style x:Key="generalFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" />
+                </igWPF:XamDataGrid.Resources>
+
+                <igWPF:XamDataGrid.FieldLayoutSettings>
+                    <igWPF:FieldLayoutSettings AutoGenerateFields="False" AutoFitMode="Always" SelectionTypeRecord="Single" SelectionTypeField="Single" SelectionTypeCell="Single" HighlightAlternateRecords="True" DataRecordCellAreaStyle="{StaticResource normalRecordStyle}"/>
+                </igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:XamDataGrid.FieldLayouts>
+                    <igWPF:FieldLayout Key="BatchOrderInfo">
+                        <igWPF:FieldLayout.Fields>
+                            <igWPF:Field Name="WO" Width="Auto" Label="Work Order" >
+                            </igWPF:Field>
+                            <igWPF:Field Name="Part" Width="Auto" Label="Part">
+                            </igWPF:Field>
+                            <igWPF:Field Name="Quantity" Width="Auto" Label="Quantity">
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings EditAsType="{x:Type sys:Int32}" EditorType="{x:Type igEditors:XamNumericEditor}">
+                                    </igWPF:FieldSettings>
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                            <igWPF:Field Name="Weight" Width="Auto" Label="Weight" >
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings EditorStyle="{StaticResource fieldWeightStyle}" EditAsType="{x:Type sys:Double}" />
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                            <igWPF:Field Name="SurfaceArea" Width="Auto" Label="Surface Area" >
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings EditorStyle="{StaticResource fieldAreaStyle}" EditAsType="{x:Type sys:Decimal}" />
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                        </igWPF:FieldLayout.Fields>
+
+                        <igWPF:FieldLayout.SummaryDefinitions>
+                            <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Count}" SourceFieldName="WO"/>
+                            <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Sum}" SourceFieldName="Weight" StringFormat="{}{1} = {0:###,### lbs.}"/>
+                            <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Sum}" SourceFieldName="SurfaceArea" StringFormat="{}{1} = {0:###,### i\n2}"/>
+                        </igWPF:FieldLayout.SummaryDefinitions>
+                    </igWPF:FieldLayout>
+                </igWPF:XamDataGrid.FieldLayouts>
+            </igWPF:XamDataGrid>
+
+            <Label x:Name="lblPartialOrders" Grid.Row="5" Grid.Column="1" Foreground="Red" FontSize="10" Margin="3,-3,0,-3" Content="* Batch contains partial orders.">
+                <Label.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Partial Orders" ToolTipText="If the batch contains a partial order, then the batch can only have 1 process."></utilities:HeaderToolTip>
+                </Label.ToolTip>
+            </Label>
+            
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="5, 0, 5, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="{StaticResource colorbrushMain}">PROCESSES</Label>
+                <Separator Margin="5,0,5,0" Grid.Column="1" VerticalAlignment="Center" Background="{StaticResource colorbrushMain}"/>
+            </Grid>
+
+            <Button x:Name="btnProcessRemove" Grid.Row="1" Grid.Column="0" Margin="0,3,0,0" VerticalAlignment="Top" Click="btnRemoveProcess_Click" ToolTipService.ShowOnDisabled="True">
+                <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png" Style="{StaticResource buttonImage}"></Image>
+                <Button.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Delete Process" ToolTipText="Remove the selected process from the batch."></utilities:HeaderToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <igWPF:XamDataGrid x:Name="grdProcesses"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               Margin="5,0,5,0"
+                               MinHeight="100"
+                               SelectedItemsChanged="grdProcesses_SelectedItemsChanged"
+                               BorderBrush="{StaticResource Highlight}" BorderThickness="1" GroupByAreaLocation="None">
+                <igWPF:XamDataGrid.Resources>
+
+                    <local:StepOrderImageConverter x:Key="stepOrderImageConverter" />
+
+                    <Style TargetType="{x:Type igWPF:XamDateTimeEditor}">
+                        <Setter Property="Format" Value="MM/dd/yyyy" />
+                    </Style>
+
+                    <Style x:Key="normalRecordStyle" TargetType="{x:Type igWPF:DataRecordCellArea}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.DataRecordCellArea}">
+                        <Setter Property="BackgroundAlternate" Value="#C8eeeeee"/>
+                        <Setter Property="Background" Value="#C8ffffff"/>
+                    </Style>
+
+                    <Style x:Key="generalCenterFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" >
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style x:Key="generalFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" />
+
+                    <Style x:Key="stepOrderFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" >
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type igWPF:CellValuePresenter}">
+                                    <Border x:Name="MainBorder" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Width="16" Height="16" Margin="5,0,2,0" Source="{Binding Path=DataItem, Converter={StaticResource stepOrderImageConverter}}" />
+                                            <ContentPresenter x:Name="PART_EditorSite" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" Style="{TemplateBinding ForegroundStyle}" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </igWPF:XamDataGrid.Resources>
+
+                <igWPF:XamDataGrid.FieldLayoutSettings>
+                    <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                               AutoFitMode="Always"
+                                               SelectionTypeRecord="Single"
+                                               SelectionTypeField="Single"
+                                               SelectionTypeCell="Single"
+                                               HighlightAlternateRecords="True"
+                                               DataRecordSizingMode="Fixed"
+                                               DataRecordCellAreaStyle="{StaticResource normalRecordStyle}"
+                                               AllowDelete="False" />
+                </igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:XamDataGrid.FieldLayouts>
+                    <igWPF:FieldLayout>
+                        <igWPF:FieldLayout.Fields>
+                            <igWPF:Field Name="Step" Width="Auto" Label="Step">
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource stepOrderFieldStyle}"/>
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                            <igWPF:Field Name="Process" Width="Auto" Label="Process">
+                            </igWPF:Field>
+                            <igWPF:Field Name="Department" Width="Auto" Label="Department">
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}"/>
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                            <igWPF:Field Name="StartDate" Width="Auto" Label="Start Date">
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalCenterFieldStyle}"/>
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                            <igWPF:Field Name="EndDate" Width="Auto" Label="End Date">
+                                <igWPF:Field.Settings>
+                                    <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalCenterFieldStyle}"/>
+                                </igWPF:Field.Settings>
+                            </igWPF:Field>
+                        </igWPF:FieldLayout.Fields>
+                    </igWPF:FieldLayout>
+                </igWPF:XamDataGrid.FieldLayouts>
+            </igWPF:XamDataGrid>
+        </Grid>
+
+        <CheckBox x:Name="chkPrint" Grid.Row="3" VerticalAlignment="Center" Margin="10" Content="Quick Print">
+            <CheckBox.ToolTip>
+                <utilities:HeaderToolTip ToolTipHeader="Print Traveler" ToolTipText="If checked, will automatically print the batch traveler."></utilities:HeaderToolTip>
+            </CheckBox.ToolTip>
+        </CheckBox>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+            <Button Name="btnOK" Style="{StaticResource buttonStandard}" Grid.Row="1" Grid.Column="0" IsDefault="True" Click="btnOK_Click">OK</Button>
+            <Button Style="{StaticResource buttonStandard}" Grid.Column="0" IsCancel="True">CANCEL</Button>
+        </StackPanel>
+    </Grid>
+</Window>

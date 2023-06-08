@@ -1,0 +1,153 @@
+﻿<Window x:Class="DWOS.UI.Reports.ProcessGroupDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:igEditors="http://infragistics.com/Editors"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Height="290"
+        Width="300"
+        Title="Add Question Group"
+        Loaded="ProcessGroupDialog_OnLoaded"
+        Unloaded="ProcessGroupDialog_OnUnloaded"
+        Style="{StaticResource ToolWindow}">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Process Name -->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               VerticalAlignment="Center"
+               Margin="0,0,0,5"
+               Content="Process Name:" />
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 Margin="0,0,0,5"
+                 IsReadOnly="True"
+                 Text="{Binding ProcessName}">
+            <TextBox.ToolTip>
+                <utilities:HeaderToolTip ToolTipHeader="Process Name"
+                                         ToolTipText="Name of the current process." />
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <!-- Step -->
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               VerticalAlignment="Center"
+               Margin="0,0,0,5"
+               Content="Step:" />
+        <ComboBox Grid.Row="1"
+                  Grid.Column="1"
+                  VerticalAlignment="Center"
+                  Margin="0,0,0,5"
+                  ItemsSource="{Binding Steps}"
+                  SelectedItem="{Binding SelectedStep}"
+                  DisplayMemberPath="DisplayString">
+            <ComboBox.ToolTip>
+                <utilities:HeaderToolTip ToolTipHeader="Step"
+                                         ToolTipText="The process step to use as part of the process question group." />
+            </ComboBox.ToolTip>
+        </ComboBox>
+
+        <!-- Question to group by -->
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               VerticalAlignment="Center"
+               Margin="0,0,0,5"
+               Content="Group Answers By:" />
+        <Grid Grid.Row="2"
+              Grid.Column="1"
+              Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <igEditors:XamComboEditor Grid.Column="0"
+                                      Margin="0"
+                                      VerticalAlignment="Stretch"
+                                      NullText="(None)"
+                                      ItemsSource="{Binding StepQuestions}"
+                                      SelectedItem="{Binding SelectedQuestion}"
+                                      DisplayMemberPath="DisplayString">
+                <igEditors:XamComboEditor.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Group Answers By"
+                                             ToolTipText="The process question to group other answers together." />
+                </igEditors:XamComboEditor.ToolTip>
+            </igEditors:XamComboEditor>
+
+            <Button Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource buttonForImage}"
+                    Command="{Binding ClearIdentifyBy}">
+                <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                       Style="{StaticResource buttonImage}" />
+            </Button>
+        </Grid>
+
+        <!-- Questions to Include -->
+        <Label Grid.Row="3"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               VerticalAlignment="Center"
+               Content="Include:" />
+
+        <DataGrid Grid.Row="4"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Margin="0,0,0,5"
+                  Height="80"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  ItemsSource="{Binding StepQuestions}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding DisplayString, Mode=OneWay}" IsReadOnly="True" Width="*" />
+                <DataGridCheckBoxColumn Binding="{Binding Include, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- OK and Cancel -->
+
+        <StackPanel Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Add Question Group"
+                    Style="{StaticResource buttonStandard}"
+                    Width="125"
+                    Command="{Binding Accept}" />
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

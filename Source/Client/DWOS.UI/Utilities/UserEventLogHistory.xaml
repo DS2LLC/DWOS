@@ -1,0 +1,40 @@
+﻿<Window x:Class="DWOS.UI.Utilities.UserEventLogHistory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:DWOS.UI.Utilities"
+        mc:Ignorable="d"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        Unloaded="UserControl_Unloaded"
+        RenderOptions.ClearTypeHint="Enabled"
+        TextOptions.TextFormattingMode="Display"
+        Height="360"
+        Width="640"
+        Title="User Event History"
+        WindowStartupLocation="CenterScreen"
+        Icon="/DWOS.UI;component/Resources/images/EventHistory_16.png"
+        Style="{StaticResource ToolWindow}">
+
+    <Grid Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <igWPF:XamDataGrid x:Name="grdUserEvents" Grid.Column="0" Theme="Office2013" AutoFit="True">
+                <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout>
+                    <igWPF:Field Name="LogEventId" Visibility="Collapsed"/>
+                    <igWPF:Field Name="Date" IsReadOnly="True"/>
+                    <igWPF:Field Name="UserName" Label="User" IsReadOnly="True"/>
+                    <igWPF:Field Name="Operation" IsReadOnly="True" />
+                    <igWPF:Field Name="Reason" IsReadOnly="True"/>
+                    <igWPF:Field Name="Details"  IsReadOnly="True"/>
+                </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+            </igWPF:XamDataGrid>
+        </Grid>
+</Window>

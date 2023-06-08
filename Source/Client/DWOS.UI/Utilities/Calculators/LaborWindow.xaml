@@ -1,0 +1,237 @@
+﻿<local:CalculatorWindow x:Class="DWOS.UI.Utilities.Calculators.LaborWindow"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                        xmlns:ig="http://schemas.infragistics.com/xaml"
+                        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+                        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+                        xmlns:local="clr-namespace:DWOS.UI.Utilities.Calculators"
+                        mc:Ignorable="d"
+                        Loaded="CalculatorWindow_Loaded"
+                        Title="Labor Cost"
+                        Icon="/DWOS.UI;component/Resources/images/Calculator_16.png"
+                        WindowStartupLocation="CenterScreen"
+                        Width="400"
+                        Height="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+                <Style.Triggers>
+                    <Trigger Property="IsReadOnly"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+
+        <!-- Add & Remove Buttons-->
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="5">
+            <Button Margin="0,0,3,0"
+                    Command="{Binding AddCommand}">
+                <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                       Style="{StaticResource buttonImage}"></Image>
+            </Button>
+            <Button Command="{Binding RemoveCommand}">
+                <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                       Style="{StaticResource buttonImage}"></Image>
+            </Button>
+        </StackPanel>
+
+        <!-- Labor Items Grid -->
+        <igWPF:XamDataGrid Grid.Row="1"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           DataSource="{Binding LaborItems}"
+                           SelectedDataItems="{Binding SelectedItems}"
+                           SelectedDataItemsScope="RecordsOrCells"
+                           GroupByAreaLocation="None"
+                           Margin="5,0,5,5">
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                           SelectionTypeRecord="Single" />
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+            <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout>
+                    <igWPF:Field Name="LaborType"
+                                 Label="Labor Type"
+                                 Width="Auto" />
+                    <igWPF:CurrencyField Name="Wage"
+                                         Label="Wage"
+                                         Width="*">
+                        <igWPF:CurrencyField.ValueConstraint>
+                            <igWPF:ValueConstraint MinInclusive="0" />
+                        </igWPF:CurrencyField.ValueConstraint>
+                    </igWPF:CurrencyField>
+                    <igWPF:NumericField Name="Count"
+                                        Label="Count"
+                                        Width="Auto">
+                        <igWPF:NumericField.ValueConstraint>
+                            <igWPF:ValueConstraint MinInclusive="0" />
+                        </igWPF:NumericField.ValueConstraint>
+                    </igWPF:NumericField>
+                </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+
+        <!-- Totals -->
+        <Grid Grid.Row="2"
+              Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="Hourly Labor Cost:" />
+
+            <igWPF:XamNumericEditor Grid.Row="0"
+                                    Grid.Column="1"
+                                    IsReadOnly="True"
+                                    IsTabStop="False"
+                                    Mask="{}{currency:6.4:c}"
+                                    ValueType="{x:Type sys:Decimal}"
+                                    Value="{Binding HourlyLaborCost, Mode=OneWay, ValidatesOnDataErrors=True}">
+                <igWPF:XamNumericEditor.Style>
+                    <Style TargetType="{x:Type igWPF:XamNumericEditor}"
+                           BasedOn="{StaticResource {x:Type igWPF:XamNumericEditor}}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError"
+                                     Value="True">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                            </Trigger>
+                            <Trigger Property="Validation.HasError"
+                                     Value="False">
+                                <Setter Property="ToolTip">
+                                    <Setter.Value>
+                                        <utilities:HeaderToolTip ToolTipHeader="Hourly Labor Cost"
+                                                                 ToolTipText="The cost of labor (per hour)" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </igWPF:XamNumericEditor.Style>
+            </igWPF:XamNumericEditor>
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="0,5,0,0"
+                   Content="Parts Per Hour:" />
+            <igWPF:XamNumericEditor Grid.Row="1"
+                                    Grid.Column="1"
+                                    IsReadOnly="True"
+                                    IsTabStop="False"
+                                    Margin="0,5,0,0"
+                                    ValueType="{x:Type sys:Decimal}"
+                                    Value="{Binding PartsPerHour, Mode=OneWay, ValidatesOnDataErrors=True}"
+                                    Mask="n,nnn.nn">
+                <igWPF:XamNumericEditor.Style>
+                    <Style TargetType="{x:Type igWPF:XamNumericEditor}"
+                           BasedOn="{StaticResource {x:Type igWPF:XamNumericEditor}}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError"
+                                     Value="True">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                            </Trigger>
+                            <Trigger Property="Validation.HasError"
+                                     Value="False">
+                                <Setter Property="ToolTip">
+                                    <Setter.Value>
+                                        <utilities:HeaderToolTip ToolTipHeader="Parts Per Hour"
+                                                                 ToolTipText="The number of parts produced in an hour" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </igWPF:XamNumericEditor.Style>
+            </igWPF:XamNumericEditor>
+
+            <Separator Grid.Row="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Margin="0,5,0,5"/>
+
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Margin="0,5,0,0"
+                   FontWeight="Bold"
+                   Content="Hourly Labor Cost Per Part:" />
+
+            <igWPF:XamNumericEditor Grid.Row="3"
+                                    Grid.Column="1"
+                                    FontWeight="Bold"
+                                    IsReadOnly="True"
+                                    IsTabStop="False"
+                                    Margin="0,5,0,0"
+                                    Mask="{}{currency:6.4:c}"
+                                    ValueType="{x:Type sys:Decimal}"
+                                    Value="{Binding HourlyLaborCostPerPart, Mode=OneWay, ValidatesOnDataErrors=True}">
+                <igWPF:XamNumericEditor.Style>
+                    <Style TargetType="{x:Type igWPF:XamNumericEditor}"
+                           BasedOn="{StaticResource {x:Type igWPF:XamNumericEditor}}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError"
+                                     Value="True">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                            </Trigger>
+                            <Trigger Property="Validation.HasError"
+                                     Value="False">
+                                <Setter Property="ToolTip">
+                                    <Setter.Value>
+                                        <utilities:HeaderToolTip ToolTipHeader="Hourly Labor Cost Per Part"
+                                                                 ToolTipText="The hourly labor cost for one part" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </igWPF:XamNumericEditor.Style>
+            </igWPF:XamNumericEditor>
+        </Grid>
+
+
+        <!-- OK & Cancel -->
+        <StackPanel Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Style="{StaticResource buttonStandard}"
+                    IsDefault="True"
+                    Content="OK"
+                    Command="{Binding AcceptCommand}" />
+
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</local:CalculatorWindow>

@@ -1,0 +1,125 @@
+﻿<igRibbon:XamRibbonWindow x:Class="DWOS.UI.Sales.CustomerFeesDialog"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:local="clr-namespace:DWOS.UI.Sales"
+                          xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+                          xmlns:igRibbon="http://infragistics.com/Ribbon"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          mc:Ignorable="d"
+                          Width="300"
+                          Height="250"
+                          Title="Customer Fees &amp; Discounts"
+                          Style="{StaticResource RibbonWindow}">
+    <igRibbon:XamRibbonWindow.DataContext>
+        <local:CustomerFeeEditorViewModel x:Name="ViewModel"
+                                          Accepted="ViewModel_Accepted" />
+    </igRibbon:XamRibbonWindow.DataContext>
+    <igRibbon:XamRibbonWindow.Resources>
+        <sys:String x:Key="CurrencyMask">
+            {currency:-5.2}
+        </sys:String>
+        <sys:String x:Key="PercentageMask">
+            -nnn.nn %
+        </sys:String>
+        <igWpf:ComboBoxItemsProvider x:Key="CustomerFeeOptions" />
+    </igRibbon:XamRibbonWindow.Resources>
+    <igRibbon:RibbonWindowContentHost Style="{StaticResource RibbonWindowContent}">
+        <Grid Margin="5,5,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Editors for grid charge -->
+            <igWpf:XamCurrencyEditor x:Name="CurrencyEditor"
+                                     Visibility="Collapsed" />
+            <igWpf:XamNumericEditor x:Name="PercentEditor"
+                                    Visibility="Collapsed" />
+
+            <igWpf:XamDataGrid Grid.Row="0"
+                               Name="FeeGrid"
+                               AutoFit="True"
+                               DataSource="{Binding CustomerFees}"
+                               UpdateMode="OnCellChangeOrLostFocus">
+                <igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                               AllowDelete="True"
+                                               AllowAddNew="True"
+                                               SupportDataErrorInfo="CellsOnly"
+                                               SelectionTypeRecord="Single"
+                                               SelectionTypeCell="None"
+                                               SelectionTypeField="None"
+                                               DataErrorDisplayMode="ErrorIconAndHighlight" />
+                </igWpf:XamDataGrid.FieldLayoutSettings>
+
+                <igWpf:XamDataGrid.FieldSettings>
+                    <igWpf:FieldSettings DataItemUpdateTrigger="OnCellValueChange"
+                                         LabelTextWrapping="Wrap" />
+                </igWpf:XamDataGrid.FieldSettings>
+
+                <igWpf:XamDataGrid.FieldLayouts>
+                    <igWpf:FieldLayout>
+                        <igWpf:ComboBoxField Name="OrderFeeTypeId"
+                                             Label="Fee Type">
+                            <igWpf:ComboBoxField.EditorStyle>
+                                <Style TargetType="{x:Type igWpf:XamComboEditor}">
+                                    <Setter Property="IsEditable"
+                                            Value="False" />
+                                    <Setter Property="ItemsProvider"
+                                            Value="{StaticResource CustomerFeeOptions}" />
+                                </Style>
+                            </igWpf:ComboBoxField.EditorStyle>
+                        </igWpf:ComboBoxField>
+                        <igWpf:NumericField Name="Charge"
+                                            Label="Default Charge">
+                            <igWpf:NumericField.EditorStyle>
+                                <Style TargetType="{x:Type igWpf:XamNumericEditor}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=DataItem.FeeType}"
+                                                     Value="Percentage">
+                                            <Setter Property="Mask"
+                                                    Value="{DynamicResource PercentageMask}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=DataItem.FeeType}"
+                                                     Value="Fixed">
+                                            <Setter Property="Mask"
+                                                    Value="{DynamicResource CurrencyMask}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </igWpf:NumericField.EditorStyle>
+                        </igWpf:NumericField>
+                        <igWpf:TextField Name="FeeType"
+                                         Label="Charge Type"
+                                         IsReadOnly="True" />
+                    </igWpf:FieldLayout>
+                </igWpf:XamDataGrid.FieldLayouts>
+            </igWpf:XamDataGrid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           VerticalAlignment="Center">
+                <Hyperlink Command="{Binding AddDefaultFees}">Default Fees</Hyperlink>
+                </TextBlock>
+
+                <Button Grid.Column="1"
+                        Style="{StaticResource buttonStandard}"
+                        Content="OK"
+                        Command="{Binding Accept}" />
+
+                <Button Grid.Column="2"
+                        Style="{StaticResource buttonStandard}"
+                        Content="Cancel"
+                        IsCancel="True" />
+            </Grid>
+        </Grid>
+    </igRibbon:RibbonWindowContentHost>
+</igRibbon:XamRibbonWindow>

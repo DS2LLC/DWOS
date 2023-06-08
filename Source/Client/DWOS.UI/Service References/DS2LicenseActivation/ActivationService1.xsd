@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://apps.mydwos.com/DS2.AppManagement/ActivationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DS2.AppManagement.DataInfo" />
+  <xs:import schemaLocation="http://apps.mydwos.com/DS2.AppManagement/ActivationService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DS2.AppManagement" />
+  <xs:element name="Activate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteFingerprint" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="licenseKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActivateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DS2.AppManagement.DataInfo" minOccurs="0" name="ActivateResult" nillable="true" type="q1:ActivationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLicenseInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteFingerprint" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLicenseInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DS2.AppManagement.DataInfo" minOccurs="0" name="GetLicenseInfoResult" nillable="true" type="q2:LicenseInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestVersion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="productID" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DS2.AppManagement" minOccurs="0" name="releaseGroup" type="q3:ReleaseGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DS2.AppManagement.DataInfo" minOccurs="0" name="GetLatestVersionResult" nillable="true" type="q4:VersionInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSites">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSitesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DS2.AppManagement" minOccurs="0" name="GetSitesResult" nillable="true" type="q5:ArrayOfSiteInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateStats">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="productID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerKey" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DS2.AppManagement" minOccurs="0" name="stats" nillable="true" type="q6:UsageStatistics" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateStatsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

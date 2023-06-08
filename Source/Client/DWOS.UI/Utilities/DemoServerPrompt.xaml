@@ -1,0 +1,28 @@
+﻿<Window x:Class="DWOS.UI.Utilities.DemoServerPrompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Height="200"
+        Width="400"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Title="DWOS"
+        Style="{StaticResource ToolWindow}">
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="24"  HorizontalAlignment="Center" Margin="0,0,0,15">
+            Your PIN is invalid.<LineBreak /> Please <Hyperlink Click="Hyperlink_Click">Contact Us</Hyperlink> to access the DWOS demo.
+        </TextBlock>
+
+        <Button Grid.Row="1"
+                FontSize="24"
+                Content="OK"
+                IsDefault="True"
+                Click="Button_Click"/>
+    </Grid>
+</Window>

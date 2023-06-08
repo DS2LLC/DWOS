@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="DWOS.UI.Utilities.HoldList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:igThemes="http://infragistics.com/Themes"
+             xmlns:igEditors="http://infragistics.com/Editors" 
+             xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"  
+             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:DWOS.UI"
+             xmlns:convertors="clr-namespace:DWOS.UI.Utilities.Convertors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             d:DesignHeight="300" d:DesignWidth="300" Initialized="UserControl_Initialized" Loaded="UserControl_Loaded">
+    <Grid>
+        <igWPF:XamDataGrid x:Name="grdHolds" Theme="Office2013">
+            <igWPF:XamDataGrid.Resources>
+                <Style TargetType="{x:Type igWPF:DataRecordCellArea}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.DataRecordCellArea}">
+                    <Setter Property="BackgroundAlternate" Value="#C8eeeeee"/>
+                    <Setter Property="Background" Value="#C8ffffff"/>
+                </Style>
+                
+                <convertors:Late3ColorConverter x:Key="estShipDateColorConverter" />
+                <convertors:TimeToTimeDifferenceConverter x:Key="timeDiffConverter" />
+                
+                <Style x:Key="generalFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" />
+                <Style x:Key="generalCenterFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" >
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+                <Style x:Key="estShipDateFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}" BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type igWPF:CellValuePresenter}">
+                                <Border x:Name="MainBorder" 
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Grid.Column="0" Width="5" Fill="{Binding Path=DataItem.RequiredDate, Converter={StaticResource estShipDateColorConverter}}"/>
+                                        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, StringFormat=d}" Background="{TemplateBinding Background}"/>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </igWPF:XamDataGrid.Resources>
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False" AutoFitMode="Always" SelectionTypeRecord="Single" SelectionTypeField="Single" SelectionTypeCell="Single" HighlightAlternateRecords="True"/>
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+            <igWPF:XamDataGrid.FieldLayouts>
+            <igWPF:FieldLayout>
+                <igWPF:FieldLayout.Fields>
+                        <igWPF:Field Name="OrderID" Width="Auto" Label="WO" >
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalCenterFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="RequiredDate" Width="Auto" Label="Required Date">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource estShipDateFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="UserName" Width="Auto" Label="User"/>
+                        <igWPF:Field Name="TimeIn" Width="Auto" Label="Time In" Converter="{StaticResource timeDiffConverter}">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" EditAsType="{x:Type sys:String}">
+                                </igWPF:FieldSettings>
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="ReasonName" Width="Auto" Label="Reason"/>
+                        <igWPF:Field Name="CurrentLocation" Width="Auto" Label="Department"/>
+                        <igWPF:Field Name="Notes" Width="Auto" Label="Hold Notes">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings>
+                                    <igWPF:FieldSettings.CellValuePresenterStyle>
+                                        <Style TargetType="{x:Type igWPF:CellValuePresenter}">
+                                            <Setter Property="ToolTip">
+                                                <Setter.Value>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding DataItem.Notes}"/>
+                                                    </StackPanel>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </igWPF:FieldSettings.CellValuePresenterStyle>
+                                </igWPF:FieldSettings>
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                    </igWPF:FieldLayout.Fields>
+            </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+    </Grid>
+</UserControl>

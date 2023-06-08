@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="DWOS.UI.BatchSummary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:igThemes="http://infragistics.com/Themes"
+             xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:DWOS.UI" mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="800"
+             Loaded="UserControl_Loaded" RenderOptions.ClearTypeHint="Enabled" TextOptions.TextFormattingMode="Display">
+    <Grid>
+        <Grid.Resources>
+
+            <DataTemplate x:Key="sidewaysHeader">
+                <TextBlock Text="{Binding }" FontSize="16" FontWeight="Bold" Foreground="#4472C4">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="90" />
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+            </DataTemplate>
+
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <igWPF:XamDataGrid x:Name="grdOrders" Grid.Column="0" Theme="Office2013"
+                           SelectedItemsChanged="grdOrders_SelectedItemsChanged" CellChanged="grdOrders_CellChanged">
+            <igWPF:XamDataGrid.Resources>
+
+                <local:BatchPartToolTipConverter x:Key="partConverter" />
+
+                <Style x:Key="normalRecordStyle" TargetType="{x:Type igWPF:DataRecordCellArea}"
+                       BasedOn="{x:Static igThemes:DataPresenterOffice2013.DataRecordCellArea}">
+                    <Setter Property="BackgroundAlternate" Value="#C8eeeeee" />
+                    <Setter Property="Background" Value="#C8ffffff" />
+                </Style>
+
+                <Style TargetType="{x:Type igWPF:XamDateTimeEditor}">
+                    <Setter Property="Format" Value="MM/dd/yyyy" />
+                </Style>
+
+                <Style x:Key="generalFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}"
+                       BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}" />
+
+                <Style x:Key="generalCenterFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}"
+                       BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+
+                <Style x:Key="surfaceAreaStyle" TargetType="{x:Type igWPF:CellValuePresenter}"
+                       BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}">
+                    <Style.Resources>
+                        <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+                            <Setter Property="Mask" Value="{}{double:9.0} i\n²" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+
+                <Style x:Key="hyperlinkFieldStyle"
+                       TargetType="{x:Type igWPF:CellValuePresenter}"
+                       BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}">
+                    <Setter Property="TextBlock.Foreground" Value="Blue" />
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <EventSetter Event="MouseLeftButtonDown"
+                                 Handler="Field_MouseLeftButtonDown" />
+                </Style>
+
+                <Style x:Key="weightStyle" TargetType="{x:Type igWPF:CellValuePresenter}"
+                       BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}">
+                    <Style.Resources>
+                        <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+                            <Setter Property="Mask" Value="{}{double:9.0} lbs" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+
+                <Style x:Key="partFieldStyle" TargetType="{x:Type igWPF:CellValuePresenter}"
+                       BasedOn="{StaticResource hyperlinkFieldStyle}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="ToolTip"
+                                    Value="{Binding Path=DataItem, Converter={StaticResource partConverter}}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </igWPF:XamDataGrid.Resources>
+
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False" AutoFitMode="Always" FilterUIType="FilterRecord"
+                                           HeaderPrefixAreaDisplayMode="FieldChooserButton"
+                                           SelectionTypeRecord="Single" SelectionTypeField="Single"
+                                           SelectionTypeCell="Single" HighlightAlternateRecords="True"
+                                           DataRecordSizingMode="Fixed"
+                                           DataRecordCellAreaStyle="{StaticResource normalRecordStyle}"
+                                           ExpansionIndicatorDisplayMode="CheckOnDisplay"
+                                           AllowDelete="False" />
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+            <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout Key="Batch">
+                    <igWPF:FieldLayout.Fields>
+                        <igWPF:Field Name="BatchID" Label="Batch">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalCenterFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="OpenDate" Label="Created" Visibility="Collapsed">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalCenterFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="Fixture" Label="Fixture" />
+                        <igWPF:Field Name="OrderCount" Label="Orders">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="PartCount" Label="Parts">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+
+                        <igWPF:Field Name="TotalSurfaceArea" Label="Surface Area">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource surfaceAreaStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+
+                        <igWPF:Field Name="TotalWeight" Label="Weight">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource weightStyle}"
+                                                     EditAsType="{x:Type sys:Double}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+
+                        <igWPF:Field Name="WorkStatus" Label="Status">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="CurrentLocation" Label="Current Dept">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="CurrentLine" Label="Current Line" Visibility="Collapsed">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="CurrentProcess" Label="Process">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="NextDept" Label="Next Dept">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="SchedulePriority" Label="Schedule Priority" Visibility="Collapsed">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="Operators"
+                                     Visibility="Collapsed" />
+                        <igWPF:Field Name="SalesOrderId"
+                                     Label="Sales Order"
+                                     Visibility="Collapsed" />
+                        <igWPF:Field Name="Orders"
+                                     Visibility="Hidden" />
+                    </igWPF:FieldLayout.Fields>
+
+                    <igWPF:FieldLayout.SummaryDefinitions>
+                        <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Count}"
+                                                 SourceFieldName="OrderCount" />
+                        <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Count}"
+                                                 SourceFieldName="PartCount" />
+                        <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Sum}"
+                                                 SourceFieldName="TotalWeight" StringFormat="Sum={0:n0} lbs" />
+                        <igWPF:SummaryDefinition Calculator="{x:Static igWPF:SummaryCalculator.Sum}"
+                                                 SourceFieldName="TotalSurfaceArea" StringFormat="Sum={0:n0} in²" />
+                    </igWPF:FieldLayout.SummaryDefinitions>
+                </igWPF:FieldLayout>
+                <igWPF:FieldLayout Key="WO"
+                                   ParentFieldName="Orders"
+                                   ParentFieldLayoutKey="Batch">
+                    <igWPF:FieldLayout.Settings>
+                        <igWPF:FieldLayoutSettings RecordFilterScope="AllRecords" />
+                    </igWPF:FieldLayout.Settings>
+                    <igWPF:FieldLayout.Fields>
+                        <igWPF:Field Name="OrderID" Label="WO">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource hyperlinkFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="PurchaseOrder" Label="PO">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="CustomerName" Label="Customer">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="PartName" Label="Part">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource partFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                        <igWPF:Field Name="BatchPartQuantity" Label="Quantity">
+                            <igWPF:Field.Settings>
+                                <igWPF:FieldSettings CellValuePresenterStyle="{StaticResource generalFieldStyle}" />
+                            </igWPF:Field.Settings>
+                        </igWPF:Field>
+                    </igWPF:FieldLayout.Fields>
+                </igWPF:FieldLayout>
+
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+    </Grid>
+</UserControl>

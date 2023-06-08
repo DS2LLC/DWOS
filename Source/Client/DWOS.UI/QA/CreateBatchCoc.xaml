@@ -1,0 +1,355 @@
+﻿<igRibbon:XamRibbonWindow x:Class="DWOS.UI.QA.CreateBatchCoc"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:ig="http://schemas.infragistics.com/xaml"
+                          xmlns:igRibbon="http://infragistics.com/Ribbon"
+                          xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+                          xmlns:util="clr-namespace:DWOS.UI.Utilities"
+                          xmlns:vm="clr-namespace:DWOS.UI.QA.ViewModels"
+                          xmlns:igEditors="http://infragistics.com/Editors"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          mc:Ignorable="d"
+                          Height="550"
+                          Width="450"
+                          MinHeight="480"
+                          MinWidth="400"
+                          Style="{StaticResource RibbonWindow}"
+                          Title="Final Inspection"
+                          Loaded="XamRibbonWindow_Loaded"
+                          Unloaded="XamRibbonWindow_Unloaded">
+    <igRibbon:XamRibbonWindow.DataContext>
+        <vm:CreateBatchCocViewModel x:Name="ViewModel" />
+    </igRibbon:XamRibbonWindow.DataContext>
+
+    <igRibbon:RibbonWindowContentHost Style="{StaticResource RibbonWindowContent}">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"
+                                   x:Name="OrdersRow"
+                                   MinHeight="100" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="2*"
+                                   x:Name="CertificateRow"
+                                   MinHeight="150" />
+                </Grid.RowDefinitions>
+
+                <!-- Batch Section -->
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <util:SectionHeader Grid.Row="0"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        TitleText="Batch" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,0,5"
+                           VerticalAlignment="Center"
+                           Content="Batch:" />
+
+                    <TextBox Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="0,0,0,5"
+                             VerticalAlignment="Center"
+                             IsReadOnly="True"
+                             Text="{Binding Batch.BatchId, Mode=OneWay}">
+                        <TextBox.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Batch">
+                                The batch being inspected.
+                            </util:HeaderToolTipContent>
+                        </TextBox.ToolTip>
+                    </TextBox>
+
+                    <Label Grid.Row="2"
+                           Grid.Column="0"
+                           Margin="0,0,0,5"
+                           VerticalAlignment="Center"
+                           Content="Customer:" />
+
+                    <TextBox Grid.Row="2"
+                             Grid.Column="1"
+                             Margin="0,0,0,5"
+                             VerticalAlignment="Center"
+                             IsReadOnly="True"
+                             Text="{Binding CustomerName, Mode=OneWay}">
+                        <TextBox.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Customer">
+                                <TextBlock>
+                                    The customer for this Final Inspection.
+                                    <LineBreak />
+                                    A Batch may have more than one Final Inspection because it can have multiple customers.
+                                </TextBlock>
+                            </util:HeaderToolTipContent>
+                        </TextBox.ToolTip>
+                    </TextBox>
+                </Grid>
+
+                <!-- Orders Section -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <util:SectionHeader Grid.Row="0"
+                                        TitleText="Orders" />
+
+                    <!-- Wrap orders grid in a canvas - fixes resize issues -->
+                    <Canvas Grid.Row="1"
+                            x:Name="OrdersContainer">
+                        <igWpf:XamDataGrid Grid.Row="1"
+                                           x:Name="OrdersDataGrid"
+                                           AutoFit="True"
+                                           DataSource="{Binding Orders}"
+                                           Width="{Binding ElementName=OrdersContainer, Path=ActualWidth}"
+                                           Height="{Binding ElementName=OrdersContainer, Path=ActualHeight}">
+                            <igWpf:XamDataGrid.FieldLayoutSettings>
+                                <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                                           AllowAddNew="False"
+                                                           AllowDelete="False" />
+                            </igWpf:XamDataGrid.FieldLayoutSettings>
+
+                            <igWpf:XamDataGrid.FieldSettings>
+                                <igWpf:FieldSettings AllowEdit="False"
+                                                     AllowGroupBy="False"
+                                                     LabelClickAction="Nothing" />
+                            </igWpf:XamDataGrid.FieldSettings>
+
+                            <igWpf:XamDataGrid.FieldLayouts>
+                                <igWpf:FieldLayout>
+                                    <igWpf:FieldLayout.Fields>
+                                        <igWpf:TextField Name="OrderId"
+                                                         Label="WO" />
+                                        <igWpf:TextField Name="PartName"
+                                                         Label="Part" />
+                                        <igWpf:NumericField Name="BatchQuantity"
+                                                            Label="Batch Qty." />
+                                    </igWpf:FieldLayout.Fields>
+                                </igWpf:FieldLayout>
+                            </igWpf:XamDataGrid.FieldLayouts>
+                        </igWpf:XamDataGrid>
+                    </Canvas>
+                </Grid>
+
+                <GridSplitter Grid.Row="2"
+                              Margin="0,5,0,5"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              Height="5"
+                              ResizeDirection="Rows" />
+
+                <!-- Certificate Section-->
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <util:SectionHeader Grid.Row="0"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        TitleText="Certificate of Conformance" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,0,5"
+                           VerticalAlignment="Center"
+                           Content="Quality Inspector:" />
+                    <TextBox Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="0,0,0,5"
+                             VerticalAlignment="Center"
+                             IsReadOnly="True"
+                             Text="{Binding QualityInspector.UserName, Mode=OneWay}">
+                        <TextBox.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Quality Inspector">
+                                The QA representative who inspected the parts.
+                            </util:HeaderToolTipContent>
+                        </TextBox.ToolTip>
+                    </TextBox>
+
+                    <Label Grid.Row="2"
+                           Grid.Column="0"
+                           Margin="0,0,0,5"
+                           VerticalAlignment="Center"
+                           Content="Date Certified:" />
+                    <DatePicker Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,0,0,5"
+                                VerticalAlignment="Center"
+                                SelectedDate="{Binding DateCertified}">
+                        <DatePicker.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Date Certified">
+                                The date the parts where inspected.
+                            </util:HeaderToolTipContent>
+                        </DatePicker.ToolTip>
+                    </DatePicker>
+
+                    <!-- Wrap COC text in a canvas - fixes resize issues -->
+                    <Canvas Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Name="CertContainer">
+                        <ig:XamRichTextEditor Grid.Row="3"
+                                              Grid.Column="0"
+                                              Grid.ColumnSpan="2"
+                                              Width="{Binding ElementName=CertContainer, Path=ActualWidth}"
+                                              Height="{Binding ElementName=CertContainer, Path=ActualHeight}"
+                                              Name="CertTextEditor">
+                            <ig:XamRichTextEditor.ToolTip>
+                                <util:HeaderToolTipContent ToolTipHeader="COC Data">
+                                    Displays information that will be on the Certificate of Conformance.
+                                </util:HeaderToolTipContent>
+                            </ig:XamRichTextEditor.ToolTip>
+                        </ig:XamRichTextEditor>
+                    </Canvas>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!-- Notifications -->
+                <Label Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="Email COC To:" />
+                <ig:XamComboEditor Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   IsEditable="True"
+                                   ItemsSource="{Binding Contacts}"
+                                   DisplayMemberPath="EmailAddress"
+                                   SelectedItems="{Binding SelectedContacts}"
+                                   AllowMultipleSelection="True"
+                                   CheckBoxVisibility="Visible"
+                                   MultiSelectValueDelimiter=","
+                                   EmptyText="&lt;None&gt;">
+                    <ig:XamComboEditor.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Email COC To">
+                            Enter the email addresses that COC notifications should be sent to.
+                        </util:HeaderToolTipContent>
+                    </ig:XamComboEditor.ToolTip>
+                </ig:XamComboEditor>
+                <!-- View/Print -->
+                <CheckBox Grid.Column="2"
+                          Margin="20, 0, 0, 0"
+                          VerticalAlignment="Center"
+                          Content="View COC"
+                          IsChecked="{Binding ViewCoc}">
+                    <CheckBox.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="View COC">
+                            If checked, allows you to view the COC before printing it.
+                        </util:HeaderToolTipContent>
+                    </CheckBox.ToolTip>
+                </CheckBox>
+                <Label Grid.Column="3"
+                       Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       Content="Print COC:" />
+                <Grid Grid.Column="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Grid.Column="0"
+                              VerticalAlignment="Center"
+                              IsChecked="{Binding PrintCoc}" />
+                    <igEditors:XamNumericEditor Grid.Column="1"
+                                                Width="50"
+                                                VerticalAlignment="Center"
+                                                IsEnabled="{Binding PrintCoc}"
+                                                Value="{Binding PrintCopies}"
+                                                ValueType="{x:Type sys:Int32}"
+                                                SpinButtonDisplayMode="Always">
+                        <igEditors:XamNumericEditor.ValueConstraint>
+                            <igEditors:ValueConstraint MinInclusive="1"
+                                                       MaxInclusive="10"
+                                                       Nullable="False" />
+                        </igEditors:XamNumericEditor.ValueConstraint>
+                    </igEditors:XamNumericEditor>
+                    <Grid.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Print COC">
+                            <TextBlock>
+                                Check the box to allow quick print to the default printer.
+                                <LineBreak />
+                                Set the number of copies to be printed.
+                            </TextBlock>
+                        </util:HeaderToolTipContent>
+                    </Grid.ToolTip>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource buttonStandard}"
+                        Content="Preview"
+                        Click="PreviewButton_Click"
+                        Margin="5,5,0,5">
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Preview">
+                            Shows a preview of the COC.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Column="1"
+                        Content="Complete"
+                        Style="{StaticResource buttonStandard}"
+                        Command="{Binding Complete}">
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Complete">
+                            Save and Print the COC.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Column="2"
+                        Content="Cancel"
+                        IsCancel="True"
+                        Style="{StaticResource buttonStandard}">
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Cancel">
+                            Cancel Final Inspection of this batch.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+            </Grid>
+        </Grid>
+    </igRibbon:RibbonWindowContentHost>
+</igRibbon:XamRibbonWindow>

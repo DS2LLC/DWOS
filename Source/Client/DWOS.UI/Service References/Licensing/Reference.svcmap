@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="794d2c99-4e6e-4816-b60d-085b9d76c6d1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8081/LicenseService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="bf64a9d2-34e7-41dd-b255-ee82669c59fa" SourceId="1" SourceUrl="net.tcp://localhost:8081/LicenseService/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="dfbca8a7-e914-4a47-b3c7-948c05a82ab4" SourceId="1" SourceUrl="net.tcp://localhost:8081/LicenseService/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="c4fd75ce-4314-4761-800c-e06a38432ca2" SourceId="1" SourceUrl="net.tcp://localhost:8081/LicenseService/mex" />
+    <MetadataFile FileName="DWOS.LicenseManager1.xsd" MetadataType="Schema" ID="61a06c59-6dbd-4dc1-92c3-6f14b8f2c1e2" SourceId="1" SourceUrl="net.tcp://localhost:8081/LicenseService/mex" />
+    <MetadataFile FileName="DWOS.Server.Services1.xsd" MetadataType="Schema" ID="fd964b72-a77d-4661-81a7-26a8f6239502" SourceId="1" SourceUrl="net.tcp://localhost:8081/LicenseService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

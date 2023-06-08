@@ -1,0 +1,4 @@
+"C:\Program Files (x86)\Eziriz\.NET Reactor\dotNET_Reactor.Console.exe" -file "%~1%~2%~3" -satellite_assemblies "C:\Projects\DPS\Source Code\DWOS.Data\bin\Release\DWOS.Data.dll/C:\Projects\DPS\Source Code\DWOS.Shared\bin\Release\DWOS.Shared.dll/C:\Projects\DPS\Source Code\DWOS.QBExport\bin\Release\DWOS.QBExport.dll/C:\Projects\DPS\Source Code\DWOS.Reports\bin\Release\DWOS.Reports.dll/C:\Projects\DPS\Source Code\DWOS.CommClient\bin\Release\DWOS.CommClient.dll" -merge 1 -snkeypair "C:\Projects\DPS\Source Code\DWOS.UI\Properties\DWOS.UI.pfx" -snpassword "GIS2003" -targetfile "%~1%~2locked\<AssemblyFileName>" -exclude_enums 1 -exclude_serializable_types 1 -stringencryption 1
+copy "%~1%~2locked\*.*" "%~1%~2" /y
+copy "%~1%~2locked\*.*" "%~1%~4" /y
+:END 

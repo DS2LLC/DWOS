@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="DWOS.LabelEditor.PositionUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:DWOS.LabelEditor"
+             mc:Ignorable="d" 
+             d:DesignWidth="532">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="X:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+            <TextBox Name="txtItemX" ToolTip="X Position" Width="80" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+            <TextBlock Text="Y:" VerticalAlignment="Center" Margin="30,0,10,0" ></TextBlock>
+            <TextBox Name="txtItemY" ToolTip="Y Position" Width="80" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+        </StackPanel>        
+    </Grid>
+</UserControl>

@@ -1,0 +1,276 @@
+﻿<Window x:Class="DWOS.UI.Sales.PricePointDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        xmlns:local="clr-namespace:DWOS.UI.Admin"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:conv="clr-namespace:DWOS.UI.Utilities.Convertors"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Height="300"
+        Width="500"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}"
+        Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <conv:DescriptionConverter x:Key="descriptionConv" />
+        <Style TargetType="{x:Type igWPF:XamTextEditor}">
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5,5,5,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Price By -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   x:Name="itemLabel"
+                   Padding="0,0,5,0"
+                   VerticalAlignment="Center"
+                   Content="{Binding ItemLabel}"/>
+
+            <igWPF:XamTextEditor Grid.Column="1"
+                                 x:Name="partTextBox"
+                                 Margin="0,0,10, 0"
+                                 MinWidth="100"
+                                 MaxWidth="200"
+                                 VerticalAlignment="Center"
+                                 IsReadOnly="True"
+                                 Text="{Binding ItemValue, Mode=OneWay}" />
+
+            <Label Grid.Column="2"
+                   Content="Price By:"
+                   Padding="0,0,5,0"
+                   VerticalAlignment="Center" />
+
+            <ComboBox Grid.Column="3"
+                      ItemsSource="{Binding PriceByOptions}"
+                      SelectedValue="{Binding SelectedPriceByOption}"
+                      IsEnabled="{Binding IsValid}"
+                      Width="100">
+                <ComboBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Price By"
+                                             ToolTipText="The pricing method for price points." />
+                </ComboBox.ToolTip>
+            </ComboBox>
+        </Grid>
+
+        <!-- Main Editor -->
+        <Grid Grid.Row="1"
+              Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Price Points -->
+            <DockPanel Grid.Column="0"
+                       MinWidth="100"
+                       Margin="0,3,0,3">
+                <Grid DockPanel.Dock="Top"
+                      Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Width="24"
+                            Height="24"
+                            Grid.Column="0"
+                            Command="{Binding AddCommand}">
+                        <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                               Style="{StaticResource buttonImage}" />
+                        <Button.ToolTip>
+                            <utilities:HeaderToolTip ToolTipHeader="Add Price Point"
+                                                     ToolTipText="Adds a price point." />
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Width="24"
+                            Height="24"
+                            Grid.Column="1"
+                            Command="{Binding DeleteCommand}">
+                        <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                               Style="{StaticResource buttonImage}" />
+                        <Button.ToolTip>
+                            <utilities:HeaderToolTip ToolTipHeader="Remove Price Point"
+                                                     ToolTipText="Removes the currently selected price point." />
+                        </Button.ToolTip>
+                    </Button>
+                </Grid>
+                <ListBox ItemsSource="{Binding PricePoints}"
+                         SelectedValue="{Binding SelectedPricePoint}"
+                         DisplayMemberPath="DisplayString">
+                </ListBox>
+            </DockPanel>
+
+            <!-- Price Point Editor -->
+            <GroupBox Grid.Column="1"
+                      Header="Edit Price Point"
+                      DataContext="{Binding SelectedPricePoint}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Padding="0,0,5,0"
+                           VerticalAlignment="Center"
+                           Content="Calculate By:" />
+
+                    <ComboBox Grid.Row="0"
+                              Grid.Column="1"
+                              ItemsSource="{Binding CalculateByOptions}"
+                              SelectedValue="{Binding CalculateBy}"
+                              VerticalAlignment="Center">
+                        <ComboBox.ToolTip>
+                            <utilities:HeaderToolTip ToolTipHeader="Calculate By"
+                                                     ToolTipText="The type of unit to use for price calculation." />
+                        </ComboBox.ToolTip>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource descriptionConv}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,5,0,0"
+                           Padding="0,0,5,0"
+                           VerticalAlignment="Center"
+                           Content="Minimum:" />
+
+                    <igWPF:XamNumericEditor Grid.Row="1"
+                                            Grid.Column="1"
+                                            Margin="0,5,0,0"
+                                            VerticalAlignment="Center"
+                                            ValueType="{Binding MinEditorType}"
+                                            Format="{Binding EditorFormat}"
+                                            Mask="{Binding EditorMask}"
+                                            Value="{Binding MinValue, ValidatesOnDataErrors=True}">
+                        <igWPF:XamNumericEditor.Style>
+                            <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError"
+                                             Value="True">
+                                        <Setter Property="ToolTip"
+                                                Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                    </Trigger>
+                                    <Trigger Property="Validation.HasError"
+                                             Value="False">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <utilities:HeaderToolTip ToolTipHeader="Minimum Value"
+                                                                         ToolTipText="The minimum value that this price point covers." />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </igWPF:XamNumericEditor.Style>
+                    </igWPF:XamNumericEditor>
+
+                    <RadioButton Grid.Row="2"
+                                 Grid.Column="0"
+                                 Margin="0,5,0,0"
+                                 Content="Maximum:"
+                                 GroupName="Max_A"
+                                 Padding="0,0,5,0"
+                                 VerticalAlignment="Center"
+                                 IsChecked="{Binding HasMaxValue}">
+                        <RadioButton.ToolTip>
+                            <utilities:HeaderToolTip ToolTipHeader="Maximum"
+                                                     ToolTipText="If selected, means that this price point has a maximum value." />
+                        </RadioButton.ToolTip>
+                    </RadioButton>
+
+                    <RadioButton Grid.Row="3"
+                                 Grid.Column="0"
+                                 Margin="0,5,0,0"
+                                 Padding="0,0,5,0"
+                                 Content="No Maximum"
+                                 GroupName="Max_B"
+                                 IsChecked="{Binding EraseMaxValue}">
+                        <RadioButton.ToolTip>
+                            <utilities:HeaderToolTip ToolTipHeader="No Maximum"
+                                                     ToolTipText="If selected, means that this price point has no maximum value." />
+                        </RadioButton.ToolTip>
+                    </RadioButton>
+
+                    <igWPF:XamNumericEditor Grid.Row="2"
+                                            Grid.Column="1"
+                                            Margin="0,5,0,0"
+                                            VerticalAlignment="Center"
+                                            ValueType="{Binding MaxEditorType}"
+                                            Format="{Binding EditorFormat}"
+                                            Mask="{Binding EditorMask}"
+                                            Value="{Binding MaxValue, ValidatesOnDataErrors=True}">
+                        <igWPF:XamNumericEditor.Style>
+                            <Style TargetType="{x:Type igWPF:XamNumericEditor}">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError"
+                                             Value="True">
+                                        <Setter Property="ToolTip"
+                                                Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                    </Trigger>
+                                    <Trigger Property="Validation.HasError"
+                                             Value="False">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <utilities:HeaderToolTip ToolTipHeader="Maximum Value"
+                                                                         ToolTipText="The maximum value that this price point covers." />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </igWPF:XamNumericEditor.Style>
+                    </igWPF:XamNumericEditor>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <!-- OK/Cancel -->
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal"
+                    Margin="0,5,0,0">
+            <Button Style="{StaticResource buttonStandard}"
+                    IsDefault="True"
+                    Content="OK"
+                    Command="{Binding AcceptCommand}" />
+
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</Window>

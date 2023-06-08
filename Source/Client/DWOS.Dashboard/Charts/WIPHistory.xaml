@@ -1,0 +1,50 @@
+﻿<UserControl xmlns:ig="http://schemas.infragistics.com/xaml"  x:Class="DWOS.Dashboard.Charts.WIPHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DWOS.Dashboard.Charts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ig:XamDataChart Grid.Row="0" Grid.RowSpan="2" x:Name="chart" Grid.Column="0">
+            <ig:XamDataChart.Axes>
+                <ig:CategoryXAxis x:Name="xAxis" Label="{}{Date:MM/dd}" Title="Date" Interval="1">
+                    <ig:CategoryXAxis.LabelSettings>
+                        <ig:AxisLabelSettings Angle="30"/>
+                    </ig:CategoryXAxis.LabelSettings>
+                </ig:CategoryXAxis>
+                <ig:NumericYAxis x:Name="yAxis" Title="Count" />
+            </ig:XamDataChart.Axes>
+            <ig:XamDataChart.Series>
+                <ig:ColumnSeries ValueMemberPath="OrderCount" Title="Open Orders" XAxis="{Binding ElementName=xAxis}" YAxis="{Binding ElementName=yAxis}" TrendLineType="WeightedAverage" TrendLineBrush="Green" TrendLineThickness="3" TrendLineDashArray="3 3" ShowDefaultTooltip="True" />
+            </ig:XamDataChart.Series>
+        </ig:XamDataChart>
+
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="settingsPanel" Margin="10" MaxWidth="500">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Margin="3" VerticalAlignment="Center">History Days:</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" x:Name="txtDays" Text="{Binding Path=HistoryDays, Mode=TwoWay}"/>
+        </Grid>
+        
+        <Image Grid.Row="1" Source="/DWOS.Dashboard;component/Resources/Images/Settings_24.png" Width="24" HorizontalAlignment="Left" Margin="5,0,0,5" Cursor="Hand" MouseDown="Image_MouseDown" ToolTip="Click to show/hide the settings."></Image>
+    </Grid>
+</UserControl>

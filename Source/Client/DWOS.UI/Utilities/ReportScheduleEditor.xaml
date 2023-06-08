@@ -1,0 +1,197 @@
+﻿<UserControl x:Class="DWOS.UI.Utilities.ReportScheduleEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="500"
+             x:Name="thisControl"
+             Loaded="Control_Loaded">
+    <UserControl.Resources>
+        <Style x:Key="HeaderTextBlock"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Report Name -->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}">
+            Report:
+        </Label>
+
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 IsReadOnly="True"
+                 VerticalAlignment="Center"
+                 Style="{StaticResource FormField}"
+                 Text="{Binding ElementName=thisControl, Path=ReportName, Mode=OneWay}">
+            <TextBox.ToolTip>
+                <utilities:HeaderToolTipContent ToolTipHeader="Report Name">
+                    The report's name. This cannot be changed.
+                </utilities:HeaderToolTipContent>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <!-- Schedule -->
+        <!-- Field Editors -->
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource HeaderTextBlock}">
+                Seconds
+            </TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Style="{StaticResource HeaderTextBlock}">
+                Minutes
+            </TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource HeaderTextBlock}">
+                Hours
+            </TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource HeaderTextBlock}">
+                Day Of Month
+            </TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="4"
+                       Style="{StaticResource HeaderTextBlock}">
+                Month
+            </TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="5"
+                       Style="{StaticResource HeaderTextBlock}">
+                Day of Week
+            </TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="6"
+                       Style="{StaticResource HeaderTextBlock}">
+                Year
+            </TextBlock>
+
+            <TextBox Grid.Row="1"
+                     Grid.Column="0"
+                     Text="{Binding ElementName=thisControl, Path=Seconds, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Seconds">
+                        The seconds field of the schedule.
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Text="{Binding ElementName=thisControl, Path=Minutes, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Minutes">
+                        The minutes field of the schedule.
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Row="1"
+                     Grid.Column="2"
+                     Text="{Binding ElementName=thisControl, Path=Hours, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Hours">
+                        The hours field of the schedule.
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Row="1"
+                     Grid.Column="3"
+                     Text="{Binding ElementName=thisControl, Path=DayOfMonth, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Day of Month">
+                        The day of month field of the schedule. Can be "?".
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Row="1"
+                     Grid.Column="4"
+                     Text="{Binding ElementName=thisControl, Path=Month, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Month">
+                        The month field of the schedule.
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Row="1"
+                     Grid.Column="5"
+                     Text="{Binding ElementName=thisControl, Path=DayOfWeek, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Day of Week">
+                        The day of week field of the schedule. Can be "?".
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+            <TextBox Grid.Row="1"
+                     Grid.Column="6"
+                     Text="{Binding ElementName=thisControl, Path=Year, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTipContent ToolTipHeader="Year">
+                        The year field of the schedule; optional.
+                    </utilities:HeaderToolTipContent>
+                </TextBox.ToolTip>
+            </TextBox>
+
+        </Grid>
+
+        <!-- Description -->
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}">
+            Description:
+        </Label>
+
+        <TextBox Grid.Row="2"
+                 Grid.Column="1"
+                 IsReadOnly="True"
+                 VerticalAlignment="Center"
+                 Style="{StaticResource FormField}"
+                 Text="{Binding ElementName=thisControl, Path=ScheduleDescription}">
+            <TextBox.ToolTip>
+                <utilities:HeaderToolTipContent ToolTipHeader="Description">
+                    The description of the schedule. This automatically updates as you update the schedule.
+                </utilities:HeaderToolTipContent>
+            </TextBox.ToolTip>
+        </TextBox>
+    </Grid>
+</UserControl>

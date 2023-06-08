@@ -1,0 +1,34 @@
+﻿<Window x:Class="DWOS.LabelEditor.AddTokenDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Token" Height="270" Width="350" ResizeMode="NoResize" xmlns:my="clr-namespace:DWOS.LabelEditor" WindowStyle="ToolWindow" ShowInTaskbar="True" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical" >
+            <TextBlock VerticalAlignment="Top" Margin="5" Text="Tokens:" />
+            <ListBox x:Name="lstTokens" Margin="5,0,5,5" Height="160" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="3" HorizontalAlignment="Stretch"  BorderThickness="2" Background="White" BorderBrush="LightCyan">
+                            <StackPanel Orientation="Horizontal" ToolTip="{Binding ToolTip}">
+                                <Border Grid.Column="0" BorderBrush="DarkGray" Margin="3" BorderThickness="2" Background="LightBlue">
+                                    <Label Content="{Binding TokenType}"></Label>
+                                </Border>
+                                <Label Grid.Column="1" Content="{Binding DisplayName}" Margin="3"></Label>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnOK" Content="OK" Height="23" HorizontalAlignment="Left" IsDefault="True" VerticalAlignment="Top" Width="75" Click="btnOK_Click" Margin="5" />
+            <Button x:Name="btnCancel" Content="Cancel" Height="23" HorizontalAlignment="Left" IsCancel="True" VerticalAlignment="Top" Width="75" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly manifestVersion="1.0"
+                xmlns="urn:schemas-microsoft-com:asm.v1"
+                xmlns:asmv1="urn:schemas-microsoft-com:asm.v1"
+                xmlns:asmv2="urn:schemas-microsoft-com:asm.v2"
+                xmlns:asmv3="urn:schemas-microsoft-com:asm.v3"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <assemblyIdentity version="1.0.0.0"
+                    name="MyApplication.app" />
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC Manifest Options -->
+        <requestedExecutionLevel level="asInvoker"
+                                 uiAccess="false" />
+      </requestedPrivileges>
+      <applicationRequestMinimum>
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+        <PermissionSet class="System.Security.PermissionSet"
+                       version="1"
+                       ID="Custom"
+                       SameSite="site"
+                       Unrestricted="true" />
+      </applicationRequestMinimum>
+    </security>
+  </trustInfo>
+
+  <asmv3:application>
+    <asmv3:windowsSettings xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">
+      <!-- DWOS's WinForms components do not handle DPI changes properly due
+           to scaling issues. Setting dpiAware to disabled causes everything
+           to be stretched - this is blurry but works. -->
+      <dpiAware>false</dpiAware>
+    </asmv3:windowsSettings>
+  </asmv3:application>
+</asmv1:assembly>

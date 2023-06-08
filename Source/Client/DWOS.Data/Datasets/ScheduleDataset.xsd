@@ -1,0 +1,1254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ScheduleDataset" targetNamespace="http://tempuri.org/ScheduleDataset.xsd" xmlns:mstns="http://tempuri.org/ScheduleDataset.xsd" xmlns="http://tempuri.org/ScheduleDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DWOSDataConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DWOSDataConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DWOS.Data.Properties.Settings.GlobalReference.Default.DWOSDataConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="OrderScheduleTableAdapter" GeneratorDataComponentClassName="OrderScheduleTableAdapter" Name="OrderSchedule" UserDataComponentName="OrderScheduleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        o.OrderID, o.PurchaseOrder, o.PartQuantity, o.Priority, o.CurrentLocation, o.WorkStatus, c.Name AS 'CustomerName', o.RequiredDate, Part.Material, c.CustomerID, o.SchedulePriority, 
+                         Part.Name AS 'PartName', o.EstShipDate, o.InitialEstShipDate, ROUND(o.PartQuantity * Part.SurfaceArea, 2) AS 'TotalSurfaceArea'
+FROM            Customer AS c INNER JOIN
+                         [Order] AS o ON c.CustomerID = o.CustomerID INNER JOIN
+                         Part ON o.PartID = Part.PartID
+WHERE        (o.Status = 'Open') AND (o.WorkStatus &lt;&gt; N'Final Inspection') AND (o.WorkStatus &lt;&gt; N'Shipping') AND (o.Hold = 0) AND (o.OrderType = 1 OR
+                         o.OrderType = 3)
+ORDER BY o.CurrentLocation, o.Priority, o.RequiredDate</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OrderID" DataSetColumn="OrderID" />
+              <Mapping SourceColumn="PurchaseOrder" DataSetColumn="PurchaseOrder" />
+              <Mapping SourceColumn="PartQuantity" DataSetColumn="PartQuantity" />
+              <Mapping SourceColumn="Priority" DataSetColumn="Priority" />
+              <Mapping SourceColumn="CurrentLocation" DataSetColumn="CurrentLocation" />
+              <Mapping SourceColumn="WorkStatus" DataSetColumn="WorkStatus" />
+              <Mapping SourceColumn="CustomerName" DataSetColumn="CustomerName" />
+              <Mapping SourceColumn="Material" DataSetColumn="Material" />
+              <Mapping SourceColumn="RequiredDate" DataSetColumn="RequiredDate" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="SchedulePriority" DataSetColumn="SchedulePriority" />
+              <Mapping SourceColumn="PartName" DataSetColumn="PartName" />
+              <Mapping SourceColumn="EstShipDate" DataSetColumn="EstShipDate" />
+              <Mapping SourceColumn="InitialEstShipDate" DataSetColumn="InitialEstShipDate" />
+              <Mapping SourceColumn="TotalSurfaceArea" DataSetColumn="TotalSurfaceArea" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByScheduled" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByScheduled" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByScheduled">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        o.OrderID, o.PurchaseOrder, o.PartQuantity, o.Priority, o.CurrentLocation, o.WorkStatus, c.Name AS 'CustomerName', o.RequiredDate, 
+                         p.Material, c.CustomerID, o.SchedulePriority, p.Name AS 'PartName', o.EstShipDate, o.InitialEstShipDate, op.EndDate, pr.Name as 'NextProcessName'
+FROM            Customer AS c, Part p, [Order] o, WorkScheduleDetail wsd, OrderProcesses op, Process pr
+WHERE       c.CustomerID = o.CustomerID 
+			AND o.PartID = p.PartID
+			AND wsd.WorkScheduleSummaryID = (SELECT TOP 1 wss.WorkScheduleSummaryID FROM WorkScheduleSummary wss WHERE (DepartmentID = @department) AND (ScheduledDate = @scheduleDate) AND (Shift = @shift))
+			AND o.OrderID = wsd.OrderID
+			AND wsd.OrderProcessID = op.OrderProcessesID
+			AND pr.ProcessID = op.ProcessID
+ORDER BY o.CurrentLocation, o.Priority, o.RequiredDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="department" ColumnName="" DataSourceName="" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@department" Precision="0" Scale="0" Size="50" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="scheduleDate" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@scheduleDate" Precision="0" ProviderType="DateTime" Scale="0" Size="3" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="shift" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@shift" Precision="0" Scale="0" Size="4" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEstShipDate" Modifier="Public" Name="UpdateEstShipDate" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateEstShipDate">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       [Order]
+SET                EstShipDate = @estShipDate
+WHERE OrderID = @orderID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="estShipDate" ColumnName="EstShipDate" DataSourceName="DPSData.dbo.[Order]" DataTypeServer="smalldatetime" DbType="DateTime" Direction="Input" ParameterName="@estShipDate" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="4" SourceColumn="EstShipDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="orderID" ColumnName="OrderID" DataSourceName="DPSData.dbo.[Order]" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@orderID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateInitialEstShipDate" Modifier="Public" Name="UpdateInitialEstShipDate" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="UpdateInitialEstShipDate">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       [Order] 
+SET InitialEstShipDate = @estShipDate
+WHERE      OrderID = @orderID AND (InitialEstShipDate IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="estShipDate" ColumnName="InitialEstShipDate" DataSourceName="DPSData.dbo.[Order]" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@estShipDate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="InitialEstShipDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="orderID" ColumnName="OrderID" DataSourceName="DPSData.dbo.[Order]" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@orderID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="d_DepartmentTableAdapter" GeneratorDataComponentClassName="d_DepartmentTableAdapter" Name="d_Department" UserDataComponentName="d_DepartmentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.d_Department" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        DepartmentID
+FROM            d_Department</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DepartmentID" DataSetColumn="DepartmentID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="OrderProcessesTableAdapter" GeneratorDataComponentClassName="OrderProcessesTableAdapter" Name="OrderProcesses" UserDataComponentName="OrderProcessesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.OrderProcesses" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        OrderProcesses.OrderProcessesID, OrderProcesses.OrderID, OrderProcesses.ProcessID, OrderProcesses.StepOrder, 
+                         OrderProcesses.Department, OrderProcesses.StartDate, OrderProcesses.EndDate, OrderProcesses.EstEndDate
+FROM            OrderProcesses INNER JOIN
+                         [Order] ON OrderProcesses.OrderID = [Order].OrderID
+WHERE       ([Order].Status = 'Open') AND ([Order].WorkStatus &lt;&gt; N'Final Inspection') AND ([Order].WorkStatus &lt;&gt; N'Shipping') AND ([Order].Hold = 0) AND (([Order].OrderType = 1) OR ([Order].OrderType = 3)) AND (OrderProcesses.EndDate IS NULL)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OrderProcessesID" DataSetColumn="OrderProcessesID" />
+              <Mapping SourceColumn="OrderID" DataSetColumn="OrderID" />
+              <Mapping SourceColumn="ProcessID" DataSetColumn="ProcessID" />
+              <Mapping SourceColumn="StepOrder" DataSetColumn="StepOrder" />
+              <Mapping SourceColumn="Department" DataSetColumn="Department" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="EndDate" DataSetColumn="EndDate" />
+              <Mapping SourceColumn="EstEndDate" DataSetColumn="EstEndDate" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEstEndDate" Modifier="Public" Name="UpdateEstEndDate" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="UpdateEstEndDate">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       OrderProcesses
+SET                EstEndDate = @estEndDate
+WHERE        (OrderProcessesID = @orderProcessesID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="estEndDate" ColumnName="EstEndDate" DataSourceName="DPSData.dbo.OrderProcesses" DataTypeServer="smalldatetime" DbType="DateTime" Direction="Input" ParameterName="@estEndDate" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="4" SourceColumn="EstEndDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="orderProcessesID" ColumnName="OrderProcessesID" DataSourceName="DPSData.dbo.OrderProcesses" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@orderProcessesID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderProcessesID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProcessTableAdapter" GeneratorDataComponentClassName="ProcessTableAdapter" Name="Process" UserDataComponentName="ProcessTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Process" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ProcessID, Name, Category
+FROM            Process</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProcessID" DataSetColumn="ProcessID" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Category" DataSetColumn="Category" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Process" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ProcessID, Name, Category
+FROM            Process
+WHERE ProcessID = @processId</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="processId" ColumnName="ProcessID" DataSourceName="DWOS.dbo.Process" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@processId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ProcessID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="WorkScheduleTableAdapter" GeneratorDataComponentClassName="WorkScheduleTableAdapter" Name="WorkSchedule" UserDataComponentName="WorkScheduleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSDataTest.dbo.WorkSchedule" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [WorkSchedule] WHERE (([DepartmentScheduleID] = @Original_DepartmentScheduleID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_DepartmentScheduleID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DepartmentScheduleID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [WorkSchedule] ([DepartmentID], [ShiftNumber], [PartProduction]) VALUES (@DepartmentID, @ShiftNumber, @PartProduction);
+SELECT DepartmentScheduleID, DepartmentID, ShiftNumber, PartProduction FROM WorkSchedule WHERE (DepartmentScheduleID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DepartmentID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DepartmentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ShiftNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ShiftNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PartProduction" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PartProduction" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        DepartmentScheduleID, DepartmentID, ShiftNumber, PartProduction
+FROM            WorkSchedule</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [WorkSchedule] SET [DepartmentID] = @DepartmentID, [ShiftNumber] = @ShiftNumber, [PartProduction] = @PartProduction WHERE (([DepartmentScheduleID] = @Original_DepartmentScheduleID));
+SELECT DepartmentScheduleID, DepartmentID, ShiftNumber, PartProduction FROM WorkSchedule WHERE (DepartmentScheduleID = @DepartmentScheduleID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DepartmentID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DepartmentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ShiftNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ShiftNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PartProduction" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PartProduction" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_DepartmentScheduleID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DepartmentScheduleID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="DepartmentScheduleID" ColumnName="DepartmentScheduleID" DataSourceName="DPSDataTest.dbo.WorkSchedule" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@DepartmentScheduleID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="DepartmentScheduleID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DepartmentScheduleID" DataSetColumn="DepartmentScheduleID" />
+              <Mapping SourceColumn="DepartmentID" DataSetColumn="DepartmentID" />
+              <Mapping SourceColumn="ShiftNumber" DataSetColumn="ShiftNumber" />
+              <Mapping SourceColumn="PartProduction" DataSetColumn="PartProduction" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="WorkHolidayTableAdapter" GeneratorDataComponentClassName="WorkHolidayTableAdapter" Name="WorkHoliday" UserDataComponentName="WorkHolidayTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.WorkHoliday" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM WorkHoliday
+WHERE        (HolidayID = @holidayId)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="holidayId" ColumnName="HolidayID" DataSourceName="DWOS.dbo.WorkHoliday" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@holidayId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="HolidayID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [WorkHoliday] ([Holiday], [Name], [Annual]) VALUES (@Holiday, @Name, @Annual)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Holiday" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="Holiday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Annual" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Annual" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        HolidayID, Holiday, Name, Annual
+FROM            WorkHoliday</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       WorkHoliday
+SET                Holiday = @holiday, Name = @name, Annual = @annual
+WHERE        (HolidayID = @holidayId)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="holiday" ColumnName="Holiday" DataSourceName="DWOS.dbo.WorkHoliday" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@holiday" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="Holiday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="name" ColumnName="Name" DataSourceName="DWOS.dbo.WorkHoliday" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@name" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="annual" ColumnName="Annual" DataSourceName="DWOS.dbo.WorkHoliday" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@annual" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="Annual" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="holidayId" ColumnName="HolidayID" DataSourceName="DWOS.dbo.WorkHoliday" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@holidayId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="HolidayID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="HolidayID" DataSetColumn="HolidayID" />
+              <Mapping SourceColumn="Holiday" DataSetColumn="Holiday" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Annual" DataSetColumn="Annual" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.WorkHoliday" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillFromDate" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillFromDate" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillFromDate">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Annual, Holiday, HolidayID, Name FROM WorkHoliday WHERE (Holiday &gt;= @fromDate)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="fromDate" ColumnName="Holiday" DataSourceName="DPSData.dbo.WorkHoliday" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@fromDate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="Holiday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetHolidaysInRange" Modifier="Public" Name="GetHolidaysInRange" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="GetHolidaysInRange">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        COUNT(*) AS HolidayCount
+FROM            WorkHoliday
+WHERE        (Holiday &gt;= @fromDate) AND (Holiday &lt;= @toDate)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="fromDate" ColumnName="Holiday" DataSourceName="DPSData.dbo.WorkHoliday" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@fromDate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="Holiday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="toDate" ColumnName="Holiday" DataSourceName="DPSData.dbo.WorkHoliday" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@toDate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="Holiday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CustomerSummaryTableAdapter" GeneratorDataComponentClassName="CustomerSummaryTableAdapter" Name="CustomerSummary" UserDataComponentName="CustomerSummaryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Customer.CustomerID, Customer.Name, Customer.OrderPriority, d_CustomerOrderPriority.Score
+FROM            Customer INNER JOIN
+                         d_CustomerOrderPriority ON Customer.OrderPriority = d_CustomerOrderPriority.CustomerOrderPriority</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="OrderPriority" DataSetColumn="OrderPriority" />
+              <Mapping SourceColumn="Score" DataSetColumn="Score" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="WorkScheduleSummaryTableAdapter" GeneratorDataComponentClassName="WorkScheduleSummaryTableAdapter" Name="WorkScheduleSummary" UserDataComponentName="WorkScheduleSummaryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.WorkScheduleSummary" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [WorkScheduleSummary] WHERE (([WorkScheduleSummaryID] = @Original_WorkScheduleSummaryID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_WorkScheduleSummaryID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="WorkScheduleSummaryID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [WorkScheduleSummary] ([DepartmentID], [ScheduledDate], [Shift], [EstimatedParts], [RunDate]) VALUES (@DepartmentID, @ScheduledDate, @Shift, @EstimatedParts, @RunDate);
+SELECT WorkScheduleSummaryID, DepartmentID, ScheduledDate, Shift, EstimatedParts, RunDate FROM WorkScheduleSummary WHERE (WorkScheduleSummaryID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DepartmentID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DepartmentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@ScheduledDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="ScheduledDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Shift" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Shift" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@EstimatedParts" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EstimatedParts" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@RunDate" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="0" SourceColumn="RunDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        WorkScheduleSummaryID, DepartmentID, ScheduledDate, Shift, EstimatedParts, RunDate
+FROM            WorkScheduleSummary</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [WorkScheduleSummary] SET [DepartmentID] = @DepartmentID, [ScheduledDate] = @ScheduledDate, [Shift] = @Shift, [EstimatedParts] = @EstimatedParts, [RunDate] = @RunDate WHERE (([WorkScheduleSummaryID] = @Original_WorkScheduleSummaryID));
+SELECT WorkScheduleSummaryID, DepartmentID, ScheduledDate, Shift, EstimatedParts, RunDate FROM WorkScheduleSummary WHERE (WorkScheduleSummaryID = @WorkScheduleSummaryID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@DepartmentID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="DepartmentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@ScheduledDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="ScheduledDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Shift" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Shift" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@EstimatedParts" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="EstimatedParts" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@RunDate" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="0" SourceColumn="RunDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_WorkScheduleSummaryID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="WorkScheduleSummaryID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="WorkScheduleSummaryID" ColumnName="WorkScheduleSummaryID" DataSourceName="DPSData.dbo.WorkScheduleSummary" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@WorkScheduleSummaryID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="WorkScheduleSummaryID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="WorkScheduleSummaryID" DataSetColumn="WorkScheduleSummaryID" />
+              <Mapping SourceColumn="DepartmentID" DataSetColumn="DepartmentID" />
+              <Mapping SourceColumn="ScheduledDate" DataSetColumn="ScheduledDate" />
+              <Mapping SourceColumn="Shift" DataSetColumn="Shift" />
+              <Mapping SourceColumn="EstimatedParts" DataSetColumn="EstimatedParts" />
+              <Mapping SourceColumn="RunDate" DataSetColumn="RunDate" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.WorkScheduleSummary" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT DepartmentID, EstimatedParts, RunDate, ScheduledDate, Shift, WorkScheduleSummaryID FROM WorkScheduleSummary WHERE (DepartmentID = @department) AND (ScheduledDate = @scheduleDate) AND (Shift = @shift)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="department" ColumnName="DepartmentID" DataSourceName="DPSData.dbo.WorkScheduleSummary" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@department" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="DepartmentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="scheduleDate" ColumnName="ScheduledDate" DataSourceName="DPSData.dbo.WorkScheduleSummary" DataTypeServer="date" DbType="AnsiString" Direction="Input" ParameterName="@scheduleDate" Precision="0" ProviderType="Date" Scale="0" Size="3" SourceColumn="ScheduledDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="shift" ColumnName="Shift" DataSourceName="DPSData.dbo.WorkScheduleSummary" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@shift" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Shift" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ServerProcessScheduleTableAdapter" GeneratorDataComponentClassName="ServerProcessScheduleTableAdapter" Name="ServerProcessSchedule" UserDataComponentName="ServerProcessScheduleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.ServerProcessSchedule" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ServerProcessScheduleID, ServerProcess, StartTime, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Parameters
+FROM            ServerProcessSchedule
+ORDER BY StartTime DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ServerProcessScheduleID" DataSetColumn="ServerProcessScheduleID" />
+              <Mapping SourceColumn="ServerProcess" DataSetColumn="ServerProcess" />
+              <Mapping SourceColumn="StartTime" DataSetColumn="StartTime" />
+              <Mapping SourceColumn="Sunday" DataSetColumn="Sunday" />
+              <Mapping SourceColumn="Monday" DataSetColumn="Monday" />
+              <Mapping SourceColumn="Tuesday" DataSetColumn="Tuesday" />
+              <Mapping SourceColumn="Wednesday" DataSetColumn="Wednesday" />
+              <Mapping SourceColumn="Thursday" DataSetColumn="Thursday" />
+              <Mapping SourceColumn="Friday" DataSetColumn="Friday" />
+              <Mapping SourceColumn="Saturday" DataSetColumn="Saturday" />
+              <Mapping SourceColumn="Parameters" DataSetColumn="Parameters" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ServerProcessHistoryTableAdapter" GeneratorDataComponentClassName="ServerProcessHistoryTableAdapter" Name="ServerProcessHistory" UserDataComponentName="ServerProcessHistoryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.ServerProcessHistory" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [ServerProcessHistory] WHERE (([ServerProcessHistoryID] = @Original_ServerProcessHistoryID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ServerProcessHistoryID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ServerProcessHistoryID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [ServerProcessHistory] ([ServerProcess], [Executed]) VALUES (@ServerProcess, @Executed);
+SELECT ServerProcessHistoryID, ServerProcess, Executed FROM ServerProcessHistory WHERE (ServerProcessHistoryID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ServerProcess" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ServerProcess" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Executed" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="Executed" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ServerProcessHistoryID, ServerProcess, Executed
+FROM            ServerProcessHistory</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [ServerProcessHistory] SET [ServerProcess] = @ServerProcess, [Executed] = @Executed WHERE (([ServerProcessHistoryID] = @Original_ServerProcessHistoryID));
+SELECT ServerProcessHistoryID, ServerProcess, Executed FROM ServerProcessHistory WHERE (ServerProcessHistoryID = @ServerProcessHistoryID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ServerProcess" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ServerProcess" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Executed" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="Executed" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ServerProcessHistoryID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ServerProcessHistoryID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ServerProcessHistoryID" ColumnName="ServerProcessHistoryID" DataSourceName="DPSData.dbo.ServerProcessHistory" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ServerProcessHistoryID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ServerProcessHistoryID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ServerProcessHistoryID" DataSetColumn="ServerProcessHistoryID" />
+              <Mapping SourceColumn="ServerProcess" DataSetColumn="ServerProcess" />
+              <Mapping SourceColumn="Executed" DataSetColumn="Executed" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="d_CustomerOrderPriorityTableAdapter" GeneratorDataComponentClassName="d_CustomerOrderPriorityTableAdapter" Name="d_CustomerOrderPriority" UserDataComponentName="d_CustomerOrderPriorityTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.d_CustomerOrderPriority" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [d_CustomerOrderPriority] WHERE (([CustomerOrderPriority] = @Original_CustomerOrderPriority))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CustomerOrderPriority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerOrderPriority" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [d_CustomerOrderPriority] ([CustomerOrderPriority], [Score]) VALUES (@CustomerOrderPriority, @Score);
+SELECT CustomerOrderPriority, Score FROM d_CustomerOrderPriority WHERE (CustomerOrderPriority = @CustomerOrderPriority)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CustomerOrderPriority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerOrderPriority" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Score" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Score" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        CustomerOrderPriority, Score
+FROM            d_CustomerOrderPriority</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [d_CustomerOrderPriority] SET [CustomerOrderPriority] = @CustomerOrderPriority, [Score] = @Score WHERE (([CustomerOrderPriority] = @Original_CustomerOrderPriority));
+SELECT CustomerOrderPriority, Score FROM d_CustomerOrderPriority WHERE (CustomerOrderPriority = @CustomerOrderPriority)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CustomerOrderPriority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerOrderPriority" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Score" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Score" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CustomerOrderPriority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerOrderPriority" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CustomerOrderPriority" DataSetColumn="CustomerOrderPriority" />
+              <Mapping SourceColumn="Score" DataSetColumn="Score" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="d_PriorityTableAdapter" GeneratorDataComponentClassName="d_PriorityTableAdapter" Name="d_Priority" UserDataComponentName="d_PriorityTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.d_Priority" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [d_Priority] WHERE (([PriorityID] = @Original_PriorityID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_PriorityID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PriorityID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [d_Priority] ([PriorityID], [Color], [PriorityScore]) VALUES (@PriorityID, @Color, @PriorityScore);
+SELECT PriorityID, Color, PriorityScore FROM d_Priority WHERE (PriorityID = @PriorityID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@PriorityID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PriorityID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Color" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Color" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PriorityScore" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PriorityScore" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        PriorityID, Color, PriorityScore
+FROM            d_Priority</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [d_Priority] SET [PriorityID] = @PriorityID, [Color] = @Color, [PriorityScore] = @PriorityScore WHERE (([PriorityID] = @Original_PriorityID));
+SELECT PriorityID, Color, PriorityScore FROM d_Priority WHERE (PriorityID = @PriorityID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@PriorityID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PriorityID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Color" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Color" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PriorityScore" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PriorityScore" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_PriorityID" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PriorityID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PriorityID" DataSetColumn="PriorityID" />
+              <Mapping SourceColumn="Color" DataSetColumn="Color" />
+              <Mapping SourceColumn="PriorityScore" DataSetColumn="PriorityScore" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="OrderPriorityTableAdapter" GeneratorDataComponentClassName="OrderPriorityTableAdapter" Name="OrderPriority" UserDataComponentName="OrderPriorityTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.[Order]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [Order] WHERE (([OrderID] = @Original_OrderID) AND ((@IsNull_RequiredDate = 1 AND [RequiredDate] IS NULL) OR ([RequiredDate] = @Original_RequiredDate)) AND ((@IsNull_PurchaseOrder = 1 AND [PurchaseOrder] IS NULL) OR ([PurchaseOrder] = @Original_PurchaseOrder)) AND ((@IsNull_CustomerWO = 1 AND [CustomerWO] IS NULL) OR ([CustomerWO] = @Original_CustomerWO)) AND ([SchedulePriority] = @Original_SchedulePriority) AND ((@IsNull_CustomerID = 1 AND [CustomerID] IS NULL) OR ([CustomerID] = @Original_CustomerID)) AND ((@IsNull_Priority = 1 AND [Priority] IS NULL) OR ([Priority] = @Original_Priority)) AND ([WorkStatus] = @Original_WorkStatus))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_RequiredDate" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="RequiredDate" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Original_RequiredDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="RequiredDate" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_PurchaseOrder" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PurchaseOrder" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_PurchaseOrder" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PurchaseOrder" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CustomerWO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerWO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CustomerWO" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerWO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_SchedulePriority" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SchedulePriority" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CustomerID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_CustomerID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Priority" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Priority" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Priority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Priority" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_WorkStatus" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="WorkStatus" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        OrderID, RequiredDate, PurchaseOrder, CustomerWO, SchedulePriority,CustomerID, Priority, WorkStatus
+FROM            [Order]
+WHERE        (Status = N'Open')</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [Order] SET [RequiredDate] = @RequiredDate, [PurchaseOrder] = @PurchaseOrder, [CustomerWO] = @CustomerWO, [SchedulePriority] = @SchedulePriority, [CustomerID] = @CustomerID, [Priority] = @Priority, [WorkStatus] = @WorkStatus WHERE (([OrderID] = @Original_OrderID) AND ((@IsNull_RequiredDate = 1 AND [RequiredDate] IS NULL) OR ([RequiredDate] = @Original_RequiredDate)) AND ((@IsNull_PurchaseOrder = 1 AND [PurchaseOrder] IS NULL) OR ([PurchaseOrder] = @Original_PurchaseOrder)) AND ((@IsNull_CustomerWO = 1 AND [CustomerWO] IS NULL) OR ([CustomerWO] = @Original_CustomerWO)) AND ([SchedulePriority] = @Original_SchedulePriority) AND ((@IsNull_CustomerID = 1 AND [CustomerID] IS NULL) OR ([CustomerID] = @Original_CustomerID)) AND ((@IsNull_Priority = 1 AND [Priority] IS NULL) OR ([Priority] = @Original_Priority)) AND ([WorkStatus] = @Original_WorkStatus));
+SELECT OrderID, RequiredDate, PurchaseOrder, CustomerWO, SchedulePriority, CustomerID, Priority, WorkStatus FROM [Order] WHERE (OrderID = @OrderID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@RequiredDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="RequiredDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@PurchaseOrder" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PurchaseOrder" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CustomerWO" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerWO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SchedulePriority" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SchedulePriority" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@CustomerID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Priority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Priority" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@WorkStatus" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="WorkStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_RequiredDate" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="RequiredDate" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="@Original_RequiredDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="RequiredDate" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_PurchaseOrder" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PurchaseOrder" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_PurchaseOrder" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="PurchaseOrder" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CustomerWO" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerWO" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_CustomerWO" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CustomerWO" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_SchedulePriority" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SchedulePriority" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_CustomerID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerID" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_CustomerID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_Priority" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Priority" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_Priority" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Priority" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_WorkStatus" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="WorkStatus" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="OrderID" ColumnName="OrderID" DataSourceName="DWOS.dbo.[Order]" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@OrderID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OrderID" DataSetColumn="OrderID" />
+              <Mapping SourceColumn="RequiredDate" DataSetColumn="RequiredDate" />
+              <Mapping SourceColumn="PurchaseOrder" DataSetColumn="PurchaseOrder" />
+              <Mapping SourceColumn="CustomerWO" DataSetColumn="CustomerWO" />
+              <Mapping SourceColumn="SchedulePriority" DataSetColumn="SchedulePriority" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="Priority" DataSetColumn="Priority" />
+              <Mapping SourceColumn="WorkStatus" DataSetColumn="WorkStatus" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="WorkScheduleDetailTableAdapter" GeneratorDataComponentClassName="WorkScheduleDetailTableAdapter" Name="WorkScheduleDetail" UserDataComponentName="WorkScheduleDetailTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DPSData.dbo.WorkScheduleDetail" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [WorkScheduleDetail] WHERE (([WorkScheduleDetailID] = @Original_WorkScheduleDetailID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_WorkScheduleDetailID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="WorkScheduleDetailID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [WorkScheduleDetail] ([WorkScheduleSummaryID], [OrderID], [OrderProcessID]) VALUES (@WorkScheduleSummaryID, @OrderID, @OrderProcessID);
+SELECT WorkScheduleDetailID, WorkScheduleSummaryID, OrderID, OrderProcessID FROM WorkScheduleDetail WHERE (WorkScheduleDetailID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@WorkScheduleSummaryID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="WorkScheduleSummaryID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OrderProcessID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderProcessID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        WorkScheduleDetailID, WorkScheduleSummaryID, OrderID, OrderProcessID
+FROM            WorkScheduleDetail</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [WorkScheduleDetail] SET [WorkScheduleSummaryID] = @WorkScheduleSummaryID, [OrderID] = @OrderID, [OrderProcessID] = @OrderProcessID WHERE (([WorkScheduleDetailID] = @Original_WorkScheduleDetailID));
+SELECT WorkScheduleDetailID, WorkScheduleSummaryID, OrderID, OrderProcessID FROM WorkScheduleDetail WHERE (WorkScheduleDetailID = @WorkScheduleDetailID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@WorkScheduleSummaryID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="WorkScheduleSummaryID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OrderProcessID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderProcessID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_WorkScheduleDetailID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="WorkScheduleDetailID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="WorkScheduleDetailID" ColumnName="WorkScheduleDetailID" DataSourceName="DPSData.dbo.WorkScheduleDetail" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@WorkScheduleDetailID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="WorkScheduleDetailID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="WorkScheduleDetailID" DataSetColumn="WorkScheduleDetailID" />
+              <Mapping SourceColumn="WorkScheduleSummaryID" DataSetColumn="WorkScheduleSummaryID" />
+              <Mapping SourceColumn="OrderID" DataSetColumn="OrderID" />
+              <Mapping SourceColumn="OrderProcessID" DataSetColumn="OrderProcessID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="d_ProcessCategoryTableAdapter" GeneratorDataComponentClassName="d_ProcessCategoryTableAdapter" Name="d_ProcessCategory" UserDataComponentName="d_ProcessCategoryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.d_ProcessCategory" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [d_ProcessCategory] WHERE (([ProcessCategory] = @Original_ProcessCategory))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_ProcessCategory" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ProcessCategory" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [d_ProcessCategory] ([ProcessCategory], [LeadTime]) VALUES (@ProcessCategory, @LeadTime);
+SELECT ProcessCategory, LeadTime FROM d_ProcessCategory WHERE (ProcessCategory = @ProcessCategory)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ProcessCategory" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ProcessCategory" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@LeadTime" Precision="3" ProviderType="Decimal" Scale="1" Size="0" SourceColumn="LeadTime" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ProcessCategory, LeadTime
+FROM            d_ProcessCategory</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [d_ProcessCategory] SET [ProcessCategory] = @ProcessCategory, [LeadTime] = @LeadTime WHERE (([ProcessCategory] = @Original_ProcessCategory));
+SELECT ProcessCategory, LeadTime FROM d_ProcessCategory WHERE (ProcessCategory = @ProcessCategory)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ProcessCategory" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ProcessCategory" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@LeadTime" Precision="3" ProviderType="Decimal" Scale="1" Size="0" SourceColumn="LeadTime" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_ProcessCategory" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ProcessCategory" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProcessCategory" DataSetColumn="ProcessCategory" />
+              <Mapping SourceColumn="LeadTime" DataSetColumn="LeadTime" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetUsageCount" Modifier="Public" Name="GetUsageCount" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetUsageCount">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        COUNT(*) AS ProcessCount
+FROM            Process
+WHERE        (Category = @category)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="category" ColumnName="Category" DataSourceName="DWOS.dbo.Process" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@category" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="Category" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DayOfWeekTableAdapter" GeneratorDataComponentClassName="DayOfWeekTableAdapter" Name="DayOfWeek" UserDataComponentName="DayOfWeekTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.DayOfWeek" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [DayOfWeek] WHERE (([DayOfWeekID] = @Original_DayOfWeekID) AND ([IsWorkday] = @Original_IsWorkday) AND ([WorkdayStart] = @Original_WorkdayStart) AND ([WorkdayEnd] = @Original_WorkdayEnd))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_DayOfWeekID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DayOfWeekID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_IsWorkday" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsWorkday" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@Original_WorkdayStart" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayStart" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@Original_WorkdayEnd" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayEnd" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [DayOfWeek] ([DayOfWeekID], [IsWorkday], [WorkdayStart], [WorkdayEnd]) VALUES (@DayOfWeekID, @IsWorkday, @WorkdayStart, @WorkdayEnd);
+SELECT DayOfWeekID, IsWorkday, WorkdayStart, WorkdayEnd FROM DayOfWeek WHERE (DayOfWeekID = @DayOfWeekID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DayOfWeekID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DayOfWeekID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsWorkday" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsWorkday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@WorkdayStart" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayStart" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@WorkdayEnd" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayEnd" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT DayOfWeekID, IsWorkday, WorkdayStart, WorkdayEnd
+FROM DayOfWeek;</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [DayOfWeek] SET [DayOfWeekID] = @DayOfWeekID, [IsWorkday] = @IsWorkday, [WorkdayStart] = @WorkdayStart, [WorkdayEnd] = @WorkdayEnd WHERE (([DayOfWeekID] = @Original_DayOfWeekID) AND ([IsWorkday] = @Original_IsWorkday) AND ([WorkdayStart] = @Original_WorkdayStart) AND ([WorkdayEnd] = @Original_WorkdayEnd));
+SELECT DayOfWeekID, IsWorkday, WorkdayStart, WorkdayEnd FROM DayOfWeek WHERE (DayOfWeekID = @DayOfWeekID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DayOfWeekID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DayOfWeekID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@IsWorkday" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsWorkday" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@WorkdayStart" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayStart" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@WorkdayEnd" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayEnd" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_DayOfWeekID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DayOfWeekID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_IsWorkday" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="IsWorkday" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@Original_WorkdayStart" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayStart" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Time" Direction="Input" ParameterName="@Original_WorkdayEnd" Precision="0" ProviderType="Time" Scale="0" Size="0" SourceColumn="WorkdayEnd" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DayOfWeekID" DataSetColumn="DayOfWeekID" />
+              <Mapping SourceColumn="IsWorkday" DataSetColumn="IsWorkday" />
+              <Mapping SourceColumn="WorkdayStart" DataSetColumn="WorkdayStart" />
+              <Mapping SourceColumn="WorkdayEnd" DataSetColumn="WorkdayEnd" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ScheduleDataset" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ScheduleDataset" msprop:Generator_UserDSName="ScheduleDataset">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="OrderSchedule" msprop:Generator_TableClassName="OrderScheduleDataTable" msprop:Generator_TableVarName="tableOrderSchedule" msprop:Generator_RowChangedName="OrderScheduleRowChanged" msprop:Generator_TablePropName="OrderSchedule" msprop:Generator_RowDeletingName="OrderScheduleRowDeleting" msprop:Generator_RowChangingName="OrderScheduleRowChanging" msprop:Generator_RowEvHandlerName="OrderScheduleRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderScheduleRowDeleted" msprop:Generator_RowClassName="OrderScheduleRow" msprop:Generator_UserTableName="OrderSchedule" msprop:Generator_RowEvArgName="OrderScheduleRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
+              <xs:element name="PurchaseOrder" msprop:Generator_ColumnVarNameInTable="columnPurchaseOrder" msprop:Generator_ColumnPropNameInRow="PurchaseOrder" msprop:Generator_ColumnPropNameInTable="PurchaseOrderColumn" msprop:Generator_UserColumnName="PurchaseOrder" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PartQuantity" msprop:Generator_ColumnVarNameInTable="columnPartQuantity" msprop:Generator_ColumnPropNameInRow="PartQuantity" msprop:Generator_ColumnPropNameInTable="PartQuantityColumn" msprop:Generator_UserColumnName="PartQuantity" type="xs:int" minOccurs="0" />
+              <xs:element name="Priority" msprop:Generator_ColumnVarNameInTable="columnPriority" msprop:Generator_ColumnPropNameInRow="Priority" msprop:Generator_ColumnPropNameInTable="PriorityColumn" msprop:Generator_UserColumnName="Priority" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CurrentLocation" msprop:Generator_ColumnVarNameInTable="columnCurrentLocation" msprop:Generator_ColumnPropNameInRow="CurrentLocation" msprop:Generator_ColumnPropNameInTable="CurrentLocationColumn" msprop:Generator_UserColumnName="CurrentLocation">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkStatus" msprop:Generator_ColumnVarNameInTable="columnWorkStatus" msprop:Generator_ColumnPropNameInRow="WorkStatus" msprop:Generator_ColumnPropNameInTable="WorkStatusColumn" msprop:Generator_UserColumnName="WorkStatus">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CustomerName" msprop:Generator_ColumnVarNameInTable="columnCustomerName" msprop:Generator_ColumnPropNameInRow="CustomerName" msprop:Generator_ColumnPropNameInTable="CustomerNameColumn" msprop:Generator_UserColumnName="CustomerName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Material" msprop:Generator_ColumnVarNameInTable="columnMaterial" msprop:Generator_ColumnPropNameInRow="Material" msprop:Generator_ColumnPropNameInTable="MaterialColumn" msprop:Generator_UserColumnName="Material" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RequiredDate" msprop:Generator_ColumnVarNameInTable="columnRequiredDate" msprop:Generator_ColumnPropNameInRow="RequiredDate" msprop:Generator_ColumnPropNameInTable="RequiredDateColumn" msprop:Generator_UserColumnName="RequiredDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CustomerID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+              <xs:element name="SchedulePriority" msprop:Generator_ColumnVarNameInTable="columnSchedulePriority" msprop:Generator_ColumnPropNameInRow="SchedulePriority" msprop:Generator_ColumnPropNameInTable="SchedulePriorityColumn" msprop:Generator_UserColumnName="SchedulePriority" type="xs:int" />
+              <xs:element name="PartName" msprop:Generator_ColumnVarNameInTable="columnPartName" msprop:Generator_ColumnPropNameInRow="PartName" msprop:Generator_ColumnPropNameInTable="PartNameColumn" msprop:Generator_UserColumnName="PartName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EstShipDate" msprop:Generator_ColumnVarNameInTable="columnEstShipDate" msprop:Generator_ColumnPropNameInRow="EstShipDate" msprop:Generator_ColumnPropNameInTable="EstShipDateColumn" msprop:Generator_UserColumnName="EstShipDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InitialEstShipDate" msprop:Generator_ColumnVarNameInTable="columnInitialEstShipDate" msprop:Generator_ColumnPropNameInRow="InitialEstShipDate" msprop:Generator_ColumnPropNameInTable="InitialEstShipDateColumn" msprop:Generator_UserColumnName="InitialEstShipDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TotalSurfaceArea" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalSurfaceArea" msprop:Generator_ColumnPropNameInRow="TotalSurfaceArea" msprop:Generator_ColumnPropNameInTable="TotalSurfaceAreaColumn" msprop:Generator_UserColumnName="TotalSurfaceArea" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="d_Department" msprop:Generator_TableClassName="d_DepartmentDataTable" msprop:Generator_TableVarName="tabled_Department" msprop:Generator_RowChangedName="d_DepartmentRowChanged" msprop:Generator_TablePropName="d_Department" msprop:Generator_RowDeletingName="d_DepartmentRowDeleting" msprop:Generator_RowChangingName="d_DepartmentRowChanging" msprop:Generator_RowEvHandlerName="d_DepartmentRowChangeEventHandler" msprop:Generator_RowDeletedName="d_DepartmentRowDeleted" msprop:Generator_RowClassName="d_DepartmentRow" msprop:Generator_UserTableName="d_Department" msprop:Generator_RowEvArgName="d_DepartmentRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DepartmentID" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_UserColumnName="DepartmentID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OrderProcesses" msprop:Generator_TableClassName="OrderProcessesDataTable" msprop:Generator_TableVarName="tableOrderProcesses" msprop:Generator_RowChangedName="OrderProcessesRowChanged" msprop:Generator_TablePropName="OrderProcesses" msprop:Generator_RowDeletingName="OrderProcessesRowDeleting" msprop:Generator_RowChangingName="OrderProcessesRowChanging" msprop:Generator_RowEvHandlerName="OrderProcessesRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderProcessesRowDeleted" msprop:Generator_RowClassName="OrderProcessesRow" msprop:Generator_UserTableName="OrderProcesses" msprop:Generator_RowEvArgName="OrderProcessesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderProcessesID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderProcessesID" msprop:Generator_ColumnPropNameInRow="OrderProcessesID" msprop:Generator_ColumnPropNameInTable="OrderProcessesIDColumn" msprop:Generator_UserColumnName="OrderProcessesID" type="xs:int" />
+              <xs:element name="OrderID" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
+              <xs:element name="ProcessID" msprop:Generator_ColumnVarNameInTable="columnProcessID" msprop:Generator_ColumnPropNameInRow="ProcessID" msprop:Generator_ColumnPropNameInTable="ProcessIDColumn" msprop:Generator_UserColumnName="ProcessID" type="xs:int" />
+              <xs:element name="StepOrder" msprop:Generator_ColumnVarNameInTable="columnStepOrder" msprop:Generator_ColumnPropNameInRow="StepOrder" msprop:Generator_ColumnPropNameInTable="StepOrderColumn" msprop:Generator_UserColumnName="StepOrder" type="xs:int" />
+              <xs:element name="Department" msprop:Generator_ColumnVarNameInTable="columnDepartment" msprop:Generator_ColumnPropNameInRow="Department" msprop:Generator_ColumnPropNameInTable="DepartmentColumn" msprop:Generator_UserColumnName="Department">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EstEndDate" msprop:Generator_ColumnVarNameInTable="columnEstEndDate" msprop:Generator_ColumnPropNameInRow="EstEndDate" msprop:Generator_ColumnPropNameInTable="EstEndDateColumn" msprop:Generator_UserColumnName="EstEndDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Process" msprop:Generator_TableClassName="ProcessDataTable" msprop:Generator_TableVarName="tableProcess" msprop:Generator_RowChangedName="ProcessRowChanged" msprop:Generator_TablePropName="Process" msprop:Generator_RowDeletingName="ProcessRowDeleting" msprop:Generator_RowChangingName="ProcessRowChanging" msprop:Generator_RowEvHandlerName="ProcessRowChangeEventHandler" msprop:Generator_RowDeletedName="ProcessRowDeleted" msprop:Generator_RowClassName="ProcessRow" msprop:Generator_UserTableName="Process" msprop:Generator_RowEvArgName="ProcessRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProcessID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnProcessID" msprop:Generator_ColumnPropNameInRow="ProcessID" msprop:Generator_ColumnPropNameInTable="ProcessIDColumn" msprop:Generator_UserColumnName="ProcessID" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WorkSchedule" msprop:Generator_TableClassName="WorkScheduleDataTable" msprop:Generator_TableVarName="tableWorkSchedule" msprop:Generator_RowChangedName="WorkScheduleRowChanged" msprop:Generator_TablePropName="WorkSchedule" msprop:Generator_RowDeletingName="WorkScheduleRowDeleting" msprop:Generator_RowChangingName="WorkScheduleRowChanging" msprop:Generator_RowEvHandlerName="WorkScheduleRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkScheduleRowDeleted" msprop:Generator_RowClassName="WorkScheduleRow" msprop:Generator_UserTableName="WorkSchedule" msprop:Generator_RowEvArgName="WorkScheduleRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DepartmentScheduleID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnDepartmentScheduleID" msprop:Generator_ColumnPropNameInRow="DepartmentScheduleID" msprop:Generator_ColumnPropNameInTable="DepartmentScheduleIDColumn" msprop:Generator_UserColumnName="DepartmentScheduleID" type="xs:int" />
+              <xs:element name="DepartmentID" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_UserColumnName="DepartmentID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ShiftNumber" msprop:Generator_ColumnVarNameInTable="columnShiftNumber" msprop:Generator_ColumnPropNameInRow="ShiftNumber" msprop:Generator_ColumnPropNameInTable="ShiftNumberColumn" msprop:Generator_UserColumnName="ShiftNumber" type="xs:int" />
+              <xs:element name="PartProduction" msprop:Generator_ColumnVarNameInTable="columnPartProduction" msprop:Generator_ColumnPropNameInRow="PartProduction" msprop:Generator_ColumnPropNameInTable="PartProductionColumn" msprop:Generator_UserColumnName="PartProduction" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WorkHoliday" msprop:Generator_TableClassName="WorkHolidayDataTable" msprop:Generator_TableVarName="tableWorkHoliday" msprop:Generator_RowChangedName="WorkHolidayRowChanged" msprop:Generator_TablePropName="WorkHoliday" msprop:Generator_RowDeletingName="WorkHolidayRowDeleting" msprop:Generator_RowChangingName="WorkHolidayRowChanging" msprop:Generator_RowEvHandlerName="WorkHolidayRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkHolidayRowDeleted" msprop:Generator_RowClassName="WorkHolidayRow" msprop:Generator_UserTableName="WorkHoliday" msprop:Generator_RowEvArgName="WorkHolidayRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HolidayID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnHolidayID" msprop:Generator_ColumnPropNameInRow="HolidayID" msprop:Generator_ColumnPropNameInTable="HolidayIDColumn" msprop:Generator_UserColumnName="HolidayID" type="xs:int" />
+              <xs:element name="Holiday" msprop:Generator_ColumnVarNameInTable="columnHoliday" msprop:Generator_ColumnPropNameInRow="Holiday" msprop:Generator_ColumnPropNameInTable="HolidayColumn" msprop:Generator_UserColumnName="Holiday" type="xs:dateTime" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Annual" msprop:Generator_ColumnVarNameInTable="columnAnnual" msprop:Generator_ColumnPropNameInRow="Annual" msprop:Generator_ColumnPropNameInTable="AnnualColumn" msprop:Generator_UserColumnName="Annual" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomerSummary" msprop:Generator_TableClassName="CustomerSummaryDataTable" msprop:Generator_TableVarName="tableCustomerSummary" msprop:Generator_RowChangedName="CustomerSummaryRowChanged" msprop:Generator_TablePropName="CustomerSummary" msprop:Generator_RowDeletingName="CustomerSummaryRowDeleting" msprop:Generator_RowChangingName="CustomerSummaryRowChanging" msprop:Generator_RowEvHandlerName="CustomerSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerSummaryRowDeleted" msprop:Generator_RowClassName="CustomerSummaryRow" msprop:Generator_UserTableName="CustomerSummary" msprop:Generator_RowEvArgName="CustomerSummaryRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CustomerID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OrderPriority" msprop:Generator_ColumnVarNameInTable="columnOrderPriority" msprop:Generator_ColumnPropNameInRow="OrderPriority" msprop:Generator_ColumnPropNameInTable="OrderPriorityColumn" msprop:Generator_UserColumnName="OrderPriority">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Score" msprop:Generator_ColumnVarNameInTable="columnScore" msprop:Generator_ColumnPropNameInRow="Score" msprop:Generator_ColumnPropNameInTable="ScoreColumn" msprop:Generator_UserColumnName="Score" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WorkScheduleSummary" msprop:Generator_TableClassName="WorkScheduleSummaryDataTable" msprop:Generator_TableVarName="tableWorkScheduleSummary" msprop:Generator_RowChangedName="WorkScheduleSummaryRowChanged" msprop:Generator_TablePropName="WorkScheduleSummary" msprop:Generator_RowDeletingName="WorkScheduleSummaryRowDeleting" msprop:Generator_RowChangingName="WorkScheduleSummaryRowChanging" msprop:Generator_RowEvHandlerName="WorkScheduleSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkScheduleSummaryRowDeleted" msprop:Generator_RowClassName="WorkScheduleSummaryRow" msprop:Generator_UserTableName="WorkScheduleSummary" msprop:Generator_RowEvArgName="WorkScheduleSummaryRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WorkScheduleSummaryID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnWorkScheduleSummaryID" msprop:Generator_ColumnPropNameInRow="WorkScheduleSummaryID" msprop:Generator_ColumnPropNameInTable="WorkScheduleSummaryIDColumn" msprop:Generator_UserColumnName="WorkScheduleSummaryID" type="xs:int" />
+              <xs:element name="DepartmentID" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_UserColumnName="DepartmentID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ScheduledDate" msprop:Generator_ColumnVarNameInTable="columnScheduledDate" msprop:Generator_ColumnPropNameInRow="ScheduledDate" msprop:Generator_ColumnPropNameInTable="ScheduledDateColumn" msprop:Generator_UserColumnName="ScheduledDate" type="xs:dateTime" />
+              <xs:element name="Shift" msprop:Generator_ColumnVarNameInTable="columnShift" msprop:Generator_ColumnPropNameInRow="Shift" msprop:Generator_ColumnPropNameInTable="ShiftColumn" msprop:Generator_UserColumnName="Shift" type="xs:int" />
+              <xs:element name="EstimatedParts" msprop:Generator_ColumnVarNameInTable="columnEstimatedParts" msprop:Generator_ColumnPropNameInRow="EstimatedParts" msprop:Generator_ColumnPropNameInTable="EstimatedPartsColumn" msprop:Generator_UserColumnName="EstimatedParts" type="xs:int" />
+              <xs:element name="RunDate" msprop:Generator_ColumnVarNameInTable="columnRunDate" msprop:Generator_ColumnPropNameInRow="RunDate" msprop:Generator_ColumnPropNameInTable="RunDateColumn" msprop:Generator_UserColumnName="RunDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ServerProcessSchedule" msprop:Generator_TableClassName="ServerProcessScheduleDataTable" msprop:Generator_TableVarName="tableServerProcessSchedule" msprop:Generator_RowChangedName="ServerProcessScheduleRowChanged" msprop:Generator_TablePropName="ServerProcessSchedule" msprop:Generator_RowDeletingName="ServerProcessScheduleRowDeleting" msprop:Generator_RowChangingName="ServerProcessScheduleRowChanging" msprop:Generator_RowEvHandlerName="ServerProcessScheduleRowChangeEventHandler" msprop:Generator_RowDeletedName="ServerProcessScheduleRowDeleted" msprop:Generator_RowClassName="ServerProcessScheduleRow" msprop:Generator_UserTableName="ServerProcessSchedule" msprop:Generator_RowEvArgName="ServerProcessScheduleRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ServerProcessScheduleID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnServerProcessScheduleID" msprop:Generator_ColumnPropNameInRow="ServerProcessScheduleID" msprop:Generator_ColumnPropNameInTable="ServerProcessScheduleIDColumn" msprop:Generator_UserColumnName="ServerProcessScheduleID" type="xs:int" />
+              <xs:element name="ServerProcess" msprop:Generator_ColumnVarNameInTable="columnServerProcess" msprop:Generator_ColumnPropNameInRow="ServerProcess" msprop:Generator_ColumnPropNameInTable="ServerProcessColumn" msprop:Generator_UserColumnName="ServerProcess">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:duration" />
+              <xs:element name="Sunday" msprop:Generator_ColumnVarNameInTable="columnSunday" msprop:Generator_ColumnPropNameInRow="Sunday" msprop:Generator_ColumnPropNameInTable="SundayColumn" msprop:Generator_UserColumnName="Sunday" type="xs:boolean" />
+              <xs:element name="Monday" msprop:Generator_ColumnVarNameInTable="columnMonday" msprop:Generator_ColumnPropNameInRow="Monday" msprop:Generator_ColumnPropNameInTable="MondayColumn" msprop:Generator_UserColumnName="Monday" type="xs:boolean" />
+              <xs:element name="Tuesday" msprop:Generator_ColumnVarNameInTable="columnTuesday" msprop:Generator_ColumnPropNameInRow="Tuesday" msprop:Generator_ColumnPropNameInTable="TuesdayColumn" msprop:Generator_UserColumnName="Tuesday" type="xs:boolean" />
+              <xs:element name="Wednesday" msprop:Generator_ColumnVarNameInTable="columnWednesday" msprop:Generator_ColumnPropNameInRow="Wednesday" msprop:Generator_ColumnPropNameInTable="WednesdayColumn" msprop:Generator_UserColumnName="Wednesday" type="xs:boolean" />
+              <xs:element name="Thursday" msprop:Generator_ColumnVarNameInTable="columnThursday" msprop:Generator_ColumnPropNameInRow="Thursday" msprop:Generator_ColumnPropNameInTable="ThursdayColumn" msprop:Generator_UserColumnName="Thursday" type="xs:boolean" />
+              <xs:element name="Friday" msprop:Generator_ColumnVarNameInTable="columnFriday" msprop:Generator_ColumnPropNameInRow="Friday" msprop:Generator_ColumnPropNameInTable="FridayColumn" msprop:Generator_UserColumnName="Friday" type="xs:boolean" />
+              <xs:element name="Saturday" msprop:Generator_ColumnVarNameInTable="columnSaturday" msprop:Generator_ColumnPropNameInRow="Saturday" msprop:Generator_ColumnPropNameInTable="SaturdayColumn" msprop:Generator_UserColumnName="Saturday" type="xs:boolean" />
+              <xs:element name="Parameters" msprop:Generator_ColumnVarNameInTable="columnParameters" msprop:Generator_ColumnPropNameInRow="Parameters" msprop:Generator_ColumnPropNameInTable="ParametersColumn" msprop:Generator_UserColumnName="Parameters" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ServerProcessHistory" msprop:Generator_TableClassName="ServerProcessHistoryDataTable" msprop:Generator_TableVarName="tableServerProcessHistory" msprop:Generator_RowChangedName="ServerProcessHistoryRowChanged" msprop:Generator_TablePropName="ServerProcessHistory" msprop:Generator_RowDeletingName="ServerProcessHistoryRowDeleting" msprop:Generator_RowChangingName="ServerProcessHistoryRowChanging" msprop:Generator_RowEvHandlerName="ServerProcessHistoryRowChangeEventHandler" msprop:Generator_RowDeletedName="ServerProcessHistoryRowDeleted" msprop:Generator_RowClassName="ServerProcessHistoryRow" msprop:Generator_UserTableName="ServerProcessHistory" msprop:Generator_RowEvArgName="ServerProcessHistoryRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ServerProcessHistoryID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnServerProcessHistoryID" msprop:Generator_ColumnPropNameInRow="ServerProcessHistoryID" msprop:Generator_ColumnPropNameInTable="ServerProcessHistoryIDColumn" msprop:Generator_UserColumnName="ServerProcessHistoryID" type="xs:int" />
+              <xs:element name="ServerProcess" msprop:Generator_ColumnVarNameInTable="columnServerProcess" msprop:Generator_ColumnPropNameInRow="ServerProcess" msprop:Generator_ColumnPropNameInTable="ServerProcessColumn" msprop:Generator_UserColumnName="ServerProcess">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Executed" msprop:Generator_ColumnVarNameInTable="columnExecuted" msprop:Generator_ColumnPropNameInRow="Executed" msprop:Generator_ColumnPropNameInTable="ExecutedColumn" msprop:Generator_UserColumnName="Executed" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="d_CustomerOrderPriority" msprop:Generator_TableClassName="d_CustomerOrderPriorityDataTable" msprop:Generator_TableVarName="tabled_CustomerOrderPriority" msprop:Generator_RowChangedName="d_CustomerOrderPriorityRowChanged" msprop:Generator_TablePropName="d_CustomerOrderPriority" msprop:Generator_RowDeletingName="d_CustomerOrderPriorityRowDeleting" msprop:Generator_RowChangingName="d_CustomerOrderPriorityRowChanging" msprop:Generator_RowEvHandlerName="d_CustomerOrderPriorityRowChangeEventHandler" msprop:Generator_RowDeletedName="d_CustomerOrderPriorityRowDeleted" msprop:Generator_RowClassName="d_CustomerOrderPriorityRow" msprop:Generator_UserTableName="d_CustomerOrderPriority" msprop:Generator_RowEvArgName="d_CustomerOrderPriorityRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CustomerOrderPriority" msprop:Generator_ColumnVarNameInTable="columnCustomerOrderPriority" msprop:Generator_ColumnPropNameInRow="CustomerOrderPriority" msprop:Generator_ColumnPropNameInTable="CustomerOrderPriorityColumn" msprop:Generator_UserColumnName="CustomerOrderPriority">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Score" msprop:Generator_ColumnVarNameInTable="columnScore" msprop:Generator_ColumnPropNameInRow="Score" msprop:Generator_ColumnPropNameInTable="ScoreColumn" msprop:Generator_UserColumnName="Score" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="d_Priority" msprop:Generator_TableClassName="d_PriorityDataTable" msprop:Generator_TableVarName="tabled_Priority" msprop:Generator_RowChangedName="d_PriorityRowChanged" msprop:Generator_TablePropName="d_Priority" msprop:Generator_RowDeletingName="d_PriorityRowDeleting" msprop:Generator_RowChangingName="d_PriorityRowChanging" msprop:Generator_RowEvHandlerName="d_PriorityRowChangeEventHandler" msprop:Generator_RowDeletedName="d_PriorityRowDeleted" msprop:Generator_RowClassName="d_PriorityRow" msprop:Generator_UserTableName="d_Priority" msprop:Generator_RowEvArgName="d_PriorityRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PriorityID" msprop:Generator_ColumnVarNameInTable="columnPriorityID" msprop:Generator_ColumnPropNameInRow="PriorityID" msprop:Generator_ColumnPropNameInTable="PriorityIDColumn" msprop:Generator_UserColumnName="PriorityID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Color" msprop:Generator_ColumnVarNameInTable="columnColor" msprop:Generator_ColumnPropNameInRow="Color" msprop:Generator_ColumnPropNameInTable="ColorColumn" msprop:Generator_UserColumnName="Color" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PriorityScore" msprop:Generator_ColumnVarNameInTable="columnPriorityScore" msprop:Generator_ColumnPropNameInRow="PriorityScore" msprop:Generator_ColumnPropNameInTable="PriorityScoreColumn" msprop:Generator_UserColumnName="PriorityScore" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OrderPriority" msprop:Generator_TableClassName="OrderPriorityDataTable" msprop:Generator_TableVarName="tableOrderPriority" msprop:Generator_RowChangedName="OrderPriorityRowChanged" msprop:Generator_TablePropName="OrderPriority" msprop:Generator_RowDeletingName="OrderPriorityRowDeleting" msprop:Generator_RowChangingName="OrderPriorityRowChanging" msprop:Generator_RowEvHandlerName="OrderPriorityRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderPriorityRowDeleted" msprop:Generator_RowClassName="OrderPriorityRow" msprop:Generator_UserTableName="OrderPriority" msprop:Generator_RowEvArgName="OrderPriorityRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
+              <xs:element name="RequiredDate" msprop:Generator_ColumnVarNameInTable="columnRequiredDate" msprop:Generator_ColumnPropNameInRow="RequiredDate" msprop:Generator_ColumnPropNameInTable="RequiredDateColumn" msprop:Generator_UserColumnName="RequiredDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PurchaseOrder" msprop:Generator_ColumnVarNameInTable="columnPurchaseOrder" msprop:Generator_ColumnPropNameInRow="PurchaseOrder" msprop:Generator_ColumnPropNameInTable="PurchaseOrderColumn" msprop:Generator_UserColumnName="PurchaseOrder" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CustomerWO" msprop:Generator_ColumnVarNameInTable="columnCustomerWO" msprop:Generator_ColumnPropNameInRow="CustomerWO" msprop:Generator_ColumnPropNameInTable="CustomerWOColumn" msprop:Generator_UserColumnName="CustomerWO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SchedulePriority" msprop:Generator_ColumnVarNameInTable="columnSchedulePriority" msprop:Generator_ColumnPropNameInRow="SchedulePriority" msprop:Generator_ColumnPropNameInTable="SchedulePriorityColumn" msprop:Generator_UserColumnName="SchedulePriority" type="xs:int" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" minOccurs="0" />
+              <xs:element name="Priority" msprop:Generator_ColumnVarNameInTable="columnPriority" msprop:Generator_ColumnPropNameInRow="Priority" msprop:Generator_ColumnPropNameInTable="PriorityColumn" msprop:Generator_UserColumnName="Priority" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkStatus" msprop:Generator_ColumnVarNameInTable="columnWorkStatus" msprop:Generator_ColumnPropNameInRow="WorkStatus" msprop:Generator_ColumnPropNameInTable="WorkStatusColumn" msprop:Generator_UserColumnName="WorkStatus">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WorkScheduleDetail" msprop:Generator_TableClassName="WorkScheduleDetailDataTable" msprop:Generator_TableVarName="tableWorkScheduleDetail" msprop:Generator_RowChangedName="WorkScheduleDetailRowChanged" msprop:Generator_TablePropName="WorkScheduleDetail" msprop:Generator_RowDeletingName="WorkScheduleDetailRowDeleting" msprop:Generator_RowChangingName="WorkScheduleDetailRowChanging" msprop:Generator_RowEvHandlerName="WorkScheduleDetailRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkScheduleDetailRowDeleted" msprop:Generator_RowClassName="WorkScheduleDetailRow" msprop:Generator_UserTableName="WorkScheduleDetail" msprop:Generator_RowEvArgName="WorkScheduleDetailRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WorkScheduleDetailID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnWorkScheduleDetailID" msprop:Generator_ColumnPropNameInRow="WorkScheduleDetailID" msprop:Generator_ColumnPropNameInTable="WorkScheduleDetailIDColumn" msprop:Generator_UserColumnName="WorkScheduleDetailID" type="xs:int" />
+              <xs:element name="WorkScheduleSummaryID" msprop:Generator_ColumnVarNameInTable="columnWorkScheduleSummaryID" msprop:Generator_ColumnPropNameInRow="WorkScheduleSummaryID" msprop:Generator_ColumnPropNameInTable="WorkScheduleSummaryIDColumn" msprop:Generator_UserColumnName="WorkScheduleSummaryID" type="xs:int" />
+              <xs:element name="OrderID" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
+              <xs:element name="OrderProcessID" msprop:Generator_ColumnVarNameInTable="columnOrderProcessID" msprop:Generator_ColumnPropNameInRow="OrderProcessID" msprop:Generator_ColumnPropNameInTable="OrderProcessIDColumn" msprop:Generator_UserColumnName="OrderProcessID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="d_ProcessCategory" msprop:Generator_TableClassName="d_ProcessCategoryDataTable" msprop:Generator_TableVarName="tabled_ProcessCategory" msprop:Generator_TablePropName="d_ProcessCategory" msprop:Generator_RowDeletingName="d_ProcessCategoryRowDeleting" msprop:Generator_RowChangingName="d_ProcessCategoryRowChanging" msprop:Generator_RowEvHandlerName="d_ProcessCategoryRowChangeEventHandler" msprop:Generator_RowDeletedName="d_ProcessCategoryRowDeleted" msprop:Generator_UserTableName="d_ProcessCategory" msprop:Generator_RowChangedName="d_ProcessCategoryRowChanged" msprop:Generator_RowEvArgName="d_ProcessCategoryRowChangeEvent" msprop:Generator_RowClassName="d_ProcessCategoryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProcessCategory" msprop:Generator_ColumnVarNameInTable="columnProcessCategory" msprop:Generator_ColumnPropNameInRow="ProcessCategory" msprop:Generator_ColumnPropNameInTable="ProcessCategoryColumn" msprop:Generator_UserColumnName="ProcessCategory">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LeadTime" msprop:Generator_ColumnVarNameInTable="columnLeadTime" msprop:Generator_ColumnPropNameInRow="LeadTime" msprop:Generator_ColumnPropNameInTable="LeadTimeColumn" msprop:Generator_UserColumnName="LeadTime" type="xs:decimal" default="1" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DayOfWeek" msprop:Generator_TableClassName="DayOfWeekDataTable" msprop:Generator_TableVarName="tableDayOfWeek" msprop:Generator_RowChangedName="DayOfWeekRowChanged" msprop:Generator_TablePropName="DayOfWeek" msprop:Generator_RowDeletingName="DayOfWeekRowDeleting" msprop:Generator_RowChangingName="DayOfWeekRowChanging" msprop:Generator_RowEvHandlerName="DayOfWeekRowChangeEventHandler" msprop:Generator_RowDeletedName="DayOfWeekRowDeleted" msprop:Generator_RowClassName="DayOfWeekRow" msprop:Generator_UserTableName="DayOfWeek" msprop:Generator_RowEvArgName="DayOfWeekRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DayOfWeekID" msprop:Generator_ColumnVarNameInTable="columnDayOfWeekID" msprop:Generator_ColumnPropNameInRow="DayOfWeekID" msprop:Generator_ColumnPropNameInTable="DayOfWeekIDColumn" msprop:Generator_UserColumnName="DayOfWeekID" type="xs:int" />
+              <xs:element name="IsWorkday" msprop:Generator_ColumnVarNameInTable="columnIsWorkday" msprop:Generator_ColumnPropNameInRow="IsWorkday" msprop:Generator_ColumnPropNameInTable="IsWorkdayColumn" msprop:Generator_UserColumnName="IsWorkday" type="xs:boolean" />
+              <xs:element name="WorkdayStart" msprop:Generator_ColumnVarNameInTable="columnWorkdayStart" msprop:Generator_ColumnPropNameInRow="WorkdayStart" msprop:Generator_ColumnPropNameInTable="WorkdayStartColumn" msprop:Generator_UserColumnName="WorkdayStart" type="xs:duration" />
+              <xs:element name="WorkdayEnd" msprop:Generator_ColumnVarNameInTable="columnWorkdayEnd" msprop:Generator_ColumnPropNameInRow="WorkdayEnd" msprop:Generator_ColumnPropNameInTable="WorkdayEndColumn" msprop:Generator_UserColumnName="WorkdayEnd" type="xs:duration" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OrderSchedule" />
+      <xs:field xpath="mstns:OrderID" />
+    </xs:unique>
+    <xs:unique name="d_Department_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:d_Department" />
+      <xs:field xpath="mstns:DepartmentID" />
+    </xs:unique>
+    <xs:unique name="OrderProcesses_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OrderProcesses" />
+      <xs:field xpath="mstns:OrderProcessesID" />
+    </xs:unique>
+    <xs:unique name="Process_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Process" />
+      <xs:field xpath="mstns:ProcessID" />
+    </xs:unique>
+    <xs:unique name="WorkSchedule_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:WorkSchedule" />
+      <xs:field xpath="mstns:DepartmentScheduleID" />
+    </xs:unique>
+    <xs:unique name="CustomerSummary_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CustomerSummary" />
+      <xs:field xpath="mstns:CustomerID" />
+    </xs:unique>
+    <xs:unique name="WorkScheduleSummary_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:WorkScheduleSummary" />
+      <xs:field xpath="mstns:WorkScheduleSummaryID" />
+    </xs:unique>
+    <xs:unique name="ServerProcessSchedule_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ServerProcessSchedule" />
+      <xs:field xpath="mstns:ServerProcessScheduleID" />
+    </xs:unique>
+    <xs:unique name="ServerProcessHistory_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ServerProcessHistory" />
+      <xs:field xpath="mstns:ServerProcessHistoryID" />
+    </xs:unique>
+    <xs:unique name="d_CustomerOrderPriority_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:d_CustomerOrderPriority" />
+      <xs:field xpath="mstns:CustomerOrderPriority" />
+    </xs:unique>
+    <xs:unique name="d_Priority_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:d_Priority" />
+      <xs:field xpath="mstns:PriorityID" />
+    </xs:unique>
+    <xs:unique name="OrderPriority_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OrderPriority" />
+      <xs:field xpath="mstns:OrderID" />
+    </xs:unique>
+    <xs:unique name="WorkScheduleDetail_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:WorkScheduleDetail" />
+      <xs:field xpath="mstns:WorkScheduleDetailID" />
+    </xs:unique>
+    <xs:unique name="d_ProcessCategory_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:d_ProcessCategory" />
+      <xs:field xpath="mstns:ProcessCategory" />
+    </xs:unique>
+    <xs:unique name="DayOfWeek_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DayOfWeek" />
+      <xs:field xpath="mstns:DayOfWeekID" />
+    </xs:unique>
+    <xs:keyref name="FK_WorkScheduleDetail_WorkScheduleSummary" refer="WorkScheduleSummary_Constraint1" msprop:rel_Generator_UserChildTable="WorkScheduleDetail" msprop:rel_Generator_ChildPropName="GetWorkScheduleDetailRows" msprop:rel_Generator_UserRelationName="FK_WorkScheduleDetail_WorkScheduleSummary" msprop:rel_Generator_RelationVarName="relationFK_WorkScheduleDetail_WorkScheduleSummary" msprop:rel_Generator_UserParentTable="WorkScheduleSummary" msprop:rel_Generator_ParentPropName="WorkScheduleSummaryRow">
+      <xs:selector xpath=".//mstns:WorkScheduleDetail" />
+      <xs:field xpath="mstns:WorkScheduleSummaryID" />
+    </xs:keyref>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="OrderProcesses_OrderSchedule" msdata:parent="OrderSchedule" msdata:child="OrderProcesses" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderProcesses" msprop:Generator_ChildPropName="GetOrderProcessesRows" msprop:Generator_UserRelationName="OrderProcesses_OrderSchedule" msprop:Generator_ParentPropName="OrderScheduleRow" msprop:Generator_RelationVarName="relationOrderProcesses_OrderSchedule" msprop:Generator_UserParentTable="OrderSchedule" />
+      <msdata:Relationship name="FK_OrderProcesses_Process" msdata:parent="Process" msdata:child="OrderProcesses" msdata:parentkey="ProcessID" msdata:childkey="ProcessID" msprop:Generator_UserChildTable="OrderProcesses" msprop:Generator_ChildPropName="GetOrderProcessesRows" msprop:Generator_UserRelationName="FK_OrderProcesses_Process" msprop:Generator_ParentPropName="ProcessRow" msprop:Generator_RelationVarName="relationFK_OrderProcesses_Process" msprop:Generator_UserParentTable="Process" />
+      <msdata:Relationship name="FK_OrderProcesses_d_Department" msdata:parent="d_Department" msdata:child="OrderProcesses" msdata:parentkey="DepartmentID" msdata:childkey="Department" msprop:Generator_UserChildTable="OrderProcesses" msprop:Generator_ChildPropName="GetOrderProcessesRows" msprop:Generator_UserRelationName="FK_OrderProcesses_d_Department" msprop:Generator_RelationVarName="relationFK_OrderProcesses_d_Department" msprop:Generator_UserParentTable="d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" />
+      <msdata:Relationship name="FK_WorkSchedule_d_Department" msdata:parent="d_Department" msdata:child="WorkSchedule" msdata:parentkey="DepartmentID" msdata:childkey="DepartmentID" msprop:Generator_UserChildTable="WorkSchedule" msprop:Generator_ChildPropName="GetWorkScheduleRows" msprop:Generator_UserRelationName="FK_WorkSchedule_d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" msprop:Generator_RelationVarName="relationFK_WorkSchedule_d_Department" msprop:Generator_UserParentTable="d_Department" />
+      <msdata:Relationship name="CustomerSummary_OrderSchedule" msdata:parent="CustomerSummary" msdata:child="OrderSchedule" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderSchedule" msprop:Generator_ChildPropName="GetOrderScheduleRows" msprop:Generator_UserRelationName="CustomerSummary_OrderSchedule" msprop:Generator_ParentPropName="CustomerSummaryRow" msprop:Generator_RelationVarName="relationCustomerSummary_OrderSchedule" msprop:Generator_UserParentTable="CustomerSummary" />
+      <msdata:Relationship name="FK_WorkScheduleSummary_d_Department" msdata:parent="d_Department" msdata:child="WorkScheduleSummary" msdata:parentkey="DepartmentID" msdata:childkey="DepartmentID" msprop:Generator_UserChildTable="WorkScheduleSummary" msprop:Generator_ChildPropName="GetWorkScheduleSummaryRows" msprop:Generator_UserRelationName="FK_WorkScheduleSummary_d_Department" msprop:Generator_RelationVarName="relationFK_WorkScheduleSummary_d_Department" msprop:Generator_UserParentTable="d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" />
+      <msdata:Relationship name="FK_Process_d_ProcessCategory" msdata:parent="d_ProcessCategory" msdata:child="Process" msdata:parentkey="ProcessCategory" msdata:childkey="Category" msprop:Generator_UserChildTable="Process" msprop:Generator_ChildPropName="GetProcessRows" msprop:Generator_UserRelationName="FK_Process_d_ProcessCategory" msprop:Generator_RelationVarName="relationFK_Process_d_ProcessCategory" msprop:Generator_UserParentTable="d_ProcessCategory" msprop:Generator_ParentPropName="d_ProcessCategoryRow" />
+      <msdata:Relationship name="FK_Order_d_Priority" msdata:parent="d_Priority" msdata:child="OrderPriority" msdata:parentkey="PriorityID" msdata:childkey="Priority" msprop:Generator_UserChildTable="OrderPriority" msprop:Generator_ChildPropName="GetOrderPriorityRows" msprop:Generator_UserRelationName="FK_Order_d_Priority" msprop:Generator_RelationVarName="relationFK_Order_d_Priority" msprop:Generator_UserParentTable="d_Priority" msprop:Generator_ParentPropName="d_PriorityRow" />
+      <msdata:Relationship name="FK_OrderProcesses_Order" msdata:parent="OrderPriority" msdata:child="OrderProcesses" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderProcesses" msprop:Generator_ChildPropName="GetOrderProcessesRows" msprop:Generator_UserRelationName="FK_OrderProcesses_Order" msprop:Generator_RelationVarName="relationFK_OrderProcesses_Order" msprop:Generator_UserParentTable="OrderPriority" msprop:Generator_ParentPropName="OrderPriorityRow" />
+      <msdata:Relationship name="FK_Order_d_Department" msdata:parent="d_Department" msdata:child="OrderSchedule" msdata:parentkey="DepartmentID" msdata:childkey="CurrentLocation" msprop:Generator_UserChildTable="OrderSchedule" msprop:Generator_ChildPropName="GetOrderScheduleRows" msprop:Generator_UserRelationName="FK_Order_d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" msprop:Generator_RelationVarName="relationFK_Order_d_Department" msprop:Generator_UserParentTable="d_Department" />
+      <msdata:Relationship name="FK_Order_d_Priority1" msdata:parent="d_Priority" msdata:child="OrderSchedule" msdata:parentkey="PriorityID" msdata:childkey="Priority" msprop:Generator_UserChildTable="OrderSchedule" msprop:Generator_ChildPropName="GetOrderScheduleRows" msprop:Generator_UserRelationName="FK_Order_d_Priority1" msprop:Generator_ParentPropName="d_PriorityRow" msprop:Generator_RelationVarName="relationFK_Order_d_Priority1" msprop:Generator_UserParentTable="d_Priority" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

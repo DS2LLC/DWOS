@@ -1,0 +1,152 @@
+﻿<Window x:Class="DWOS.UI.Sales.SplitContainers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:ig="http://schemas.infragistics.com/xaml"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        mc:Ignorable="d"
+        Title="Split Containers"
+        WindowStartupLocation="CenterScreen"
+        Icon="/DWOS.UI;component/Resources/images/Container_16.png"
+        Width="600"
+        Height="350"
+        x:Name="MainControl"
+        Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <igWPF:ComboBoxItemsProvider x:Key="packageTypes" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="{StaticResource colorbrushMain}">Containers
+            </Label>
+            <Separator Margin="5,0,5,0" Grid.Column="1" VerticalAlignment="Center" Background="{StaticResource colorbrushMain}"/>
+        </Grid>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Original WO:" VerticalAlignment="Center" Padding="3,0,20, 0"/>
+            <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding OriginalOrderID}" VerticalAlignment="Center" Margin="0,0,3,0" Foreground="DarkGray">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Original Work Order" ToolTipText="The work order being split." />
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Original Part Qty:" VerticalAlignment="Center" Padding="3,5,20, 0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text="{Binding OriginalPartQuantity}" VerticalAlignment="Center" Margin="0,5,3,0" Foreground="DarkGray">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Original Part Quantity" ToolTipText="The original part quantity of the work order being split." />
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="41*" />
+                <ColumnDefinition Width="511*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,10,0">
+                <Button Command="{Binding AddCommand}" Width="24" Height="24" Margin="0,3,0,0">
+                    <Button.Content>
+                        <Image Source="/DWOS.UI;component/Resources/images/Add_16.png" Style="{StaticResource buttonImage}"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Add Container" ToolTipText="Add a new container to the selected order." />
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding RemoveCommand}" Width="24" Height="24" Margin="0,3,0,0">
+                    <Button.Content>
+                        <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png" Style="{StaticResource buttonImage}"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Remove Container" ToolTipText="Remove the selected container (or container item) from its order." />
+                    </Button.ToolTip>
+                </Button>
+                
+                <Button Command="{Binding AddItemCommand}" Width="24" Height="24" Margin="0,3,0,0">
+                    <Button.Content>
+                        <Image Source="/DWOS.UI;component/Resources/images/AddAlt_16.png" Style="{StaticResource buttonImage}"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Add Container Item" ToolTipText="Adds an item to the container." />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+
+            <igWPF:XamDataGrid Grid.Column="1" DataSource="{Binding Orders}" SelectedDataItems="{Binding SelectedRecords}" SelectedDataItemsScope="RecordsOrCells" Theme="Office2013" InitializeRecord="mainGrid_InitializeRecord" Grid.ColumnSpan="2">
+                <igWPF:XamDataGrid.FieldLayoutSettings>
+                    <igWPF:FieldLayoutSettings AutoGenerateFields="False" ExpansionIndicatorDisplayMode="CheckOnDisplay" SelectionTypeRecord="Single" />
+                </igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:XamDataGrid.FieldLayouts>
+                    <igWPF:FieldLayout Key="Order">
+                        <igWPF:Field Name="OrderID" Width="Auto" Label="WO" />
+                        <igWPF:Field Name="PartQuantity" Width="Auto" Label="Part Qty" />
+                        <igWPF:Field Name="Containers"
+                                     Visibility="Hidden" />
+                    </igWPF:FieldLayout>
+                    <igWPF:FieldLayout Key="Container"
+                                   ParentFieldName="Containers"
+                                   ParentFieldLayoutKey="Order">
+                        <igWPF:Field Name="OrderContainerID" Label="Container #" />
+                        <igWPF:NumericField Name="PartQuantity" Label="Part Qty" />
+                        <igWPF:NumericField Name="Weight" Label="Weight (Lbs)" Format="##,##0.0#">
+                            <igWPF:NumericField.ValueConstraint>
+                                <igWPF:ValueConstraint MinInclusive="0" MaxInclusive="999999.99" />
+                            </igWPF:NumericField.ValueConstraint>
+                        </igWPF:NumericField>
+                        <igWPF:Field Name="IsActive" Label="Is Active" />
+                        <igWPF:ComboBoxField Name="PackageType" Label="Package Type">
+                            <igWPF:ComboBoxField.EditorStyle>
+                                <Style TargetType="{x:Type igWPF:XamComboEditor}">
+                                    <Setter Property="ItemsProvider" Value="{StaticResource packageTypes}" />
+                                </Style>
+                            </igWPF:ComboBoxField.EditorStyle>
+                        </igWPF:ComboBoxField>
+                        <igWPF:Field Name="Items"
+                                     Visibility="Hidden" />
+                    </igWPF:FieldLayout>
+                    <igWPF:FieldLayout Key="ContainerItem"
+                                   ParentFieldName="Items"
+                                   ParentFieldLayoutKey="Container">
+                        <igWPF:ComboBoxField Name="PackageType" Label="Item Package Type">
+                            <igWPF:ComboBoxField.EditorStyle>
+                                <Style TargetType="{x:Type igWPF:XamComboEditor}">
+                                    <Setter Property="ItemsProvider" Value="{StaticResource packageTypes}" />
+                                </Style>
+                            </igWPF:ComboBoxField.EditorStyle>
+                        </igWPF:ComboBoxField>
+                    </igWPF:FieldLayout>
+                </igWPF:XamDataGrid.FieldLayouts>
+            </igWPF:XamDataGrid>
+        </Grid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" IsDefault="True" Click="AcceptButton_Click" Style="{StaticResource buttonStandard}" />
+            <Button Content="Cancel" Click="CancelButton_Click"  Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</Window>

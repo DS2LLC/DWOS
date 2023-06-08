@@ -1,0 +1,32 @@
+﻿<!-- Demo Deployment -->
+-- Connect to SQLLocalDB Direct
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=(localdb)\v11.0;AttachDbFilename=|DataDirectory|\Database\DWOS.mdf;Initial Catalog=DWOS;Integrated Security=True" providerName="System.Data.SqlClient" />
+-- Connect to SQLLocalDB via Named Pipes
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=np:\\.\pipe\LOCALDB#9E004BAD\tsql\query;AttachDbFilename=C:\Users\XXX\Desktop\DWOS.UI_4_0_4_154\Database\DWOS.mdf;Initial Catalog=DWOS;Integrated Security=True" providerName="System.Data.SqlClient" />
+-- Connect to SQL Server Express
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=.\sqlexpress;AttachDbFilename=\Database\DWOS.mdf;Initial Catalog=DWOS;Integrated Security=True;User Instance=True" providerName="System.Data.SqlClient" />
+		
+<!-- My Work -->
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=localhost;Initial Catalog=DWOS;Integrated Security=True" providerName="System.Data.SqlClient" />
+
+<!-- My Laptop -->
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=localhost;Initial Catalog=DPSData;Integrated Security=True" providerName="System.Data.SqlClient" />
+
+<!-- DWOS Appliance -->
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=DWOS-0001;Initial Catalog=DWOS;Persist Security Info=True;User ID=dps;Password=xxx" providerName="System.Data.SqlClient" />
+
+<!-- TEST w/ User/Pass -->
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=DPSData;Initial Catalog=DPSData;Persist Security Info=True;User ID=dps;Password=xxx" providerName="System.Data.SqlClient" />
+<add name="DWOS.Data.Properties.Settings.PLCDataConnectionString" connectionString="Data Source=DPSData;Initial Catalog=PLCData;Persist Security Info=True;User ID=plc;Password=plc" providerName="System.Data.SqlClient" />
+
+<!-- TEST -->
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=DPSData;Initial Catalog=DPSData;Integrated Security=True" providerName="System.Data.SqlClient" />
+<add name="DWOS.Data.Properties.Settings.PLCDataConnectionString" connectionString="Data Source=DPSData;Initial Catalog=PLCData;Persist Security Info=True;User ID=plc;Password=plc" providerName="System.Data.SqlClient" />
+<-- S&S -->
+<add name="DWOS.Data.Properties.Settings.DPSDataConnectionString" connectionString="Data Source=Todd;Initial Catalog=DWOS;Persist Security Info=True;User ID=sa;Password=P@ssword!" providerName="System.Data.SqlClient" />
+
+
+
+
+-- Manual build of 
+msbuild /target:publish /p:Configuration=ReleaseDemo

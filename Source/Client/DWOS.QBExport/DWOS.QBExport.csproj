@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{52059CCA-0DAD-4C95-83C8-7A35C340D501}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DWOS.QBExport</RootNamespace>
+    <AssemblyName>DWOS.QBExport</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Infragistics4.Shared.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Win.Misc.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Win.UltraWinEditors.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Win.UltraWinListView.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Win.UltraWinTabControl.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Win.UltraWinTree.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Win.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="nsoftware.InQB, Version=6.0.6250.0, Culture=neutral, PublicKeyToken=cdc168f89cffe9cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\nsoftware.InQB.6.0.6250\lib\nsoftware.InQB.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AccountingFieldValidation.cs" />
+    <Compile Include="AddProductClassItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProductClassItem.Designer.cs">
+      <DependentUpon>AddProductClassItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddDepartmentItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddDepartmentItem.Designer.cs">
+      <DependentUpon>AddDepartmentItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddListItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddListItem.Designer.cs">
+      <DependentUpon>AddListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddTerms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTerms.Designer.cs">
+      <DependentUpon>AddTerms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportConnectionException.cs" />
+    <Compile Include="ExportInvoicesN.cs" />
+    <Compile Include="InvoiceComparison.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Syncing\Dialogs\SelectDwosCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Syncing\Dialogs\SelectDwosCustomer.Designer.cs">
+      <DependentUpon>SelectDwosCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Syncing\Dialogs\SelectQuickBooksCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Syncing\Dialogs\SelectQuickBooksCustomer.Designer.cs">
+      <DependentUpon>SelectQuickBooksCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Syncing\Enums.cs" />
+    <Compile Include="Syncing\QBSyncController.cs" />
+    <Compile Include="Syncing\SourceSelection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Syncing\SourceSelection.Designer.cs">
+      <DependentUpon>SourceSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Syncing\SyncProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Syncing\SyncProgress.Designer.cs">
+      <DependentUpon>SyncProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Syncing\SyncSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Syncing\SyncSummary.Designer.cs">
+      <DependentUpon>SyncSummary.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWOS.Data\DWOS.Data.csproj">
+      <Project>{F83FFF1C-F805-40B1-A9A4-337EE53788B9}</Project>
+      <Name>DWOS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWOS.Shared\DWOS.Shared.csproj">
+      <Project>{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}</Project>
+      <Name>DWOS.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AddProductClassItem.resx">
+      <DependentUpon>AddProductClassItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddDepartmentItem.resx">
+      <DependentUpon>AddDepartmentItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddListItem.resx">
+      <DependentUpon>AddListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddTerms.resx">
+      <DependentUpon>AddTerms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Syncing\Dialogs\SelectDwosCustomer.resx">
+      <DependentUpon>SelectDwosCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Syncing\Dialogs\SelectQuickBooksCustomer.resx">
+      <DependentUpon>SelectQuickBooksCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Syncing\SourceSelection.resx">
+      <DependentUpon>SourceSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Syncing\SyncProgress.resx">
+      <DependentUpon>SyncProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Syncing\SyncSummary.resx">
+      <DependentUpon>SyncSummary.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

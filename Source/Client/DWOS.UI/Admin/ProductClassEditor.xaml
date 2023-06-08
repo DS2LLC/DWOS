@@ -1,0 +1,123 @@
+﻿<Window x:Class="DWOS.UI.Admin.ProductClassEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:vm="clr-namespace:DWOS.UI.Admin.ViewModels"
+        mc:Ignorable="d"
+        Height="250"
+        Width="400"
+        Title="Product Class Manager"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource ToolWindow}"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded">
+    <Window.DataContext>
+        <vm:ProductClassEditorViewModel x:Name="ViewModel" />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Margin="5,5,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Orientation="Vertical"
+                        Margin="0,0,3,0">
+                <Button Command="{Binding AddProductClass}"
+                        Style="{StaticResource buttonForImage}"
+                        ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Add Product Class"
+                                                 ToolTipText="Adds a new product class." />
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding DeleteProductClass}"
+                        Style="{StaticResource buttonForImage}"
+                        ToolTipService.ShowOnDisabled="True"
+                        Margin="0,3,0,0">
+                    <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Delete Product Class"
+                                                 ToolTipText="Deletes the selected product class." />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <igWpf:XamDataGrid Name="ProductClassGrid"
+                                   Theme="Office2013"
+                                   DataSource="{Binding ProductClasses}"
+                                   SelectedDataItem="{Binding SelectedProductClass}"
+                                   UpdateMode="OnCellChangeOrLostFocus">
+                    <igWpf:XamDataGrid.FieldLayoutSettings>
+                        <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                                   AllowDelete="False"
+                                                   AllowAddNew="False"
+                                                   SupportDataErrorInfo="CellsOnly"
+                                                   SelectionTypeRecord="Single"
+                                                   SelectionTypeCell="None"
+                                                   SelectionTypeField="None"
+                                                   DataErrorDisplayMode="ErrorIconAndHighlight" />
+                    </igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:XamDataGrid.FieldLayouts>
+                        <igWpf:FieldLayout>
+                            <igWpf:TextField Name="Name"
+                                             Label="Product Class" />
+                            <igWpf:TextField Name="AccountingCode"
+                                             Label="Accounting Code" />
+                            <igWpf:TextField Name="EmailAddress"
+                                             Label="Email Address">
+                                <igWpf:TextField.ValueConstraint>
+                                    <igWpf:ValueConstraint MaxLength="50" />
+                                </igWpf:TextField.ValueConstraint>
+                            </igWpf:TextField>
+                            <igWpf:TextField Name="Address1"
+                                             Label="Address 1" />
+                            <igWpf:TextField Name="Address2"
+                                             Label="Address 2" />
+                            <igWpf:TextField Name="City">
+                                <igWpf:TextField.ValueConstraint>
+                                    <igWpf:ValueConstraint MaxLength="50" />
+                                </igWpf:TextField.ValueConstraint>
+                            </igWpf:TextField>
+                            <igWpf:TextField Name="State">
+                                <igWpf:TextField.ValueConstraint>
+                                    <igWpf:ValueConstraint MaxLength="50" />
+                                </igWpf:TextField.ValueConstraint>
+                            </igWpf:TextField>
+                            <igWpf:TextField Name="Zip">
+                                <igWpf:TextField.ValueConstraint>
+                                    <igWpf:ValueConstraint MaxLength="50" />
+                                </igWpf:TextField.ValueConstraint>
+                            </igWpf:TextField>
+                        </igWpf:FieldLayout>
+                    </igWpf:XamDataGrid.FieldLayouts>
+                </igWpf:XamDataGrid>
+            </Grid>
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Save"
+                    Style="{StaticResource buttonStandard}"
+                    Command="{Binding Save}" />
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

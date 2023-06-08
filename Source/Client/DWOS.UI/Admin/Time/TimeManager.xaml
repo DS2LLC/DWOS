@@ -1,0 +1,138 @@
+﻿<igRibbon:XamRibbonWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:conv="clr-namespace:DWOS.UI.Utilities.Convertors"
+                          xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+                          xmlns:igRibbon="http://infragistics.com/Ribbon"
+                          xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+                          x:Class="DWOS.UI.Admin.Time.TimeManager"
+                          mc:Ignorable="d"
+                          Width="640"
+                          Height="480"
+                          WindowStartupLocation="CenterScreen"
+                          Title="Time Manager"
+                          Loaded="XamRibbonWindow_Loaded"
+                          Unloaded="XamRibbonWindow_Unloaded"
+                          Style="{StaticResource RibbonWindow}">
+    <igRibbon:XamRibbonWindow.Resources>
+        <conv:BoolToStringConverter x:Key="boolToStringConv"
+                                    TrueValue="Active"
+                                    FalseValue="Paused" />
+    </igRibbon:XamRibbonWindow.Resources>
+
+    <igRibbon:RibbonWindowContentHost Style="{StaticResource RibbonWindowContent}">
+
+        <igRibbon:RibbonWindowContentHost.Ribbon>
+            <igRibbon:XamRibbon Theme="Office2013"
+                                Grid.Row="0">
+                <igRibbon:XamRibbon.ApplicationMenu>
+                    <igRibbon:ApplicationMenu Visibility="Visible"
+                                              Caption="File">
+                        <igRibbon:ButtonTool Caption="Close"
+                                             Click="Close_Click" />
+                    </igRibbon:ApplicationMenu>
+                </igRibbon:XamRibbon.ApplicationMenu>
+
+                <igRibbon:XamRibbon.QuickAccessToolbar>
+                    <igRibbon:QuickAccessToolbar />
+                </igRibbon:XamRibbon.QuickAccessToolbar>
+
+                <igRibbon:RibbonTabItem Header="Time">
+                    <igRibbon:RibbonGroup Caption="Processing">
+                        <igRibbon:ButtonTool Caption="Manage Processing Timers"
+                                             Command="{Binding ManageProcessing}"
+                                             x:Name="btnProcessing"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Manage Processing Timers"
+                                                         ToolTipText="Manage processing timers for orders." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                    </igRibbon:RibbonGroup>
+                    <igRibbon:RibbonGroup Caption="Labor">
+                        <igRibbon:ButtonTool Caption="Start"
+                                             Command="{Binding StartTimer}"
+                                             x:Name="btnStart"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Start Labor"
+                                                         ToolTipText="Starts labor timers for the selected orders or batches.If the process timer has not been started, DWOS will automatically start one." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                        <igRibbon:ButtonTool Caption="Pause"
+                                             Command="{Binding PauseTimer}"
+                                             x:Name="btnPause"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Pause Labor"
+                                                         ToolTipText="Pauses labor timers for the selected orders or batches." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                        <igRibbon:ButtonTool Caption="Stop"
+                                             Command="{Binding StopTimer}"
+                                             x:Name="btnStop"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Stop Labor"
+                                                         ToolTipText="Stops labor timers for the selected orders or batches." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                        <igRibbon:ButtonTool Caption="Move"
+                                             Command="{Binding MoveTimer}"
+                                             x:Name="btnMove"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Move"
+                                                         ToolTipText="Moves selected orders and batches to another user." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                    </igRibbon:RibbonGroup>
+                </igRibbon:RibbonTabItem>
+            </igRibbon:XamRibbon>
+        </igRibbon:RibbonWindowContentHost.Ribbon>
+
+        <igWPF:XamDataGrid Grid.Row="1"
+                           Name="TimeGrid"
+                           DataSource="{Binding OperatorEntries}"
+                           SelectedDataItems="{Binding SelectedItems}"
+                           SelectedDataItemsScope="RecordsOrCells"
+                           Theme="Office2013">
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                           AutoFitMode="Always"
+                                           FilterUIType="FilterRecord"
+                                           HeaderPrefixAreaDisplayMode="FieldChooserButton"
+                                           SelectionTypeRecord="Range"
+                                           SelectionTypeField="Single"
+                                           SelectionTypeCell="Single"
+                                           HighlightAlternateRecords="True"
+                                           DataRecordSizingMode="Fixed"
+                                           FilterClearButtonLocation="RecordSelectorAndFilterCell"
+                                           FilterRecordLocation="OnTopFixed"
+                                           ExpansionIndicatorDisplayMode="Never" />
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+
+            <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout>
+                    <igWPF:FieldLayout.Fields>
+                        <igWPF:Field Name="UserName"
+                                     Label="User"
+                                     IsReadOnly="True" />
+                        <igWPF:Field Name="Id"
+                                     Label="WO/Batch"
+                                     IsReadOnly="True" />
+                        <igWPF:Field Label="Status"
+                                     IsReadOnly="True"
+                                     BindingType="UseAlternateBinding"
+                                     AlternateBinding="{Binding HasActiveTimer, Converter={StaticResource boolToStringConv}}" />
+                        <igWPF:NumericField Name="DurationMinutes"
+                                            Label="Duration (Min.)"
+                                            IsReadOnly="True"
+                                            HorizontalContentAlignment="Left"/>
+                    </igWPF:FieldLayout.Fields>
+                </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+    </igRibbon:RibbonWindowContentHost>
+</igRibbon:XamRibbonWindow>

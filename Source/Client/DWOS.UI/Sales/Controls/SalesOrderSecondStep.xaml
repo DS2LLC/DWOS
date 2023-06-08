@@ -1,0 +1,247 @@
+﻿<UserControl x:Class="DWOS.UI.Sales.Controls.SalesOrderSecondStep"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:util="clr-namespace:DWOS.UI.Utilities"
+             xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:Name="Self"
+             Loaded="Control_Loaded"
+             Unloaded="Control_Unloaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Base Price -->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Base Price (Lot):" />
+        <igWpf:XamCurrencyEditor Grid.Row="0"
+                                 Grid.Column="1"
+                                 util:WpfBehaviors.SelectAllOnFocus="True"
+                                 Style="{StaticResource FormField}"
+                                 Mask="{Binding ElementName=Self, Path=ViewModel.CurrencyMask}"
+                                 Value="{Binding ElementName=Self, Path=ViewModel.BasePriceLot}">
+            <igWpf:XamCurrencyEditor.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Base Price (Lot)">
+                    The base lot price of the entire Sales Order
+                </util:HeaderToolTipContent>
+            </igWpf:XamCurrencyEditor.ToolTip>
+        </igWpf:XamCurrencyEditor>
+
+        <!-- Fees -->
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Fees &amp; Discounts:" />
+
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <igWpf:XamCurrencyEditor Grid.Column="0"
+                                     Style="{StaticResource FormField}"
+                                     IsReadOnly="True"
+                                     Mask="{Binding ElementName=Self, Path=ViewModel.CurrencyMask}"
+                                     Value="{Binding ElementName=Self, Path=ViewModel.FeeTotal, Mode=OneWay}">
+                <igWpf:XamCurrencyEditor.ToolTip>
+                    <util:HeaderToolTipContent ToolTipHeader="Fees">
+                        Additional fees added to the orders based on the processes and PO.
+                    </util:HeaderToolTipContent>
+                </igWpf:XamCurrencyEditor.ToolTip>
+            </igWpf:XamCurrencyEditor>
+
+            <Button Grid.Column="1"
+                    Style="{StaticResource buttonForImage}"
+                    Margin="0,0,0,5"
+                    Command="{Binding ElementName=Self, Path=ViewModel.EditFees}">
+                <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                       Style="{StaticResource buttonImage}" />
+            </Button>
+        </Grid>
+        
+        <!-- Total Price -->
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Total Price:" />
+        <igWpf:XamCurrencyEditor Grid.Row="2"
+                                 Grid.Column="1"
+                                 Style="{StaticResource FormField}"
+                                 IsReadOnly="True"
+                                 Mask="{Binding ElementName=Self, Path=ViewModel.CurrencyMask}"
+                                 Value="{Binding ElementName=Self, Path=ViewModel.TotalPrice, Mode=OneWay}">
+            <igWpf:XamCurrencyEditor.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Total Price">
+                    The total price of the entire Sales Order.
+                </util:HeaderToolTipContent>
+            </igWpf:XamCurrencyEditor.ToolTip>
+        </igWpf:XamCurrencyEditor>
+
+        <!-- Parts -->
+        <Label Grid.Row="3"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabelTop}"
+               Content="Parts:" />
+        <Grid Grid.Row="3"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Orientation="Vertical">
+                <Button Style="{StaticResource buttonForImage}"
+                        Margin="0,3,0,0"
+                        Command="{Binding ElementName=Self, Path=ViewModel.AddWorkOrder}">
+                    <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Add Part">
+                            Add a part to this Sales Order.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button Style="{StaticResource buttonForImage}"
+                        Margin="0,3,0,0"
+                        Command="{Binding ElementName=Self, Path=ViewModel.DeleteWorkOrder}">
+                    <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Remove Part">
+                            Removes the selected part from this Sales Order.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button Style="{StaticResource buttonForImage}"
+                        Margin="0,3,0,0"
+                        Command="{Binding ElementName=Self, Path=ViewModel.EditWorkOrder}">
+                    <Image Source="/DWOS.UI;component/Resources/images/Edit_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Edit Part">
+                            Edits the selected part.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button Style="{StaticResource buttonForImage}"
+                        Margin="0,12,0,0"
+                        Command="{Binding ElementName=Self, Path=ViewModel.MoveWorkOrderUp}">
+                    <Image Source="/DWOS.UI;component/Resources/images/uparrow.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Move Part Up">
+                            Moves the selected part up.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+                <Button Style="{StaticResource buttonForImage}"
+                        Margin="0,3,0,0"
+                        Command="{Binding ElementName=Self, Path=ViewModel.MoveWorkOrderDown}">
+                    <Image Source="/DWOS.UI;component/Resources/images/downarrow.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <util:HeaderToolTipContent ToolTipHeader="Move Part Down">
+                            Moves the selected part down.
+                        </util:HeaderToolTipContent>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+
+            <igWpf:XamDataGrid Grid.Column="1"
+                               x:Name="WorkOrderGrid"
+                               Height="150"
+                               Margin="5,0,0,0"
+                               AutoFit="True"
+                               DataSource="{Binding ElementName=Self, Path=ViewModel.WorkOrders}"
+                               SelectedDataItem="{Binding ElementName=Self, Path=ViewModel.SelectedWorkOrder}">
+                <igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                               AllowAddNew="False"
+                                               AllowDelete="False" />
+                </igWpf:XamDataGrid.FieldLayoutSettings>
+
+                <igWpf:XamDataGrid.FieldSettings>
+                    <igWpf:FieldSettings AllowEdit="False"
+                                         AllowGroupBy="False" 
+                                         LabelClickAction="Nothing" />
+                </igWpf:XamDataGrid.FieldSettings>
+
+                <igWpf:XamDataGrid.FieldLayouts>
+                    <igWpf:FieldLayout>
+                        <igWpf:FieldLayout.SortedFields>
+                            <igWpf:FieldSortDescription Direction="Ascending"
+                                                        FieldName="Order" />
+                        </igWpf:FieldLayout.SortedFields>
+                        <igWpf:FieldLayout.Fields>
+                            <igWpf:TextField Name="Order"
+                                             Width="40"
+                                             Label="Line Item" />
+                            <igWpf:TextField Name="CustomerWorkOrder"
+                                             Label="Customer WO" />
+                            <igWpf:TemplateField Name="SelectedPart"
+                                                 Label="Part Name">
+                                <igWpf:TemplateField.DisplayTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </igWpf:TemplateField.DisplayTemplate>
+                            </igWpf:TemplateField>
+                            <igWpf:TextField Name="Quantity"
+                                             Label="Qty" />
+                            <igWpf:CurrencyField Name="TotalPrice"
+                                                 Label="Total Price" />
+                        </igWpf:FieldLayout.Fields>
+                    </igWpf:FieldLayout>
+                </igWpf:XamDataGrid.FieldLayouts>
+            </igWpf:XamDataGrid>
+        </Grid>
+
+        <!-- Accept -->
+        <Label Grid.Row="4"
+               Style="{StaticResource FormFieldLabelTop}"
+               Content="Accept:" />
+        <Grid Grid.Row="4"
+              Grid.Column="1"
+              Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Grid.Column="0"
+                      Margin="0,0,10,0"
+                      VerticalAlignment="Top"
+                      IsChecked="{Binding ElementName=Self, Path=ViewModel.IsAccepted}">
+                <CheckBox.ToolTip>
+                    <util:HeaderToolTipContent ToolTipHeader="Order Verification">
+                        If checked, then you agree that this order has been verified to ensure that it is correct.
+                    </util:HeaderToolTipContent>
+                </CheckBox.ToolTip>
+            </CheckBox>
+            <util:HtmlBox Grid.Column="1"
+                          Width="350"
+                          Height="150"
+                          Html="{Binding ElementName=Self, Path=ViewModel.ContractReviewText}" />
+        </Grid>
+    </Grid>
+</UserControl>

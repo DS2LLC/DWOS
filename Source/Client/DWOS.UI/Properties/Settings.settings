@@ -1,0 +1,141 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DWOS.UI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="OrderStatusOpen" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Open</Value>
+    </Setting>
+    <Setting Name="OrderPriorityDefault" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="CurrentDepartment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Paint</Value>
+    </Setting>
+    <Setting Name="OrderStatusClosed" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Closed</Value>
+    </Setting>
+    <Setting Name="LastSelectedCustomer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastSelectedProcess" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastSelectedUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CallUpgrade" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LastSelectedPart" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ScannedPODirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MinimumOrderRushCharge" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="PrintQuantity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="OrderMaxNumberofDays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="PartManagerMediaDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OrderPriorityExpedite" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Expedite</Value>
+    </Setting>
+    <Setting Name="ShippingRolloverTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">08/10/2011 16:30:00</Value>
+    </Setting>
+    <Setting Name="Late0Day" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="Late1Day" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Orange</Value>
+    </Setting>
+    <Setting Name="Late2Day" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="Late3Day" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Blue</Value>
+    </Setting>
+    <Setting Name="DefaultShippingCarrierID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UPS</Value>
+    </Setting>
+    <Setting Name="AutoHideDisabledButtons" Description="Hide buttons that are disabled that the user is not authorized to use." Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UserLogInType" Type="DWOS.Data.LoginType" Scope="User">
+      <Value Profile="(Default)">Pin</Value>
+    </Setting>
+    <Setting Name="PartMarkSelectedFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Medium</Value>
+    </Setting>
+    <Setting Name="PartMarkSelectedStroke" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MultiStroke1</Value>
+    </Setting>
+    <Setting Name="LastVersionUpdateShown" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UserVoiceAPIKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">QCguvMndJnRdD4QZTlXw</Value>
+    </Setting>
+    <Setting Name="UserVoiceAPISecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7aV8u2phiSuU5LKWWzk9FIMdrG9TRxzdmDJ0KrdlKA</Value>
+    </Setting>
+    <Setting Name="UserVoiceSubDomain" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dwos</Value>
+    </Setting>
+    <Setting Name="DocumentTypesToExclude" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.lnk,.exe,.dll</Value>
+    </Setting>
+    <Setting Name="TouchEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PrintOrderProcessSheets" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="WIPAnimations" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SummaryCountBy" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SummaryLateBy" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WIPHighlightLateFullRow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomerStatusOnHold" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">On Hold</Value>
+    </Setting>
+    <Setting Name="LastSelectedOrderReport" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ReceivingPrintQuantity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="FinalInspectionPrintLabel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CurrentLine" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="PauseRefreshWithOpenDialog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HoldPrintLabel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastSelectedProcessPackage" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PrintPdfUsingReader" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

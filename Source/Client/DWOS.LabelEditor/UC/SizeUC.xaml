@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="DWOS.LabelEditor.SizeUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:DWOS.LabelEditor"
+             mc:Ignorable="d" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+           
+        <StackPanel Orientation="Horizontal" Margin="4,2,2,2" Grid.Row="0">
+            <TextBlock Text="Width:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+            <TextBox Name="txtItemWidth" ToolTip="Item Width" Width="80" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+            <TextBlock Text="Height:" VerticalAlignment="Center" Margin="10,0,10,0" ></TextBlock>
+            <TextBox Name="txtItemHeight" ToolTip="Item Height" Width="80" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+        </StackPanel>
+        <GroupBox Name="gbRotation" Header="Rotation" Margin="2"  Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="2" >
+                <TextBlock Text="Angle [0-360]:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                <TextBox Name="txtItemRotationAngle" ToolTip="Item Rotation (in Degrees)" Width="80" my:TextBoxMaskBehavior.Mask="Integer" my:TextBoxMaskBehavior.MinimumValue="0" my:TextBoxMaskBehavior.MaximumValue="360"></TextBox>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,158 @@
+﻿<Window  x:Class="DWOS.LabelEditor.MainWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         Title="DWOS Label Editor"
+         Height="500"
+         Width="800"
+         xmlns:my="clr-namespace:Neodynamic.Windows.WPF.ThermalLabelEditor;assembly=Neodynamic.Windows.ThermalLabelEditor"
+         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+         WindowState="Normal">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Image}" x:Key="toolbarImageStyle">
+            <Style.Triggers>
+                <DataTrigger 
+                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                    <Setter Property="Opacity" Value="0.3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0" />
+            <RowDefinition Height="44" />
+            <RowDefinition Height="286*" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ToolBar Grid.Row="1" Grid.ColumnSpan="2">
+            <Button Name="menuLabelSetup" ToolTip="Print Size" Click="menuLabelSetup_Click" >
+                <Image  Width="32" Height="32" Source="Icons\printsize_32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True"/>
+            </Button>
+            <Button Name="tbbPrint" ToolTip="Print" Click="menuPrint_Click" >
+                <Image Width="32" Height="32" Source="Icons\print.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbExportToPDF" ToolTip="Export to PDF" Click="menuPdf_Click" >
+                <Image Width="32" Height="32" Source="Icons\pdf.gif" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True"/>
+            </Button>
+            <Separator Margin="10,0,10,0"></Separator>
+            <Button Name="tbbCut" Command="my:EditorCommands.Cut" ToolTip="Cut" CommandTarget="{Binding ElementName=thermalLabelEditor1}">
+                <Image Width="32" Height="32" Source="Icons\cut.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbCopy" Command="my:EditorCommands.Copy" ToolTip="Copy" CommandTarget="{Binding ElementName=thermalLabelEditor1}">
+                <Image Width="32" Height="32" Source="Icons\copy.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbPaste" Command="my:EditorCommands.Paste" ToolTip="Paste" CommandTarget="{Binding ElementName=thermalLabelEditor1}">
+                <Image Width="32" Height="32" Source="Icons\paste.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Separator Margin="10,0,10,0"></Separator>
+            <Button Name="tbbUndo" ToolTip="Undo" Command="my:EditorCommands.Undo" CommandTarget="{Binding ElementName=thermalLabelEditor1}" >
+                <Image Width="32" Height="32" Source="Icons\undo.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbRedo" ToolTip="Redo" Command="my:EditorCommands.Redo" CommandTarget="{Binding ElementName=thermalLabelEditor1}">
+                <Image Width="32" Height="32" Source="Icons\redo.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Separator Margin="10,0,10,0"></Separator>
+            <Button Name="tbbPointer" Click="tbbPointer_Click" ToolTip="Pointer tool.">
+                <Image Width="32" Height="32" Source="Icons\pointer.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True"/>
+            </Button>
+            <Button Name="tbbRect" Click="tbbRect_Click" ToolTip="Draw a rectangle item.">
+                <Image Width="32" Height="32" Source="Icons\rect.png" Style="{StaticResource toolbarImageStyle}" />                
+            </Button>
+            <Button Name="tbbEllipse" Click="tbbEllipse_Click" ToolTip="Draw a ellipse item.">
+                <Image Width="32" Height="32" Source="Icons\ellipse.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbLine" Click="tbbLine_Click" ToolTip="Draw a line item.">
+                <Image Width="32" Height="32" Source="Icons\line.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbText" Click="tbbText_Click" ToolTip="Draw a text item.">
+                <Image Width="32" Height="32" Source="Icons\text.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbImage" Click="tbbImage_Click" ToolTip="Draw an image item.">
+                <Image Width="32" Height="32" Source="Icons\picture.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbBarcode" Click="tbbBarcode_Click" ToolTip="Draw a barcode item.">
+                <Image Width="32" Height="32" Source="Icons\barcode.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Separator Margin="10,0,10,0"></Separator>
+            <Button Name="tbbProp" ToolTip="Item Properties" Click="cmFormat_Click">
+                <Image Width="32" Height="32" Source="Icons\properties.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Separator Margin="10,0,10,0"></Separator>
+            <Button Name="tbbAlignLeft" Click="tbbAlignLeft_Click" ToolTip="Align Left of selected text items.">
+                <Image Width="32" Height="32" Source="Icons\AlignLeft32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbAlignRight" Click="tbbAligRight_Click" ToolTip="Align Right of selected text items.">
+                <Image Width="32" Height="32" Source="Icons\AlignRight32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbAlignTop" Click="tbbAligTop_Click" ToolTip="Align Top of selected text items.">
+                <Image Width="32" Height="32" Source="Icons\AlignTop32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbAlignBottom" Click="tbbAligBottom_Click" ToolTip="Align Bottom of selected text items.">
+                <Image Width="32" Height="32" Source="Icons\AlignBottom32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbAlignCenter" Click="tbbAligCenter_Click" ToolTip="Align Center of selected text items.">
+                <Image Width="32" Height="32" Source="Icons\AlignCenter32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Button Name="tbbAlignMiddle" Click="tbbAligMiddle_Click" ToolTip="Align Middle of selected text items.">
+                <Image Width="32" Height="32" Source="Icons\AlignMiddle32.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Separator Margin="10,0,10,0"></Separator>
+            <Button Name="tbbZoom100" ToolTip="Zoom" Click="tbbZoom100_Click">
+                <Image Width="32" Height="32" Source="Icons\Zoom100.png" Style="{StaticResource toolbarImageStyle}" SnapsToDevicePixels="True" />
+            </Button>
+            <Slider Name="sldZoom" Minimum="10" Maximum="1000" IsSnapToTickEnabled="True" TickFrequency="1" Width="150" Value="{Binding ElementName=thermalLabelEditor1, Path=Zoom}" VerticalAlignment="Center"></Slider>
+        </ToolBar>
+        <my:ThermalLabelEditor Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch"  Name="thermalLabelEditor1" VerticalAlignment="Stretch" SelectionChanged="thermalLabelEditor1_SelectionChanged"  SelectionAreaChanged="thermalLabelEditor1_SelectionAreaChanged" >
+            <my:ThermalLabelEditor.ContextMenu>
+                <ContextMenu Name="editorContextMenu" Opened="editorContextMenu_Opened" >
+                    <MenuItem Name="cmCut" Header="Cut" Command="my:EditorCommands.Cut" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                    <MenuItem Name="cmCopy" Header="Copy"  Command="my:EditorCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                    <MenuItem Name="cmPaste" Header="Paste"  Command="my:EditorCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                    <Separator Name="Sep1"></Separator>
+                    <MenuItem Name="cmFont" Header="Font..." Click="cmFont_Click" />
+                    <MenuItem Header="Select All" Name="menuSelAll" Command="my:EditorCommands.SelectAll" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" ></MenuItem>
+                    <MenuItem Header="Delete All" Name="menuDelAll" Command="my:EditorCommands.DeleteAll" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" ></MenuItem>
+                    <Separator Name="Sep2"></Separator>
+                    <MenuItem Name="cmOrder" Header="Order">
+                        <MenuItem Name="cmBringToFront" Header="Bring to Front" Command="my:EditorCommands.BringToFront" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                        <MenuItem Name="cmSendToBack" Header="Send to Back" Command="my:EditorCommands.SendToBack" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                        <MenuItem Name="cmBringForward" Header="Bring Forward" Command="my:EditorCommands.BringForward" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                        <MenuItem Name="cmSendBackward" Header="Send Backward" Command="my:EditorCommands.SendBackward" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                    </MenuItem>
+                    <Separator Name="Sep3"></Separator>
+                    <MenuItem Name="cmFormat" Header="Format..." Click="cmFormat_Click" />
+                </ContextMenu>
+            </my:ThermalLabelEditor.ContextMenu>
+        </my:ThermalLabelEditor>
+        <GroupBox Grid.Row="2" Grid.Column="1" MinWidth="150" Header="TOKENS">
+            <ListBox Grid.Row="2" x:Name="lstTokens">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="3" MouseLeftButtonDown="Border_MouseLeftButtonDown" HorizontalAlignment="Stretch"  BorderThickness="2" Background="White" BorderBrush="LightCyan" Cursor="Hand">
+                            <StackPanel Orientation="Horizontal" ToolTip="{Binding ToolTip}">
+                                <Border Grid.Column="0" BorderBrush="DarkGray" Margin="3" BorderThickness="2" Background="LightBlue">
+                                    <Label Content="{Binding TokenType}"></Label>
+                                </Border>
+                                <Label Grid.Column="1" Content="{Binding DisplayName}" Margin="3"></Label>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="2">
+            <TextBlock Name="txtSelectionInfo" Margin="15,0,0,0">Location</TextBlock>
+        </StatusBar>
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Height="23" HorizontalAlignment="Left" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" Margin="5" />
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Name="button2" VerticalAlignment="Top" Width="75" Margin="5" IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

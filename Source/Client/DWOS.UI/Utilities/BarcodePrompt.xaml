@@ -1,0 +1,40 @@
+﻿<Window x:Class="DWOS.UI.Utilities.BarcodePrompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Width="225"
+        Height="125"
+        Style="{StaticResource ToolWindow}">
+    <Grid Margin="5,5,5,0"
+          FocusManager.FocusedElement="{Binding ElementName=BarcodeTextBox}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               FontWeight="Bold"
+               Content="Please scan a barcode:" />
+
+        <TextBox Grid.Row="1"
+                 Margin="5,0"
+                 Name="BarcodeTextBox" />
+
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Content="Scan"
+                    Style="{StaticResource buttonStandard}"
+                    IsDefault="True"
+                    Click="OkButtonOnClick" />
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

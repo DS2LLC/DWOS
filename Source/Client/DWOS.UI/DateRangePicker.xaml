@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="DWOS.UI.DateRangePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+             mc:Ignorable="d"
+             d:DesignWidth="250"
+             Name="Self">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- From Date -->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Margin="0,0,5,5"
+               Content="From Date:" />
+        <DatePicker Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,5"
+                    VerticalAlignment="Center"
+                    SelectedDate="{Binding ElementName=Self, Path=FromDate}">
+            <DatePicker.ToolTip>
+                <utilities:HeaderToolTip ToolTipHeader="From Date"
+                                         ToolTipText="The date the report will look at orders opened on and after this date." />
+            </DatePicker.ToolTip>
+        </DatePicker>
+
+        <!-- To Date -->
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Margin="0,0,5,5"
+               Content="To Date:" />
+        <DatePicker Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,0,0,5"
+                    VerticalAlignment="Center"
+                    SelectedDate="{Binding ElementName=Self, Path=ToDate}">
+            <DatePicker.ToolTip>
+                <utilities:HeaderToolTip ToolTipHeader="To Date"
+                                         ToolTipText="The date the report will look at orders closed on and before this date." />
+            </DatePicker.ToolTip>
+        </DatePicker>
+
+        <!-- Quick select -->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <TextBlock TextWrapping="Wrap"
+                       HorizontalAlignment="Left"
+                       Margin="0,0,10,0">
+                <Hyperlink Click="TodayClick">
+                    Today
+                    <Hyperlink.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Today"
+                                                 ToolTipText="Click to set the date to today." />
+                    </Hyperlink.ToolTip>
+                </Hyperlink>
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,10,0">
+                <Hyperlink Click="LastMonthClick">
+                    Last Month
+                    <Hyperlink.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Last Month"
+                                                 ToolTipText="Click to set dates to last month." />
+                    </Hyperlink.ToolTip>
+                </Hyperlink>
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap"
+                       HorizontalAlignment="Right">
+                <Hyperlink Click="YearToDateClick">
+                    YTD
+                    <Hyperlink.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Year To Date"
+                                                 ToolTipText="Click to set dates to a year-to-date range." />
+                    </Hyperlink.ToolTip>
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

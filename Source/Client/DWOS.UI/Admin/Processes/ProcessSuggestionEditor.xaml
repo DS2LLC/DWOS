@@ -1,0 +1,212 @@
+﻿<Window x:Class="DWOS.UI.Admin.Processes.ProcessSuggestionEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        mc:Ignorable="d"
+        Height="350"
+        Width="325"
+        MinWidth="215"
+        MinHeight="125"
+        WindowStartupLocation="CenterScreen"
+        Title="Add Suggested Process"
+        Loaded="ProcessSuggestionEditor_OnLoaded"
+        Unloaded="ProcessSuggestionEditor_OnUnloaded"
+        Name="SuggestionWindow"
+        Style="{StaticResource DialogWindow}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Main Process -->
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="Primary Process:"
+                       VerticalAlignment="Center" />
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         VerticalAlignment="Center"
+                         IsReadOnly="True"
+                         Text="{Binding PrimaryProcessName, Mode=OneWay}">
+                    <TextBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Primary Process"
+                                                 ToolTipText="The process to add a suggestion to." />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <!-- Type -->
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Content="Type:"
+                       Margin="0,5,0,0"
+                       VerticalAlignment="Center" />
+                <ComboBox Grid.Row="1"
+                          Grid.Column="1"
+                          Width="75"
+                          Margin="0,5,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          SelectedItem="{Binding SelectedSuggestionType}"
+                          ItemsSource="{Binding SuggestionTypes }">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Type"
+                                                 ToolTipText="The type of the suggested process. Can be before the primary process (Pre) or after (Post)." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <!-- Department -->
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Content="Department:"
+                       Margin="0,5,0,0"
+                       VerticalAlignment="Center" />
+                <ComboBox Grid.Row="2"
+                          Grid.Column="1"
+                          Margin="0,5,0,0"
+                          VerticalAlignment="Center"
+                          SelectedItem="{Binding SelectedDepartment}"
+                          ItemsSource="{Binding Departments}">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Department"
+                                                 ToolTipText="The department of the suggested process." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <!-- Suggested Process -->
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Margin="0,5,0,0"
+                       Content="Suggested Process:"
+                       VerticalAlignment="Center" />
+                <ComboBox Grid.Row="3"
+                          Grid.Column="1"
+                          Margin="0,5,0,0"
+                          VerticalAlignment="Center"
+                          SelectedItem="{Binding SelectedProcess}"
+                          ItemsSource="{Binding SelectedDepartment.Processes}">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Suggested Process"
+                                                 ToolTipText="The process to suggest in Parts Manager." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <!-- Suggested Alias -->
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Content="Suggested Alias:"
+                       Margin="0,5,0,0"
+                       VerticalAlignment="Center" />
+                <ComboBox Grid.Row="4"
+                          Grid.Column="1"
+                          Margin="0,5,0,0"
+                          VerticalAlignment="Center"
+                          SelectedItem="{Binding SelectedProcessAlias}"
+                          ItemsSource="{Binding SelectedProcess.ProcessAliases}">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Suggested Process Alias"
+                                                 ToolTipText="The process alias to suggest in Parts Manager." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <Separator Grid.Row="5"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Margin="0,10" />
+
+                <!-- Condition Type -->
+                <Label Grid.Row="6"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="0,5,0,0"
+                       Content="Condition Type:" />
+                <ComboBox Grid.Row="6"
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          Margin="0,5,0,0"
+                          ItemsSource="{Binding ConditionTypes}"
+                          SelectedItem="{Binding SelectedConditionType}"
+                          DisplayMemberPath="DisplayText">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Condition Type"
+                                                 ToolTipText="The condition type to use. Any - Always show recommendation. Manufacturer - Show recommendation only if part manufacturer matches." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <!-- Condition Operator -->
+                <Label Grid.Row="7"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="0,5,0,0"
+                       Content="Operator:" />
+                <ComboBox Grid.Row="7"
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          Margin="0,5,0,0"
+                          IsEnabled="{Binding HasConditionType}"
+                          ItemsSource="{Binding ConditionOperators}"
+                          SelectedItem="{Binding SelectedConditionOperator}">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Condition Operator"
+                                                 ToolTipText="The condition operator to use." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+                <!-- Condition Value -->
+                <Label Grid.Row="8"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Content="Value:"
+                       Margin="0,5,0,0" />
+                <ComboBox Grid.Row="8"
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          Margin="0,5,0,0"
+                          IsEditable="True"
+                          IsEnabled="{Binding HasConditionType}"
+                          Text="{Binding ConditionValue, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding ConditionValueSuggestions, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Condition Value"
+                                                 ToolTipText="The value to use for the condition." />
+                    </ComboBox.ToolTip>
+                </ComboBox>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Content="OK"
+                    Style="{StaticResource buttonStandard}"
+                    Command="{Binding Accept}" />
+
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

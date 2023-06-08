@@ -1,0 +1,67 @@
+﻿<Window x:Class="DWOS.LabelEditor.BarcodeItemDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Barcode" Height="491" Width="540" Loaded="Window_Loaded" WindowStyle="ToolWindow" ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" xmlns:my="clr-namespace:DWOS.LabelEditor" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TabControl Margin="5" Grid.Row="0">
+            <TabItem Header="Barcode">
+                <my:BarcodeUC x:Name="barcodeUC1" Margin="5"></my:BarcodeUC>
+            </TabItem>
+            <TabItem Header="Font">
+                <my:FontUC x:Name="fontUC1" Margin="5"></my:FontUC>
+            </TabItem>
+            <TabItem Header="Fill &amp; Stroke">
+                <StackPanel>
+                    <my:StrokeFillUC x:Name="strokeFillUC1" Margin="5"></my:StrokeFillUC>
+                    <GroupBox Header="Foreground" Margin="10,2,10,0">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="Text Color:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                            <ComboBox Name="cboForeColor" ToolTip="Foreground Text Color" Width="80"></ComboBox>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Position &amp; Size">
+                <StackPanel>
+                    <my:PositionUC x:Name="positionUC1" Margin="0,3,0,0"></my:PositionUC>
+                    <my:SizeUC x:Name="sizeUC1" Margin="0,3,0,0"></my:SizeUC>
+                    <GroupBox Header="Barcode Alignment" Margin="3,3,3,0">
+                        <StackPanel Orientation="Horizontal"  Margin="3">
+                            <TextBlock Text="Alignment:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                            <ComboBox Name="cboBarcodeAlignment" ToolTip="Barcode Alignment" Width="150"></ComboBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Barcode Sizing" Margin="3">
+                        <StackPanel Orientation="Horizontal"  Margin="3">
+                            <TextBlock Text="Sizing:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                            <ComboBox Name="cboBarcodeSizing" ToolTip="Barcode Sizing" Width="152"></ComboBox>
+                            <TextBlock Text="NOTE: 'Fill' option could make a barcode to become unreadable!" Foreground="Red" FontSize="9" VerticalAlignment="Center" Margin="5,6,0,5"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Content">
+                <my:ContentUC x:Name="contentUC1" Margin="5"></my:ContentUC>
+            </TabItem>
+            <TabItem Header="Data Binding" Visibility="Collapsed">
+                <my:DataBindingUC x:Name="dataBindingUC1" Margin="0,10,0,0"></my:DataBindingUC>
+            </TabItem>
+            <TabItem Header="General" Visibility="Collapsed">
+                <my:GeneralUC x:Name="generalUC1" ></my:GeneralUC>
+            </TabItem>
+        </TabControl>
+
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" Margin="5" FontSize="16">Token:</TextBlock>
+        <TextBlock Grid.Row="1" x:Name="txtTokenName" VerticalAlignment="Center" Margin="60,5,5,5" FontSize="16" Foreground="Red" FontWeight="Bold">NONE</TextBlock>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Height="23" HorizontalAlignment="Left" IsDefault="True"  Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" Margin="5" />
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Left" IsCancel="True"  Name="button2" VerticalAlignment="Top" Width="75" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window>

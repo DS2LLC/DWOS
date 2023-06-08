@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfDashboardTileSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DashboardTileSettings>
+    <WidgetType>DWOS.Dashboard.Gauges.ProductionByDepartmentGuage</WidgetType>
+    <WidgetAssembly>DWOS.Dashboard</WidgetAssembly>
+    <Settings>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ProductionByDepartmentSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;HistoryDays&gt;30&lt;/HistoryDays&gt;
+  &lt;Departments&gt;
+    &lt;string&gt;Top Coat&lt;/string&gt;
+    &lt;string&gt;Bond Primer&lt;/string&gt;
+    &lt;string&gt;Chem-Process&lt;/string&gt;
+    &lt;string&gt;Masking&lt;/string&gt;
+    &lt;string&gt;Paint&lt;/string&gt;
+    &lt;string&gt;NDT&lt;/string&gt;
+    &lt;string&gt;Sales&lt;/string&gt;
+  &lt;/Departments&gt;
+&lt;/ProductionByDepartmentSettings&gt;</Settings>
+    <Position>
+      <X>0</X>
+      <Y>0</Y>
+    </Position>
+    <IsNormalMode>true</IsNormalMode>
+  </DashboardTileSettings>
+  <DashboardTileSettings>
+    <WidgetType>DWOS.Dashboard.Charts.ShippingReceivingProduction</WidgetType>
+    <WidgetAssembly>DWOS.Dashboard</WidgetAssembly>
+    <Settings>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ShippingReceivingProductionSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;CountByType&gt;Parts&lt;/CountByType&gt;
+  &lt;Date&gt;2013-07-29T21:25:51.1781203-05:00&lt;/Date&gt;
+  &lt;UseCurrentDateAlways&gt;true&lt;/UseCurrentDateAlways&gt;
+  &lt;IncludeOpenPackages&gt;true&lt;/IncludeOpenPackages&gt;
+&lt;/ShippingReceivingProductionSettings&gt;</Settings>
+    <Position>
+      <X>1</X>
+      <Y>0</Y>
+    </Position>
+    <IsNormalMode>true</IsNormalMode>
+  </DashboardTileSettings>
+  <DashboardTileSettings>
+    <WidgetType>DWOS.Dashboard.Charts.OrdersByLocation</WidgetType>
+    <WidgetAssembly>DWOS.Dashboard</WidgetAssembly>
+    <Settings>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;OrdersByLocationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;CountByType&gt;Orders&lt;/CountByType&gt;
+  &lt;PendingInspectionDepartment&gt;QA&lt;/PendingInspectionDepartment&gt;
+  &lt;PartMarkingDepartment&gt;Part Marking&lt;/PartMarkingDepartment&gt;
+&lt;/OrdersByLocationSettings&gt;</Settings>
+    <Position>
+      <X>2</X>
+      <Y>0</Y>
+    </Position>
+    <IsNormalMode>true</IsNormalMode>
+  </DashboardTileSettings>
+  <DashboardTileSettings>
+    <WidgetType>DWOS.Dashboard.Charts.LateByLocation</WidgetType>
+    <WidgetAssembly>DWOS.Dashboard</WidgetAssembly>
+    <Settings>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;LateByLocationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;CountByType&gt;Orders&lt;/CountByType&gt;
+  &lt;PendingInspectionDepartment&gt;QA&lt;/PendingInspectionDepartment&gt;
+  &lt;PartMarkingDepartment&gt;Part Marking&lt;/PartMarkingDepartment&gt;
+&lt;/LateByLocationSettings&gt;</Settings>
+    <Position>
+      <X>0</X>
+      <Y>1</Y>
+    </Position>
+    <IsNormalMode>true</IsNormalMode>
+  </DashboardTileSettings>
+  <DashboardTileSettings>
+    <WidgetType>DWOS.Dashboard.Charts.QAByLocation</WidgetType>
+    <WidgetAssembly>DWOS.Dashboard</WidgetAssembly>
+    <Settings>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;QAByLocationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;CountByType&gt;Orders&lt;/CountByType&gt;
+  &lt;PendingInspectionDepartment&gt;QA&lt;/PendingInspectionDepartment&gt;
+&lt;/QAByLocationSettings&gt;</Settings>
+    <Position>
+      <X>1</X>
+      <Y>1</Y>
+    </Position>
+    <IsNormalMode>true</IsNormalMode>
+  </DashboardTileSettings>
+  <DashboardTileSettings>
+    <WidgetType>DWOS.Dashboard.Charts.OrdersByLocation</WidgetType>
+    <WidgetAssembly>DWOS.Dashboard</WidgetAssembly>
+    <Settings>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;OrdersByLocationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;CountByType&gt;Parts&lt;/CountByType&gt;
+  &lt;PendingInspectionDepartment&gt;QA&lt;/PendingInspectionDepartment&gt;
+  &lt;PartMarkingDepartment&gt;Part Marking&lt;/PartMarkingDepartment&gt;
+&lt;/OrdersByLocationSettings&gt;</Settings>
+    <Position>
+      <X>2</X>
+      <Y>1</Y>
+    </Position>
+    <IsNormalMode>true</IsNormalMode>
+  </DashboardTileSettings>
+</ArrayOfDashboardTileSettings>

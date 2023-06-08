@@ -1,0 +1,308 @@
+﻿<UserControl x:Class="DWOS.UI.Admin.Schedule.Manual.SchedulingDepartmentTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:igDp="http://infragistics.com/DataPresenter"
+             xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+             xmlns:igThemes="http://infragistics.com/Themes"
+             xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+             xmlns:ui="clr-namespace:DWOS.UI"
+             xmlns:convertors="clr-namespace:DWOS.UI.Utilities.Convertors"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             Loaded="SchedulingDepartmentTab_OnLoaded"
+             Unloaded="SchedulingDepartmentTab_OnUnloaded"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+    <UserControl.Resources>
+        <convertors:PriorityColorConverter x:Key="priorityColorConverter" />
+        <ui:PrioritySortComparer x:Key="prioritySortComparer" />
+
+        <Style TargetType="Label"
+               x:Key="Title">
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource colorbrushMain}" />
+            <Setter Property="Padding"
+                    Value="0,5,0,5" />
+
+        </Style>
+
+        <Style x:Key="priorityFieldStyle"
+               TargetType="{x:Type igWpf:CellValuePresenter}"
+               BasedOn="{x:Static igThemes:DataPresenterOffice2013.CellValuePresenter}">
+            <Setter Property="ForegroundStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="TextBlock.Foreground"
+                                Value="{Binding Path=DataItem.Priority, Converter={StaticResource priorityColorConverter}}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ForegroundAlternateStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="TextBlock.Foreground"
+                                Value="{Binding Path=DataItem.Priority, Converter={StaticResource priorityColorConverter}}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+        </Style>
+
+        <Style x:Key="RecordSelectorBorderBase"
+               TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness"
+                    Value="1,1,1,0" />
+            <Setter Property="Background"
+                    Value="{DynamicResource LabelBackground}" />
+            <Setter Property="BorderBrush"
+                    Value="#FFE1E1E1" />
+        </Style>
+
+        <Style x:Key="UnscheduledRecordSelector"
+               TargetType="{x:Type igDp:RecordSelector}"
+               BasedOn="{x:Static igThemes:DataPresenterOffice2013.RecordSelector}">
+            <EventSetter Event="MouseDown"
+                         Handler="RecordSelector_MouseDown" />
+            <EventSetter Event="MouseMove"
+                         Handler="UnscheduledRecordSelector_MouseMove" />
+            <EventSetter Event="MouseUp"
+                         Handler="RecordSelector_MouseUp" />
+            <EventSetter Event="MouseLeave"
+                         Handler="RecordSelector_MouseLeave" />
+        </Style>
+
+        <Style x:Key="ScheduledRecordSelector"
+               TargetType="{x:Type igDp:RecordSelector}"
+               BasedOn="{x:Static igThemes:DataPresenterOffice2013.RecordSelector}">
+            <EventSetter Event="MouseDown"
+                         Handler="RecordSelector_MouseDown" />
+            <EventSetter Event="MouseMove"
+                         Handler="ScheduledRecordSelector_MouseMove" />
+            <EventSetter Event="MouseUp"
+                         Handler="RecordSelector_MouseUp" />
+            <EventSetter Event="MouseLeave"
+                         Handler="RecordSelector_MouseLeave" />
+        </Style>
+
+        <Style x:Key="ScheduledRecordPresenter"
+               TargetType="{x:Type igDp:DataRecordPresenter}"
+               BasedOn="{x:Static igThemes:DataPresenterOffice2013.DataRecordPresenter}">
+            <EventSetter Event="Drop"
+                         Handler="DataRecordPresenter_Drop" />
+            <EventSetter Event="DragOver"
+                         Handler="DataRecordPresenter_DragOver" />
+            <EventSetter Event="DragLeave"
+                         Handler="DataRecordPresenter_DragLeave" />
+        </Style>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5px"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!--This is the section for the top-->
+        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Style="{StaticResource Title}"
+                   Content="NON-SCHEDULED WORK ORDERS"  Grid.ColumnSpan="2"/>
+            <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    Orientation="Vertical"
+                    Margin="0,0,3,0">
+                <Button Command="{Binding AddSelectedToSchedule}"
+                    Style="{StaticResource buttonForImage}"
+                    ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                       Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Add to Schedule"
+                                             ToolTipText="Adds the selected work order to the department schedule." />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+            <igWpf:XamDataGrid Grid.Row="1"
+                           Grid.Column="1"
+                           DataSource="{Binding Unscheduled}"
+                           Name="Unscheduled"
+                           SelectedDataItems="{Binding UnscheduledSelection, Mode=TwoWay}"
+                           SelectedDataItemsScope="RecordsOnly"
+                           FieldPositionChanged="Grid_FieldPositionChanged"
+                           Theme="Office2013"
+                           AllowDrop="True"
+                           DragOver="Unscheduled_DragOver"
+                           Drop="Unscheduled_Drop"
+                           HorizontalAlignment="Stretch"
+                           ScrollingMode ="Deferred"
+                           VerticalAlignment="Stretch">
+                <igWpf:XamDataGrid.ViewSettings>
+                    <igWpf:GridViewSettings/>
+                </igWpf:XamDataGrid.ViewSettings>
+                <igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                           AllowDelete="False"
+                                           FilterUIType="FilterRecord"
+                                           FilterClearButtonLocation="RecordSelectorAndFilterCell"
+                                           FilterRecordLocation="OnTopFixed"
+                                           RecordSelectorStyle="{StaticResource UnscheduledRecordSelector}" />
+                </igWpf:XamDataGrid.FieldLayoutSettings>
+
+                <igWpf:XamDataGrid.FieldSettings>
+                    <igWpf:FieldSettings AllowRecordFiltering="True" />
+                </igWpf:XamDataGrid.FieldSettings>
+                <igWpf:XamDataGrid.FieldLayouts>
+                    <igWpf:FieldLayout>
+                        <igWpf:Field Name="Id" />
+                        <igWpf:Field Name="Type" />
+                        <igWpf:Field Name="CurrentLocation"
+                                 Label="Current Department" />
+                        <igWpf:Field Name="NextDept"
+                                 Label="Next Department" />
+                        <igWpf:Field Name ="Process" />
+                        <igWpf:Field Name="CurrentLine"
+                                 Label="Current Line" />
+                        <igWpf:Field Name="Customer" />
+                        <igWpf:Field Name="Priority"
+                                 CellValuePresenterStyle="{StaticResource priorityFieldStyle}">
+                            <igWpf:Field.Settings>
+                                <igWpf:FieldSettings SortComparer="{StaticResource prioritySortComparer}" />
+                            </igWpf:Field.Settings>
+                        </igWpf:Field>
+                        <igWpf:Field Name="Part" />
+                        <igWpf:Field Name="Quantity" />
+                        <igWpf:Field Name="TotalSurfaceArea"
+                                 Label="Total SA" />
+                        <igWpf:Field Name="RequiredDate"
+                                 Label="Required Date" />
+
+                    </igWpf:FieldLayout>
+                </igWpf:XamDataGrid.FieldLayouts>
+            </igWpf:XamDataGrid>
+        </Grid>
+        <GridSplitter Background="Red" Height="10"  HorizontalAlignment="Stretch" Grid.Row="1"/>
+        <!--This is the section for the bottom-->
+        <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Style="{StaticResource Title}"
+                   Content="SCHEDULED WORK ORDERS"  Grid.ColumnSpan="2"/>
+            <StackPanel Grid.Row="4"
+                    Grid.Column="0"
+                    Orientation="Vertical"
+                    Margin="0,0,3,0">
+                <Button Command="{Binding RemoveSelectedFromSchedule}"
+                    Style="{StaticResource buttonForImage}"
+                    ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                       Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Remove from Schedule"
+                                             ToolTipText="Removes the selected work order from the department schedule." />
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding MoveSelectedUp}"
+                    Style="{StaticResource buttonForImage}"
+                    Margin="0,3,0,0"
+                    ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/uparrow.png"
+                       Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Move Up"
+                                             ToolTipText="Moves the selected work order up in the department schedule." />
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding MoveSelectedDown}"
+                    Style="{StaticResource buttonForImage}"
+                    Margin="0,3,0,0"
+                    ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/downarrow.png"
+                       Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Move Down"
+                                             ToolTipText="Moves the selected work order down in the department schedule." />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+
+                <igWpf:XamDataGrid 
+                           Name="Scheduled"
+                           DataSource="{Binding Scheduled}"
+                           SelectedDataItems="{Binding ScheduledSelection, Mode=TwoWay}"
+                           SelectedDataItemsScope="RecordsOnly"
+                           FieldPositionChanged="Grid_FieldPositionChanged"
+                           GroupByAreaLocation="None"
+                           Theme="Office2013"
+                           AllowDrop="True"
+                           DragOver="Scheduled_DragOver"
+                           Drop="Scheduled_Drop"
+                           Grid.Row="1" Grid.Column="1" 
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                           >
+                <igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False" AllowDelete="False"
+                                           DataRecordPresenterStyle="{StaticResource ScheduledRecordPresenter}"
+                                           RecordSelectorStyle="{StaticResource ScheduledRecordSelector}" />
+                </igWpf:XamDataGrid.FieldLayoutSettings>
+                <igWpf:XamDataGrid.FieldSettings>
+                    <igWpf:FieldSettings LabelClickAction="Nothing"
+                                     AllowGroupBy="False" />
+                </igWpf:XamDataGrid.FieldSettings>
+                <igWpf:XamDataGrid.FieldLayouts>
+                    <igWpf:FieldLayout>
+                        <igWpf:FieldLayout.SortedFields>
+                            <igWpf:FieldSortDescription Direction="Ascending"
+                                                    FieldName="SchedulePriority" />
+                        </igWpf:FieldLayout.SortedFields>
+                        <igWpf:Field Name="SchedulePriority"
+                                 Label="Schedule Priority"
+                                 IsReadOnly="True" />
+                        <igWpf:Field Name="CurrentLine" Label="Current Line"/>
+                        <igWpf:Field Name="Id" />
+                        <igWpf:Field Name="Type" />
+                        <igWpf:Field Name="CurrentLocation"
+                                 Label="Current Department" />
+                        <igWpf:Field Name="NextDept"
+                                 Label="Next Department" />
+                        <igWpf:Field Name ="Process" />
+                        <igWpf:Field Name="Customer" />
+                        <igWpf:Field Name="Priority"
+                                 CellValuePresenterStyle="{StaticResource priorityFieldStyle}" />
+                        <igWpf:Field Name="Part" />
+                        <igWpf:Field Name="Quantity" />
+                        <igWpf:Field Name="TotalSurfaceArea"
+                                 Label="Total SA" />
+                        <igWpf:Field Name="RequiredDate"
+                                 Label="Required Date" />
+                    </igWpf:FieldLayout>
+                </igWpf:XamDataGrid.FieldLayouts>
+            </igWpf:XamDataGrid> 
+
+           
+        </Grid>
+    </Grid>
+</UserControl>

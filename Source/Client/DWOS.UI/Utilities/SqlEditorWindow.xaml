@@ -1,0 +1,75 @@
+﻿<Window x:Class="DWOS.UI.Utilities.SqlEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        RenderOptions.ClearTypeHint="Enabled"
+        TextOptions.TextFormattingMode="Display"
+        Height="360"
+        Width="640"
+        Title="SQL Editor"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource ToolWindow}"
+        Icon="/DWOS.UI;component/Resources/images/EventHistory_16.png">
+
+    <Grid Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="3"
+                    Grid.Row="0">
+            <Label>Pre-Defined Script:</Label>
+            <ComboBox Width="250"
+                      x:Name="cboScript"
+                      SelectionChanged="cboScript_SelectionChanged"></ComboBox>
+        </StackPanel>
+
+        <TextBox  Grid.Row="1"
+                  x:Name="txtSql"
+                  AcceptsReturn="True"
+                  AcceptsTab="True">Select TOP 1000 * FROM [Order]</TextBox>
+
+        <GridSplitter Grid.Row="2"
+                      Height="5"
+                      HorizontalAlignment="Stretch" />
+
+        <igWPF:XamDataGrid x:Name="grdSqlOutput"
+                           Grid.Row="3"
+                           Theme="Office2013">
+        </igWPF:XamDataGrid>
+
+        <StackPanel Grid.Row="4"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Grid.Row="4"
+                    Width="75"
+                    Margin="5"
+                    Click="ExecuteButton_Click">Execute</Button>
+            <Button Grid.Row="4"
+                    Width="75"
+                    Margin="5"
+                    Click="SaveButton_Click">Export</Button>
+        </StackPanel>
+
+        <Border  Grid.Row="5"
+                 BorderBrush="Gray"
+                 BorderThickness="1"
+                 Padding="3">
+            <StackPanel>
+                <TextBlock x:Name="txtStatus">Ready</TextBlock>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

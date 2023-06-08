@@ -1,0 +1,63 @@
+﻿<UserControl xmlns:ig="http://schemas.infragistics.com/xaml"  x:Class="DWOS.Dashboard.Charts.LateByLocation2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DWOS.Dashboard.Charts"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ig:XamPieChart Grid.Row="0" Grid.RowSpan="2" x:Name="chart" Grid.Column="0" Legend="{Binding ElementName=legend}" LeaderLineVisibility="Visible" LabelsPosition="BestFit">            
+            <ig:XamPieChart.Resources>
+                <local:LateOrderValueConverter x:Key="lateValueConverter" ></local:LateOrderValueConverter>
+            </ig:XamPieChart.Resources>
+            <ig:XamPieChart.LegendItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <ContentPresenter Content="{Binding}" Margin="5,0,5,0" ContentTemplate="{Binding Series.LegendItemBadgeTemplate}" />
+                        <ContentPresenter Content="{Binding ItemLabel}" Margin="0,0,5,0" />
+                        <ContentPresenter Content="{Binding Item, Converter={StaticResource lateValueConverter}}" Margin="0,0,5,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ig:XamPieChart.LegendItemTemplate>
+        </ig:XamPieChart>
+
+        <ig:ItemLegend  Grid.Row="0" Grid.RowSpan="2" x:Name="legend" Content="Departments" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Padding="10,5,10,5" >
+        </ig:ItemLegend>
+
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="settingsPanel" Margin="10" MaxWidth="500">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Margin="3" VerticalAlignment="Center">Display Type:</TextBlock>
+            <ComboBox Grid.Column="1" Margin="3" VerticalAlignment="Center"></ComboBox>
+
+            <TextBlock Grid.Row="0" Margin="3" VerticalAlignment="Center">Display Type:</TextBlock>
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" x:Name="cboType" SelectedItem="{Binding Path=CountByType, Mode=TwoWay}"></ComboBox>
+
+            <TextBlock Grid.Row="1" Margin="3" VerticalAlignment="Center">Inspection Department:</TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PendingInspectionDepartment, Mode=TwoWay}"></TextBox>
+
+            <TextBlock Grid.Row="2" Margin="3" VerticalAlignment="Center">Part Marking Department:</TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" Text="{Binding Path=PartMarkingDepartment, Mode=TwoWay}"></TextBox>
+        </Grid>
+        
+        <Image Grid.Row="1" Source="/DWOS.Dashboard;component/Resources/Images/Settings_24.png" Width="24" HorizontalAlignment="Left" Margin="5,0,0,5" Cursor="Hand" MouseDown="Image_MouseDown" ToolTip="Click to show/hide the settings."></Image>
+    </Grid>
+</UserControl>

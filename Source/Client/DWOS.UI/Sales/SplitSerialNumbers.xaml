@@ -1,0 +1,109 @@
+﻿<Window x:Class="DWOS.UI.Sales.SplitSerialNumbers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:local="clr-namespace:DWOS.UI.Sales"
+        xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Width="350"
+        Height="350"
+        Loaded="SplitSerialNumbers_OnLoaded"
+        Unloaded="SplitSerialNumbers_OnUnloaded"
+        Title="Split Serial Numbers"
+        Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <Style x:Key="OrderIdEditor"
+               TargetType="{x:Type igWpf:XamComboEditor}">
+            <Setter Property="ItemsSource"
+                    Value="{Binding Path=DataContext.OrderIds, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SplitSerialNumbers}}}" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                   Foreground="{StaticResource colorbrushMain}">
+                Serial Numbers
+            </Label>
+            <Separator Margin="5,0,5,0" Grid.Column="1" VerticalAlignment="Center"
+                       Background="{StaticResource colorbrushMain}" />
+        </Grid>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Original WO:" VerticalAlignment="Center" Padding="3,0,20, 0" />
+            <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding OriginalOrderId}"
+                     VerticalAlignment="Center" Margin="0,0,3,0">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Original Work Order"
+                                             ToolTipText="The work order being split." />
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="2" Visibility="{Binding WarningMessageVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Name="WarningImage" Margin="0,0,10,0"/>
+            <TextBlock Grid.Column="1" Text="{Binding Warning}" Foreground="Red" />
+        </Grid>
+
+        <Grid Grid.Row="3" Visibility="{Binding ErrorMessageVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Name="ErrorImage" Margin="0,0,10,0"/>
+            <TextBlock Grid.Column="1" Text="{Binding Error}" Foreground="Red" />
+        </Grid>
+
+        <igWpf:XamDataGrid Grid.Row="4" Margin="3" DataSource="{Binding SerialNumbers}" Theme="Office2013">
+            <igWpf:XamDataGrid.FieldLayoutSettings>
+                <igWpf:FieldLayoutSettings AutoGenerateFields="False" ExpansionIndicatorDisplayMode="CheckOnDisplay"
+                                           SelectionTypeRecord="Single" />
+            </igWpf:XamDataGrid.FieldLayoutSettings>
+            <igWpf:XamDataGrid.FieldLayouts>
+                <igWpf:FieldLayout Key="Order">
+                    <igWpf:Field Name="Number" Width="Auto" IsReadOnly="True" />
+                    <igWpf:Field Name="OrderId" Width="Auto" Label="WO" EditorType="{x:Type igWpf:XamComboEditor}"
+                                 EditorStyle="{StaticResource OrderIdEditor}">
+                        <igWpf:Field.Settings>
+                            <igWpf:FieldSettings DataItemUpdateTrigger="OnCellValueChange" />
+                        </igWpf:Field.Settings>
+                    </igWpf:Field>
+                </igWpf:FieldLayout>
+            </igWpf:XamDataGrid.FieldLayouts>
+        </igWpf:XamDataGrid>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" IsDefault="True" Style="{StaticResource buttonStandard}" Command="{Binding Accept}" />
+            <Button Content="Cancel" Click="CancelButton_Click" Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</Window>

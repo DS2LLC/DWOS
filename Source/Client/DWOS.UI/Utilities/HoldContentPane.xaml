@@ -1,0 +1,15 @@
+﻿<igWPF:ContentPane x:Class="DWOS.UI.Utilities.HoldContentPane"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:DWOS.UI.Utilities"
+                   mc:Ignorable="d"
+                   IsPinned="False"
+                   CloseAction="RemovePane"
+                   Closed="ContentPane_Closed"
+                   HeaderTemplate="{StaticResource holdHeaderTemplate}"
+                   TabHeaderTemplate="{StaticResource holdHeaderTemplate}">
+    <local:HoldList x:Name="holdList" />
+</igWPF:ContentPane>

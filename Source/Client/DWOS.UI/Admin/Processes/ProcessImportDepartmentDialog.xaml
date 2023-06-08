@@ -1,0 +1,114 @@
+﻿<Window x:Class="DWOS.UI.Admin.Processes.ProcessImportDepartmentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:DWOS.UI.Admin.Processes.ViewModels"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        mc:Ignorable="d"
+        Height="200"
+        Width="300"
+        Title="Select Department"
+        Style="{StaticResource ToolWindow}"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded">
+    <Window.DataContext>
+        <vm:ProcessImportDepartmentViewModel x:Name="ViewModel" />
+    </Window.DataContext>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Process -->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Margin="0,0,5,0">
+            Process:
+        </Label>
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 IsReadOnly="True"
+                 Text="{Binding ProcessName, Mode=OneWay}">
+            <TextBox.ToolTip>
+                <utilities:HeaderToolTipContent ToolTipHeader="Process">
+                    The process that you are importing.
+                </utilities:HeaderToolTipContent>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <!-- Department from imported process -->
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Margin="0,5,5,0">
+            Dept. From File:
+        </Label>
+        <TextBox Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="0,5,0,0"
+                 IsReadOnly="True"
+                 Text="{Binding ImportedDepartment, Mode=OneWay}">
+            <TextBox.ToolTip>
+                <utilities:HeaderToolTipContent ToolTipHeader="Department From File">
+                    The department specified by the import file.
+                </utilities:HeaderToolTipContent>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Margin="0,5,5,0">
+            Department:
+        </Label>
+        <ComboBox Grid.Row="2"
+                  Grid.Column="1"
+                  Margin="0,5,0,0"
+                  ItemsSource="{Binding Departments}"
+                  SelectedItem="{Binding SelectedDepartment}"
+                  IsEnabled="{Binding UseExistingDepartment}">
+            <ComboBox.ToolTip>
+                <utilities:HeaderToolTipContent ToolTipHeader="Department">
+                    The existing department to use for the imported process.
+                </utilities:HeaderToolTipContent>
+            </ComboBox.ToolTip>
+        </ComboBox>
+
+        <CheckBox Grid.Row="3"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Margin="0,5,0,0"
+                  IsChecked="{Binding CreateNewDepartment}">
+            Create new department
+            <CheckBox.ToolTip>
+                <utilities:HeaderToolTipContent ToolTipHeader="Create New Department">
+                    If checked, DWOS will create the department from the import file.
+                </utilities:HeaderToolTipContent>
+            </CheckBox.ToolTip>
+        </CheckBox>
+
+        <StackPanel Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,10,0,0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="OK"
+                    Style="{StaticResource buttonStandard}"
+                    Command="{Binding Accept}" />
+
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

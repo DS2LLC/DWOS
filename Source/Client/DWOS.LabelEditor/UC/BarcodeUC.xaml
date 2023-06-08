@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="DWOS.LabelEditor.BarcodeUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:DWOS.LabelEditor"
+             mc:Ignorable="d" 
+             d:DesignHeight="311" d:DesignWidth="532" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+                <TextBlock Text="Barcode Symbology/Standard:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                <ComboBox Name="cboSymbology" Width="250">
+                <ComboBox.ToolTip>
+                    <TextBlock>Barcode Symbology<LineBreak />Code128 is recommended.</TextBlock>
+                </ComboBox.ToolTip>
+                </ComboBox>
+            </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1">
+                <TextBlock Text="Value to encode:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                <TextBox Name="txtCode" ToolTip="Barcode Value" Width="200" ></TextBox>
+                <CheckBox Name="chkDisplayCode" ToolTip="Display unencoded text" VerticalAlignment="Center" Margin="20,0,0,0">Display Text</CheckBox>
+            </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="2">
+                <TextBlock Text="Narrow Bar Width:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                <TextBox Name="txtBarWidth" ToolTip="Narrow Bar Width" Width="50" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+                <TextBlock Text="Bar Ratio:" VerticalAlignment="Center" Margin="20,0,10,0" ></TextBlock>
+                <TextBox Name="txtBarRatio" ToolTip="Bar Ratio" Width="50" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+                <TextBlock Text="Bar Height:" VerticalAlignment="Center" Margin="20,0,10,0" ></TextBlock>
+                <TextBox Name="txtBarHeight" ToolTip="Bar Height" Width="50" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>
+            </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="3">
+                <TextBlock Text="2D Module Size:" VerticalAlignment="Center" Margin="0,0,10,0"></TextBlock>
+                <TextBox Name="txtModuleSize" ToolTip="2D Module Size" Width="50" my:TextBoxMaskBehavior.Mask="Decimal" my:TextBoxMaskBehavior.MinimumValue="0"></TextBox>                
+            </StackPanel>
+        
+    </Grid>
+</UserControl>

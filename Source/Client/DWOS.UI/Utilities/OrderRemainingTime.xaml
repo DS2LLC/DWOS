@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="DWOS.UI.Utilities.OrderRemainingTime"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="clr-namespace:DWOS.UI"
+             xmlns:conv="clr-namespace:DWOS.UI.Utilities.Convertors"
+             mc:Ignorable="d" 
+             x:Name="control"
+             d:DesignHeight="20" d:DesignWidth="60">
+    <UserControl.Resources>
+        <conv:ProcessTimeConverter x:Key="processTimeConverter" />
+    </UserControl.Resources>
+
+    <Border BorderBrush="Black" BorderThickness="1">
+        <StackPanel Orientation="Horizontal" ToolTip="This order has to be completed within the specified time.">
+            <Image Width="16" Height="16" Source="../Resources/images/Hourglass_16.png" />
+            <TextBlock Margin="1" Padding="5" VerticalAlignment="Center" Text="{Binding Path=DataItem, ElementName=control,Converter={StaticResource processTimeConverter}}" Foreground="White" Background="Red" />
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,195 @@
+﻿<Window x:Class="DWOS.UI.Sales.Customer.BulkPartCustomFieldDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:conv="clr-namespace:DWOS.UI.Utilities.Convertors"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:local="clr-namespace:DWOS.UI.Sales.Customer"
+        mc:Ignorable="d"
+        Title="Bulk Part-Level Custom Field"
+        WindowStartupLocation="CenterOwner"
+        Height="340"
+        Width="300"
+        Loaded="Window_Loaded"
+        Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <conv:PartMarkingConverter x:Key="partMarking" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Main Editor -->
+        <ScrollViewer Grid.Row="0">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="0,0,5,0"
+                       VerticalAlignment="Center"
+                       Content="Display Name:" />
+                <ComboBox Grid.Row="0"
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          IsEditable="True"
+                          Text="{Binding DisplayName, ValidatesOnDataErrors=True}"
+                          ItemsSource="{Binding FieldNames}">
+                    <ComboBox.Style>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError"
+                                         Value="True">
+                                    <Setter Property="ToolTip"
+                                            Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                                </Trigger>
+                                <Trigger Property="Validation.HasError"
+                                         Value="False">
+                                    <Setter Property="ToolTip">
+                                        <Setter.Value>
+                                            <utilities:HeaderToolTip ToolTipHeader="Display Name"
+                                                                     ToolTipText="The name of the custom field that will be shown in Parts Manager." />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Style>
+                </ComboBox>
+
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="0,5,5,0"
+                       VerticalAlignment="Center"
+                       Content="Description:" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         Margin="0,5,0,0"
+                         VerticalAlignment="Center"
+                         MaxLength="255"
+                         Text="{Binding Description}">
+                    <TextBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Description"
+                                                 ToolTipText="A description of the custom field." />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Margin="0,5,5,0"
+                       VerticalAlignment="Center"
+                       Content="Default Value:" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         Margin="0,5,0,0"
+                         VerticalAlignment="Center"
+                         MaxLength="255"
+                         Text="{Binding DefaultValue}">
+                    <TextBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Default Value"
+                                                 ToolTipText="The default value to use for this field when creating a new part." />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Margin="0,5,5,0"
+                       VerticalAlignment="Center"
+                       Content="List:" />
+
+                <Grid Grid.Row="3"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Style="{StaticResource buttonForImage}"
+                            Command="{Binding ClearListCommand}">
+                        <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                               Style="{StaticResource buttonImage}" />
+                    </Button>
+                    <ComboBox Grid.Column="1"
+                              ItemsSource="{Binding ListsTable}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="ListID"
+                              SelectedValue="{Binding ListId}">
+                        <ComboBox.ToolTip>
+                            <utilities:HeaderToolTip ToolTipHeader="List"
+                                                     ToolTipText="List to show for this custom field in Parts Manager." />
+                        </ComboBox.ToolTip>
+                    </ComboBox>
+                </Grid>
+
+                <CheckBox Grid.Row="4"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Margin="5,5,0,0"
+                          Content="Print on WO Traveler"
+                          IsChecked="{Binding PrintOnTraveler}">
+                    <CheckBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Print on WO Traveler"
+                                                 ToolTipText="If checked, then this custom field and its value will be printed on the WO Traveler." />
+                    </CheckBox.ToolTip>
+                </CheckBox>
+
+                <CheckBox Grid.Row="5"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Margin="5,5,0,0"
+                          Content="Print on COC"
+                          IsChecked="{Binding PrintOnCOC}">
+                    <CheckBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Print On COC"
+                                                 ToolTipText="If checked, then this custom field and its value will be printed on the COC." />
+                    </CheckBox.ToolTip>
+                </CheckBox>
+
+                <CheckBox Grid.Row="6"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Margin="5,5,0,0"
+                          Content="Is Visible"
+                          IsChecked="{Binding IsVisible}">
+                    <CheckBox.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Is Visible"
+                                                 ToolTipText="If checked (default), shows this custom field throughout DWOS. If unchecked, hides this custom field." />
+                    </CheckBox.ToolTip>
+                </CheckBox>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- OK & Cancel -->
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Style="{StaticResource buttonStandard}"
+                    IsDefault="True"
+                    Content="OK"
+                    Command="{Binding AcceptCommand}" />
+
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</Window>

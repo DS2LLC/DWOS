@@ -1,0 +1,38 @@
+﻿USE [DWOS]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---- 1) Create a ROWGUID column--
+USE [DWOS]
+ALTER Table dbo.DocumentRevision
+Add RowGUID uniqueidentifier not null ROWGUIDCOL unique default newid()
+GO
+-- 2) Turn on FILESTREAM
+USE [DWOS]
+ALTER Table dbo.DocumentRevision
+SET (filestream_on=DPSDataFS)  -- set filestream_on to FILESTREAMGroupName)
+GO
+-- 3) Add FILESTREAM column to the table
+USE [DWOS]
+ALTER Table DocumentRevision
+Add FSMedia varbinary(max) FILESTREAM null
+GO
+-- 4) Move data into the new column
+UPDATE DocumentRevision
+SET FSMedia = FileName
+GO
+-- 5) Drop the old column
+ALTER Table DocumentRevision
+DROP column FileName
+GO
+-- 6) Rename the new FILESTREAM column to the old column name
+Use [DWOS]
+EXEC sp_rename 'DocumentRevision.FSMedia', 'FileName', 'COLUMN'
+GO
+
+Use[DWOS]
+ROLLBACK;
+GO;

@@ -1,0 +1,89 @@
+﻿<igRibbon:XamRibbonWindow x:Class="DWOS.UI.Admin.Time.ProcessingTimeManager"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+                          xmlns:igRibbon="http://infragistics.com/Ribbon"
+                          xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+                          mc:Ignorable="d"
+                          Width="620"
+                          Height="460"
+                          WindowStartupLocation="CenterScreen"
+                          Title="Processing Time Manager"
+                          Loaded="XamRibbonWindow_Loaded"
+                          Unloaded="XamRibbonWindow_Unloaded"
+                          Style="{StaticResource RibbonWindow}">
+    <igRibbon:RibbonWindowContentHost Style="{StaticResource RibbonWindowContent}">
+
+        <igRibbon:RibbonWindowContentHost.Ribbon>
+            <igRibbon:XamRibbon Theme="Office2013"
+                                Grid.Row="0">
+                <igRibbon:XamRibbon.ApplicationMenu>
+                    <igRibbon:ApplicationMenu Visibility="Visible"
+                                              Caption="File">
+                        <igRibbon:ButtonTool Caption="Close"
+                                             Click="Close_Click" />
+                    </igRibbon:ApplicationMenu>
+                </igRibbon:XamRibbon.ApplicationMenu>
+
+                <igRibbon:XamRibbon.QuickAccessToolbar>
+                    <igRibbon:QuickAccessToolbar />
+                </igRibbon:XamRibbon.QuickAccessToolbar>
+
+                <igRibbon:RibbonTabItem Header="Time">
+                    <igRibbon:RibbonGroup Caption="Processing">
+                        <igRibbon:ButtonTool Caption="Stop"
+                                             Command="{Binding StopTimer}"
+                                             x:Name="btnStop"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Stop Timer"
+                                                         ToolTipText="Stops processing timers for the selected orders or batches." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                    </igRibbon:RibbonGroup>
+                </igRibbon:RibbonTabItem>
+            </igRibbon:XamRibbon>
+        </igRibbon:RibbonWindowContentHost.Ribbon>
+
+        <igWPF:XamDataGrid Grid.Row="1"
+                           Name="TimeGrid"
+                           DataSource="{Binding ProcessingEntries}"
+                           SelectedDataItems="{Binding SelectedItems}"
+                           SelectedDataItemsScope="RecordsOrCells"
+                           Theme="Office2013">
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                           AutoFitMode="Always"
+                                           FilterUIType="FilterRecord"
+                                           HeaderPrefixAreaDisplayMode="FieldChooserButton"
+                                           SelectionTypeRecord="Range"
+                                           SelectionTypeField="Single"
+                                           SelectionTypeCell="Single"
+                                           HighlightAlternateRecords="True"
+                                           DataRecordSizingMode="Fixed"
+                                           FilterClearButtonLocation="RecordSelectorAndFilterCell"
+                                           FilterRecordLocation="OnTopFixed"
+                                           ExpansionIndicatorDisplayMode="Never" />
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+
+            <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout>
+                    <igWPF:FieldLayout.Fields>
+                        <igWPF:Field Name="Id"
+                                     Label="WO/Batch"
+                                     IsReadOnly="True" />
+                        <igWPF:Field Name="WorkStatus"
+                                     Label="Work Status"
+                                     IsReadOnly="True" />
+                        <igWPF:NumericField Name="DurationMinutes"
+                                            Label="Duration (Min.)"
+                                            IsReadOnly="True"
+                                            HorizontalContentAlignment="Left"/>
+                    </igWPF:FieldLayout.Fields>
+                </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+    </igRibbon:RibbonWindowContentHost>
+</igRibbon:XamRibbonWindow>

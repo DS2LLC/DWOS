@@ -1,0 +1,119 @@
+﻿<Window x:Class="DWOS.UI.Admin.OrderApprovalTermsEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+        xmlns:igEditors="http://infragistics.com/Editors"
+        xmlns:vm="clr-namespace:DWOS.UI.Admin.ViewModels"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        Width="450"
+        Height="200"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource DialogWindow}"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded"
+        Title="Order Approval Terms Manager">
+    <Window.DataContext>
+        <vm:OrderApprovalTermsViewModel x:Name="ViewModel"
+                                        Accepted="ViewModel_Accepted" />
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="{x:Type igEditors:XamTextEditor}"
+               x:Key="TermsStyle">
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+            <Setter Property="AcceptsReturn"
+                    Value="True" />
+        </Style>
+        </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Orientation="Vertical"
+                        Margin="0,0,3,0">
+                <Button Command="{Binding AddTerm}"
+                        Style="{StaticResource buttonForImage}"
+                        ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Add Term"
+                                                 ToolTipText="Adds a new order approval term." />
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding DeleteSelectedTerm}"
+                        Style="{StaticResource buttonForImage}"
+                        ToolTipService.ShowOnDisabled="True"
+                        Margin="0,3,0,0">
+                    <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Delete Term"
+                                                 ToolTipText="Deletes the selected order approval term." />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+            <igWpf:XamDataGrid Grid.Column="1"
+                               Name="ApprovalTermsGrid"
+                               Theme="{StaticResource Theme}"
+                               AutoFit="True"
+                               DataSource="{Binding Terms}"
+                               SelectedDataItem="{Binding SelectedTerm}"
+                               UpdateMode="OnCellChangeOrLostFocus">
+                <igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                               AllowDelete="False"
+                                               AllowAddNew="False"
+                                               SupportDataErrorInfo="CellsOnly"
+                                               SelectionTypeRecord="Single"
+                                               SelectionTypeCell="None"
+                                               SelectionTypeField="None"
+                                               DataErrorDisplayMode="ErrorIconAndHighlight" />
+                </igWpf:XamDataGrid.FieldLayoutSettings>
+                <igWpf:XamDataGrid.FieldLayouts>
+                    <igWpf:FieldLayout>
+                        <igWpf:TextField Name="Name"
+                                         Label="Name">
+                            <igWpf:TextField.ValueConstraint>
+                                <igWpf:ValueConstraint MinLength="1"
+                                                       MaxLength="50" />
+                            </igWpf:TextField.ValueConstraint>
+                        </igWpf:TextField>
+                        <igWpf:TextField Name="Terms"
+                                         Label="Terms">
+                            <igWpf:TextField.ValueConstraint>
+                                <igWpf:ValueConstraint MaxLength="255" />
+                            </igWpf:TextField.ValueConstraint>
+                            <igWpf:TextField.Settings>
+                                <igWpf:FieldSettings EditorStyle="{StaticResource TermsStyle}"/>
+                            </igWpf:TextField.Settings>
+                        </igWpf:TextField>
+                        <igWpf:CheckBoxField Name="Active"
+                                             Label="Active" />
+                    </igWpf:FieldLayout>
+                </igWpf:XamDataGrid.FieldLayouts>
+            </igWpf:XamDataGrid>
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Save"
+                    Style="{StaticResource buttonStandard}"
+                    Command="{Binding Accept}" />
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,961 @@
+﻿
+Version 12.2.2.0 [XX.XX.XX]
+	- Process Manager: Reworked process aliases to have there own tab.
+	- Customer Manager: Changed portal authorizations to be sent by the server.
+	- Application Settings: Added ability to CC someone during portal authorizations.
+
+Version 12.2.1.1 [11.20.12]
+
+	- Order Entry: Added ability to add Order Notes
+	- Work Order Traveler: Update to add Order Notes
+	- Order Entry: Fixed price and price unit not being copied from part manager
+	- Order Entry: Fixed load time of Order Entry if not selecting first Order in the tree view
+	- Control Inspection: Fixed name length to prevent to long of a name being set
+
+Version 12.2.0.3 [09.28.12]
+
+	- Order Entry: Changed Split Order to copy order answers
+	- Open Orders Report: Changed implementation to show orders that where in an open state within the date range specified
+	- License Manager: Keep Alive updated to create new comm channel each call
+
+Version 12.2.0.2 [09.07.12]
+
+	- Terms Manager: Added
+	- Quote Processes Manager: Added
+	- Quote Manager: Completely revamped, including multiple parts per quote, reminders, and new reports
+	- User Manager: Added Email Address field
+	- Reports: Added Open Orders report similar to the Closed Orders report
+	- Customer Manager: Fixed bug that would cause customer form not to display
+	- Customer Manager: Fixed bug that would prevent adding of new customers
+	- Shipping Manager: Added new Refresh button to refresh shipping orders
+	- Shipping Manager: Removed auto-sync mechanism from between the multiple shipping managers
+	- Order Entry: Added validator that would verify the price unit to part quantity recommendations
+	- Price Unit Manager: Added a new price unit manager to adjust each units(each/lot) min max values
+	- Parts Manager: Added ability to auto sync to existing quote when adding a new part
+	- Logged In Users: Add new dialog to show all logged in users
+	- User Permissions Report: Added new report to show each users effective permissions
+	- Security Group Permissions Report: Added new report to show permissions defined for each security group
+	- Order Entry: Added ability to attach multiple files to an order
+	- Order Review: Re-configured the layout of the data, including seeing multiple documents for an order
+	- Settings: Removed License Info
+	- Settings: Added Server Info to optionally set the location of the server
+	- Quick View Order: Added ability to print either the work order traveler or the work order summary
+	- QI Manager: Added Copy & Paste
+	- Shipping Manager: Add new Package Label to be created for every box
+	- Quickbooks Export: Added check to verify that the part quantity is equal to the COC quantity
+	 
+
+Version 4.0.5 [07.10.12]
+
+	- Customer Manager: Added separate permission for part marking editing.
+	- Customer Manager: Added separate permission for shipping carrier editing.
+	- Feedback: Added customer feedback link on main toolbar.
+	- Order Entry: Added capability to filter orders without edit permission. 
+	- Manufacturer/Model: Changed verbiage from OEM to Manufacturer and changed Airframe to Model to make the data more generic.
+	- Process Manager: Fixed ability to add new process steps and questions.
+
+Version 4.0.3 [06.27.12]
+
+	- Closed Order Report: Fixed dialog to allow selecting single customer
+	- Customer Manager: Added Field Customization
+	- Customer Manager: Allow definition of Part Rev as required
+	- Order Entry: Added Default Fees link to quickly add the default fees for the order
+	- Fee Manager: Added Fee Manager to allow the editing of the available fees and there default values
+	- Shipping Manager: Added ability to print order media (i.e. Purchase Order)
+	- Shipping Carrier Manager: Added Shipping Carrier Manager to allow editing of shipping carriers
+	- Department Manager: Added Department Manager to allow editing of departments
+	- Department Manager: Added ability to de-activate a department, which removes from department list
+	- User Manager: Added ability to toggle visibility of inactive users
+	- Customer Manager: Added ability to define inactive customers
+	- Customer Manager: Added ability to toggle visibility of inactive customers
+	- Order Entry: Updated customer dropdown to only show active or in use customers
+
+
+Version 4.0.0 [06.06.12]
+
+	- Main Screen: Add Colors for number of days late from 0 to 3
+	- Main Screen: Added User Profile Widget
+	- Settings: Allow administrator to set authentication type to either Pin or Smartcard
+	- Settings: Added new license manager panel to allow user to enter DWOS license
+	- User Manager: Added properties for Logon Pin, Title, Department, and User Picture
+	- Parts Manager: Removed Clear Coat checkbox
+	- Part Marking: Removed Clear Coat checkbox
+	- Work Status: Changed 'Pending QI' to 'Pending Inspection'.
+	- Batch Order Processing: Add Fixture to an order batch
+	- Bulk Field Change: Fix issue error if part quantity on any order is set to 0
+	- Dashboard: Updated daily production dashboard with new gauges
+	- Closed Order Report: Added summary section at beginning of the report
+
+	- Database
+
+		Update Relationship
+			OrderFees -> Order : Cascade Delete
+		Added Stored Procedure: [Get_IsUserUsed]	
+
+		Part
+			Added column LastModified -> Run   Add_Part.LastModified.sql Script
+
+
+Version 3.1.0 [04.24.12]
+
+	- Customer Manager: Added new custom field type
+	- Customer Manager: Added custom field part mark tokens to part mark template designer
+	- Order Entry: Added custom fields to order entry
+	- COC Report: Added custom fields to COC
+	- Work Order Traveler: Added customer fields to traveler
+
+	- Database
+
+		Add Table
+			CustomField
+				CustomFieldID	int	Unchecked
+				Name	nvarchar(50)	Unchecked
+				Description	nvarchar(255)	Checked
+				DisplayOnTraveler	bit	Unchecked
+				DisplayOnCOC	bit	Unchecked
+				Required	bit	Unchecked
+				PartMarkToken	nvarchar(50)	Checked
+				CustomerID	int	Unchecked
+		
+			OrderCustomFields
+				OrderID	int	Unchecked
+				CustomFieldID	int	Unchecked
+				Value	nvarchar(255)	Checked
+
+		COC
+			Add IX_COCOrderID
+		OrderPartMark
+			Add IX_OPMOrderID
+		OrderShipment
+			Add IX_OSOrderID
+		CustomerCummunication
+			Add IX_CCOrderID
+		OrderFees
+			Add IX_OFOrderID
+
+
+Version 3.0.6 [03.XX.12]
+
+	- COC Report: Added COC Signature Title
+	- Settings: Added ability to set the signature title
+	- Part Mark: Change month and day to 2-digit month and day
+	- Process Manager: Improved load time
+	- Process Manager: Added Notes to Question
+	- Process Manger: Added Rich Text toolbar to Question and Step Notes
+	- Process Manager: Added grouping processes by department
+	- Order Processing: Changed display order of questions to Left to Right style
+	- Order Processing: Chagned questions to include notes
+
+	- Database
+
+		OrderProcesses
+			Add IX_OPEndDate
+
+		ApplicationSettings
+			COCSignatureTitle  Quality Director
+
+		ProcessSteps
+			AutoAudit Remove/Add
+		ProcessQuestion
+			Notes	nvarchar(MAX)	Checked
+
+
+Version 3.0.5 [03.04.12]
+
+	- Temperature Report: Added report to show temperatures of tanks and ovens
+
+	- Database
+		SecurityRole
+			TemperatureReport	Ability to run report to show all temperatures.	Reports
+
+
+Version 3.0.4 [02.14.12]
+
+	- Parts Manager: Surface Area is now required for new parts
+	- COC Report: Minor changes to report format
+	- Final Inspection: Added unit of measure to steps on cert
+	- Order Processing: Changed the Process Step Description section to have a scroll bar and changed to rich text
+	- Work Order Traveler: Added Date and Signature sections per process
+	- Inspection Manager: Fixed adding new Inspection issues
+	- Process Manager: Add 'Traveler Notes' for each process alias, used to set alias specific data (i.e. Internal Paint Color)
+	- Process Manager: Changed Process Step Description to rich text, can be formatted with right-click
+	- Work Order Traveler: Added 'Traveler Notes' from the processes alias
+	- Process Manager: Moved Department to Process and removed Department from Process Step, thus each process can only have 1 department
+
+	Database
+		ProcessAlias
+			TravelerNotes	nvarchar(255)	Checked
+
+		Delete Table ProcessFolders
+
+		Process Table
+			Delete IsTemplate
+			Delete FolderID
+			Add   Department	nvarchar(50)	Unchecked  'Sales'
+
+			-- Leave Null, run script, Set back to No Nulls
+				UPDATE Process
+				SET Process.Department = (SELECT TOP 1 ProcessSteps.DepartmentID FROM ProcessSteps WHERE ProcessSteps.ProcessID = Process.ProcessID)
+
+				UPDATE Process
+				SET Process.Department = 'Sales'
+				WHERE Process.Department IS NULL
+			-- 
+
+		ProcessSteps
+			Delete DepartmentID
+
+Version 3.0.1 [01.31.12]
+	
+	- Order Entry: Fixed bug that would only show top 120 days old open orders, should not affect Open orders
+	- Shipping Manger: Change notifications to be sent by server
+	- Settings: Enabled settings manager to manage all application and user settings
+	- Customer Manager: Updated contacts to be able to authorize contacts to log in to the portal
+	- Order Processing: Changed to new order processing dialog
+	- Batch Processing: Print batch traveler
+	- Batch Processing: 
+	- Process Manager: Add inputs for Time In/Time Out/Time Duration
+	- QI Manager: Added manager to manage QI Questions
+	- Control Inspection: Updated to new question/answer style
+	- Smart Card Manager: Add new smart card manager
+	- Smart Card Manager: Add Capability to read/write card types ZC3.9, ZC3.12 Rev A, ZC3.12 Rev B, ZC3.12 Rev C
+
+	Application Settings
+		Add 
+			EmailPort				25
+			EmailUserName			hog\dwos
+			EmailPassword			DWOS2010!
+			CompanyLogo				NA
+			COCSignature			NA
+			ShipppingRolloverTime	16:00
+			COCSignatureName		Craig Swindell
+
+		Delete 
+			MinVersion
+			EmailBodyDoNotReply
+			ShipmentNotificationMessage
+			Company Logo
+
+	Database
+		
+		d_InputType
+			TimeIn
+			TimeOut
+			TimeDuration
+
+		Drop AutoAudit [d_InspectionType]
+		ShipmentPackage
+			Add Column
+				NotificationSent	datetime	Checked			 >> UPDATE [ShipmentPackage] SET NotificationSent = '1/1/2000'
+
+		Relationships
+			PartInspectionQuestion.InputType -> d_InputType		Cascade Delete
+			PartInspectionQuestion.ListID -> Lists				Cascade Delete
+
+	Security_Role (New Role)
+		QIManager.Edit				Ability to edit quality inspections.	Managers
+		ApplicationSettings.Edit	Ability to edit application settings.	Managers
+		SmartCardManager			Ability to manage the smart card id.	Managers
+
+
+Version 2.1.52 [11.13.11]
+
+	- Order Entry: Fixed ability to add a custom partmark to a new order
+	- Order Entry: Added new Security Role for "OrderEntry.OrderCopy"
+	- Batch Processing: Added Batch Traveler Report
+	- Batch Processing: Allowed questions in Order Processing for a batch to only be partially compelted
+	- Process Manager: Sorted customer names in Customer Alias
+	- Part Manager: Added ability to search based on hitting return key in search box
+
+	Other misc fixes and changes
+	Upgraded to Infragistics 2011 Volume 2
+	Upgraded nSoftware Quickbooks Integrator to 5.0.4316.0
+
+Version 2.1.51 [10.09.11]
+
+	- QuickBooks Export: Completed Invoice Comparision report to compare what was exported to Quickbooks with what DWOS has set as the price
+	- QuickBooks Export: Added new 'Update Custom Fields' tool to update the customer fields like 'Customer WO' in Quickbooks for orders already exported
+	- QuickBooks Export: Changed the export tool to clear any custom fields set in Quickbooks for all customers, this will prevent the Invoice from setting the custom field
+
+Version 2.1.50 [09.10.11]
+
+	- Changed over to use FileStream in Database
+	- Fixed Part Marking not printing correctly
+
+Version 2.1.48 [08.09.11]
+
+	- Shipping Manager: Added ability to print shipping package label.
+	- Shipping Manager: Added ability to toggle printing of packing list on or off.
+	- Shipping Manager: Added ability to change settings in the Shipping Manager File Menu.
+	- Order Entry: Added ability to search by Customer WO.
+	- Order Entry: Added warning if the part quantity on a new order is less than or equal to 1.
+	- Order Entry: Added warning if there is no scanned PO attached to an order.
+	- Customer Manager: Added checkbox to determine if customer requires PO on all orders.
+	- Batch Processing: Added Load Number to load name
+	- Main Screen: Added Settings in the File Menu
+	- Main Screen: Added ability to reset layouts on next load
+
+	- DATABASE
+		- Customers
+			Added RequiresPO bit 1 (0)
+
+Version 2.1.46 [07.31.11]
+
+	- Integrated Quickbooks Export into DWOS
+	- Add Security Role, EditClosedOrderPrice to allow users to edit price of closed orders
+	- Add Security Role, ExportToQuickbooks to allow users to export invoices to quick books
+	- Order Entry, Add check to ensure that a Customer WO is set for customers that require one
+	- Customer Manager, Added ability to define if a customer requires the Customer WO to be completed for all orders
+
+	- DATABASE
+		- Customers
+			Added RequiresCustomerWO bit 1 (0)
+
+Version 2.1.44 [07.25.11]
+
+	- Work Order Traveler, fixed dimensions to show both L and W
+	- Shipping Manager, Fixed the GMA.Useractivity that was not working with x86 Win 7 .Net 4 correctly
+
+Version 2.1.43 [07.22.11]
+
+	- Update Part Manager, changed Length and Width to two decimal places
+	- Update Part Manager, for new parts, selecting the manufacturer will auto select the airframe based on the part name
+	- Update Part Manager, if filter is filled out and a new part is created then the new parts name is set to the filter text
+	- Updated Work Order Traveler, added part dimensions
+	- Updated Work Order Traveler, updated to show the custom order park mark template if exists
+	- Fixed Order Entry, fees should update correctly after selecting between different orders
+	- Updated Late Orders Report, updated to determine if the order is late based on the required date instead of the Est Ship Date
+	- Updated Lead Time Report, removed price and added created date
+
+Version 2.1.42 [07.21.11]
+
+	- Upgraded project to .Net 4
+	- Attempted to fix Memory Leak in order entry (issue was commands where not disposed and they had static event handler to security manager)
+	- Fixed Production Summary Report error for Jul. 2011 report, data for shipping was in a process which caused duplicates
+	- Updated Order Entry, Added a Daily Total part count 
+	- Updated Order Entry, Added Part Mark Node under each order to identify what was part marked on the parts
+	- Updated Order Entry, Added ability to add a custom Part Mark Template to an order that has a part that is being part marked
+
+Version 2.1.41 [06.28.11]
+
+	- Fixed Parts Manager, unable to add new part due to modified field was null
+
+Version 2.1.40 [06.27.11]
+
+	- Upgraded project to Infragistics 2011.1
+	- Fixed Recieving, check box for print quantity will not print if the check box is not selected
+	- Fixed User Manager, Security groups are now sorted alphabetically
+	- Updated Order Entry, Rework will no work if in filtered orders
+	- Updated Order Entry, Orders cannot be added if the part has in-active processes
+	- Updated Parts Manager, there can only be one active part per part name
+	- Updated Order Entry Order Processing Node
+	- Updated Part Marking, if order is not in the correct department then the parts can be marked, but the order will not move to Final Inspection
+	- Updated Order Entry, removed nag screen about manually entering order
+	- Updated Parts Manager, filtering will now filter both active and inactive
+	- Updated Parts Manager, from Order Entry a part that is selected for an order must be active
+
+	- DATABASE
+		- Added table OrderPartMark
+			OrderPartMarkID	int				Unchecked
+			OrderID			int				Unchecked
+			PartMarkingID	int				Checked
+			ProcessSpec		nvarchar(50)	Checked
+			Line1			nvarchar(MAX)	Checked
+			Line2			nvarchar(MAX)	Checked
+			Line3			nvarchar(MAX)	Checked
+			Line4			nvarchar(MAX)	Checked
+			PartMarkedDate	datetime		Unchecked
+
+Version 2.1.38 [06.12.11]
+
+	- Redid Security to have security groups and permissions
+		- Modified database to use security roles
+
+Version 2.1.37 [05.23.11]
+	- Added Assembly Name to Parts Manager
+	- Added new <Assembly> Token to Part Marking
+	- Productsion Summary Report added Square Inches for parts by department
+
+	- DATABASE
+		- Parts Table
+			- Add Column
+				AssemblyNumber	nvarchar(50)	Checked 
+
+Version 2.1.36 [05.09.11]
+	- Added new shipping manager email notification dialog
+	- Fixed issue with quantities being set incorrectly in Batch Processing
+
+Version 2.1.35 [05.01.11]
+	- Added additional text to QI Questions to display value ranges for answers
+	- Fixed issue with number of decimal places to be used in a dynamiclly created numeric control of decimal type.
+
+Version 2.1.33 [04.15.11]
+	- Order Entry - Receiving Import added PO removed WO and Customer WO fields
+	- Price History
+	- New Skin Office 2010
+
+Version 2.1.32 [04.07.11]
+Version 2.1.31 [04.07.11]
+	- Shipping Manager added real-time updates for all shipping manager clients
+
+	- DATABASE
+		- Added WebSyncURL Application Setting
+
+
+Version 2.1.30 [03.11.11]
+ 
+ - Fixed Customer Manager ability to Add a new customer
+
+ - DATABASE
+	- New Table 
+		- PartInspectionQuestion
+		- PartInspectionAnswer
+	- Updated Table	
+		- d_InpspectionType
+		- PartInspection
+			- OrderProcessID
+			- FK OrderProcess -> Add cascaded delete to delete Part inspection if order process is deleted
+		- Order
+			- FK Order -> PartInspection = Remove delete cascade
+	
+
+Version 2.0.29 [02.27.11]
+ - Add Order Priority
+ - Added Current Location to Work Schedule report
+ 
+ - DATABASE
+	- New Table 
+		- WorkScheduleDetail
+	- WorkScheduleSummary
+		- Added Column
+		- RunDate	smalldatetime	Checked
+	- d_Roles
+		- Added Order Priority
+	- FormSecurity
+		- Added		OrderPriority	Reset Answers	Reset Answers
+
+
+Version 2.0.24 [02.08.11]
+ - Changed COC editing to create new COC version
+ - Changed Work Order Summary to show QA Inspection answers
+ - Redefined Reset Orders permissions to require explicit permissions to reset answers
+ - Part Marking requires order work status to be Part Marking in order to allow uploading
+ 
+ - DATABASE
+	- COC
+		- COCID change to Identity Seed
+	- d_Roles
+		- Added Reset Answers
+		- Added Reset Order
+	- FormSecurity
+		- Added		ResetAnswers	Reset Answers	Reset Answers
+		- Updated 	ResetOrder		Reset Order		Reset Order
+
+Version 2.0.22 [01.XX.11]
+ - 
+ 
+ - DATABASE
+	- Added Table WorkSchedule
+	- Added Table WorkScheduleSummary
+	- Added Table ServerProcess
+	- Added Table ServerProcessHistory
+	- Added Table ServerProcessSchedule
+	
+	- Table Order
+		- Added Column 
+			InitialEstShipDate	date	Checked
+	- Table d_Priority
+		- Added Column
+			PriorityScore	int	Unchecked
+
+
+Version 2.0.21 [01.19.11]
+ - Removed Masking Required line from Work Order Traveler
+ - Updated Work Order Traveler to only show part marking template if part marking is selected
+
+Version 2.0.20 [01.14.11]		    
+
+- Process Manager added ability to add customer alias to a process alias
+- Process Manager added process alias pop up notes to be displayed in Parts Manager
+- Parts Manager added Process Pop Up Notes to be displayed after a new process has been added to a part that has notes
+- Parts Manager added ability to see customer alias instead of standard alias name in Add Process dialog
+- Parts Manager removed Masking Checkbox
+
+- DATABASE
+	- Added Table CustomerProcessAlias
+		CustomerProcessAliasID	int				Unchecked
+		ProcessAliasID			int				Unchecked
+		CustomerID				int				Unchecked
+		Name					nvarchar(255)	Unchecked
+		
+	- Added Column ProcessAlias 
+		PopUpNotes	nvarchar(MAX)	Checked
+
+Version 2.0.4 [11.XX.10]
+- Allow duplicate processes in a part
+- Only display a single process at a time in Order Processing
+- Fixed check in error with Order Check In
+- Changed Process Picker in Part Manager to scroll and filter
+- Fixed process ordering in Part Manager to not clear selection after moving a process up or down
+- Added process aliases to processes
+- Added Order Batching capability
+- Added Material Manager
+- Updated DPS Logo
+- Changed Processs Question - Decimal Input type to 4 decimal places
+- Changed Processs Question - Time Input type to not show seconds
+- Changed Processs Step - Quality Inspection change to allow selection of inspection type 
+
+Version 2.0.1 [11.XX.10]
+- Added to COC the following end line: Total: ____ Accepted:______ Rejected: _______
+- Added SmartCard UserID to the status bar
+- Added Lead Time to Late Orders
+- Updated Late Orders to take into account only the date and not the time
+
+- DATABASE
+	- Added d_Material table
+		- Added d_Material to Part relation
+
+	- Process Table
+		- Added IsTemplate bit Not Null 0
+	- Added ProcessAlias
+		- Added ProcessAlias to ProcessID relation
+		
+	-----------------------------------------------
+	- Added
+		PartProcess.ProcessAliasID		int	NULL
+		OrderProcesses.ProcessAliasID	int	NULL
+		ProcessPackage_Processes.ProcessAliasID	int	NULL
+
+	- Run Script 
+
+		-- Create default alias
+		INSERT INTO [ProcessAlias] ([Name]
+			,[ProcessID])      
+			SELECT Process.Name, Process.ProcessID FROM Process
+
+		-- Assign default alias to all existing part processes
+		UPDATE [PartProcess]
+		SET [ProcessAliasID] = (SELECT [ProcessAliasID] FROM ProcessAlias WHERE ProcessAlias.ProcessID = [PartProcess].ProcessID)
+
+		-- Assign default alias to all existing order processes
+		UPDATE [OrderProcesses]
+		SET [ProcessAliasID] = (SELECT [ProcessAliasID] FROM ProcessAlias WHERE ProcessAlias.ProcessID = [OrderProcesses].ProcessID)
+
+		-- Assign default alias to all existing order processes packages
+		UPDATE [ProcessPackage_Processes]
+		SET [ProcessAliasID] = (SELECT [ProcessAliasID] FROM ProcessAlias WHERE ProcessAlias.ProcessID = [ProcessPackage_Processes].ProcessID)
+
+		-- Set ProcessAliasID To Not Null
+		PartProcess.ProcessAliasID		int	NOT NULL
+		OrderProcesses.ProcessAliasID	int	NOT NULL
+		ProcessPackage_Processes.ProcessAliasID	int	NOT NULL
+
+
+
+Version 1.1.34 [07.29.10]
+- Added Shipping Detail By Customer report
+- Added warning to Order Entry if any new orders have the same part as an existing opern order
+- Allowed Print to print multiple selected items at the same type
+
+Version 1.1.33 [07.26.10]
+- Improved performance of Order Entry Filtering
+- Fixed Customer Manager not opening
+- Added Order Processing node in Order Entry to allow Sales to see where order is at relative to processes
+
+Version 1.1.30 [07.23.10]
+- Fixed ability to add Part in Part Manager due to clear coating value not defined
+
+- DATABASE
+	- Added
+		SP [Delete_AuditHistory]
+
+
+Version 1.1.29 [07.18.10]
+- Added "Clear Coating" to Parts Manager
+- Added validation that a properly defined Part Marking template exist for the part selected part in Part Manager if Part Marking is checked
+- Added Customer WO column to "Open Orders By Customer" Report
+- Added "Is Rework" check box to the Reciving Import in Order Entry to identify an order as rework
+- Changed the delete capability of the Reciving Import in Order Entry to just hide deleted imports
+- Added "Shipping Notification" system tray icon to show what happened for each scan in shipping, if it didn't accept the scan then it will be shown.
+- Changed routing of Orders, should now be Part Marking -> Final Inspection -> Shipping
+
+ - DATABASE
+	- Part Table
+		- ClearCoating	bit	Unchecked 0
+
+Version 1.1.28 [07.13.10]
+- Added "Rework Orders" Report
+- Added "Orders By Process" Report which allows you to show all orders for a specified process
+- Added ability for "Open Orders By Customer" to be created as an excel document
+- Fixed error with Parts Manager not loading customer if it is the first customer in the list
+
+Version 1.1.27 [07.02.10]
+- Added Part Marking dialog
+- Added Part Marking to Part Manager
+- Added Spec to Customer Part Marking Definition
+- Update Part Manager to select part that was selected on the Main Screen
+
+- DATABASE
+	- Part Table
+		- PartMarking	bit		0
+
+Version 1.1.26 [07.XX.10]
+- Added Work Order Traveler Print to Order Quick View
+- Receiving will automatically determine new parts Manufacturer and Airframe based on the parts prefix
+- Added Order Review checkbox to Customers to allow customer orders to be order reviewed in sales
+- Added Customer OrderReview check on new orders
+ 
+- DATABASE 
+	- d_Airframe
+		- PartPrefix nvarchar(50)
+
+
+Version 1.1.24 [07.01.10]
+- Added requirment for user to describe why an order receipt was deleted in order receiving
+- Added requirment for user to describe why an order was manually added without using order import
+
+- DATABASE
+	- Added Table
+		- OrderRework
+	- Order
+		- Added Column
+			- IsRework	bit	Unchecked 0
+	- d_OrderStatus
+		- Deleted Value 'ReWork'
+	- Get_OrderStatus
+		- Added IsRework
+
+Version 1.1.23 [06.30.10]
+- Added delete capability selected item in Receving's Image List 
+- Added Part Summary Report to Part Quick View and Parts Manager
+- Maintain size and position of Order Import windows
+- Allows delete receiving orders from Order Import
+- Added Customer WO column to Order Import
+- Added Bulk Field Change to Order Entry to allow multiple items to be selected and change at a time
+
+- DATABASE
+	- Added Index
+		- Part	-> CustomerID
+		- Order -> OrderDate
+
+Version 1.1.22 [06.20.10]
+- Correct Imported Order in Order Entry to properly set default price
+- Receiving, Added part size
+- Parts Manager, Added part size
+- Added Part Marking definitions to Customer Manager
+
+- DATABASE
+	- Part
+		- Added Columns
+			Length			float			UnChecked	0
+			Width			float			UnChecked	0
+			SurfaceArea		float			UnChecked	0
+			PartMarkingID	int				Checked
+
+	- PartMarking
+		- Added Table
+			PartMarkingID	int				Unchecked
+			AirframeID_d	nvarchar(50)	Unchecked
+			Def1			nvarchar(MAX)	Checked
+			Def2			nvarchar(MAX)	Checked
+			Def3			nvarchar(MAX)	Checked
+			Def4			nvarchar(MAX)	Checked
+		
+	- Customer_PartMarking										   
+		- Added Table
+			CustomerID		int				Unchecked
+			PartMarkingID	int				Unchecked
+		
+
+Version 1.1.21 [05.29.10]
+- Changed Receiving to print Order Receipt with PO and Customer WO
+- Added Part Total per Customer for Late Orders Report
+- Changed Closed Order Report to Closed Customer Order Report
+- Changed Parts Manager Airframe is now a drop down based on Manufacturer
+- Added Airframe Manager to enable changing Airframes
+- Final Inspection form, added saving last print qty used
+- Fixed order processing answers that had dates shown incorrectly, minute was getting put in as month in display mode
+
+- DATABASE
+	- Added d_Airframe Table with relation to Manufacturer
+		C-5		LMAC
+		C-17	Boeing
+		C-130	LMAC
+		<None>	NULL
+	- Receiving
+		- Added Columns
+			CustomerID		int				Checked
+			PurchaseOrder	nvarchar(50)	Checked
+			CustomerWO		nvarchar(50)	Checked
+			OrderID			int				Checked
+		
+
+Version 1.1.20 [04.29.10]
+- Added Customer to Process Usage Summary Report
+- Added Customer Order Status Report
+
+Version 1.1.19 [04.13.10]
+- Fixed sort order of processes in Parts Manager and Process Packages when number of steps is over 10
+- Added Order By User Report
+
+Version 1.1.18 [03.14.10]
+- Fixed Process Manager unable to change questions value type
+- Updated Process Manager to force validation of default answer based on question type
+
+Version 1.1.17 [03.07.10]
+- Updated Customer, added Invoice Options (Print, Email)
+
+- DATABASE
+	- Update Customer, Added PrintInvoice(bit, default 0) and EmailInvoice(bit, default 1)
+
+Version 1.1.16 [03.02.10]
+- Added Receiving total parts counter
+- Changed Order Summary 'Required Date' to 'Est Ship Date'
+- Updated Order Summary date filters to filter by the date only and not the time value
+- Added print to Order Summary
+- Changed Order Search 'Required Date' to 'Est Ship Date'
+- Updated Order Search Est Ship Date filter to filter by the date only and not the time value
+- Added 'Filtered Order Count' to Order Summary status bar
+- Added 'Late Order Count' to Order Summary status bar
+
+- DATABASE
+	- Update Get_OrderSummary Store Procedure to change RequiredDate to EstShipDate
+	- Changed Dashboard_OrderSummary to Dashboard_OrderSummaryByPriority
+
+Version 1.1.15 [03.01.10]
+- Added initial dashboard
+- Fixed Process Manager Min and Max Value not updating changes
+
+- DATABASE
+	- Added Dashboard_OrderSummary Store Procedure
+
+Version 1.1.14 [02.17.10]
+- Added shipping report
+- Fixed step ordering in Process Summary Report
+- Converted to VS 2010
+
+Version 1.1.13 [01.25.10]
+- Updated Shipping Manager to correct issues with it not storing tracking number
+
+Version 1.1.12 [01.13.10]
+- Updated Shipping Manager to try and prevent blank packing slip
+- Added Default Sort tool on Order Summary
+
+Version 1.1.11 [01.12.10]
+- Changed Receiving Part Drop-down to not automatically add additional text when typing in a part
+- Changed Order Entry Part Drop-down to not automatically add additional text when typing in a part
+
+Version 1.1.10 [01.11.10]
+- ReWorked Bulkshipping to allow mutliple packages to be maintained at same time
+
+Version 1.1.7 [12.24.09]
+- Updated Parts Manager look and feel
+- Parts Manager copy behaivor changed to copy and paste with one button click
+- Parts Manager added 'Create Revision' command
+- Updated Open Order Report to include total quantity of parts per customer
+- Added capaiblity to define Default PO for a customer in Customer Manager
+
+- DATABASE
+	- Added Customer.DefaultPO NVARCHAR(50) +
+	- Added OrderShipment.PackingSlipID NVARCHAR(50) +
+	- Set Customer 67 (KAMMAN) DefaultPO = 637217750 +
+	- Add Index Order.Status +
+	- Add Index OrderProcessAnswer.OrderIDIndex	+
+	- Add Index PartProcess.PartID +
+
+
+Version 1.1.6 [11.25.09]
+- Fixed WO Traveler from printing manufacturer id in Airframe column
+- Added Customer WO to WO Traveler
+
+Version 1.1.5 [11.22.09]
+- Added Manufacturer to WO Traveler
+- Added Airframe to Parts Manager and WO Traveler
+- Fixed error when adding new User
+- Added Lead Time Report
+
+- DATABASE
+	- Added Part.Airframe NVARCHAR(50)
+	
+Version 1.1.0 [11.08.09]
+
+- Removed Apply button to receiving and changed print to Save/Print to reduce clicks
+- Updated Production Report to include ability to chart by Part Quantity or Order Quantity
+- Updated Final Inspection to allow user to see PO
+- Fixed Closed Order Report to correct summation of total part count
+- Changed signature on COC to Craig Swindell
+- Fixed Order Summary statubar updates when the user's smartcard is removed
+- Updated Contract Review text in Order Entry
+- Updated Ship Day to default to 10 working days from date created, regardless of required date
+- Added hyperline WO # on Order Summary screen
+- Added new report "Shipping and Receiving"
+- Added new report "Order Fees"
+- Added 'Process Packages' capability
+- Updated 'Add Process' dialog from Parts Manger to save location and size
+- Added customer contact invoice preferences
+
+- DATABASE
+	Get_ProcessesByOrder
+	Get_OrderProcesses
+	Added Customer.LeadTime
+	Added Order.CustomerWO
+	Added Users.RequireOrderReview
+	PaintInventory
+	PaintInventoryParts
+	d_PaintLocation
+
+Version 1.0.32 [09.03.09]
+
+- Added the Reset Order Processes tool to allow administrators to reset the processing of an order {Status, Work Status, Location, Answers}
+
+Version 1.0.30 [08.20.09]
+
+- Updated 'Closed Orders' Report to have summary at top, sum part qty, and add Unit column
+- Updated Order Entry -> Shipping Information to show and editable parts quantity that was shipped
+- Updated Receiving to add Quantity to receiving checkin and to log it
+- Updated Production Report
+
+Version 1.0.28 [08.19.09]
+
+- Updated Order Review to fix bug with DateTimeEditor due to upgrade of Infragistics tools
+
+Version 1.0.27 [08.18.09]
+
+- Corrected bug with duplicating order process answers
+
+Version 1.0.26 [08.17.09]
+
+- Updated Database schema to track processes for each order instead of for each part
+- Able to view part properites in Order Entry
+
+Version 1.0.25 [07.22.09]
+
+- Added new 'Order Quantity' column to process usage summary report
+- Added ability to edit scanned PO in Order Entry after an order has started being processed
+- Changed the focus of the data panel from automatically going to the first control once a tree node is selected to prevent accidentally editing items (order PO)
+- Updated Order Entry to add icons to right of orders that have been Added or Edited by the user
+- Updated Order Shipdate to be set to required date if it is longer than 10 working days from order date
+- Updated Work Order Traveler to show Est Ship Date
+- Changed Shipping button to only be enabled if Work Status is Shipping and Current Department is Shipping
+- Updated Quote to include process steps of the part
+- Added new report "Open Customer Orders" to show all orders for a specific customer that are still open
+
+Version 1.0.24 [07.08.09]
+
+- Fixed issue with quote not allow user to create new quote
+- Order Entry changed Est Ship date and Req. date to default to 10 working days (i.e. Monday - Friday)
+- Updated Late Orders report to use Est Ship Date if available else use	Required date
+- Updated 'Shipping/Receiving' to 'Shipping' throught program
+
+Version 1.0.23 [07.03.09]
+
+- Fixed issue with quote not saving part price
+- Updated Quote table to require values not be null (i.e. price)
+- Fixed issue with Order Entry not allowing existing media to be deleted or added if media already exists for the order
+
+Version 1.0.22 [06.29.09]
+
+- Added estimated ship date to order entry
+- Added warning to Part Check In if user is checking in to the incorrect department.
+- Added Order Review warning when no fees are present
+- After Final Inspection of an order its Department will be set to Shipping
+- Added Customer Contact options for Shipping Notify and Manufacturer Representative
+- Added Shipping shipment notification to contacts who have a valid email and the Shipping Notify option selected 
+- Added new field in Customer Shipping called "Default Shipping Method"
+- Order Entry will set default shipping method for new orders is customer has a defined default method
+- Updated UnInvoiced Orders Report to add the Total Price column and updated format similar to other reports
+- Set default path to always look for Purchase Orders in Order Entry for an Order
+- After a PO is loaded in Order Entry for an Order, the PO will be deleted from the file system
+- Fixed Quote Printing
+- Added verification from sales if they enter a Expedite Fee that is less than the minimum expedite charge
+- Changes fee name from "Rush" to "Expedite"
+- Added a Manufacturers Manager to allow administrators to edit available manufacturers
+- Added Part Summary on the Order Summary screen to allow all users to get a quick look at an orders part
+- Added ability to search for orders by "Quantity" in Order Entry
+- Changed Parts Manager Add Process tool to be a larger list instead of the previous dropdown
+- Add Event Log requirement for deleting an existing order from within Order Entry
+- Added ability to reset Invoice number in Order Entry to allow an invoice to be re-imported
+- Added Part Active and Inactive state to allow parts to assist with revisioning
+
+Version 1.0.21 [06.04.09]
+
+- Corrected UnInvoiced Orders Report to show part name
+- Added additional debug statements to track down error for Order Entry crashing the application
+- Added column names to reports that did not have them
+- Updated Part Check In to only show image of currently selected order, even if user types in invalid order number
+- Fixed issue with forms not opening and crashing system, dealt with the re-size of the splitter bar caused infinite loop
+
+Version 1.0.20 [05.28.09]
+
+- Fixed issue with COC information being able to display processes that have invalid HTML text like "&" and "<>"
+- Updated Order Entry to no longer using optimistic concurrency
+- Updated Order Review to warn user if Order Review has an issue
+
+Version 1.0.19 [05.19.09]
+
+- Added additional functionality to verify Price is not null when exiting Order Entry 
+- Added new report "Order Search"
+- Updated "COC Report" to reduce size of image to allow for more room for process info on one page
+- Updated "Process Summary Usage" to add part summary at end
+- Removed Order Entry nag screen to remind users to add fees
+
+Version 1.0.18 [05.14.09]
+
+- Added new report "Closed Orders" to display orders that are closed within a date range
+
+Version 1.0.17 [05.12.09]
+
+- Fixed "UnInvoiced Orders" to show correct number of columns
+- Added "Filter" tool in Order Entry to quickly find an order by WO, PO, Customer, or Part
+- Added new report "Late Orders" to display orders that are late, i.e. orders due today or before today
+
+Version 1.0.16 [05.11.09]
+
+- Updated Open Orders report, it was not showing order that had no fees associated with them
+- Fixed Order Entry Unit Price was not properly updating and may allow null values to be entered
+
+Version 1.0.15 [05.11.09]
+
+- Changed filtering of grid to display filter row for main screen
+- Added custom sort comparer to sort the Priority column by critical vs alphabetically on main screen
+- Converted application to click-once to provide application automatic updates
+
+Version 1.0.14 [05.10.09]
+
+- Changed location of reports created to "My Documents/Dynamic Work Order System/Reports"
+- Changed "Order Check In" to provide drop down to allow user to select work order to check in
+
+Version 1.0.13 [05.07.09]
+
+- Added About dialog
+- Added Settings dialog with Global Settings enabled
+- Added "Open Orders" Report
+- Changed Main Summary page grid refresh to reselect last selected work order
+- Upgraded Infragistics Toolset to v9.1
+- Added column filtering to the main summary grid
+- Added check in order entry if no fees are added then ask user if he wants to add them
+- Added check in order entry if a 'Rush' fee is added and the priority is 'Normal' then ask if the user wants to change the priority
+- Changed COC Information Panel in Order Entry to allow the COC text to be edited
+
+Version 1.0.12 [04.29.09]
+
+- Updated Receiving Dialog to watch all subdirectories for files being added
+- Fixed issue with Receiving Dialog adding images from watched subdirectories
+- Updated Process Summary Usage Report to report (number of parts NOT number of orders) per process
+- Added the "UnInvoicedOrders" Report to show orders that are closed, but have not been invoiced in QuickBooks
+
+Version 1.0.11 [04.28.09]
+
+- Added Part "Manufacturer" Selection and COC now prints Manufacturer Warranty based on that selection
+- Changed Receiving Entry to search for image in all subdirectories of specified folder
+
+Version 1.0.10 [04.21.09]
+
+- Updated Image Sizes in Order Receipt and Work Order Traveler
+- Changed "Print" button in Receiving to automatically print Order Receipt without displaying to user
+- Added "Process Summary Usage Report" to Reports Menu
+- Added "Process Usage Report" to Process Manager to help identify Parts being used by a Process
+- Fixed issue with Part not deleting if it had Part Process Answers defined for it
+- Added automated error message notification of errors to the administrator
+- Updated Final Inspection to allow user to type additional text
+- Updated COC Report image size, moved quality statement, and use new text user typed in

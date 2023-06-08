@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="tipManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>106, 17</value>
+  </metadata>
+  <metadata name="ultraFlowLayoutManager2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>359, 17</value>
+  </metadata>
+  <data name="ultraToolTipInfo12.ToolTipTextFormatted" xml:space="preserve">
+    <value>The invoice number defined by Quick Books. If there is no value, then the invoice has not been created.&lt;br/&gt;&lt;br/&gt;By clicking the delete button the current invoice will be reset, allowing the order to be imported into Quick Books again.&lt;br/&gt;</value>
+  </data>
+  <data name="ultraToolTipInfo13.ToolTipTextFormatted" xml:space="preserve">
+    <value>The purchase order number received from the customer.&lt;br/&gt;&lt;br/&gt;&lt;img title="Filters orders by the product order number." style="width:16px; height:16px;" data="AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAKwIAAAKJUE5HDQoaCgAAAA1JSERSAAAAEAAAABAIBgAAAB/z/2EAAAAEZ0FNQQAAsY58+1GTAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAGhSURBVDhPpZJPSwJBGMYj7DP471ggnqI+wgqCpwJZUzxk4SE9VHjxUmF9AAvsYrJFUJEX61SCmGKeK1zqUsctQdBOErrs+zSzRGjNIenwW5hn3uc3s8uOAfgXwnAUzMfV1bVer9dJVVW6u7unarVKpVKJLi4u6eT0jI6OjungIEfpdJqSySQtL0fJ5/Ox6pdgY3PLuH94QLvdga7r6Pf76Ha7bN2G9voKvlepVJDNZhGNRiHLMqxWq/EtcDqdk6nUDjUaDbNkGHwP6DHRW7OJx6cnFItFZDIZ+P1+2Gw2sM7MoGCCMbW6voZa7RatVsu8Sfu9Y5bL5TJyuRxCoRCxk4nNzjLGvwWDkpVYnPhpmqbh+eUF5ZsbZPb3EQ6HYbfbh8pDgkGJHAgYiqJQQ1VRKBSQSCTgcDh+lTlDAs6XZHJhIajzD6coh/B4PPydp3+WOUOLQWQ50DvP55FKbcPr9ZJohiMMOcFgqLe7u4dIZAlut3t0weJipBeLxSFJEiwWC4vEc8KQMzc3/yFJHrhcLi4wfxoRwnAUhOEoCMO/g7FP5DS5MOtm5V8AAAAASUVORK5CYIILAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/&gt;&amp;edsp;&lt;span style="font-style:italic; font-weight:bold;"&gt;Filters orders by the purchase order number.&lt;/span&gt;</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picQuantityDesync.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DwAACw8BkvkDpQAAAAd0SU1FB+IDFg4yLQe7R7QAAAEnSURBVEhLxZU9boNAEIVJsKIUJq2LiCo98hHs
+        jtpNjkHOkTRcAfooBTfAVL6AT2D3livLSjbvDdpo/LMmxkh80icvmpnHSobFuxIfmnp5FtYe6mX3jOEa
+        Nm3gG77KVUc8wS/IcKsL3cPNPsPW3MEZ3EMG2l/qwta17/AeXsULXEIJiaLI5HmuQ11Inb2csddwB6ew
+        ET5AH1AGgyAwSZKYsixNVVU68KLs5QxnmaFqCziEZ5nALZTmOI5NURQSZrW1JvUMM5il6j/wDf4xgnMo
+        DWEYmjRND0K6kJnMtveBG8h7978BS29/gabXh1Bz8hpmWaaDXEidvW1fQ83BQeT7vg50IfWj3lYHkYZH
+        8SfUoS50zwredBQf09vHSDOATRt4rJf/wfN+AUMCmsCDxB6BAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="picQuantitySync.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DwAACw8BkvkDpQAAAAd0SU1FB+IDFg8gBUs49aoAAAImSURBVEhLxZXbS1RRFMbPdFK6jGYFWolDFJQ1
+        dKELTWPjiNnFphwL05yIIkKokKQgoogILK1/wxf10T+gp+hRs+hKqd2szC5YjRLV17f38Yzr2BxnNKEP
+        fsw+s9ZeF9Y++xiTlElGrGVSKVumtZx+rSN9JFUBcXJQP02Tskk7UcFt3CR9VLFLyJTlIZXkG1EB7V+F
+        m2y75DqZQSalZaSb6CAVdxpwGDdgPxM3abu//yhWdlRI/yESJimlDlAT0Rt9ZasQY+IYbqLm1zUZcEJ8
+        PVVY9CyKhU8iyAoulvtuEy9JqmIySLSzSlz7uxlVPxsRHbmCPfGLaReQ82g35j4oQ+a9MDx3t8HoKpJ7
+        h0k9SSiX3CLaYWtTFNXsdv+Pq9g7fBm7vl9A6dA5hD6fQWDwFDYM1GHt2+MofHMEy1/WoqBXdVupu81+
+        uBOz75fC7A5ZSTXBBPMa/LKQAaJyOwvY1BhBefwSdnw9j/CXswh+qsfmDyex/t0J+PuPYcWrGJb2VSP/
+        +QHkPt2H+Y/L4dXdlsDTpbplss5RHAUUsYDVSQuw5RhB4ONpbHxfhzWq29fs9sWhtEcgkxqdo0WM2f8a
+        gZTjEC4I+dhtDfJ7rG7t/1Miup8TyJP7JjyEUo7XMK+thLPdLgO5ybIzubdli/RP+zWUGruIMjwwTTMx
+        HuImbR/nO6WLSEpdxa3EDqhwk/TpJf90FY/Xf/sYSc0kqQqYZS3TkWH8AQ0SXjGjRLkvAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
+  <data name="picPriceHistory.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAABPpJREFUWEft
+        lmtMk1cYx8Fdiss+NC7hg8bETKoTMRANTAIZRAYCgqAUUOQiFWaZDCdsMMFNu6oB6pR0oGOAgGU01o0l
+        XhdRmaKZiCIXnVwdMtC2tLQwRJyO/845oW9Ey2BNP20+yT/vedtzzv/3Ps/zXmxexn8q3Pa+MltydemZ
+        7IZ3MZXoPDp/fKl1olIdWPZ4ZAemKwoxvtQ6IWtyxx3jZhCQKUXnZV1yxvhS6wTdkG68ePFiODg4YO7c
+        ubC3twefz8fMmTMxY8YM2NraMlkF4IH2Xmj9zdrhxpa6NjLeaAJwc3PDihUrkJKSAqlUivz8fCiVSlRX
+        V6O5udk6AMRwV3FZATJ3pSJLkobs/bvYhnRjb29vuLu7w9XVFSKRCLm5uSgqKkJVVRVqa2thZ2dnOcB9
+        TTf/l2s119OzUpD4YTTKv/sWFy6dQXF5AQcQGBgIHx8feHp6Moi1a9dCLpdDoVDg1KlTmDVrlmUADzS9
+        4qM/HBmlxjt3Z+BOeyNaWutxsDwbO3K2cABCoRDBwcHw8/ODl5cXli9fziAKCwuhUqkwZ86cfwegVqv5
+        vX09v5Ijuro60XyrEQajFv0D99HT1wnVicMTAGJjYxEZGYnQ0FAEBASwfvDw8GA9UVZWBoFAMH0AtaYv
+        obf39yfUXKPRoL+/H3q9ngAYMDQ0COOQDlp9H0hPcABisRjx8fGIiopCWFgYgoKC4Ovry0BkMhlcXFym
+        BiAb8lU/Vvy0SRyL0iPF6L7XDa1WC51Oh4GBARiNRgIwhOHhYYyMPMTDh8McQFpaGpKTk5GQkICYmBhE
+        REQgJCQE/v7+iIuLY036jwDE/ONSxTes1hlZWyE/JEPmF6kEpAidXR1mAEYwOjrKAZAtppRZAHovVx1X
+        6lJSE1mHHz99jKWWpvi3e23s/PMvPyWdX4KGxhsMwhyAuSff85oAQEy8Fcri9i1bRYgRCZGXn427Pa3M
+        nHZ5XpEEh8pzoCbnmv5enD1/EtLsLOzL2wNFZSkMBgMGBwcnZICmnB4nG3MAQ38YDHn5ucyYit7f1TUn
+        mTnVhSsnWYdT5RRkQm9QQ29Uo6PrNjYmRMLDexnC1weTbve3DKC16zq0ur4/9fr+sQplKQdCy2AqAc1C
+        ifIAbrVdh0bXi/M/n2YlorpyrQbLXJ3gtMTJMoDm1sugoiCGQe2Y0TiAo99XYHNyHAeiqlJwJaFPPtPv
+        1Dx1uxhOzgLIv5ZzAPTWy8jIYMfJxi8AmHS7vY5cZQ8ePRrBhYtnOZDEpGhmSse0TDeaLmPbZ5uxQbSG
+        AezdK7UsA8LwgLHcr3ai7iZ5U5kBGX38CDeb6rEtPYmZU6Daq9UQJa1j5uviQiBYOG/McdGCBosAwtYE
+        8aW7MyuF4YF/bc/6CKfPqcyCPH36BHdaW1Bbd26C+cpV7z11XCRo4PFeDzUBTJb2Z8ccwLMh2y8p2ZS4
+        fuQDcTSKy/JeALmvuQuROJIzD1ztM/zOQofjPB5vNVm+1KIMmIsD8j3xn6QnDQkjVuH58lDziJggZr5w
+        wfxjdjzeKrLEmegNqwGYIlcm8ZBI07spCC1PzeUTEEaRd/1KT3rlKjs7XgCZ5kj0Gp1vAjD35Hte0wIw
+        RXnFwSX79ksukoZFUIhvx/y35xUQcz/yl4DoVTaJxAbl7Pr35W+CfG5PS2sOvzU4vtS6Qa7QexqaNz79
+        Zfyvw8bmbzcCo2MLALF3AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="txtContractReview.Value" xml:space="preserve">
+    <value>I have reviewed the contract (purchase order) for compliance to the following:&lt;br/&gt;&lt;br/&gt;1. The applicable specification number(s), applicable Type(s), Class(es), Grade(s), and items related to quality.&lt;br/&gt;2. That this company has the capacity, capability, and customer approvals necessary to meet the contract requirements.&lt;br/&gt;&lt;br/&gt;I have also ensured resolution between any differences between prior quotations and the contract prior to acceptance.</value>
+  </data>
+  <metadata name="bsData.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="popPriceHistory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>221, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>49</value>
+  </metadata>
+</root>

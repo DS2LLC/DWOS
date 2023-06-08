@@ -1,0 +1,245 @@
+﻿<igRibbon:XamRibbonWindow x:Class="DWOS.UI.Sales.Dialogs.WizardWorkOrderEditor"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:ig="http://schemas.infragistics.com/xaml"
+                          xmlns:igRibbon="http://infragistics.com/Ribbon"
+                          xmlns:convertors="clr-namespace:DWOS.UI.Utilities.Convertors"
+                          xmlns:util="clr-namespace:DWOS.UI.Utilities"
+                          mc:Ignorable="d"
+                          Width="300"
+                          Height="400"
+                          x:Name="Self"
+                          Title="Sales Order - Part"
+                          Style="{StaticResource RibbonWindow}">
+    <igRibbon:XamRibbonWindow.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <convertors:BoolToCustomValueEnteredActionConverter x:Key="BoolToEnteredActionConverter" />
+    </igRibbon:XamRibbonWindow.Resources>
+    <igRibbon:RibbonWindowContentHost Style="{StaticResource RibbonWindowContent}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Customer Work Order -->
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource FormFieldLabel}"
+                           Content="Customer WO:" />
+                    <TextBox Grid.Row="0"
+                             Grid.Column="1"
+                             Style="{StaticResource FormField}"
+                             util:WpfBehaviors.SelectAllOnFocus="True"
+                             Text="{Binding ElementName=Self, Path=WorkOrder.CustomerWorkOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <TextBox.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Customer WO">
+                                The customer WO, if available.
+                            </util:HeaderToolTipContent>
+                        </TextBox.ToolTip>
+                    </TextBox>
+
+                    <!-- Part -->
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Style="{StaticResource FormFieldLabel}"
+                           Content="Part Number:" />
+                    <ig:XamComboEditor Grid.Row="1"
+                                       Grid.Column="1"
+                                       IsEditable="True"
+                                       AutoComplete="False"
+                                       CustomValueEnteredAction="{Binding ElementName=Self, Path=MainViewModel.AllowNewParts, Converter={StaticResource BoolToEnteredActionConverter}}"
+                                       ItemsSource="{Binding ElementName=Self, Path=MainViewModel.Parts}"
+                                       SelectedItem="{Binding ElementName=Self, Path=WorkOrder.SelectedPart, ValidatesOnDataErrors=True}"
+                                       DisplayMemberPath="Name">
+                        <ig:XamComboEditor.Style>
+                            <Style TargetType="{x:Type ig:XamComboEditor}"
+                                   BasedOn="{StaticResource FormField}">
+                                <Style.Triggers>
+                                    <!-- Trigger for redline styling -->
+                                    <DataTrigger Binding="{Binding ElementName=Self, Path=WorkOrder.SelectedPart.PartId}"
+                                                 Value="-1">
+                                        <Setter Property="EditAreaBackground"
+                                                Value="Red" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ig:XamComboEditor.Style>
+                        <ig:XamComboEditor.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Part Number">
+                                The number for this part.
+                            </util:HeaderToolTipContent>
+                        </ig:XamComboEditor.ToolTip>
+                    </ig:XamComboEditor>
+
+                    <!-- Quantity -->
+                    <Label Grid.Row="2"
+                           Grid.Column="0"
+                           Style="{StaticResource FormFieldLabel}"
+                           Content="Qty:" />
+                    <ig:XamNumericInput Grid.Row="2"
+                                        Grid.Column="1"
+                                        Style="{StaticResource FormField}"
+                                        Mask="nnn,nnn,nnn"
+                                        util:WpfBehaviors.SelectAllOnFocus="True"
+                                        ValueType="{x:Type sys:Int32}"
+                                        Value="{Binding ElementName=Self, Path=WorkOrder.Quantity, ValidatesOnDataErrors=True}">
+                        <ig:XamNumericInput.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Part Quantity">
+                                The number of parts in this order.
+                            </util:HeaderToolTipContent>
+                        </ig:XamNumericInput.ToolTip>
+                        <ig:XamNumericInput.ValueConstraint>
+                            <ig:ValueConstraint MinInclusive="1"
+                                                MaxInclusive="2147483647" />
+                        </ig:XamNumericInput.ValueConstraint>
+                    </ig:XamNumericInput>
+
+                    <!-- Serial Number - Basic Editor-->
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           Style="{StaticResource FormFieldLabel}"
+                           Visibility="{Binding ElementName=Self, Path=MainViewModel.ShowBasicSerialNumberEditor, Converter={StaticResource BoolToVisibilityConverter}}"
+                           Content="Serial Number:" />
+                    <TextBox Grid.Row="3"
+                             Grid.Column="1"
+                             Style="{StaticResource FormField}"
+                             util:WpfBehaviors.SelectAllOnFocus="True"
+                             Visibility="{Binding ElementName=Self, Path=MainViewModel.ShowBasicSerialNumberEditor, Converter={StaticResource BoolToVisibilityConverter}}"
+                             MaxLength="20"
+                             Text="{Binding ElementName=Self, Path=WorkOrder.SerialNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <TextBox.ToolTip>
+                            <util:HeaderToolTipContent ToolTipHeader="Serial Number">
+                                The serial number for the order.
+                            </util:HeaderToolTipContent>
+                        </TextBox.ToolTip>
+                    </TextBox>
+
+                    <!-- Serial Numbers - Advanced Editor -->
+                    <Label Grid.Row="4"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource FormFieldLabel}"
+                           Visibility="{Binding ElementName=Self, Path=MainViewModel.ShowAdvancedSerialNumberEditor, Converter={StaticResource BoolToVisibilityConverter}}"
+                           Content="Serial Numbers:" />
+
+                    <!-- Serial Number notification -->
+                    <TextBlock Grid.Row="5"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="4"
+                               Background="Red"
+                               FontWeight="Bold">
+                    Please enter a serial number for each piece.
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=Self, Path=WorkOrder.AreSerialNumbersValid}"
+                                                 Value="False">
+                                        <Setter Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=Self, Path=WorkOrder.AreSerialNumbersValid}"
+                                                 Value="True">
+                                        <Setter Property="Visibility"
+                                                Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                    <Grid Grid.Row="6"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Visibility="{Binding ElementName=Self, Path=MainViewModel.ShowAdvancedSerialNumberEditor, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Vertical">
+                            <Button Style="{StaticResource buttonForImage}"
+                                    Margin="0,3,0,0"
+                                    Focusable="False"
+                                    Click="AddSerialNumberButton_Click">
+                                <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                                       Style="{StaticResource buttonImage}" />
+                                <Button.ToolTip>
+                                    <util:HeaderToolTipContent ToolTipHeader="Add Serial Number">
+                                        Add a serial number to this part.
+                                    </util:HeaderToolTipContent>
+                                </Button.ToolTip>
+                            </Button>
+
+                            <Button Style="{StaticResource buttonForImage}"
+                                    Margin="0,3,0,0"
+                                    Focusable="False"
+                                    Click="DeleteSerialNumberButton_Click">
+                                <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                                       Style="{StaticResource buttonImage}" />
+                                <Button.ToolTip>
+                                    <util:HeaderToolTipContent ToolTipHeader="Remove Serial Number">
+                                        Removes the selected serial number from this part.
+                                    </util:HeaderToolTipContent>
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+
+                        <DataGrid Grid.Column="1"
+                                  Height="200"
+                                  Margin="5,0,0,0"
+                                  AutoGenerateColumns="False"
+                                  ItemsSource="{Binding ElementName=Self, Path=WorkOrder.SerialNumbers}"
+                                  x:Name="SerialNumbersGrid"
+                                  CanUserAddRows="{Binding ElementName=Self, Path=WorkOrder.CanAddSerialNumbers}"
+                                  CanUserDeleteRows="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Number"
+                                                    Binding="{Binding Number}">
+                                    <DataGridTextColumn.EditingElementStyle>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="MaxLength"
+                                                    Value="20" />
+                                        </Style>
+                                    </DataGridTextColumn.EditingElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+
+                <Button Content="OK"
+                        Style="{StaticResource buttonStandard}"
+                        Command="{Binding ElementName=Self, Path=WorkOrder.Accept}" />
+                <Button Content="Cancel"
+                        Style="{StaticResource buttonStandard}"
+                        IsCancel="True" />
+            </StackPanel>
+        </Grid>
+    </igRibbon:RibbonWindowContentHost>
+</igRibbon:XamRibbonWindow>

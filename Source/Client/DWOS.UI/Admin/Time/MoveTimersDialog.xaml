@@ -1,0 +1,97 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:conv="clr-namespace:DWOS.UI.Utilities.Convertors"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        x:Class="DWOS.UI.Admin.Time.MoveTimersDialog"
+        mc:Ignorable="d"
+        Height="300"
+        Width="300"
+        Title="Move To User"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <conv:BoolToStringConverter x:Key="boolToStringConv"
+                                    TrueValue="Active"
+                                    FalseValue="Paused" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Content="Order/Batch Timers To Move:" />
+
+        <!-- Items Grid-->
+        <igWPF:XamDataGrid Grid.Row="1"
+                           Margin="5,0,5,0"
+                           DataSource="{Binding OperatorEntries}"
+                           SelectedDataItemsScope="RecordsOrCells"
+                           Theme="Office2013">
+            <igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                           AutoFitMode="Always"
+                                           FilterUIType="FilterRecord"
+                                           HeaderPrefixAreaDisplayMode="FieldChooserButton"
+                                           SelectionTypeRecord="Range"
+                                           SelectionTypeField="Single"
+                                           SelectionTypeCell="Single"
+                                           HighlightAlternateRecords="True"
+                                           DataRecordSizingMode="Fixed"
+                                           FilterClearButtonLocation="RecordSelectorAndFilterCell"
+                                           FilterRecordLocation="OnTopFixed"
+                                           ExpansionIndicatorDisplayMode="Never" />
+            </igWPF:XamDataGrid.FieldLayoutSettings>
+
+            <igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:FieldLayout>
+                    <igWPF:FieldLayout.Fields>
+                        <igWPF:Field Name="UserName"
+                                     Label="User"
+                                     IsReadOnly="True" />
+                        <igWPF:Field Name="Id"
+                                     Label="WO/Batch"
+                                     IsReadOnly="True" />
+                        <igWPF:Field Label="Status"
+                                     IsReadOnly="True"
+                                     BindingType="UseAlternateBinding"
+                                     AlternateBinding="{Binding HasActiveTimer, Converter={StaticResource boolToStringConv}}" />
+                    </igWPF:FieldLayout.Fields>
+                </igWPF:FieldLayout>
+            </igWPF:XamDataGrid.FieldLayouts>
+        </igWPF:XamDataGrid>
+
+        <Label Grid.Row="2"
+               Content="User:" />
+
+        <ComboBox Grid.Row="3"
+                  Margin="5"
+                  ItemsSource="{Binding UserEntries}"
+                  SelectedItem="{Binding SelectedUser}"
+                  DisplayMemberPath="Name">
+            <ComboBox.ToolTip>
+                <utilities:HeaderToolTip ToolTipHeader="User"
+                                         ToolTipText="The user to move orders/batches to." />
+            </ComboBox.ToolTip>
+        </ComboBox>
+
+        <StackPanel Grid.Row="4"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top">
+            <Button Content="Move"
+                    Style="{StaticResource buttonStandard}"
+                    Command="{Binding MoveItems}"/>
+            <Button Content="Cancel"
+                    Style="{StaticResource buttonStandard}"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

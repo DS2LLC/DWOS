@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="tipManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>106, 17</value>
+  </metadata>
+  <data name="ultraToolTipInfo2.ToolTipTextFormatted" xml:space="preserve">
+    <value>If the Input Type is &lt;span style="font-weight:bold;"&gt;Decimal &lt;/span&gt;or &lt;span style="font-weight:bold;"&gt;Integer&lt;/span&gt;, then this will be the units of measure that the numeric input is in. Selecting the ‘&lt;span style="font-style:italic;"&gt;Add&lt;/span&gt;” button will allow the ability to edit the available units.</value>
+  </data>
+  <data name="ultraToolTipInfo3.ToolTipTextFormatted" xml:space="preserve">
+    <value>If the Input Type is &lt;span style="font-weight:bold;"&gt;Decimal &lt;/span&gt;or &lt;span style="font-weight:bold;"&gt;Integer&lt;/span&gt;, then this will be the minimum value that the operator is allowed to enter.&lt;br/&gt;&lt;br/&gt;Click the field button to link this field to a custom field by its token name. This button is green if there is a linked field.&lt;br/&gt;If the field is Process Unique, its value will be used during order processing.</value>
+  </data>
+  <data name="ultraToolTipInfo4.ToolTipTextFormatted" xml:space="preserve">
+    <value>If the Input Type is &lt;span style="font-weight:bold;"&gt;Decimal &lt;/span&gt;or &lt;span style="font-weight:bold;"&gt;Integer&lt;/span&gt;, then this will be the maximum value that the operator is allowed to enter.&lt;br/&gt;&lt;br/&gt;Click the field button to link this field to a custom field by its token name. This button is green if there is a linked field.&lt;br/&gt;If the field is Process Unique, its value will be used during order processing.</value>
+  </data>
+  <data name="ultraToolTipInfo5.ToolTipTextFormatted" xml:space="preserve">
+    <value>If the Input Type is &lt;b&gt;Decimal &lt;/b&gt;or &lt;b&gt;Integer&lt;/b&gt;, then this can determine the minimum&lt;br/&gt;and maximum values that operators can set based off of a value for Answer.&lt;br/&gt;Minimum: Answer - Tolerance&lt;br/&gt;Maximum: Answer + Tolerance&lt;br/&gt;&lt;br/&gt;This will override any values that you enter for Min Value or Max Value.&lt;br/&gt;&lt;br/&gt;Click the field button to link this field to a custom field by its token name. This button is green if there is a linked field.&lt;br/&gt;If the field is Process Unique, its value will be used during order processing.</value>
+  </data>
+  <data name="ultraToolTipInfo13.ToolTipTextFormatted" xml:space="preserve">
+    <value>The default answer to the question. This allows the answer to be pre-filled out for the operator. (Optional)&lt;br/&gt;&lt;br/&gt;Click the field button to link this field to a custom field by its token name. This button is green if there is a linked field.&amp;edsp;&lt;br/&gt;If the field is Process Unique, its value will be used during order processing.</value>
+  </data>
+  <data name="ultraToolTipInfo14.ToolTipTextFormatted" xml:space="preserve">
+    <value>The input type is the way in which the operator will be allowed to answer the question. The different types are defined as:&lt;br/&gt;&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;Date&lt;/span&gt;: The input type will be a date.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;Decimal&lt;/span&gt;: The input type will be a decimal number.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;Integer&lt;/span&gt;: The input type will be a whole number.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;List&lt;/span&gt;: The input type will be a dropdown list to allow the operator to choose.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;None&lt;/span&gt;: No defined input type.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;String&lt;/span&gt;: The input type will be standard string input.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;Time&lt;/span&gt;: The input type will be a specific time.&lt;br/&gt;&lt;br/&gt;Special Input Types:&lt;br/&gt;&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;PartQty:&lt;/span&gt; This input type will automatically default the value to the orders part quantity during processing.&lt;br/&gt;&lt;br/&gt;&lt;span style="text-decoration: underline;"&gt;Decimal Difference:&lt;span style="text-decoration: none;"&gt; This is used to validate two decimal values. If any 2 of these are filled out then the 3rd will automatically be filled out and validated. To work properly all 3 of these input types should be within the same step.&lt;br/&gt;&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;DecimalBefore:&lt;span style="font-weight:normal;"&gt; The starting value.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;DecimalAfter:&lt;span style="font-weight:normal;"&gt; The finished value.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;DecimalDifference:&lt;span style="font-weight:normal;"&gt; The (positive) difference between the starting value and the finished value.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;&lt;span style="font-weight:normal;text-decoration: underline;"&gt;Time Durations:&lt;/span&gt; This is used to validate the total duraction between the time in and time out. If any 2 of these are filled out then the 3rd will automatically be filled out and validated. To work properly all 3 of these input types should be within the same step.&lt;br/&gt;&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;TimeIn/DateTimeIn:&lt;/span&gt; The time the part begin to process.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;TimeOut/DateTimeOut:&lt;/span&gt; The time the part was done processing.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;TimeDuration:&lt;/span&gt; The total duration the part spent processing.&lt;br/&gt;&lt;br/&gt;&lt;span style="text-decoration: underline;"&gt;Weights:&lt;/span&gt; This is used to capture the weight of materials before and after processing. With these two weights, DWOS can calculate the material cost of a process.&lt;br/&gt;To work properly, pre-processing weight should be a question in the first step, and post-processing weight should be a question in the last step.&lt;br/&gt;&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;PreProcessingWeight:&lt;/span&gt; The weight of materials prior to processing.&lt;br/&gt;&lt;span style="font-weight:bold;"&gt;PostProcessingWeight:&lt;/span&gt; The weight of materials after processing.</value>
+  </data>
+  <data name="ultraToolTipInfo15.ToolTipTextFormatted" xml:space="preserve">
+    <value>If the Input Type is defined as a &lt;span style="font-weight:bold;"&gt;List &lt;/span&gt;type then the list to display to the operator must be chosen. Selecting the ‘&lt;span style="font-style:italic;"&gt;Add&lt;/span&gt;” button will allow the ability to edit the available lists.</value>
+  </data>
+  <metadata name="bsData.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>

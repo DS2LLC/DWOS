@@ -1,0 +1,158 @@
+﻿<Window x:Class="DWOS.UI.Admin.Users.EmployeeResourceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:DWOS.UI.Admin.Users"
+        xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+        xmlns:igWPF="http://schemas.infragistics.com/xaml/wpf"
+        mc:Ignorable="d"
+        Width="500"
+        Height="300"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded"
+        WindowStartupLocation="CenterScreen"
+        Title="Employee Resource Center"
+        Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- User Name -->
+        <Grid Grid.Row="0"
+              Margin="0,5,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   VerticalAlignment="Center"
+                   Content="Name: " />
+
+            <TextBox Grid.Column="1"
+                     IsReadOnly="True"
+                     VerticalAlignment="Center"
+                     Text="{Binding UserName, Mode=OneWay}">
+                <TextBox.ToolTip>
+                    <utilities:HeaderToolTip ToolTipHeader="Name"
+                                             ToolTipText="The display name of the user." />
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+
+        <Label Grid.Row="1"
+               Content="Resource History: " />
+
+        <!-- Salary Data -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Orientation="Vertical"
+                        Margin="5, 0, 0, 0">
+                <Button Width="24"
+                        Height="24"
+                        Command="{Binding AddEntryCommand}"
+                        ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/Add_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Add Entry"
+                                                 ToolTipText="Adds a new entry to the user's salary history." />
+                    </Button.ToolTip>
+                </Button>
+                <Button Width="24"
+                        Height="24"
+                        Margin="0,3,0,0"
+                        Command="{Binding RemoveEntryCommand}"
+                        ToolTipService.ShowOnDisabled="True">
+                    <Image Source="/DWOS.UI;component/Resources/images/Delete_16.png"
+                           Style="{StaticResource buttonImage}" />
+                    <Button.ToolTip>
+                        <utilities:HeaderToolTip ToolTipHeader="Remove Entry"
+                                                 ToolTipText="Removes the selected entry from the user's salary history." />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+
+            <igWPF:XamDataGrid Grid.Column="1"
+                               Name="salaryDataGrid"
+                               MinHeight="100"
+                               Margin="5,0,5,0"
+                               GroupByAreaLocation="None"
+                               Theme="Office2013"
+                               DataSource="{Binding SalaryEntries}"
+                               SelectedDataItem="{Binding SelectedSalaryEntry}"
+                               FieldLayoutInitialized="SalaryDataGrid_OnFieldLayoutInitialized">
+                <igWPF:XamDataGrid.FieldLayoutSettings>
+                    <igWPF:FieldLayoutSettings AutoGenerateFields="False"
+                                               SupportDataErrorInfo="RecordsAndCells"
+                                               DataErrorDisplayMode="Highlight" />
+                </igWPF:XamDataGrid.FieldLayoutSettings>
+                <igWPF:XamDataGrid.FieldLayouts>
+                    <igWPF:FieldLayout>
+                        <igWPF:FieldLayout.SortedFields>
+                            <igWPF:FieldSortDescription FieldName="EffectiveDate"
+                                                        Direction="Descending" />
+                        </igWPF:FieldLayout.SortedFields>
+                        <igWPF:DateTimeField Name="EffectiveDate"
+                                             Label="Effective Date"
+                                             Width="*" />
+                        <igWPF:CurrencyField Name="Salary"
+                                             Label="Salary (per-hour)"
+                                             Width="*">
+                            <igWPF:CurrencyField.ValueConstraint>
+                                <igWPF:ValueConstraint MinInclusive="0" />
+                            </igWPF:CurrencyField.ValueConstraint>
+                        </igWPF:CurrencyField>
+                        <igWPF:CurrencyField Name="Burden"
+                                             Label="Burden (per-hour)"
+                                             Width="*">
+                            <igWPF:CurrencyField.ValueConstraint>
+                                <igWPF:ValueConstraint MinInclusive="0" />
+                            </igWPF:CurrencyField.ValueConstraint>
+                        </igWPF:CurrencyField>
+                    </igWPF:FieldLayout>
+                </igWPF:XamDataGrid.FieldLayouts>
+                <igWPF:XamDataGrid.ViewSettings>
+                    <igWPF:GridViewSettings />
+                </igWPF:XamDataGrid.ViewSettings>
+                <igWPF:XamDataGrid.FieldSettings>
+                    <igWPF:FieldSettings LabelClickAction="Nothing" />
+                </igWPF:XamDataGrid.FieldSettings>
+            </igWPF:XamDataGrid>
+        </Grid>
+
+        <!-- OK & Cancel -->
+        <StackPanel Grid.Row="3"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Grid.Column="0"
+                    Command="{Binding ConfirmCommand}"
+                    Style="{StaticResource buttonStandard}"
+                    Content="OK" />
+            <Button Grid.Column="1"
+                    Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource buttonStandard}" />
+        </StackPanel>
+    </Grid>
+</Window>

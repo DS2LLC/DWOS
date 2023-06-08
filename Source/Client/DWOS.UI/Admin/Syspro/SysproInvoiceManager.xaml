@@ -1,0 +1,119 @@
+﻿<igRibbon:XamRibbonWindow x:Class="DWOS.UI.Admin.Syspro.SysproInvoiceManager"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:igRibbon="http://infragistics.com/Ribbon"
+                          xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+                          xmlns:igThemes="http://infragistics.com/Themes"
+                          xmlns:utilities="clr-namespace:DWOS.UI.Utilities"
+                          mc:Ignorable="d"
+                          Width="640"
+                          Height="480"
+                          WindowStartupLocation="CenterScreen"
+                          Loaded="SysproInvoiceManager_OnLoaded"
+                          Unloaded="SysproInvoiceManager_OnUnloaded"
+                          Title="SYSPRO Invoice Manager"
+                          Style="{StaticResource RibbonWindow}">
+    <igRibbon:XamRibbonWindow.Resources>
+        <Style x:Key="NormalRecordStyle"
+               TargetType="{x:Type igWpf:DataRecordCellArea}"
+               BasedOn="{x:Static igThemes:DataPresenterOffice2013.DataRecordCellArea}">
+            <Setter Property="BackgroundAlternate"
+                    Value="#C8eeeeee" />
+            <Setter Property="Background"
+                    Value="#C8ffffff" />
+        </Style>
+    </igRibbon:XamRibbonWindow.Resources>
+    <igRibbon:RibbonWindowContentHost Style="{StaticResource RibbonWindowContent}">
+
+        <igRibbon:RibbonWindowContentHost.Ribbon>
+            <igRibbon:XamRibbon Theme="Office2013"
+                                Grid.Row="0">
+                <igRibbon:XamRibbon.ApplicationMenu>
+                    <igRibbon:ApplicationMenu Visibility="Visible"
+                                              Caption="File">
+                        <igRibbon:ButtonTool Caption="Close"
+                                             Click="Close_Click" />
+                    </igRibbon:ApplicationMenu>
+                </igRibbon:XamRibbon.ApplicationMenu>
+
+                <igRibbon:XamRibbon.QuickAccessToolbar>
+                    <igRibbon:QuickAccessToolbar />
+                </igRibbon:XamRibbon.QuickAccessToolbar>
+
+                <igRibbon:RibbonTabItem Header="Home">
+                    <igRibbon:RibbonGroup>
+                        <igRibbon:ButtonTool Caption="Reset Invoices"
+                                             Name="ResetButton"
+                                             Command="{Binding Retry}"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Reset Order Invoices"
+                                                         ToolTipText="Resets the invoice for each selected order and allows it to be invoiced again. " />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                        <igRibbon:ButtonTool Caption="Delete"
+                                             Name="DeleteButton"
+                                             Command="{Binding Delete}"
+                                             igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge">
+                            <igRibbon:ButtonTool.ToolTip>
+                                <utilities:HeaderToolTip ToolTipHeader="Delete"
+                                                         ToolTipText="Removes records of non-pending invoices from DWOS." />
+                            </igRibbon:ButtonTool.ToolTip>
+                        </igRibbon:ButtonTool>
+                    </igRibbon:RibbonGroup>
+                </igRibbon:RibbonTabItem>
+            </igRibbon:XamRibbon>
+        </igRibbon:RibbonWindowContentHost.Ribbon>
+        <igWpf:XamDataGrid Name="InvoicesGrid"
+                           DataSource="{Binding Invoices}"
+                           SelectedDataItems="{Binding SelectedItems}"
+                           SelectedDataItemsScope="RecordsOrCells"
+                           Theme="Office2013">
+            <igWpf:XamDataGrid.FieldSettings>
+                <igWpf:FieldSettings FilterClearButtonVisibility="Visible"
+                                     AllowRecordFiltering="True" />
+            </igWpf:XamDataGrid.FieldSettings>
+            <igWpf:XamDataGrid.FieldLayoutSettings>
+                <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                           AutoFitMode="Always"
+                                           FilterUIType="FilterRecord"
+                                           HeaderPrefixAreaDisplayMode="FieldChooserButton"
+                                           SelectionTypeRecord="Extended"
+                                           SelectionTypeField="Single"
+                                           SelectionTypeCell="Single"
+                                           HighlightAlternateRecords="True"
+                                           DataRecordSizingMode="Fixed"
+                                           DataRecordCellAreaStyle="{StaticResource NormalRecordStyle}"
+                                           ExpansionIndicatorDisplayMode="CheckOnDisplay" />
+            </igWpf:XamDataGrid.FieldLayoutSettings>
+            <igWpf:XamDataGrid.FieldLayouts>
+                <igWpf:FieldLayout Key="Invoice">
+                    <igWpf:FieldLayout.Fields>
+                        <igWpf:Field Name="TransmissionReference"
+                                     Label="Transmission Reference"
+                                     IsReadOnly="True" />
+                        <igWpf:Field Name="Created"
+                                     IsReadOnly="True" />
+                        <igWpf:Field Name="Status"
+                                     IsReadOnly="True" />
+                        <igWpf:Field Name="Message"
+                                     IsReadOnly="True" />
+                        <igWpf:Field Name="Orders"
+                                     Visibility="Hidden" />
+                    </igWpf:FieldLayout.Fields>
+                </igWpf:FieldLayout>
+                <igWpf:FieldLayout Key="WO"
+                                   ParentFieldName="Orders"
+                                   ParentFieldLayoutKey="Invoice">
+                    <igWpf:FieldLayout.Fields>
+                        <igWpf:Field Name="OrderId"
+                                     Label="WO"
+                                     HorizontalContentAlignment="Left"/>
+                    </igWpf:FieldLayout.Fields>
+                </igWpf:FieldLayout>
+            </igWpf:XamDataGrid.FieldLayouts>
+        </igWpf:XamDataGrid>
+    </igRibbon:RibbonWindowContentHost>
+</igRibbon:XamRibbonWindow>

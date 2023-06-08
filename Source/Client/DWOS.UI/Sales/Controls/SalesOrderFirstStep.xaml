@@ -1,0 +1,291 @@
+﻿<UserControl x:Class="DWOS.UI.Sales.Controls.SalesOrderFirstStep"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:DWOS.UI.Sales.ViewModels"
+             xmlns:ig="http://schemas.infragistics.com/xaml"
+             xmlns:util="clr-namespace:DWOS.UI.Utilities"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Loaded="Self_Loaded"
+             Unloaded="Self_Unloaded"
+             x:Name="Self">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:TextFieldViewModel}">
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource FormField}"
+                     MaxLength="255"
+                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ComboBoxFieldViewModel}">
+            <ComboBox Style="{StaticResource FormField}"
+                      SelectedItem="{Binding Value, ValidatesOnDataErrors=True}"
+                      ItemsSource="{Binding ListItems}" />
+        </DataTemplate>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"
+                              SharedSizeGroup="LeftmostColumn" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Order Date:" />
+        <DatePicker Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Style="{StaticResource FormField}"
+                    SelectedDate="{Binding ElementName=Self, Path=ViewModel.OrderDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <DatePicker.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Order Date">
+                    The date that the Sales Order was entered.
+                </util:HeaderToolTipContent>
+            </DatePicker.ToolTip>
+        </DatePicker>
+
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Est. Ship:" />
+        <DatePicker Grid.Row="1"
+                    Grid.Column="1"
+                    Style="{StaticResource FormField}"
+                    SelectedDate="{Binding ElementName=Self, Path=ViewModel.EstShipDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <DatePicker.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Estimated Shipping Date">
+                    <TextBlock>
+                    The estimated shipping date of the order.<LineBreak />
+                    If the customer has a specified lead time then that time is used to determine the estimated ship date, else the defined standard lead time for all orders will be used.
+                    </TextBlock>
+                </util:HeaderToolTipContent>
+            </DatePicker.ToolTip>
+        </DatePicker>
+
+        <Label Grid.Row="1"
+               Grid.Column="2"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Req. Date"
+               Visibility="{Binding ElementName=Self, Path=ViewModel.ReqDateSettings.IsVisible, Converter={StaticResource BoolToVisibility}}" />
+        <DatePicker Grid.Row="1"
+                    Grid.Column="3"
+                    Style="{StaticResource FormField}"
+                    SelectedDate="{Binding ElementName=Self, Path=ViewModel.RequiredDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Visibility="{Binding ElementName=Self, Path=ViewModel.ReqDateSettings.IsVisible, Converter={StaticResource BoolToVisibility}}">
+            <DatePicker.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Customer Required Date">
+                    The date the order is required by the customer. Depending on shop work load, this date may not be achievable.
+                </util:HeaderToolTipContent>
+            </DatePicker.ToolTip>
+        </DatePicker>
+
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Customer:" />
+        <ig:XamComboEditor Grid.Row="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource FormField}"
+                           IsEditable="True"
+                           AllowFiltering="True"
+                           AutoComplete="True"
+                           util:WpfBehaviors.SelectAllOnFocus="True"
+                           ItemsSource="{Binding ElementName=Self, Path=ViewModel.Customers}"
+                           SelectedItem="{Binding ElementName=Self, Path=ViewModel.SelectedCustomer, ValidatesOnDataErrors=True}"
+                           DisplayMemberPath="Name">
+            <ig:XamComboEditor.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Customer">
+                    The name of the customer.
+                </util:HeaderToolTipContent>
+            </ig:XamComboEditor.ToolTip>
+        </ig:XamComboEditor>
+
+        <Label Grid.Row="3"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Customer WO:" />
+        <TextBox Grid.Row="3"
+                 Grid.Column="1"
+                 Style="{StaticResource FormField}"
+                 util:WpfBehaviors.SelectAllOnFocus="True"
+                 MaxLength="50"
+                 Text="{Binding ElementName=Self, Path=ViewModel.CustomerWorkOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <TextBox.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Customer WO">
+                    The customer WO, if available.
+                </util:HeaderToolTipContent>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Label Grid.Row="3"
+               Grid.Column="2"
+               Style="{StaticResource FormFieldLabel}"
+               Content="PO Number:" />
+        <TextBox Grid.Row="3"
+                 Grid.Column="3"
+                 Style="{StaticResource FormField}"
+                 util:WpfBehaviors.SelectAllOnFocus="True"
+                 MaxLength="50"
+                 Text="{Binding ElementName=Self, Path=ViewModel.PurchaseOrderNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <TextBox.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="PO Number">
+                    The purchase order number received from the customer.
+                </util:HeaderToolTipContent>
+            </TextBox.ToolTip>
+        </TextBox>
+
+        <Label Grid.Row="4"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Priority:" />
+        <ig:XamComboEditor Grid.Row="4"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource FormField}"
+                           IsEditable="True"
+                           AllowFiltering="True"
+                           AutoComplete="True"
+                           util:WpfBehaviors.SelectAllOnFocus="True"
+                           ItemsSource="{Binding ElementName=Self, Path=ViewModel.Priorities}"
+                           SelectedItem="{Binding ElementName=Self, Path=ViewModel.Priority, ValidatesOnDataErrors=True}">
+            <ig:XamComboEditor.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Priority">
+                    The priority for all Work Orders in the Sales Order.
+                </util:HeaderToolTipContent>
+            </ig:XamComboEditor.ToolTip>
+        </ig:XamComboEditor>
+
+        <!-- Document Required notification -->
+        <TextBlock Grid.Row="5"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="4"
+                   Background="Red"
+                   FontWeight="Bold">
+            The customer requires a scanned PO attached.
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=Self, Path=ViewModel.IsDocumentValid}"
+                                     Value="False">
+                            <Setter Property="Visibility"
+                                    Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=Self, Path=ViewModel.IsDocumentValid}"
+                                     Value="True">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <!-- Placeholder for documents control -->
+        <Grid Grid.Row="6"
+              Grid.Column="0"
+              Grid.ColumnSpan="4"
+              Height="100"
+              x:Name="DocumentControlGrid" />
+
+        <!-- Custom Fields -->
+        <ItemsControl Grid.Row="7"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="4"
+                      ItemsSource="{Binding ElementName=Self, Path=ViewModel.CustomFields}"
+                      IsTabStop="False">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"
+                                              SharedSizeGroup="LeftmostColumn" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Style="{StaticResource FormFieldLabel}"
+                               Content="{Binding Name}" />
+
+                        <ContentControl Grid.Column="1"
+                                        Content="{Binding }"
+                                        IsTabStop="False">
+                            <ContentControl.ToolTip>
+                                <util:HeaderToolTipContent ToolTipHeader="{Binding Name}">
+                                    <TextBlock Text="{Binding Description}" />
+                                </util:HeaderToolTipContent>
+                            </ContentControl.ToolTip>
+                        </ContentControl>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Shipping Method -->
+        <Label Grid.Row="8"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Shipping:" />
+        <ig:XamComboEditor Grid.Row="8"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource FormField}"
+                           IsEditable="True"
+                           AllowFiltering="True"
+                           AutoComplete="True"
+                           util:WpfBehaviors.SelectAllOnFocus="True"
+                           ItemsSource="{Binding ElementName=Self, Path=ViewModel.SelectedCustomer.ShippingMethods}"
+                           SelectedItem="{Binding ElementName=Self, Path=ViewModel.SelectedShippingMethod}"
+                           DisplayMemberPath="Name">
+            <ig:XamComboEditor.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Shipping Method">
+                    The shipping method to use.
+                </util:HeaderToolTipContent>
+            </ig:XamComboEditor.ToolTip>
+        </ig:XamComboEditor>
+
+        <!-- Shipping Address -->
+        <Label Grid.Row="9"
+               Grid.Column="0"
+               Style="{StaticResource FormFieldLabel}"
+               Content="Ship To:" />
+        <ig:XamComboEditor Grid.Row="9"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Style="{StaticResource FormField}"
+                           IsEditable="True"
+                           AllowFiltering="True"
+                           AutoComplete="True"
+                           util:WpfBehaviors.SelectAllOnFocus="True"
+                           ItemsSource="{Binding ElementName=Self, Path=ViewModel.SelectedCustomer.ShippingAddresses}"
+                           SelectedItem="{Binding ElementName=Self, Path=ViewModel.SelectedShippingAddress}"
+                           DisplayMemberPath="Name">
+            <ig:XamComboEditor.ToolTip>
+                <util:HeaderToolTipContent ToolTipHeader="Ship To">
+                    The customer address to use for shipping.
+                </util:HeaderToolTipContent>
+            </ig:XamComboEditor.ToolTip>
+        </ig:XamComboEditor>
+    </Grid>
+</UserControl>

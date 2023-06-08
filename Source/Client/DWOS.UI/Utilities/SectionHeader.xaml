@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="DWOS.UI.Utilities.SectionHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DWOS.UI.Utilities"
+             mc:Ignorable="d"
+             x:Name="Self"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label VerticalAlignment="Center"
+               FontSize="16"
+               FontWeight="Bold"
+               Foreground="{StaticResource colorbrushMain}"
+               Content="{Binding TitleText,ElementName=Self}"/>
+        <Separator Margin="5,0,5,0"
+                   Grid.Column="1"
+                   VerticalAlignment="Center"
+                   Background="{StaticResource colorbrushMain}" />
+    </Grid>
+</UserControl>
