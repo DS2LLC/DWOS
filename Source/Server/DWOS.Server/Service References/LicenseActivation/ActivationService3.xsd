@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DS2.AppManagement" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DS2.AppManagement" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/DS2.AppManagement/ActivationService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="ReleaseGroup">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="EarlyAdopter">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Beta">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReleaseGroup" nillable="true" type="tns:ReleaseGroup" />
+  <xs:complexType name="UsageStatistics">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Stastics" nillable="true" type="tns:ArrayOfUsageStat" />
+      <xs:element minOccurs="0" name="StatisticsStartTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StatisticsStopTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsageStatistics" nillable="true" type="tns:UsageStatistics" />
+  <xs:complexType name="ArrayOfUsageStat">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UsageStat" nillable="true" type="tns:UsageStat" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUsageStat" nillable="true" type="tns:ArrayOfUsageStat" />
+  <xs:complexType name="UsageStat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Metric" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsageStat" nillable="true" type="tns:UsageStat" />
+</xs:schema>

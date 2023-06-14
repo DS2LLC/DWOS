@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DWOS.Server.Admin.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProductID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DWOS</Value>
+    </Setting>
+    <Setting Name="ReleaseGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="SQLServerInstallArgsFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/qs /action=Install /IAcceptSqlServerLicenseTerms /ConfigurationFile={0}</Value>
+    </Setting>
+    <Setting Name="SQLServerInstallURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://go.microsoft.com/fwlink/?linkid=853017</Value>
+    </Setting>
+    <Setting Name="FirewallLicensePort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8080</Value>
+    </Setting>
+    <Setting Name="FirewallSQLPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1433</Value>
+    </Setting>
+    <Setting Name="FirewallRESTPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8081</Value>
+    </Setting>
+    <Setting Name="FirewallMobileLicensePort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8082</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

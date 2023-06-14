@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1c0be8b0-419f-4325-9cc9-f12b25a28627" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/DS2.AppManagement/ActivationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ActivationService1.xsd" MetadataType="Schema" ID="23ce613d-f3fd-4442-a967-6e70103f0464" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ActivationService.xsd" MetadataType="Schema" ID="22c7fc2b-121a-4e93-8e9d-7cb07fa0ea34" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ActivationService2.xsd" MetadataType="Schema" ID="dbd0c064-05b9-4879-a0b9-8d9415bd2f6f" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ActivationService3.xsd" MetadataType="Schema" ID="e2c29e07-e4cd-4fdb-bb07-2657a04e7074" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ActivationService4.xsd" MetadataType="Schema" ID="7a8810f5-1ead-4bdd-875a-4a79b8699580" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ActivationService.disco" MetadataType="Disco" ID="7b162453-c44c-4f2b-9005-65f70bd9f48d" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?disco" />
+    <MetadataFile FileName="ActivationService.wsdl" MetadataType="Wsdl" ID="c1d4305e-4d74-4081-ab8e-0682dcd83065" SourceId="1" SourceUrl="http://localhost/DS2.AppManagement/ActivationService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DS2.AppManagement.Datasets" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DS2.AppManagement.Datasets" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfSite">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Site" nillable="true" type="tns:Site" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSite" nillable="true" type="tns:ArrayOfSite" />
+  <xs:complexType name="Site">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
+      <xs:element minOccurs="0" name="Fingerprint" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Licenses" nillable="true" type="tns:ArrayOfLicense" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Site" nillable="true" type="tns:Site" />
+  <xs:complexType name="ArrayOfLicense">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="License" nillable="true" type="tns:License" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLicense" nillable="true" type="tns:ArrayOfLicense" />
+  <xs:complexType name="License">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
+      <xs:element minOccurs="0" name="Expiration" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Floating" type="xs:int" />
+      <xs:element minOccurs="0" name="LicenseActivationHistories" nillable="true" type="tns:ArrayOfLicenseActivationHistory" />
+      <xs:element minOccurs="0" name="LicenseID" type="xs:int" />
+      <xs:element minOccurs="0" name="LicenseKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Product" nillable="true" type="tns:Product" />
+      <xs:element minOccurs="0" name="ProductID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Site" nillable="true" type="tns:Site" />
+      <xs:element minOccurs="0" name="SiteID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="License" nillable="true" type="tns:License" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Licenses" nillable="true" type="tns:ArrayOfLicense" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrimaryContactID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Customers" nillable="true" type="tns:ArrayOfCustomer" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomer" nillable="true" type="tns:ArrayOfCustomer" />
+  <xs:complexType name="ArrayOfLicenseActivationHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LicenseActivationHistory" nillable="true" type="tns:LicenseActivationHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLicenseActivationHistory" nillable="true" type="tns:ArrayOfLicenseActivationHistory" />
+  <xs:complexType name="LicenseActivationHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HistoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="License" nillable="true" type="tns:License" />
+      <xs:element minOccurs="0" name="LicenseID" type="xs:int" />
+      <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LicenseActivationHistory" nillable="true" type="tns:LicenseActivationHistory" />
+  <xs:complexType name="Product">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Licenses" nillable="true" type="tns:ArrayOfLicense" />
+      <xs:element minOccurs="0" name="ProductID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductVersions" nillable="true" type="tns:ArrayOfProductVersion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Product" nillable="true" type="tns:Product" />
+  <xs:complexType name="ArrayOfProductVersion">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductVersion" nillable="true" type="tns:ProductVersion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductVersion" nillable="true" type="tns:ArrayOfProductVersion" />
+  <xs:complexType name="ProductVersion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateReleased" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Product" nillable="true" type="tns:Product" />
+      <xs:element minOccurs="0" name="ProductID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReleaseGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReleaseGroup1" nillable="true" type="tns:ReleaseGroup" />
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VersionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductVersion" nillable="true" type="tns:ProductVersion" />
+  <xs:complexType name="ReleaseGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProductVersions" nillable="true" type="tns:ArrayOfProductVersion" />
+      <xs:element minOccurs="0" name="ReleaseGroup1" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReleaseGroup" nillable="true" type="tns:ReleaseGroup" />
+</xs:schema>
