@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tableLayout1"
+    android:background="@drawable/orderListSelector"
+    android:paddingLeft="@dimen/edgeMargin"
+    android:paddingRight="@dimen/edgeMargin"
+    android:paddingBottom="@dimen/elementSpacing"
+    android:stretchColumns="0"
+    android:shrinkColumns="0">
+    <TableRow
+        android:id="@+id/tableRow1">
+        <TextView
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewOrderTitle"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="?android:attr/textColorPrimary" />
+        <TextView
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textViewOrderSubtitle"
+            android:ellipsize="end"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:layout_weight="1"
+            android:gravity="right" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRow2">
+        <TextView
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textViewOrderLocation"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:ellipsize="end" />
+        <TextView
+            android:text="In Process"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textViewOrderStatus"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:ellipsize="end"
+            android:gravity="right" />
+    </TableRow>
+</TableLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/android:list"
+        android:layout_weight="1"
+        android:choiceMode="singleChoice" />
+    <TextView
+        android:id="@+id/textViewNoOrders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Orders Found"
+        android:visibility="gone" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/android:empty"
+        android:visibility="visible">
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundgrey"
+        android:id="@+id/layoutCount"
+        android:paddingLeft="@dimen/edgeMargin"
+        android:paddingRight="@dimen/elementSpacing"
+        android:layout_marginTop="0.0dp"
+        android:layout_marginLeft="0.0dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewCountTitle"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="TOTAL" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewCount"
+            android:gravity="right"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="DWOS.AutomatedWorkOrderTool.Dialogs.ImportShippingManifest.ShippingConfirmControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             x:Name="Self"
+             Loaded="ShippingConfirmControl_OnLoaded"
+             Unloaded="ShippingConfirmControl_OnUnloaded">
+    <UserControl.Resources>
+        <Style x:Key="StatusCellStyle"
+               TargetType="DataGridCell"
+               BasedOn="{StaticResource MetroDataGridCell}">
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Status}"
+                             Value="NewWithoutExistingOrders">
+                    <Setter Property="Background"
+                            Value="IndianRed"></Setter>
+                    <Setter Property="FontWeight"
+                            Value="Bold" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Visibility="{Binding ViewModel.HasError, ElementName=Self, Converter={StaticResource BooleanToVisibilityConverter}}"
+               Foreground="Red"
+               FontWeight="Bold"
+               Content="{Binding ViewModel.ErrorText, ElementName=Self}" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Manifest Date:" />
+            <TextBox Grid.Column="1"
+                     Text="{Binding ViewModel.OrderDate,ElementName=Self, Mode=OneWay, StringFormat=MM-dd-yyyy}"
+                     IsReadOnly="True" />
+        </Grid>
+
+        <DataGrid Grid.Row="2"
+                  Name="OrderGrid"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding ViewModel.Orders, ElementName=Self}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow"
+                                BasedOn="{StaticResource MetroDataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}"
+                                     Value="Invalid">
+                            <Setter Property="Foreground"
+                                    Value="Red"></Setter>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}"
+                                     Value="Existing">
+                            <Setter Property="Foreground"
+                                    Value="Gray"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Part Number"
+                                    Binding="{Binding Part}" />
+                <DataGridTextColumn Header="Status"
+                                    Binding="{Binding Status, Converter={StaticResource OrderStatusConverter}}"
+                                    CellStyle="{StaticResource StatusCellStyle}"/>
+                <DataGridTextColumn Header="Notes"
+                                    Binding="{Binding ImportNotes}" />
+                <DataGridTextColumn Header="Ship Qty"
+                                    Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Due Date"
+                                    Binding="{Binding DueDate, StringFormat=d}" />
+                <DataGridTextColumn Header="Priority"
+                                    Binding="{Binding Priority}" />
+                <DataGridTextColumn Header="KAC Shipper"
+                                    Binding="{Binding KacShipper}" />
+                <DataGridTextColumn Header="PO Nbr"
+                                    Binding="{Binding PurchaseOrder}" />
+                <DataGridTextColumn Header="PO Item Nbr"
+                                    Binding="{Binding PurchaseOrderItem}" />
+                <DataGridTextColumn Header="Work Order"
+                                    Binding="{Binding WorkOrder}" />
+                <DataGridTextColumn Header="Project"
+                                    Binding="{Binding Project}" />
+                <DataGridTextColumn Header="Lot Cost"
+                                    Binding="{Binding LotCost}" />
+                <DataGridTextColumn Header="Invoice Nbr"
+                                    Binding="{Binding InvoiceNumber}" />
+                <DataGridTextColumn Header="Vendors Packslip"
+                                    Binding="{Binding VendorPackslip}" />
+                <DataGridTextColumn Header="Purchasing Invoice Approval"
+                                    Binding="{Binding PurchasingInvoiceApproval}" />
+                <DataGridTextColumn Header="Vendor Nbr"
+                                    Binding="{Binding VendorNumber}" />
+                <DataGridTextColumn Header="SrcCod"
+                                    Binding="{Binding SourceCode}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Continue"
+                    Command="{Binding ViewModel.Continue, ElementName=Self}" />
+
+            <Button Margin="10,0,0,0"
+                    Content="Go Back"
+                    Command="{Binding ViewModel.GoBack, ElementName=Self}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

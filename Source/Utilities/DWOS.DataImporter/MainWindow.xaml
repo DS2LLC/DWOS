@@ -1,0 +1,62 @@
+﻿<Window x:Class="DWOS.DataImporter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="484" Width="525" Icon="Resources/Database.ico" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Server:" VerticalAlignment="Center"></Label>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBox x:Name="txtServerName" Width="150" Margin="3" ToolTip="Server Name">ds2-dwos-dev-1</TextBox>
+            <TextBox x:Name="txtServerPort" Width="50" Margin="3" ToolTip="Server Port Number">8080</TextBox>
+            <Button Margin="3" Padding="5,0" HorizontalAlignment="Left" Click="btnConnect_Click" ToolTip="Connect to the DWOS Server">Connect</Button>
+        </StackPanel>
+        
+        <Separator Grid.Row="1" Grid.ColumnSpan="3" Margin="3"></Separator>
+        
+        <Label Content="Customers:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"></Label>
+        <Button x:Name="btnCustomerExport" Grid.Row="2" Grid.Column="1" Width="75" Margin="3" Click="btnCustomerExport_Click" ToolTip="Export all customers to XLS">Export...</Button>
+        <Button x:Name="btnCustomerImport" Grid.Row="2" Grid.Column="2" Width="75" Margin="3" HorizontalAlignment="Left" Click="btnCustomerImport_Click" ToolTip="Import customers from XLS">Import...</Button>
+        <Label Grid.Row="2" Grid.Column="2" Margin="3" HorizontalAlignment="Right">
+            <TextBlock TextDecorations="Underline" FontSize="9" ToolTip="Display the customer xls template." Cursor="Hand" MouseDown="CustomerTemplate_MouseDown">Template</TextBlock>
+        </Label>
+
+        <Label Content="Parts:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"></Label>
+        <Button x:Name="btnPartExport" Grid.Row="3" Grid.Column="1" Width="75" Margin="3" Click="btnPartExport_Click" ToolTip="Export parts to XLS">Export...</Button>
+        <Button x:Name="btnPartImport" Grid.Row="3" Grid.Column="2" Width="75" Margin="3" HorizontalAlignment="Left" Click="btnPartImport_Click" ToolTip="Import parts from XLS">Import...</Button>
+        <Label Grid.Row="3" Grid.Column="2" Margin="3" HorizontalAlignment="Right">
+            <TextBlock TextDecorations="Underline" FontSize="9" ToolTip="Display the part xls template." Cursor="Hand" MouseDown="PartTemplate_MouseDown">Template</TextBlock>
+        </Label>
+
+        <Label Content="Contacts:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"></Label>
+        <Button x:Name="btnContactExport" Grid.Row="4" Grid.Column="1" Width="75" Margin="3" Click="btnContactExport_OnClick" ToolTip="Export contacts to XLS">Export...</Button>
+        <Button x:Name="btnContactImport" Grid.Row="4" Grid.Column="2" Width="75" Margin="3" HorizontalAlignment="Left" Click="btnContactImport_OnClick" ToolTip="Import contacts from XLS">Import...</Button>
+        <Label Grid.Row="4" Grid.Column="2" Margin="3" HorizontalAlignment="Right">
+            <TextBlock TextDecorations="Underline" FontSize="9" ToolTip="Display the contact xls template." Cursor="Hand" MouseDown="ContactTemplate_MouseDown">Template</TextBlock>
+        </Label>
+        
+        <Border  Grid.Row="5" Grid.ColumnSpan="3" Margin="5" BorderBrush="DarkGray" BorderThickness="1">
+            <TextBlock x:Name="txtNotifications" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBlock>
+        </Border>
+    </Grid>
+</Window>

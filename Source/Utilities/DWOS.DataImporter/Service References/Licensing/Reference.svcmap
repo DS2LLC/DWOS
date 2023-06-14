@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="61c1031c-dfba-4e64-bedb-0531cecf6b62" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://ds2-scout:8081/LicenseService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ef1ae17b-09f7-4dec-a691-53ced281b099" SourceId="1" SourceUrl="net.tcp://ds2-scout:8081/LicenseService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="20bde797-55cb-42c0-b0bc-f118545c57d4" SourceId="1" SourceUrl="net.tcp://ds2-scout:8081/LicenseService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="36b75930-e8b1-42b2-8cb1-010e2cfe11f2" SourceId="1" SourceUrl="net.tcp://ds2-scout:8081/LicenseService/mex" />
+    <MetadataFile FileName="DWOS.LicenseManager.xsd" MetadataType="Schema" ID="49c6f710-b723-4090-a1f1-898f5f2ea0ec" SourceId="1" SourceUrl="net.tcp://ds2-scout:8081/LicenseService/mex" />
+    <MetadataFile FileName="DWOS.Server.Services.xsd" MetadataType="Schema" ID="fe01348c-4b8b-4b1d-a7fe-3dbc8142bbf6" SourceId="1" SourceUrl="net.tcp://ds2-scout:8081/LicenseService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

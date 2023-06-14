@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingRight="@dimen/edgeMargin"
+    android:paddingLeft="@dimen/betweenMarginHalf">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/detailsLayout">
+        <ScrollView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollViewDetails">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/textViewBatch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:lines="1"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                    <TextView
+                        android:id="@+id/textViewCurrentDepartment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/textViewProcess"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:lines="1" />
+                    <TextView
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/textViewWorkStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:lines="1"
+                        android:ellipsize="end" />
+                </LinearLayout>
+                <TextView
+                    android:text="Created"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewCreated"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Fixture"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewFixture"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Schedule Priority"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    android:id="@+id/textViewSchedulePriorityLabel"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewSchedulePriority"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Sales Order"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    android:id="@+id/textViewSalesOrderLabel"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewSalesOrder"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Orders"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewOrders"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Parts"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewParts"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Surface Area"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewSurfaceArea"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Weight"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewWeight"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+                <TextView
+                    android:text="Next Department"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:layout_marginLeft="@dimen/orderDetailHeaderLeftMargin"
+                    style="?android:attr/listSeparatorTextViewStyle" />
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/betweenMarginFull"
+                    android:id="@+id/textViewNextDepartment"
+                    android:layout_marginLeft="@dimen/orderDetailValueLeftMargin" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

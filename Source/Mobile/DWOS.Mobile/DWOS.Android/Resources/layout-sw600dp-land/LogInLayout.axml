@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<!-- Stop auto focussing the EditText -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialogLayout"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/edgeMargin">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginServer"
+            android:hint="DWOS SERVER NAME"
+            android:singleLine="true"
+            android:textSize="@dimen/editTextFontSize"
+            android:inputType="textUri|textNoSuggestions" />
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userPin"
+            android:hint="USER PIN"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/editTextFontSize"
+            android:imeOptions="actionGo"
+            android:inputType="numberPassword" />
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/elementSpacing"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
+            <Button
+                android:text="Log In"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logIn"
+                android:layout_below="@+id/userPin"
+                android:textColor="@color/disabledText" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logInProgressBar"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+        android:text="Use Demo Server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDemo"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/edgeMargin"
+        android:textColor="#0000EE"
+        android:typeface="sans"
+        style="?android:attr/borderlessButtonStyle" />
+</RelativeLayout>

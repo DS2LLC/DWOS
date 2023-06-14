@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Loading">Loading...</string>
+  <string name="NA">N/A</string>
+  <string name="ApplicationName">DWOS.Android</string>
+  <string name="FeedbackUrl">http://feedback.getdwos.com</string>
+  <string name="HelpUrl">http://getdwos.com</string>
+  <string name="KnowledgeBaseUrl">http://feedback.getdwos.com/knowledgebase</string>
+  <string name="ExpiredLogOutTitle">License Deactivated</string>
+  <string name="ExpiredLogOut">Please log in again to continue.</string>
+  <string name="LoggedInFormat">%1s</string>
+  <string name="ConfirmLogOutTitle">Sign Out</string>
+  <string name="ConfirmLogOut">Sign out of DWOS?</string>
+  <string name="ConfirmOK">Confirm</string>
+  <string name="SaveYes">Yes</string>
+  <string name="SaveNo">No</string>
+  <string name="SaveCancel">Cancel</string>
+  <string name="OK">OK</string>
+  <string name="Done">Done</string>
+  <string name="Continue">Continue</string>
+  <string name="SetDate">Set date</string>
+  <string name="SetTime">Set time</string>
+  <string name="SetDateTime">Set date and time</string>
+  <string name="ExpiredOK">Login</string>
+  <string name="Cancel">Cancel</string>
+  <string name="ApplicationShortName">DWOS</string>
+  <string name="SearchAdvancedName">ds2.dwos.advancedsearch</string>
+  <string name="SearchHint">Search Orders</string>
+  <string name="DemoUrl">http://www.mydwos.com</string>
+  <string name="AddOrderNote">Add Note</string>
+  <string name="TimerLabel">Labor:</string>
+  <string name="TimerStart">Start</string>
+  <string name="TimerPause">Pause</string>
+  <string name="TimerStop">Stop</string>
+  <string name="NotificationChannel_LicenseCheck">DWOS - Login</string>
+  <string name="LicenseManager_LoggedInFormat">Logged-in as %1s.</string>
+  <string name="LicenseManager_LoggedOut">You are not currently logged into DWOS.</string>
+  <string name="LicenseManager_LicenseDeactivated">The application has lost connection with your central DWOS server and you will be signed-out.</string>
+</resources>

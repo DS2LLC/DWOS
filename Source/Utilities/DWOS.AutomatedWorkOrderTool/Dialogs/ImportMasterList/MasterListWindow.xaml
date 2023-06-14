@@ -1,0 +1,35 @@
+﻿<controls:MetroWindow x:Class="DWOS.AutomatedWorkOrderTool.Dialogs.ImportMasterList.MasterListWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:local="clr-namespace:DWOS.AutomatedWorkOrderTool.Dialogs.ImportMasterList"
+                      xmlns:awotControls="clr-namespace:DWOS.AutomatedWorkOrderTool.Controls"
+                      mc:Ignorable="d"
+                      Title="Import Master List"
+                      Height="300"
+                      Width="300"
+                      Style="{StaticResource BaseWindowStyle}"
+                      Loaded="MasterListWindow_OnLoaded"
+                      Unloaded="MasterListWindow_OnUnloaded">
+    <Grid Name="InnerControl"
+          DataContext="{Binding MasterList, Source={StaticResource Locator}}">
+        <local:MasterListSetupControl ViewModel="{Binding }"
+                                      Margin="{StaticResource PrimaryMargin}"
+                                      Visibility="{Binding ShowSetup, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <local:MasterListConfirmControl ViewModel="{Binding }"
+                                        Margin="{StaticResource PrimaryMargin}"
+                                        Visibility="{Binding ShowConfirmation, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <local:MasterListImportControl ViewModel="{Binding }"
+                                       Margin="{StaticResource PrimaryMargin}"
+                                       Visibility="{Binding ShowImport, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <local:MasterListResultControl ViewModel="{Binding }"
+                                       Margin="{StaticResource PrimaryMargin}"
+                                       Visibility="{Binding ShowResults, Converter={StaticResource BooleanToVisibilityConverter}}" />
+       <awotControls:LoadingControl Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Grid>
+</controls:MetroWindow>

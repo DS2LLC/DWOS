@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.ds2.dwos" android:versionCode="69" android:versionName="22.1.1.0">
+  <application android:label="DWOS" android:icon="@drawable/Icon">
+    <provider android:name="android.support.v4.content.FileProvider" android:authorities="com.ds2.dwos.provider" android:exported="false" android:grantUriPermissions="true">
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+    </provider>
+  </application>
+	<supports-screens android:largeScreens="true" android:xlargeScreens="true" />
+	<uses-sdk android:targetSdkVersion="27" android:minSdkVersion="17" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+</manifest>

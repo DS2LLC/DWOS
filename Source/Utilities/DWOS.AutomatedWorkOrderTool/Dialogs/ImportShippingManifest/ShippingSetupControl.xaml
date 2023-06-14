@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="DWOS.AutomatedWorkOrderTool.Dialogs.ImportShippingManifest.ShippingSetupControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:DWOS.AutomatedWorkOrderTool.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             Name="Self">
+    <UserControl.Resources>
+        <converters:BoolToTextConverter x:Key="RequiredConverter"
+                                        TrueValue="*" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="Customer:" />
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 IsReadOnly="True"
+                 Text="{Binding ViewModel.Customer.Name, ElementName=Self, Mode=OneWay}" />
+
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               Content="Fields:" />
+
+        <DataGrid Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Height="125"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding ViewModel.Fields, ElementName=Self}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow"
+                       BasedOn="{StaticResource MetroDataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsValid}"
+                                     Value="False">
+                            <Setter Property="Foreground"
+                                    Value="Red" />
+                            <Setter Property="FontWeight"
+                                    Value="Bold" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding IsRequired, Converter={StaticResource RequiredConverter}}"
+                                    IsReadOnly="True">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell"
+                               BasedOn="{StaticResource MetroDataGridCell}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsRequired}"
+                                             Value="True">
+                                    <Setter Property="ToolTip"
+                                            Value="This field is required." />
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="FontWeight"
+                                    Value="Bold" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name, Mode=OneWay}"
+                                    IsReadOnly="True">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell"
+                               BasedOn="{StaticResource MetroDataGridCell}">
+                            <Setter Property="ToolTip"
+                                    Value="{Binding Description}" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Value"
+                                    Binding="{Binding Value}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Grid.Row="3"
+               Grid.Column="0"
+               Content="File:" />
+        <Grid Grid.Row="3"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     IsReadOnly="True"
+                     Text="{Binding ViewModel.ShippingFileName,ElementName=Self}" />
+            <Button Grid.Column="1"
+                    Content="Browse..."
+                    Command="{Binding ViewModel.SelectShippingManifest, ElementName=Self}" />
+        </Grid>
+
+        <CheckBox Grid.Row="4"
+                  Grid.Column="0"
+                  Content="Print WO Travelers"
+                  IsChecked="{Binding ViewModel.PrintWorkOrderTravelers, ElementName=Self}"
+                  Visibility="{Binding ViewModel.ShowWorkOrderTravelerOption, ElementName=Self, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <CheckBox.ToolTip>
+                <TextBlock>
+                    Option for development/testing purposes.
+                    <LineBreak />
+                    If checked, AWOT will print a work order traveler for each imported order.
+                </TextBlock>
+            </CheckBox.ToolTip>
+        </CheckBox>
+
+        <StackPanel Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <Button Content="Continue"
+                    Command="{Binding ViewModel.Continue ,ElementName=Self}" />
+
+            <Button Margin="10,0,0,0"
+                    Content="Cancel"
+                    Command="{Binding ViewModel.CloseDialog, ElementName=Self}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

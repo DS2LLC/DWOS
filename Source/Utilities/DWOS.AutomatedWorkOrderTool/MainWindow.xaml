@@ -1,0 +1,134 @@
+﻿<controls:MetroWindow x:Class="DWOS.AutomatedWorkOrderTool.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:awot="clr-namespace:DWOS.AutomatedWorkOrderTool.Controls"
+                      xmlns:viewModels="clr-namespace:DWOS.AutomatedWorkOrderTool.ViewModel"
+                      mc:Ignorable="d"
+                      Title="{Binding TitleText}"
+                      Height="350"
+                      Width="575"
+                      Style="{StaticResource BaseWindowStyle}"
+                      DataContext="{Binding MainWindow, Source={StaticResource Locator}}"
+                      Loaded="MainWindow_OnLoaded"
+                      Unloaded="MainWindow_OnUnloaded"
+                      Closing="MainWindow_OnClosing"
+                      FocusManager.FocusedElement="{Binding ElementName=LoginControl}">
+    <controls:MetroWindow.Resources>
+        <Style x:Key="RibbonText" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+    </controls:MetroWindow.Resources>
+
+    <Grid Margin="{StaticResource PrimaryMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Hidden"
+                      HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal">
+                <awot:UserInfoControl User="{Binding User, Source={StaticResource Locator}}"
+                                      MinWidth="175"
+                                      Margin="0,0,5,0" />
+                <Button Command="{Binding LogOut}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource RibbonText}">Log Out</TextBlock>
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding AddCustomer}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource RibbonText}">Add<LineBreak />Customer</TextBlock>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Adds an existing customer from DWOS to the Automated Work Order Tool.
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding AddManufacturer}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource RibbonText}">
+                        Add<LineBreak />Manufacturer
+                        </TextBlock>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Adds an existing manufacturer from DWOS to the Automated Work Order Tool.
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding ShowMasterListDialog}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource RibbonText}">Import<LineBreak />Master List…</TextBlock>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Imports a master list of parts for a customer.
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding ShowShippingManifestDialog}">
+                    <Button.Content>
+                        <TextBlock Style="{StaticResource RibbonText}">Import<LineBreak />Shipping Manifest…</TextBlock>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Imports a shipping manifest of orders for a customer.
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Separator Grid.Row="1"  />
+
+        <awot:LoginControl Grid.Row="2"
+                           x:Name="LoginControl"
+                           Visibility="{Binding ShowLoggedInPrompt, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="3"
+              Visibility="{Binding LoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TreeView x:Name="CustomersView"
+                      ItemsSource="{Binding Customers}"
+                      SelectedItemChanged="CustomersView_OnSelectedItemChanged"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Top"
+                      Width="150">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True" />
+                        <Setter Property="IsSelected"
+                                Value="{Binding IsSelected}" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Formats}"
+                                              DataType="{x:Type viewModels:CustomerViewModel}">
+                        <ContentPresenter Content="{Binding Name}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:OspFormatViewModel}">
+                                <ContentPresenter Content="{Binding Manufacturer}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="5" ShowsPreview="True"/>
+
+            <ContentPresenter Grid.Column="2" Content="{Binding SelectedItem}" />
+        </Grid>
+    </Grid>
+</controls:MetroWindow>

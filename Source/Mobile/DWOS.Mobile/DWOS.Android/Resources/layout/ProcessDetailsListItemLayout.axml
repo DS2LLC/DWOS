@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/elementSpacing">
+    <View
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:id="@+id/viewProcessStatus"
+        android:background="@color/stepStatusIncomplete" />
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/elementSpacing">
+        <TextView
+            android:text="100.0"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProcessStep"
+            android:textColor="?android:attr/textColorPrimary"
+            android:lines="1" />
+        <TextView
+            android:text="An Important Process To Do"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProcessName"
+            android:textColor="?android:attr/textColorPrimary"
+            android:lines="1"
+            android:layout_toRightOf="@id/textViewProcessStep"
+            android:layout_marginLeft="@dimen/elementSpacing" />
+        <TextView
+            android:text="Process Alias"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProcessAliasName"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@id/textViewProcessName"  />
+        <TextView
+            android:text="Department"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProcessDepartment"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:layout_alignParentBottom="false"
+            android:layout_alignLeft="@id/textViewProcessStep"
+            android:layout_below="@id/textViewProcessAliasName" />
+        <TextView
+            android:text="12/12/2014 - 12/12/2015"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProcessDate"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/textViewProcessDepartment" />
+        <TextView
+            android:text="Number of Fixtures: X"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewFixtureCount"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@id/textViewProcessDepartment" />
+        <TextView
+            android:text="Weight per Fixture: X.XX lbs."
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewFixtureWeight"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lines="1"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/textViewFixtureCount" />
+    </RelativeLayout>
+</LinearLayout>

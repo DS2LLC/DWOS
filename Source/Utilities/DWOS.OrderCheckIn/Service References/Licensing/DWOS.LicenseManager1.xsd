@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DWOS.LicenseManager" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DWOS.LicenseManager" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="LicenseSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvaliableActivations" type="xs:int" />
+      <xs:element minOccurs="0" name="CurrentActivations" nillable="true" type="tns:ArrayOfUserActivation" />
+      <xs:element minOccurs="0" name="TotalActivations" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LicenseSummary" nillable="true" type="tns:LicenseSummary" />
+  <xs:complexType name="ArrayOfUserActivation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserActivation" nillable="true" type="tns:UserActivation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserActivation" nillable="true" type="tns:ArrayOfUserActivation" />
+  <xs:complexType name="UserActivation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Activated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ComputerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastCommunication" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UID" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserActivation" nillable="true" type="tns:UserActivation" />
+</xs:schema>

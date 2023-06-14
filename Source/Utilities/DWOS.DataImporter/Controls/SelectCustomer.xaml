@@ -1,0 +1,27 @@
+﻿<Window x:Class="DWOS.DataImporter.Controls.SelectCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Customer Selector" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0">Source Customer Name:</Label>
+        <TextBox Grid.Row="1" Margin="25,5,5,5" x:Name="txtSourceCustomer" IsReadOnly="True"></TextBox>
+
+        <Label Grid.Row="2">Target Customer Name (DWOS):</Label>
+        <ComboBox Grid.Row="3" Margin="25,5,5,5" x:Name="cboTargetCustomer"></ComboBox>
+        
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="75" Margin="3" Click="btnOK_Click">OK</Button>
+            <Button Width="75" Margin="3" Click="btnNone_Click" ToolTip="Do not process data from this customer.">SKIP</Button>
+            <Button Width="75" Margin="3" Click="btnAbort_Click" ToolTip="Stop the current import process">STOP</Button>
+        </StackPanel>
+    </Grid>
+</Window>

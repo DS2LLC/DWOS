@@ -1,0 +1,35 @@
+﻿<controls:MetroWindow x:Class="DWOS.AutomatedWorkOrderTool.Dialogs.ImportShippingManifest.ShippingManifestWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:local="clr-namespace:DWOS.AutomatedWorkOrderTool.Dialogs.ImportShippingManifest"
+                      xmlns:awotControls="clr-namespace:DWOS.AutomatedWorkOrderTool.Controls"
+                      mc:Ignorable="d"
+                      Title="Import Shipping Manifest"
+                      Height="300"
+                      Width="300"
+                      Style="{StaticResource BaseWindowStyle}"
+                      Loaded="ShippingManifestWindow_OnLoaded"
+                      Unloaded="ShippingManifestWindow_OnUnloaded">
+    <Grid Name="InnerControl"
+          DataContext="{Binding ShippingManifest, Source={StaticResource Locator}}">
+        <local:ShippingSetupControl ViewModel="{Binding }"
+                                    Margin="{StaticResource PrimaryMargin}"
+                                    Visibility="{Binding ShowSetup, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <local:ShippingConfirmControl ViewModel="{Binding }"
+                                      Margin="{StaticResource PrimaryMargin}"
+                                      Visibility="{Binding ShowConfirmation, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <local:ShippingImportControl ViewModel="{Binding }"
+                                     Margin="{StaticResource PrimaryMargin}"
+                                     Visibility="{Binding ShowImport, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <local:ShippingResultControl ViewModel="{Binding }"
+                                     Margin="{StaticResource PrimaryMargin}"
+                                     Visibility="{Binding ShowResults, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <awotControls:LoadingControl Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Grid>
+</controls:MetroWindow>

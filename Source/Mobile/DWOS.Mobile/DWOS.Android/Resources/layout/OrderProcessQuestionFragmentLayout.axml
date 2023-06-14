@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="1.0 Question Title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewQuestionTitle"
+        android:visibility="gone" />
+    <TextView
+        android:text="Answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_marginTop="@dimen/elementSpacing"
+        android:id="@+id/textViewAnswerHeader"
+        android:lines="1"
+        android:ellipsize="end" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/elementSpacing">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+            <EditText
+                android:id="@+id/editTextAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter Answer"
+                android:maxLines="1"
+                android:minWidth="125dp"
+                android:lines="1"
+                android:visibility="invisible"
+                android:selectAllOnFocus="true"
+                android:layout_centerVertical="true">
+                <requestFocus />
+            </EditText>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonAnswer"
+                android:visibility="invisible"
+                style="?android:attr/spinnerStyle"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_centerVertical="true" />
+            <DWOS.Android.Controls.DWOSSpinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerAnswer"
+                android:minWidth="145dp"
+                android:layout_centerVertical="true"
+                android:spinnerMode="dropdown"
+                android:visibility="invisible" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewAnswer"
+                android:minWidth="125dp"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"
+                android:imeOptions="actionNext" />
+        </RelativeLayout>
+        <TextView
+            android:text="*"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewAnswerRequired"
+            android:layout_marginLeft="@dimen/elementSpacing"
+            android:gravity="center"
+            android:textColor="@color/headerred" />
+        <TextView
+            android:text="5 - 20 Something"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewRange"
+            android:layout_marginLeft="@dimen/elementSpacing"
+            android:layout_gravity="center_vertical"
+            android:gravity="center" />
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:drawableLeft="@drawable/ic_hand_left"
+                android:text="Set To Default"
+                android:id="@+id/buttonSetDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/edgeMargin" />
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:text="Operator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_marginTop="@dimen/elementSpacing" />
+    <TextView
+        android:id="@+id/textViewOperator"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_height="wrap_content"
+        android:text="Operator"
+        android:layout_marginTop="@dimen/elementSpacing"
+        android:inputType="none"
+        android:minWidth="228dp"
+        android:layout_width="wrap_content" />
+    <TextView
+        android:text="Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_marginTop="@dimen/elementSpacing" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/elementSpacing">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:id="@+id/textViewDate"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/elementSpacing"
+                android:minWidth="228dp"
+                android:layout_width="wrap_content"
+                android:visibility="invisible" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonDate"
+                android:text="10/02/2014"
+                android:visibility="invisible"
+                style="?android:attr/spinnerStyle"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonTime"
+                android:layout_marginLeft="@dimen/elementSpacing"
+                android:text="02:14 PM"
+                android:layout_toRightOf="@id/buttonDate"
+                android:visibility="invisible"
+                style="?android:attr/spinnerStyle"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:text="Notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_marginTop="@dimen/elementSpacing" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <WebView
+            android:id="@+id/webViewNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/elementSpacing" />
+    </ScrollView>
+</LinearLayout>

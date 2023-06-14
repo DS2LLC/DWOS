@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="@dimen/elementSpacing"
+    android:paddingLeft="@dimen/elementSpacing"
+    android:paddingRight="@dimen/elementSpacing">
+  <Button
+      android:id="@+id/buttonAddNote"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:text="@string/AddOrderNote"/>
+  <ListView
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/android:list"
+      android:choiceMode="none"
+      android:dividerHeight="@dimen/orderNotesDividerHeight"
+      android:divider="@color/textColorPrimary" />
+  <TextView
+      android:id="@android:id/empty"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:text="There are no notes for this order." />
+</LinearLayout>

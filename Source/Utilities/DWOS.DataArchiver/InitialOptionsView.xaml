@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="DWOS.DataArchiver.InitialOptionsViewModel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <Grid DataContext="{Binding InitialOptions, Source={StaticResource Locator}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               FontWeight="Bold"
+               Content="Options" />
+
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="Number of closed orders:" />
+        <controls:NumericUpDown Grid.Row="1"
+                                Grid.Column="1"
+                                Value="{Binding OrderCount}" />
+
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Content="Directory:" />
+
+        <Grid Grid.Row="2"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     IsReadOnly="True"
+                     Text="{Binding Directory}" />
+            <Button Grid.Column="1"
+                    Content="Browse"
+                    Command="{Binding BrowseFolder}" />
+        </Grid>
+
+        <Button Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Content="Next"
+                Command="{Binding Next}" />
+    </Grid>
+</UserControl>

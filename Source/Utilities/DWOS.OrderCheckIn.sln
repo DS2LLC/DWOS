@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.OrderCheckIn", "DWOS.OrderCheckIn\DWOS.OrderCheckIn.csproj", "{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Shared", "..\Client\DWOS.Shared\DWOS.Shared.csproj", "{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Data", "..\Client\DWOS.Data\DWOS.Data.csproj", "{F83FFF1C-F805-40B1-A9A4-337EE53788B9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ds2corp.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DWOS.Data\\DWOS.Data.csproj
+		SccProjectName1 = DWOS.Data
+		SccLocalPath1 = DWOS.Data
+		SccProjectUniqueName2 = DWOS.Shared\\DWOS.Shared.csproj
+		SccProjectName2 = DWOS.Shared
+		SccLocalPath2 = DWOS.Shared
+		SccProjectUniqueName3 = DWOS.OrderCheckIn\\DWOS.OrderCheckIn.csproj
+		SccProjectName3 = DWOS.OrderCheckIn
+		SccLocalPath3 = DWOS.OrderCheckIn
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DWOS.Services|Any CPU = DWOS.Services|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseEncrypt|Any CPU = ReleaseEncrypt|Any CPU
+		ReleaseRun|Any CPU = ReleaseRun|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.DWOS.Services|Any CPU.ActiveCfg = DWOS.Services|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.DWOS.Services|Any CPU.Build.0 = DWOS.Services|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.ReleaseEncrypt|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.ReleaseEncrypt|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.ReleaseRun|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{4F985BC0-FFAA-4E30-A9A3-D594C1894B87}.ReleaseRun|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.DWOS.Services|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.DWOS.Services|Any CPU.Build.0 = Debug|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.ReleaseEncrypt|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.ReleaseEncrypt|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.ReleaseRun|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.ReleaseRun|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.DWOS.Services|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.DWOS.Services|Any CPU.Build.0 = Debug|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.ReleaseEncrypt|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.ReleaseEncrypt|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.ReleaseRun|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.ReleaseRun|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

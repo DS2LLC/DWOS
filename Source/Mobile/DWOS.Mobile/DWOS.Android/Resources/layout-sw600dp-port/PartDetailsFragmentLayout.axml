@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_marginTop="@dimen/elementSpacing"
+    android:paddingLeft="@dimen/elementSpacing"
+    android:paddingRight="@dimen/edgeMargin"
+    android:paddingBottom="@dimen/edgeMargin">
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Part"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewPart"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Revision"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewRev"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manufacturer"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewManufacturer"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewModel"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Material"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewMaterial"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewSize"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/layoutCustomFields" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewNotes"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:text="Documents"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/elementSpacing"
+                style="?android:attr/listSeparatorTextViewStyle" />
+            <Spinner
+                android:id="@+id/spinnerDocuments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

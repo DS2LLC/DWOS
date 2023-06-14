@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@android:color/transparent"
+    android:keepScreenOn="true">
+<!-- Stop auto focussing the EditText -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="600dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:padding="16dp">
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewWorkOrder" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewInspectionName"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <include
+                layout="@layout/LaborTimerButtons"
+                android:id="@+id/laborButtons"
+                android:visibility="gone" />
+            <TextView
+                android:text="reference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/elementSpacing"
+                style="?android:attr/listSeparatorTextViewStyle" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewInspectionReference"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:text="requirements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/elementSpacing"
+                style="?android:attr/listSeparatorTextViewStyle" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewInspectionRequirements"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <TextView
+                android:text="documents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/elementSpacing"
+                style="?android:attr/listSeparatorTextViewStyle" />
+            <Spinner
+                android:id="@+id/spinnerDocuments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/elementSpacing">
+                <TableRow
+                    android:layout_marginTop="@dimen/elementSpacing">
+                    <TextView
+                        android:text="operator"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        style="?android:attr/listSeparatorTextViewStyle" />
+                    <TextView
+                        android:text="date"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:layout_marginLeft="@dimen/elementSpacing" />
+                </TableRow>
+                <TableRow
+                    android:layout_marginTop="@dimen/elementSpacing">
+                    <TextView
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textViewInspectionOperator" />
+                    <TextView
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textViewInspectionDate"
+                        android:layout_marginLeft="@dimen/elementSpacing" />
+                </TableRow>
+            </TableLayout>
+            <EditText
+                android:hint="Enter Notes"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewInspectionNotes"
+                android:layout_marginTop="@dimen/elementSpacing" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pagerQuestions"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/elementSpacing">
+                <android.support.v4.view.PagerTabStrip
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:textColor="@color/pagerTabTextColor"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
+            </android.support.v4.view.ViewPager>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

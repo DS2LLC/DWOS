@@ -1,0 +1,43 @@
+﻿<dialogs:CustomDialog x:Class="DWOS.AutomatedWorkOrderTool.Dialogs.AddCustomerDialog"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                      mc:Ignorable="d"
+                      Loaded="AddCustomerDialog_OnLoaded">
+    <Grid Name="InnerControl"
+          DataContext="{Binding AddCustomer, Source={StaticResource Locator}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0"
+               Grid.Column="0">Customer:</Label>
+        <ComboBox Grid.Row="0"
+                  Grid.Column="1"
+                  ItemsSource="{Binding Customers}"
+                  SelectedItem="{Binding SelectedCustomer}"
+                  DisplayMemberPath="Name" />
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <Button Name="OkButton"
+                    IsDefault="True"
+                    Content="OK" />
+            <Button Name="CancelButton"
+                    Margin="10,0,0,0"
+                    Content="Cancel" />
+        </StackPanel>
+
+    </Grid>
+</dialogs:CustomDialog>

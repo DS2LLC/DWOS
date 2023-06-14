@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <dimen name="orderDetailHeaderTopMargin">16dp</dimen>
+  <dimen name="orderDetailDividerTopMargin">4dp</dimen>
+  <dimen name="orderDetailHeaderLeftMargin">4dp</dimen>
+  <dimen name="orderDetailValueLeftMargin">4dp</dimen>
+  <dimen name="orderDetailValueTopMargin">8dp</dimen>
+  <dimen name="orderDetailDividerHeight">1dp</dimen>
+  <dimen name="orderNotesDividerHeight">2dp</dimen>
+  <dimen name="edgeMargin">16dp</dimen>
+  <dimen name="elementSpacing">8dp</dimen>
+  <dimen name="betweenMarginHalf">4dp</dimen>
+  <dimen name="betweenMarginFull">8dp</dimen>
+  <dimen name="textSizeXLarge">30dp</dimen>
+  <dimen name="buttonWidth">150dp</dimen>
+  <dimen name="mediumFont">18sp</dimen>
+  <dimen name="editTextFontSize">16sp</dimen>
+</resources>

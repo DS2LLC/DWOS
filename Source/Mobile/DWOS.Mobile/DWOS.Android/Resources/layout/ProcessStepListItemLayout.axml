@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
+    android:paddingBottom="@dimen/betweenMarginHalf"
+    android:paddingTop="@dimen/betweenMarginHalf"
+    android:background="@drawable/orderListSelector">
+    <View
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:id="@+id/viewStepStatus"
+        android:background="@color/stepStatusIncomplete"
+        android:layout_marginRight="@dimen/betweenMarginHalf"
+        android:layout_marginLeft="@dimen/edgeMargin" />
+    <TextView
+        android:text="100.0"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewStepOrder"
+        android:layout_marginRight="@dimen/betweenMarginHalf"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/betweenMarginHalf" />
+    <TextView
+        android:text="Example Step Name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewStepName"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_gravity="center" />
+</LinearLayout>

@@ -1,0 +1,196 @@
+﻿<dialogs:CustomDialog x:Class="DWOS.AutomatedWorkOrderTool.Dialogs.AddOspFormatCodeMapDialog"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300"
+                      d:DesignWidth="300"
+                      FocusManager.FocusedElement="{Binding ElementName=OspCodeTextBox}">
+    <ScrollViewer>
+        <Grid Name="InnerControl"
+              DataContext="{Binding AddOspFormatCodeMap, Source={StaticResource Locator}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Customer -->
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="Customer:" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     IsReadOnly="True"
+                     Text="{Binding CustomerName, Mode=OneWay}" />
+
+            <!-- Manufacturer -->
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Content="Manufacturer:" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     IsReadOnly="True"
+                     Text="{Binding ManufacturerName, Mode=OneWay}" />
+
+            <!-- Section -->
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Content="Section:" />
+            <ComboBox Grid.Row="2"
+                      Grid.Column="1"
+                      ItemsSource="{Binding Sections}"
+                      SelectedItem="{Binding SelectedSection}"
+                      DisplayMemberPath="DisplayText" />
+
+            <!-- Code -->
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Content="OSP Code:" />
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     Name="OspCodeTextBox"
+                     Text="{Binding OspCode, UpdateSourceTrigger=PropertyChanged}"
+                     CharacterCasing="Upper"
+                     MaxLength="10" />
+
+            <!-- Process Section: Process -->
+            <Label Grid.Row="4"
+                   Grid.Column="0"
+                   Visibility="{Binding ShowProcessFields, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Content="Process:" />
+            <ComboBox Grid.Row="4"
+                      Grid.Column="1"
+                      Visibility="{Binding ShowProcessFields, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding Processes}"
+                      SelectedItem="{Binding SelectedProcess}"
+                      DisplayMemberPath="Name" />
+
+            <!-- Process Section: Process Alias -->
+            <Label Grid.Row="5"
+                   Grid.Column="0"
+                   Visibility="{Binding ShowProcessFields, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Content="Process Alias:" />
+            <ComboBox Grid.Row="5"
+                      Grid.Column="1"
+                      Visibility="{Binding ShowProcessFields, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding SelectedProcess.Aliases}"
+                      SelectedItem="{Binding SelectedProcessAlias}"
+                      DisplayMemberPath="Name" />
+
+            <!-- Part Mark Section: Specification -->
+            <Label Grid.Row="6"
+                   Grid.Column="0"
+                   Visibility="{Binding ShowPartMarkFields, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Content="Specification:" />
+            <TextBox Grid.Row="6"
+                     Grid.Column="1"
+                     Visibility="{Binding ShowPartMarkFields, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     MaxLength="50"
+                     Text="{Binding ProcessSpec, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Part Mark Section: Lines -->
+            <Grid Grid.Row="7"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Visibility="{Binding ShowPartMarkFields, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Content="Marking Definition Template" />
+
+                <CheckBox Grid.Row="1"
+                          Grid.Column="0"
+                          IsChecked="{Binding IsDef1Editable}" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         IsEnabled="{Binding IsDef1Editable}"
+                         Text="{Binding Def1}" />
+
+                <CheckBox Grid.Row="2"
+                          Grid.Column="0"
+                          IsChecked="{Binding IsDef2Editable}" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         IsEnabled="{Binding IsDef2Editable}"
+                         Text="{Binding Def2}" />
+
+                <CheckBox Grid.Row="3"
+                          Grid.Column="0"
+                          IsChecked="{Binding IsDef3Editable}" />
+                <TextBox Grid.Row="3"
+                         Grid.Column="1"
+                         IsEnabled="{Binding IsDef3Editable}"
+                         Text="{Binding Def3}" />
+
+                <CheckBox Grid.Row="4"
+                          Grid.Column="0"
+                          IsChecked="{Binding IsDef4Editable}" />
+                <TextBox Grid.Row="4"
+                         Grid.Column="1"
+                         IsEnabled="{Binding IsDef4Editable}"
+                         Text="{Binding Def4}" />
+            </Grid>
+
+            <!-- Part Mark Section: Marker Definition Codes -->
+            <Expander Grid.Row="8"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
+                      Header="Marker Definition Codes"
+                      Visibility="{Binding ShowPartMarkFields, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DataGrid ItemsSource="{Binding MarkerCodes}"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Code}"
+                                            Header="Code"
+                                            Width="*" />
+                        <DataGridTextColumn Binding="{Binding Sample}"
+                                            Header="Sample" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Expander>
+
+            <!-- OK/Cancel -->
+            <StackPanel Grid.Row="9"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Name="OkButton"
+                        IsEnabled="{Binding IsValid}"
+                        IsDefault="True"
+                        Content="OK" />
+                <Button Name="CancelButton"
+                        Margin="10,0,0,0"
+                        Content="Cancel" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</dialogs:CustomDialog>

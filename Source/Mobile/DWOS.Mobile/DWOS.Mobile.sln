@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Android", "DWOS.Android\DWOS.Android.csproj", "{0C182A3C-D780-4613-AF0C-A16FAF48569D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8428F68B-8083-4743-B281-DEF8C9CCA4DD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DWOS", "DWOS\DWOS.csproj", "{878F92B0-CD97-42A3-84DA-CE31FAF86E9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Tests", "DWOS.Tests\DWOS.Tests.csproj", "{071D21BD-A4F5-408D-9403-1B1F83EE1DA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C182A3C-D780-4613-AF0C-A16FAF48569D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C182A3C-D780-4613-AF0C-A16FAF48569D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C182A3C-D780-4613-AF0C-A16FAF48569D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0C182A3C-D780-4613-AF0C-A16FAF48569D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C182A3C-D780-4613-AF0C-A16FAF48569D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C182A3C-D780-4613-AF0C-A16FAF48569D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{878F92B0-CD97-42A3-84DA-CE31FAF86E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{878F92B0-CD97-42A3-84DA-CE31FAF86E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{878F92B0-CD97-42A3-84DA-CE31FAF86E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{878F92B0-CD97-42A3-84DA-CE31FAF86E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071D21BD-A4F5-408D-9403-1B1F83EE1DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071D21BD-A4F5-408D-9403-1B1F83EE1DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071D21BD-A4F5-408D-9403-1B1F83EE1DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071D21BD-A4F5-408D-9403-1B1F83EE1DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {099DED70-5201-49AD-92CB-F5C62E87095B}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ds2corp.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DWOS.Android\\DWOS.Android.csproj
+		SccProjectName1 = DWOS.Android
+		SccLocalPath1 = DWOS.Android
+		SccProjectUniqueName2 = DWOS\\DWOS.csproj
+		SccProjectName2 = DWOS
+		SccLocalPath2 = DWOS
+		SccProjectUniqueName3 = DWOS.Tests\\DWOS.Tests.csproj
+		SccProjectName3 = DWOS.Tests
+		SccLocalPath3 = DWOS.Tests
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = DWOS.Android\DWOS.Android.csproj
+	EndGlobalSection
+EndGlobal

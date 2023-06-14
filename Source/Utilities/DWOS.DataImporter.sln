@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.DataImporter", "DWOS.DataImporter\DWOS.DataImporter.csproj", "{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Shared", "..\Client\DWOS.Shared\DWOS.Shared.csproj", "{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Data", "..\Client\DWOS.Data\DWOS.Data.csproj", "{F83FFF1C-F805-40B1-A9A4-337EE53788B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseEncrypt|Any CPU = ReleaseEncrypt|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}.ReleaseEncrypt|Any CPU.ActiveCfg = Release|Any CPU
+		{C60BCAFD-38FF-4A52-8B44-B729E61FBD9E}.ReleaseEncrypt|Any CPU.Build.0 = Release|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.ReleaseEncrypt|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}.ReleaseEncrypt|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.ReleaseEncrypt|Any CPU.ActiveCfg = ReleaseEncrypt|Any CPU
+		{F83FFF1C-F805-40B1-A9A4-337EE53788B9}.ReleaseEncrypt|Any CPU.Build.0 = ReleaseEncrypt|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ds2corp.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DWOS.Data\\DWOS.Data.csproj
+		SccProjectName1 = DWOS.Data
+		SccLocalPath1 = DWOS.Data
+		SccProjectUniqueName2 = DWOS.Shared\\DWOS.Shared.csproj
+		SccProjectName2 = DWOS.Shared
+		SccLocalPath2 = DWOS.Shared
+		SccProjectUniqueName3 = DWOS.DataImporter\\DWOS.DataImporter.csproj
+		SccProjectName3 = DWOS.DataImporter
+		SccLocalPath3 = DWOS.DataImporter
+	EndGlobalSection
+EndGlobal

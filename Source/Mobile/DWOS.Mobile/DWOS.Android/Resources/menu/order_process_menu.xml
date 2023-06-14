@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/action_save_orderprocessing"
+        android:icon="@drawable/ic_action_save"
+        android:title="Save"
+        android:showAsAction="ifRoom"/>
+  <item android:id="@+id/action_done_orderprocessing"
+        android:icon="@drawable/ic_action_accept"
+        android:title="Done"
+        android:showAsAction="ifRoom"/>
+  <item android:id="@+id/action_start_timer_orderprocessing"
+        android:title="Start Processing Timer"
+        android:showAsAction="never" />
+
+  <item android:id="@+id/action_stop_timer_orderprocessing"
+      android:title="Stop Processing Timer"
+      android:showAsAction="never" />
+</menu>

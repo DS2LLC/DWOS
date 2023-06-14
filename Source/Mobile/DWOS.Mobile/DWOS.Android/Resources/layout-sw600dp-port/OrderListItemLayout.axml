@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/orderListSelector"
+    android:paddingLeft="@dimen/edgeMargin"
+    android:paddingRight="@dimen/edgeMargin"
+    android:paddingBottom="@dimen/edgeMargin">
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewOrderTitle"
+        android:ellipsize="end"
+        android:layout_marginTop="8dp"
+        android:textColor="?android:attr/textColorPrimary" />
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewOrderSubtitle"
+        android:layout_below="@id/textViewOrderTitle"
+        android:ellipsize="end"
+        android:textColor="?android:attr/textColorSecondary"
+        android:lines="1" />
+</RelativeLayout>

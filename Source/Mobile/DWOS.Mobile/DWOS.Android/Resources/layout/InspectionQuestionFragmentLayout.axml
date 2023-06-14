@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/elementSpacing"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/elementSpacing"
+        android:id="@+id/viewSkipQuestion"
+        android:visibility="gone">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="You may skip this question."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSkipQuestion"
+            android:text="@string/Continue"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+    <TextView
+        android:text="Answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:id="@+id/textViewAnswerHeader"
+        android:lines="1"
+        android:ellipsize="end" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/elementSpacing"
+        android:id="@+id/layoutQuestionResponse">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/editTextAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter Answer"
+                android:maxLines="1"
+                android:minWidth="125dp"
+                android:lines="1"
+                android:visibility="invisible"
+                android:selectAllOnFocus="true"
+                android:layout_centerVertical="true" />
+            <Button
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonAnswer"
+                android:visibility="invisible"
+                style="?android:attr/spinnerStyle"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_centerVertical="true" />
+            <DWOS.Android.Controls.DWOSSpinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerAnswer"
+                android:minWidth="145dp"
+                android:layout_centerVertical="true"
+                android:spinnerMode="dropdown"
+                android:visibility="invisible" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewAnswer"
+                android:minWidth="125dp"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"
+                android:imeOptions="actionNext" />
+        </RelativeLayout>
+        <TextView
+            android:text="5 - 20 Something"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewRange"
+            android:layout_marginLeft="@dimen/elementSpacing"
+            android:gravity="center" />
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayout1">
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:drawableLeft="@drawable/ic_hand_left"
+                android:text="Set To Default"
+                android:id="@+id/buttonSetDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/edgeMargin" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

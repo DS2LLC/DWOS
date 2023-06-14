@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TimerLabel" />
+    <Button
+        android:id="@+id/startLaborButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TimerStart"
+        android:drawableLeft="@drawable/ic_media_play" />
+    <Button
+        android:id="@+id/pauseLaborButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TimerPause"
+        android:drawableLeft="@drawable/ic_media_pause" />
+    <Button
+        android:id="@+id/stopLaborButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TimerStop"
+        android:drawableLeft="@drawable/ic_media_stop" />
+</LinearLayout>

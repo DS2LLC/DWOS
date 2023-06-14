@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3506FAB1-7F5B-45A0-BF1E-5A04A0D4B435}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DWOS.AutomatedWorkOrderTool</RootNamespace>
+    <AssemblyName>DWOS.AutomatedWorkOrderTool</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SHOW_TRAVELER_OPTION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseNightly|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NIGHTLY;SHOW_TRAVELER_OPTION</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AWOT Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="InfragisticsWPF4.Documents.Core.v17.1, Version=17.1.20171.2200, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.Documents.Excel.v17.1, Version=17.1.20171.2200, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.Documents.Reports.v17.1, Version=17.1.20171.2108, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.Reduced.1.9.1.8\lib\net20\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="ConnectionWindow.xaml.cs">
+      <DependentUpon>ConnectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Licensing\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingControl.xaml.cs">
+      <DependentUpon>LoadingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OspFormatControl.xaml.cs">
+      <DependentUpon>OspFormatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserInfoControl.xaml.cs">
+      <DependentUpon>UserInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToTextConverter.cs" />
+    <Compile Include="Converters\ImportSummaryImageConverter.cs" />
+    <Compile Include="Converters\OrderStatusConverter.cs" />
+    <Compile Include="Dialogs\AddCustomerDialog.xaml.cs">
+      <DependentUpon>AddCustomerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddManufacturerDialog.xaml.cs">
+      <DependentUpon>AddManufacturerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddOspFormatCodeMapDialog.xaml.cs">
+      <DependentUpon>AddOspFormatCodeMapDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddOspFormatSectionDialog.xaml.cs">
+      <DependentUpon>AddOspFormatSectionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportMasterList\MasterListConfirmControl.xaml.cs">
+      <DependentUpon>MasterListConfirmControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportMasterList\MasterListImportControl.xaml.cs">
+      <DependentUpon>MasterListImportControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportMasterList\MasterListResultControl.xaml.cs">
+      <DependentUpon>MasterListResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportMasterList\MasterListSetupControl.xaml.cs">
+      <DependentUpon>MasterListSetupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportMasterList\MasterListWindow.xaml.cs">
+      <DependentUpon>MasterListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportShippingManifest\ShippingConfirmControl.xaml.cs">
+      <DependentUpon>ShippingConfirmControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportShippingManifest\ShippingImportControl.xaml.cs">
+      <DependentUpon>ShippingImportControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportShippingManifest\ShippingManifestWindow.xaml.cs">
+      <DependentUpon>ShippingManifestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportShippingManifest\ShippingResultControl.xaml.cs">
+      <DependentUpon>ShippingResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportShippingManifest\ShippingSetupControl.xaml.cs">
+      <DependentUpon>ShippingSetupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MetroWindowExtensions.cs" />
+    <Compile Include="ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Messages\AddCustomerMessage.cs" />
+    <Compile Include="Messages\AddOspFormatMessage.cs" />
+    <Compile Include="Messages\AddOspPartMarkMessage.cs" />
+    <Compile Include="Messages\AddOspProcessMessage.cs" />
+    <Compile Include="Messages\ConfirmActionMessage.cs" />
+    <Compile Include="Messages\ErrorMessage.cs" />
+    <Compile Include="Messages\AddOspFormatSectionMessage.cs" />
+    <Compile Include="Messages\ShowAddCodeMapDialogMessage.cs" />
+    <Compile Include="Messages\ShowAddSectionDialogMessage.cs" />
+    <Compile Include="Messages\ShowDialogMessage.cs" />
+    <Compile Include="Messages\SuccessMessage.cs" />
+    <Compile Include="Model\AwotDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AwotDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomField.cs" />
+    <Compile Include="Model\PartMark.cs" />
+    <Compile Include="Model\PartProcessingInfo.cs" />
+    <Compile Include="Model\DocumentFile.cs" />
+    <Compile Include="Model\DocumentFolder.cs" />
+    <Compile Include="Model\MasterListPart.cs" />
+    <Compile Include="Model\ProcessRequisite.cs" />
+    <Compile Include="Model\ShippingManifestOrder.cs" />
+    <Compile Include="Services\AwotSecurityUserInfo.cs" />
+    <Compile Include="Services\DocumentManager.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\IDocumentManager.cs" />
+    <Compile Include="Services\IFileService.cs" />
+    <Compile Include="Services\IPartManager.cs" />
+    <Compile Include="Services\ISettingsProvider.cs" />
+    <Compile Include="Services\PartManager.cs" />
+    <Compile Include="Services\SettingsProvider.cs" />
+    <Compile Include="Services\UnsavedDataService.cs" />
+    <Compile Include="ViewModel\AddOspFormatCodeMapViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel.cs" />
+    <Compile Include="Model\Enums.cs" />
+    <Compile Include="ViewModel\ImportSummaryItem.cs" />
+    <Compile Include="ViewModel\ISelectable.cs" />
+    <Compile Include="ViewModel\ManufacturerViewModel.cs" />
+    <Compile Include="Model\DwosUser.cs" />
+    <Compile Include="ViewModel\MasterListViewModel.cs" />
+    <Compile Include="ViewModel\OspFormatViewModel.cs" />
+    <Compile Include="ViewModel\OspFormatSectionViewModel.cs" />
+    <Compile Include="Services\CustomerManager.cs" />
+    <Compile Include="Services\DataManager.cs" />
+    <Compile Include="Services\DepartmentManager.cs" />
+    <Compile Include="Services\ICustomerManager.cs" />
+    <Compile Include="Services\IDataManager.cs" />
+    <Compile Include="Services\IDepartmentManager.cs" />
+    <Compile Include="Services\IServerManager.cs" />
+    <Compile Include="Services\IUserManager.cs" />
+    <Compile Include="Services\ServerManager.cs" />
+    <Compile Include="Services\UserChangedEventArgs.cs" />
+    <Compile Include="Services\UserManager.cs" />
+    <Compile Include="ViewModel\AddCustomerViewModel.cs" />
+    <Compile Include="ViewModel\AddManufacturerViewModel.cs" />
+    <Compile Include="ViewModel\AddOspFormatSectionViewModel.cs" />
+    <Compile Include="ViewModel\ConnectionWindowViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\OspFormatEditorViewModel.cs" />
+    <Compile Include="ViewModel\OspPartMarkViewModel.cs" />
+    <Compile Include="ViewModel\OspProcessViewModel.cs" />
+    <Compile Include="ViewModel\ShippingManifestViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="ViewModel\ValidationResult.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="ConnectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OspFormatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AddCustomerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AddManufacturerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AddOspFormatCodeMapDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AddOspFormatSectionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportMasterList\MasterListConfirmControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportMasterList\MasterListImportControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportMasterList\MasterListResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportMasterList\MasterListSetupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportMasterList\MasterListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportShippingManifest\ShippingConfirmControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportShippingManifest\ShippingImportControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportShippingManifest\ShippingManifestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportShippingManifest\ShippingResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ImportShippingManifest\ShippingSetupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Connected Services\Licensing\configuration91.svcinfo" />
+    <None Include="Connected Services\Licensing\configuration.svcinfo" />
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.CheckInLicenseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.CheckOutLicenseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.GetApplicationInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.GetLicenseSummaryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.KeepLicenseAliveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.ReloadCompanyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.AutomatedWorkOrderTool.Licensing.ValidateLicenseActivationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Licensing\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Templates\Master List.xlsx" />
+    <Resource Include="Images\Add_16.png" />
+    <Resource Include="Images\Delete_16.png" />
+    <Resource Include="Images\downarrow.png" />
+    <Resource Include="Images\uparrow.png" />
+    <Resource Include="Images\nopicture_thumb.jpg" />
+    <Resource Include="Images\error_32.png" />
+    <Resource Include="Images\info_32.png" />
+    <Resource Include="AWOT Logo.ico" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Connected Services\Licensing\DWOS.LicenseManager.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Licensing\DWOS.Server.Services.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Licensing\service.wsdl" />
+    <None Include="Connected Services\Licensing\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Licensing\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Model\AwotDataSet.xsc">
+      <DependentUpon>AwotDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Model\AwotDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AwotDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Model\AwotDataSet.xss">
+      <DependentUpon>AwotDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Client\DWOS.Data\DWOS.Data.csproj">
+      <Project>{f83fff1c-f805-40b1-a9a4-337ee53788b9}</Project>
+      <Name>DWOS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Client\DWOS.Reports\DWOS.Reports.csproj">
+      <Project>{28de14c9-ca9d-4499-ad39-211ae4ed36af}</Project>
+      <Name>DWOS.Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Client\DWOS.Shared\DWOS.Shared.csproj">
+      <Project>{1a332a66-4f1f-4a69-b3c2-0c7d363a77d2}</Project>
+      <Name>DWOS.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\Licensing\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

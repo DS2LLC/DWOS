@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/edgeMargin"
+        android:layout_centerInParent="true"
+        android:stretchColumns="0">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/filterHeaderRow">
+            <TextView
+                android:text="FILTER TYPE"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow
+            android:paddingTop="@dimen/elementSpacing"
+            android:id="@+id/filterContentRow">
+            <Spinner
+                android:id="@+id/spinnerFilter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <Button
+                android:text="Reset"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/elementSpacing"
+                android:id="@+id/buttonResetFilter"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/red08" />
+        </TableRow>
+        <TableRow
+            android:paddingTop="@dimen/elementSpacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="DEPARTMENT"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow
+            android:paddingTop="@dimen/elementSpacing">
+            <Spinner
+                android:id="@+id/spinnerDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <Button
+                android:text="Reset"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/elementSpacing"
+                android:id="@+id/buttonResetDepartment"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/red08" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/lineHeaderRow"
+            android:paddingTop="@dimen/elementSpacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="PROCESSING LINE"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/lineContentRow"
+            android:paddingTop="@dimen/elementSpacing">
+            <Spinner
+                android:id="@+id/spinnerProcessingLine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <Button
+                android:text="Reset"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/elementSpacing"
+                android:id="@+id/buttonResetLine"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/red08" />
+        </TableRow>
+
+        <TableRow
+            android:paddingTop="@dimen/elementSpacing">
+            <TextView
+                android:text="STATUS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow
+            android:paddingTop="@dimen/elementSpacing">
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerStatus" />
+            <Button
+                android:text="Reset"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/elementSpacing"
+                android:id="@+id/buttonResetStatus"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/red08" />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

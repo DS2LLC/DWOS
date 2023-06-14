@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+           xmlns:app="http://schemas.android.com/apk/res-auto">
+  <style name="Theme.Customdwosactionbar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="actionBarStyle">@style/Theme.Customdwosactionbar.ActionBar</item>
+    <item name="android:textAppearanceLarge">@style/TextAppearanceLarge</item>
+    <item name="android:textAppearanceMedium">@style/TextAppearanceMedium</item>
+    <item name="android:textAppearanceSmall">@style/TextAppearanceSmall</item>
+    <item name="android:textColorPrimary">@color/textColorPrimary</item>
+    <item name="android:textColorSecondary">@color/textColorSecondary</item>
+  </style>
+
+  <style name="Theme.NoActionBar" parent="Theme.Customdwosactionbar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Theme.Customdwosactionbar.ActionBar" parent="Widget.AppCompat.Light.ActionBar">
+    <item name="background">@color/colorPrimary</item>
+    <item name="subtitleTextStyle">@style/TextAppearance.Customdwosactionbar.Subtitle</item>
+  </style>
+
+  <style name="TextAppearance.Customdwosactionbar.Subtitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+    <item name="android:textColor">#FFFFFF</item>
+  </style>
+
+  <style name="TextAppearanceLarge" parent="@android:style/TextAppearance.Large">
+    <item name="android:textColor">@color/textColorPrimary</item>
+  </style>
+
+  <style name="TextAppearanceMedium" parent="@android:style/TextAppearance.Medium">
+    <item name="android:textColor">@color/textColorSecondary</item>
+  </style>
+
+  <style name="TextAppearanceSmall" parent="@android:style/TextAppearance.Small">
+    <item name="android:textColor">@color/textColorSecondary</item>
+  </style>
+</resources>
