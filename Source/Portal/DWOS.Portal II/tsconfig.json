@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "charset": "utf8",
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es5",
+    "outDir": "scripts",
+    "lib": [ "es2015", "es2017", "dom" ],
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": [ "node_modules/@types" ]
+  },
+
+  "angularCompilerOptions": { "preserveWhitespaces": "off" }
+}

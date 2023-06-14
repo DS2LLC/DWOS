@@ -1,0 +1,19 @@
+﻿.error-indicator {
+    color: red;
+    font-size: 150%;
+}
+
+.ribbon {
+    background: rgb(52, 58, 64);
+    padding: 5px 5px 0 5px;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+.ribbon .ribbon-inner {
+    overflow-x: auto;
+}
+
+.ribbon .ribbon-inner .btn-group {
+    padding: 0 0 5px 0;
+}
