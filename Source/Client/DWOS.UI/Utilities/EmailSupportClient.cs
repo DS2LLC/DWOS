@@ -25,7 +25,7 @@ namespace DWOS.UI.Support
                 htmlMailer.SSLStartMode = Enum.TryParse<HtmlmailerSSLStartModes>(ApplicationSettings.Current.EmailSslStartMode, out var sslStartMode) ? sslStartMode : HtmlmailerSSLStartModes.sslAutomatic;
 
                 htmlMailer.From = ticket.FromAddress;
-                htmlMailer.SendTo = "support@getdwos.com";
+                htmlMailer.SendTo = "mail@mail.com";
                 htmlMailer.Subject = ticket.Subject + $" - User: { ticket.UserName}";
                 htmlMailer.MessageText = ticket.Message;
 

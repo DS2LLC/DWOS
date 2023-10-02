@@ -82,23 +82,23 @@ namespace DWOS.Data.Datasets {
         
         private global::System.Data.DataRelation relationFK_d_Contact_Customer;
         
-        private global::System.Data.DataRelation relationFK_CustomerShipping_Customer;
-        
         private global::System.Data.DataRelation relationFK_CustomerShipping_d_ShippingCarrier;
         
-        private global::System.Data.DataRelation relationFK_Customer_PartMarking_PartMarking;
+        private global::System.Data.DataRelation relationFK_CustomerShipping_Customer;
         
         private global::System.Data.DataRelation relationFK_Customer_PartMarking_Customer;
         
-        private global::System.Data.DataRelation relationFK_CustomField_Customer;
+        private global::System.Data.DataRelation relationFK_Customer_PartMarking_PartMarking;
         
-        private global::System.Data.DataRelation relationFK_Customer_Fields_Customer;
+        private global::System.Data.DataRelation relationFK_CustomField_Customer;
         
         private global::System.Data.DataRelation relationFK_Customer_Fields_Fields;
         
-        private global::System.Data.DataRelation relationFK_ReportTask_ReportType;
+        private global::System.Data.DataRelation relationFK_Customer_Fields_Customer;
         
         private global::System.Data.DataRelation relationFK_ReportTask_d_Contact;
+        
+        private global::System.Data.DataRelation relationFK_ReportTask_ReportType;
         
         private global::System.Data.DataRelation relationFK_CustomerAddress_Customer;
         
@@ -106,9 +106,9 @@ namespace DWOS.Data.Datasets {
         
         private global::System.Data.DataRelation relationFK_CustomerPricePointDetail_CustomerPricePoint;
         
-        private global::System.Data.DataRelation relationFK_ContactAdditionalCustomer_Customer;
-        
         private global::System.Data.DataRelation relationFK_ContactAdditionalCustomer_d_Contact;
+        
+        private global::System.Data.DataRelation relationFK_ContactAdditionalCustomer_Customer;
         
         private global::System.Data.DataRelation relationFK_CustomerFee_Customer;
         
@@ -878,20 +878,20 @@ namespace DWOS.Data.Datasets {
             }
             this.relationFK_Customer_d_CustomerStatus = this.Relations["FK_Customer_d_CustomerStatus"];
             this.relationFK_d_Contact_Customer = this.Relations["FK_d_Contact_Customer"];
-            this.relationFK_CustomerShipping_Customer = this.Relations["FK_CustomerShipping_Customer"];
             this.relationFK_CustomerShipping_d_ShippingCarrier = this.Relations["FK_CustomerShipping_d_ShippingCarrier"];
-            this.relationFK_Customer_PartMarking_PartMarking = this.Relations["FK_Customer_PartMarking_PartMarking"];
+            this.relationFK_CustomerShipping_Customer = this.Relations["FK_CustomerShipping_Customer"];
             this.relationFK_Customer_PartMarking_Customer = this.Relations["FK_Customer_PartMarking_Customer"];
+            this.relationFK_Customer_PartMarking_PartMarking = this.Relations["FK_Customer_PartMarking_PartMarking"];
             this.relationFK_CustomField_Customer = this.Relations["FK_CustomField_Customer"];
-            this.relationFK_Customer_Fields_Customer = this.Relations["FK_Customer_Fields_Customer"];
             this.relationFK_Customer_Fields_Fields = this.Relations["FK_Customer_Fields_Fields"];
-            this.relationFK_ReportTask_ReportType = this.Relations["FK_ReportTask_ReportType"];
+            this.relationFK_Customer_Fields_Customer = this.Relations["FK_Customer_Fields_Customer"];
             this.relationFK_ReportTask_d_Contact = this.Relations["FK_ReportTask_d_Contact"];
+            this.relationFK_ReportTask_ReportType = this.Relations["FK_ReportTask_ReportType"];
             this.relationFK_CustomerAddress_Customer = this.Relations["FK_CustomerAddress_Customer"];
             this.relationFK_CustomerPricePoint_Customer = this.Relations["FK_CustomerPricePoint_Customer"];
             this.relationFK_CustomerPricePointDetail_CustomerPricePoint = this.Relations["FK_CustomerPricePointDetail_CustomerPricePoint"];
-            this.relationFK_ContactAdditionalCustomer_Customer = this.Relations["FK_ContactAdditionalCustomer_Customer"];
             this.relationFK_ContactAdditionalCustomer_d_Contact = this.Relations["FK_ContactAdditionalCustomer_d_Contact"];
+            this.relationFK_ContactAdditionalCustomer_Customer = this.Relations["FK_ContactAdditionalCustomer_Customer"];
             this.relationFK_CustomerFee_Customer = this.Relations["FK_CustomerFee_Customer"];
             this.relationFK_PartLevelCustomField_Customer = this.Relations["FK_PartLevelCustomField_Customer"];
             this.relationd_Manufacturer_Contact = this.Relations["d_Manufacturer_Contact"];
@@ -984,13 +984,6 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_CustomerShipping_Customer", new global::System.Data.DataColumn[] {
-                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCustomerShipping.CustomerIDColumn});
-            this.tableCustomerShipping.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_CustomerShipping_d_ShippingCarrier", new global::System.Data.DataColumn[] {
                         this.tabled_ShippingCarrier.CarrierIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomerShipping.CarrierIDColumn});
@@ -998,16 +991,23 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Customer_PartMarking_PartMarking", new global::System.Data.DataColumn[] {
-                        this.tablePartMarking.PartMarkingIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCustomer_PartMarking.PartMarkingIDColumn});
-            this.tableCustomer_PartMarking.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_CustomerShipping_Customer", new global::System.Data.DataColumn[] {
+                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCustomerShipping.CustomerIDColumn});
+            this.tableCustomerShipping.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_Customer_PartMarking_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomer_PartMarking.CustomerIDColumn});
+            this.tableCustomer_PartMarking.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Customer_PartMarking_PartMarking", new global::System.Data.DataColumn[] {
+                        this.tablePartMarking.PartMarkingIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCustomer_PartMarking.PartMarkingIDColumn});
             this.tableCustomer_PartMarking.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -1019,6 +1019,13 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Customer_Fields_Fields", new global::System.Data.DataColumn[] {
+                        this.tableFields.FieldIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCustomer_Fields.FieldIDColumn});
+            this.tableCustomer_Fields.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_Customer_Fields_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomer_Fields.CustomerIDColumn});
@@ -1026,10 +1033,10 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Customer_Fields_Fields", new global::System.Data.DataColumn[] {
-                        this.tableFields.FieldIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCustomer_Fields.FieldIDColumn});
-            this.tableCustomer_Fields.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_ReportTask_d_Contact", new global::System.Data.DataColumn[] {
+                        this.tableContact.ContactIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableReportTask.ContactIDColumn});
+            this.tableReportTask.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
@@ -1040,13 +1047,6 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_ReportTask_d_Contact", new global::System.Data.DataColumn[] {
-                        this.tableContact.ContactIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableReportTask.ContactIDColumn});
-            this.tableReportTask.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_CustomerAddress_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomerAddress.CustomerIDColumn});
@@ -1068,16 +1068,16 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_ContactAdditionalCustomer_Customer", new global::System.Data.DataColumn[] {
-                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableContactAdditionalCustomer.CustomerIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_ContactAdditionalCustomer_d_Contact", new global::System.Data.DataColumn[] {
+                        this.tableContact.ContactIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableContactAdditionalCustomer.ContactIDColumn});
             this.tableContactAdditionalCustomer.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_ContactAdditionalCustomer_d_Contact", new global::System.Data.DataColumn[] {
-                        this.tableContact.ContactIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableContactAdditionalCustomer.ContactIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_ContactAdditionalCustomer_Customer", new global::System.Data.DataColumn[] {
+                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableContactAdditionalCustomer.CustomerIDColumn});
             this.tableContactAdditionalCustomer.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -1104,42 +1104,42 @@ namespace DWOS.Data.Datasets {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableContact.CustomerIDColumn}, false);
             this.Relations.Add(this.relationFK_d_Contact_Customer);
-            this.relationFK_CustomerShipping_Customer = new global::System.Data.DataRelation("FK_CustomerShipping_Customer", new global::System.Data.DataColumn[] {
-                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCustomerShipping.CustomerIDColumn}, false);
-            this.Relations.Add(this.relationFK_CustomerShipping_Customer);
             this.relationFK_CustomerShipping_d_ShippingCarrier = new global::System.Data.DataRelation("FK_CustomerShipping_d_ShippingCarrier", new global::System.Data.DataColumn[] {
                         this.tabled_ShippingCarrier.CarrierIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomerShipping.CarrierIDColumn}, false);
             this.Relations.Add(this.relationFK_CustomerShipping_d_ShippingCarrier);
-            this.relationFK_Customer_PartMarking_PartMarking = new global::System.Data.DataRelation("FK_Customer_PartMarking_PartMarking", new global::System.Data.DataColumn[] {
-                        this.tablePartMarking.PartMarkingIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCustomer_PartMarking.PartMarkingIDColumn}, false);
-            this.Relations.Add(this.relationFK_Customer_PartMarking_PartMarking);
+            this.relationFK_CustomerShipping_Customer = new global::System.Data.DataRelation("FK_CustomerShipping_Customer", new global::System.Data.DataColumn[] {
+                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCustomerShipping.CustomerIDColumn}, false);
+            this.Relations.Add(this.relationFK_CustomerShipping_Customer);
             this.relationFK_Customer_PartMarking_Customer = new global::System.Data.DataRelation("FK_Customer_PartMarking_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomer_PartMarking.CustomerIDColumn}, false);
             this.Relations.Add(this.relationFK_Customer_PartMarking_Customer);
+            this.relationFK_Customer_PartMarking_PartMarking = new global::System.Data.DataRelation("FK_Customer_PartMarking_PartMarking", new global::System.Data.DataColumn[] {
+                        this.tablePartMarking.PartMarkingIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCustomer_PartMarking.PartMarkingIDColumn}, false);
+            this.Relations.Add(this.relationFK_Customer_PartMarking_PartMarking);
             this.relationFK_CustomField_Customer = new global::System.Data.DataRelation("FK_CustomField_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomField.CustomerIDColumn}, false);
             this.Relations.Add(this.relationFK_CustomField_Customer);
-            this.relationFK_Customer_Fields_Customer = new global::System.Data.DataRelation("FK_Customer_Fields_Customer", new global::System.Data.DataColumn[] {
-                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCustomer_Fields.CustomerIDColumn}, false);
-            this.Relations.Add(this.relationFK_Customer_Fields_Customer);
             this.relationFK_Customer_Fields_Fields = new global::System.Data.DataRelation("FK_Customer_Fields_Fields", new global::System.Data.DataColumn[] {
                         this.tableFields.FieldIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomer_Fields.FieldIDColumn}, false);
             this.Relations.Add(this.relationFK_Customer_Fields_Fields);
-            this.relationFK_ReportTask_ReportType = new global::System.Data.DataRelation("FK_ReportTask_ReportType", new global::System.Data.DataColumn[] {
-                        this.tableReportType.ReportTypeIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableReportTask.ReportTypeIDColumn}, false);
-            this.Relations.Add(this.relationFK_ReportTask_ReportType);
+            this.relationFK_Customer_Fields_Customer = new global::System.Data.DataRelation("FK_Customer_Fields_Customer", new global::System.Data.DataColumn[] {
+                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCustomer_Fields.CustomerIDColumn}, false);
+            this.Relations.Add(this.relationFK_Customer_Fields_Customer);
             this.relationFK_ReportTask_d_Contact = new global::System.Data.DataRelation("FK_ReportTask_d_Contact", new global::System.Data.DataColumn[] {
                         this.tableContact.ContactIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableReportTask.ContactIDColumn}, false);
             this.Relations.Add(this.relationFK_ReportTask_d_Contact);
+            this.relationFK_ReportTask_ReportType = new global::System.Data.DataRelation("FK_ReportTask_ReportType", new global::System.Data.DataColumn[] {
+                        this.tableReportType.ReportTypeIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableReportTask.ReportTypeIDColumn}, false);
+            this.Relations.Add(this.relationFK_ReportTask_ReportType);
             this.relationFK_CustomerAddress_Customer = new global::System.Data.DataRelation("FK_CustomerAddress_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomerAddress.CustomerIDColumn}, false);
@@ -1152,14 +1152,14 @@ namespace DWOS.Data.Datasets {
                         this.tableCustomerPricePoint.CustomerPricePointIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomerPricePointDetail.CustomerPricePointIDColumn}, false);
             this.Relations.Add(this.relationFK_CustomerPricePointDetail_CustomerPricePoint);
-            this.relationFK_ContactAdditionalCustomer_Customer = new global::System.Data.DataRelation("FK_ContactAdditionalCustomer_Customer", new global::System.Data.DataColumn[] {
-                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableContactAdditionalCustomer.CustomerIDColumn}, false);
-            this.Relations.Add(this.relationFK_ContactAdditionalCustomer_Customer);
             this.relationFK_ContactAdditionalCustomer_d_Contact = new global::System.Data.DataRelation("FK_ContactAdditionalCustomer_d_Contact", new global::System.Data.DataColumn[] {
                         this.tableContact.ContactIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableContactAdditionalCustomer.ContactIDColumn}, false);
             this.Relations.Add(this.relationFK_ContactAdditionalCustomer_d_Contact);
+            this.relationFK_ContactAdditionalCustomer_Customer = new global::System.Data.DataRelation("FK_ContactAdditionalCustomer_Customer", new global::System.Data.DataColumn[] {
+                        this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableContactAdditionalCustomer.CustomerIDColumn}, false);
+            this.Relations.Add(this.relationFK_ContactAdditionalCustomer_Customer);
             this.relationFK_CustomerFee_Customer = new global::System.Data.DataRelation("FK_CustomerFee_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCustomerFee.CustomerIDColumn}, false);
@@ -2448,6 +2448,8 @@ namespace DWOS.Data.Datasets {
             
             private global::System.Data.DataColumn columnIncludeCOCInShippingNotifications;
             
+            private global::System.Data.DataColumn columnOrderReceiptNotification;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ContactDataTable() {
@@ -2635,6 +2637,14 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn OrderReceiptNotificationColumn {
+                get {
+                    return this.columnOrderReceiptNotification;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2688,7 +2698,8 @@ namespace DWOS.Data.Datasets {
                         bool ApprovalNotification, 
                         bool HoldNotification, 
                         bool LateOrderNotification, 
-                        bool IncludeCOCInShippingNotifications) {
+                        bool IncludeCOCInShippingNotifications, 
+                        bool OrderReceiptNotification) {
                 ContactRow rowContactRow = ((ContactRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2709,7 +2720,8 @@ namespace DWOS.Data.Datasets {
                         ApprovalNotification,
                         HoldNotification,
                         LateOrderNotification,
-                        IncludeCOCInShippingNotifications};
+                        IncludeCOCInShippingNotifications,
+                        OrderReceiptNotification};
                 if ((parentCustomerRowByFK_d_Contact_Customer != null)) {
                     columnValuesArray[1] = parentCustomerRowByFK_d_Contact_Customer[0];
                 }
@@ -2767,6 +2779,7 @@ namespace DWOS.Data.Datasets {
                 this.columnHoldNotification = base.Columns["HoldNotification"];
                 this.columnLateOrderNotification = base.Columns["LateOrderNotification"];
                 this.columnIncludeCOCInShippingNotifications = base.Columns["IncludeCOCInShippingNotifications"];
+                this.columnOrderReceiptNotification = base.Columns["OrderReceiptNotification"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2810,6 +2823,8 @@ namespace DWOS.Data.Datasets {
                 base.Columns.Add(this.columnLateOrderNotification);
                 this.columnIncludeCOCInShippingNotifications = new global::System.Data.DataColumn("IncludeCOCInShippingNotifications", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIncludeCOCInShippingNotifications);
+                this.columnOrderReceiptNotification = new global::System.Data.DataColumn("OrderReceiptNotification", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrderReceiptNotification);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnContactID}, true));
                 this.columnContactID.AutoIncrement = true;
@@ -2841,6 +2856,8 @@ namespace DWOS.Data.Datasets {
                 this.columnLateOrderNotification.DefaultValue = ((bool)(false));
                 this.columnIncludeCOCInShippingNotifications.AllowDBNull = false;
                 this.columnIncludeCOCInShippingNotifications.DefaultValue = ((bool)(false));
+                this.columnOrderReceiptNotification.AllowDBNull = false;
+                this.columnOrderReceiptNotification.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9176,6 +9193,8 @@ namespace DWOS.Data.Datasets {
             
             private global::System.Data.DataColumn columnIncludeInLateOrderNotifications;
             
+            private global::System.Data.DataColumn columnIncludeInOrderReceiptNotification;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ContactAdditionalCustomerDataTable() {
@@ -9291,6 +9310,14 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn IncludeInOrderReceiptNotificationColumn {
+                get {
+                    return this.columnIncludeInOrderReceiptNotification;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -9326,7 +9353,7 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ContactAdditionalCustomerRow AddContactAdditionalCustomerRow(ContactRow parentContactRowByFK_ContactAdditionalCustomer_d_Contact, CustomerRow parentCustomerRowByFK_ContactAdditionalCustomer_Customer, bool IncludeInPortal, bool IncludeInShippingNotifications, bool IncludeInCocNotifications, bool IncludeInAutomatedNotifications, bool IncludeInApprovalNotifications, bool IncludeInHoldNotifications, bool IncludeInLateOrderNotifications) {
+            public ContactAdditionalCustomerRow AddContactAdditionalCustomerRow(ContactRow parentContactRowByFK_ContactAdditionalCustomer_d_Contact, CustomerRow parentCustomerRowByFK_ContactAdditionalCustomer_Customer, bool IncludeInPortal, bool IncludeInShippingNotifications, bool IncludeInCocNotifications, bool IncludeInAutomatedNotifications, bool IncludeInApprovalNotifications, bool IncludeInHoldNotifications, bool IncludeInLateOrderNotifications, bool IncludeInOrderReceiptNotification) {
                 ContactAdditionalCustomerRow rowContactAdditionalCustomerRow = ((ContactAdditionalCustomerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -9338,7 +9365,8 @@ namespace DWOS.Data.Datasets {
                         IncludeInAutomatedNotifications,
                         IncludeInApprovalNotifications,
                         IncludeInHoldNotifications,
-                        IncludeInLateOrderNotifications};
+                        IncludeInLateOrderNotifications,
+                        IncludeInOrderReceiptNotification};
                 if ((parentContactRowByFK_ContactAdditionalCustomer_d_Contact != null)) {
                     columnValuesArray[1] = parentContactRowByFK_ContactAdditionalCustomer_d_Contact[0];
                 }
@@ -9384,6 +9412,7 @@ namespace DWOS.Data.Datasets {
                 this.columnIncludeInApprovalNotifications = base.Columns["IncludeInApprovalNotifications"];
                 this.columnIncludeInHoldNotifications = base.Columns["IncludeInHoldNotifications"];
                 this.columnIncludeInLateOrderNotifications = base.Columns["IncludeInLateOrderNotifications"];
+                this.columnIncludeInOrderReceiptNotification = base.Columns["IncludeInOrderReceiptNotification"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9409,6 +9438,8 @@ namespace DWOS.Data.Datasets {
                 base.Columns.Add(this.columnIncludeInHoldNotifications);
                 this.columnIncludeInLateOrderNotifications = new global::System.Data.DataColumn("IncludeInLateOrderNotifications", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIncludeInLateOrderNotifications);
+                this.columnIncludeInOrderReceiptNotification = new global::System.Data.DataColumn("IncludeInOrderReceiptNotification", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncludeInOrderReceiptNotification);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnContactAdditionalCustomerID}, true));
                 this.columnContactAdditionalCustomerID.AutoIncrement = true;
@@ -9426,6 +9457,7 @@ namespace DWOS.Data.Datasets {
                 this.columnIncludeInApprovalNotifications.AllowDBNull = false;
                 this.columnIncludeInHoldNotifications.AllowDBNull = false;
                 this.columnIncludeInLateOrderNotifications.AllowDBNull = false;
+                this.columnIncludeInOrderReceiptNotification.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11445,6 +11477,17 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool OrderReceiptNotification {
+                get {
+                    return ((bool)(this[this.tableContact.OrderReceiptNotificationColumn]));
+                }
+                set {
+                    this[this.tableContact.OrderReceiptNotificationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public CustomerRow CustomerRow {
                 get {
                     return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_d_Contact_Customer"])));
@@ -11732,23 +11775,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CustomerRow CustomerRow {
-                get {
-                    return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_CustomerShipping_Customer"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_CustomerShipping_Customer"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public d_ShippingCarrierRow d_ShippingCarrierRow {
                 get {
                     return ((d_ShippingCarrierRow)(this.GetParentRow(this.Table.ParentRelations["FK_CustomerShipping_d_ShippingCarrier"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_CustomerShipping_d_ShippingCarrier"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public CustomerRow CustomerRow {
+                get {
+                    return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_CustomerShipping_Customer"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CustomerShipping_Customer"]);
                 }
             }
         }
@@ -12106,23 +12149,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PartMarkingRow PartMarkingRow {
-                get {
-                    return ((PartMarkingRow)(this.GetParentRow(this.Table.ParentRelations["FK_Customer_PartMarking_PartMarking"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_PartMarking_PartMarking"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public CustomerRow CustomerRow {
                 get {
                     return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_Customer_PartMarking_Customer"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_PartMarking_Customer"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public PartMarkingRow PartMarkingRow {
+                get {
+                    return ((PartMarkingRow)(this.GetParentRow(this.Table.ParentRelations["FK_Customer_PartMarking_PartMarking"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_PartMarking_PartMarking"]);
                 }
             }
         }
@@ -12684,23 +12727,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CustomerRow CustomerRow {
-                get {
-                    return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_Customer_Fields_Customer"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_Fields_Customer"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public FieldsRow FieldsRow {
                 get {
                     return ((FieldsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Customer_Fields_Fields"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_Fields_Fields"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public CustomerRow CustomerRow {
+                get {
+                    return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_Customer_Fields_Customer"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_Fields_Customer"]);
                 }
             }
             
@@ -12777,23 +12820,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ReportTypeRow ReportTypeRow {
-                get {
-                    return ((ReportTypeRow)(this.GetParentRow(this.Table.ParentRelations["FK_ReportTask_ReportType"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_ReportTask_ReportType"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ContactRow ContactRow {
                 get {
                     return ((ContactRow)(this.GetParentRow(this.Table.ParentRelations["FK_ReportTask_d_Contact"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_ReportTask_d_Contact"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ReportTypeRow ReportTypeRow {
+                get {
+                    return ((ReportTypeRow)(this.GetParentRow(this.Table.ParentRelations["FK_ReportTask_ReportType"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_ReportTask_ReportType"]);
                 }
             }
         }
@@ -13605,12 +13648,12 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public CustomerRow CustomerRow {
+            public bool IncludeInOrderReceiptNotification {
                 get {
-                    return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_ContactAdditionalCustomer_Customer"])));
+                    return ((bool)(this[this.tableContactAdditionalCustomer.IncludeInOrderReceiptNotificationColumn]));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_ContactAdditionalCustomer_Customer"]);
+                    this[this.tableContactAdditionalCustomer.IncludeInOrderReceiptNotificationColumn] = value;
                 }
             }
             
@@ -13622,6 +13665,17 @@ namespace DWOS.Data.Datasets {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_ContactAdditionalCustomer_d_Contact"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public CustomerRow CustomerRow {
+                get {
+                    return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_ContactAdditionalCustomer_Customer"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_ContactAdditionalCustomer_Customer"]);
                 }
             }
         }
@@ -15632,6 +15686,7 @@ ORDER BY Customer.Name";
             tableMapping.ColumnMappings.Add("HoldNotification", "HoldNotification");
             tableMapping.ColumnMappings.Add("LateOrderNotification", "LateOrderNotification");
             tableMapping.ColumnMappings.Add("IncludeCOCInShippingNotifications", "IncludeCOCInShippingNotifications");
+            tableMapping.ColumnMappings.Add("OrderReceiptNotification", "OrderReceiptNotification");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -15640,8 +15695,8 @@ ORDER BY Customer.Name";
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [d_Contact] ([CustomerID], [Name], [PhoneNumber], [EmailAddress], [Notes], [FaxNumber], [PrimaryContact], [ShippingNotification], [ManufacturerID], [InvoicePreference], [PortalAuthorized], [PortalAuthorizationSent], [Active], [COCNotification], [ApprovalNotification], [HoldNotification], [LateOrderNotification], [IncludeCOCInShippingNotifications]) VALUES (@CustomerID, @Name, @PhoneNumber, @EmailAddress, @Notes, @FaxNumber, @PrimaryContact, @ShippingNotification, @ManufacturerID, @InvoicePreference, @PortalAuthorized, @PortalAuthorizationSent, @Active, @COCNotification, @ApprovalNotification, @HoldNotification, @LateOrderNotification, @IncludeCOCInShippingNotifications);
-SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications FROM d_Contact WHERE (ContactID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [d_Contact] ([CustomerID], [Name], [PhoneNumber], [EmailAddress], [Notes], [FaxNumber], [PrimaryContact], [ShippingNotification], [ManufacturerID], [InvoicePreference], [PortalAuthorized], [PortalAuthorizationSent], [Active], [COCNotification], [ApprovalNotification], [HoldNotification], [LateOrderNotification], [IncludeCOCInShippingNotifications], [OrderReceiptNotification]) VALUES (@CustomerID, @Name, @PhoneNumber, @EmailAddress, @Notes, @FaxNumber, @PrimaryContact, @ShippingNotification, @ManufacturerID, @InvoicePreference, @PortalAuthorized, @PortalAuthorizationSent, @Active, @COCNotification, @ApprovalNotification, @HoldNotification, @LateOrderNotification, @IncludeCOCInShippingNotifications, @OrderReceiptNotification);
+SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications, OrderReceiptNotification FROM d_Contact WHERE (ContactID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -15661,10 +15716,11 @@ SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber,
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HoldNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HoldNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LateOrderNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LateOrderNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeCOCInShippingNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeCOCInShippingNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrderReceiptNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrderReceiptNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [d_Contact] SET [CustomerID] = @CustomerID, [Name] = @Name, [PhoneNumber] = @PhoneNumber, [EmailAddress] = @EmailAddress, [Notes] = @Notes, [FaxNumber] = @FaxNumber, [PrimaryContact] = @PrimaryContact, [ShippingNotification] = @ShippingNotification, [ManufacturerID] = @ManufacturerID, [InvoicePreference] = @InvoicePreference, [PortalAuthorized] = @PortalAuthorized, [PortalAuthorizationSent] = @PortalAuthorizationSent, [Active] = @Active, [COCNotification] = @COCNotification, [ApprovalNotification] = @ApprovalNotification, [HoldNotification] = @HoldNotification, [LateOrderNotification] = @LateOrderNotification, [IncludeCOCInShippingNotifications] = @IncludeCOCInShippingNotifications WHERE (([ContactID] = @Original_ContactID));
-SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications FROM d_Contact WHERE (ContactID = @ContactID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [d_Contact] SET [CustomerID] = @CustomerID, [Name] = @Name, [PhoneNumber] = @PhoneNumber, [EmailAddress] = @EmailAddress, [Notes] = @Notes, [FaxNumber] = @FaxNumber, [PrimaryContact] = @PrimaryContact, [ShippingNotification] = @ShippingNotification, [ManufacturerID] = @ManufacturerID, [InvoicePreference] = @InvoicePreference, [PortalAuthorized] = @PortalAuthorized, [PortalAuthorizationSent] = @PortalAuthorizationSent, [Active] = @Active, [COCNotification] = @COCNotification, [ApprovalNotification] = @ApprovalNotification, [HoldNotification] = @HoldNotification, [LateOrderNotification] = @LateOrderNotification, [IncludeCOCInShippingNotifications] = @IncludeCOCInShippingNotifications, [OrderReceiptNotification] = @OrderReceiptNotification WHERE (([ContactID] = @Original_ContactID));
+SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications, OrderReceiptNotification FROM d_Contact WHERE (ContactID = @ContactID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -15684,6 +15740,7 @@ SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber,
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HoldNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HoldNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LateOrderNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LateOrderNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeCOCInShippingNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeCOCInShippingNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrderReceiptNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrderReceiptNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -15701,17 +15758,18 @@ SELECT ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber,
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT   ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications
-FROM     d_Contact";
+            this._commandCollection[0].CommandText = @"SELECT   ContactID, CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, 
+                         PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications, OrderReceiptNotification
+FROM         d_Contact";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT Active, ApprovalNotification, COCNotification, ContactID, CustomerID, EmailAddress, FaxNumber, HoldNotification, IncludeCOCInShippingNotifications, InvoicePreference, LateOrderNotification, ManufacturerID, Name, Notes, PhoneNumber, PortalAuthorizationSent, PortalAuthorized, PrimaryContact, ShippingNotification FROM d_Contact WHERE (CustomerID = @customerID)";
+            this._commandCollection[1].CommandText = @"SELECT Active, ApprovalNotification, COCNotification, ContactID, CustomerID, EmailAddress, FaxNumber, HoldNotification, IncludeCOCInShippingNotifications, InvoicePreference, LateOrderNotification, ManufacturerID, Name, Notes, OrderReceiptNotification, PhoneNumber, PortalAuthorizationSent, PortalAuthorized, PrimaryContact, ShippingNotification FROM d_Contact WHERE (CustomerID = @customerID)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@customerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT Active, ApprovalNotification, COCNotification, ContactID, CustomerID, EmailAddress, FaxNumber, HoldNotification, IncludeCOCInShippingNotifications, InvoicePreference, LateOrderNotification, ManufacturerID, Name, Notes, PhoneNumber, PortalAuthorizationSent, PortalAuthorized, PrimaryContact, ShippingNotification FROM d_Contact WHERE (ContactID IN (SELECT ContactID FROM ContactAdditionalCustomer WHERE (CustomerID = @customerId)))";
+            this._commandCollection[2].CommandText = @"SELECT Active, ApprovalNotification, COCNotification, ContactID, CustomerID, EmailAddress, FaxNumber, HoldNotification, IncludeCOCInShippingNotifications, InvoicePreference, LateOrderNotification, ManufacturerID, Name, Notes, OrderReceiptNotification, PhoneNumber, PortalAuthorizationSent, PortalAuthorized, PrimaryContact, ShippingNotification FROM d_Contact WHERE (ContactID IN (SELECT ContactID FROM ContactAdditionalCustomer WHERE (CustomerID = @customerId)))";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@customerId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
@@ -15876,7 +15934,8 @@ FROM     d_Contact";
                     bool ApprovalNotification, 
                     bool HoldNotification, 
                     bool LateOrderNotification, 
-                    bool IncludeCOCInShippingNotifications) {
+                    bool IncludeCOCInShippingNotifications, 
+                    bool OrderReceiptNotification) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(CustomerID));
             if ((Name == null)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -15940,6 +15999,7 @@ FROM     d_Contact";
             this.Adapter.InsertCommand.Parameters[15].Value = ((bool)(HoldNotification));
             this.Adapter.InsertCommand.Parameters[16].Value = ((bool)(LateOrderNotification));
             this.Adapter.InsertCommand.Parameters[17].Value = ((bool)(IncludeCOCInShippingNotifications));
+            this.Adapter.InsertCommand.Parameters[18].Value = ((bool)(OrderReceiptNotification));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15979,6 +16039,7 @@ FROM     d_Contact";
                     bool HoldNotification, 
                     bool LateOrderNotification, 
                     bool IncludeCOCInShippingNotifications, 
+                    bool OrderReceiptNotification, 
                     int Original_ContactID, 
                     int ContactID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(CustomerID));
@@ -16044,8 +16105,9 @@ FROM     d_Contact";
             this.Adapter.UpdateCommand.Parameters[15].Value = ((bool)(HoldNotification));
             this.Adapter.UpdateCommand.Parameters[16].Value = ((bool)(LateOrderNotification));
             this.Adapter.UpdateCommand.Parameters[17].Value = ((bool)(IncludeCOCInShippingNotifications));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_ContactID));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(ContactID));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((bool)(OrderReceiptNotification));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_ContactID));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(ContactID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16085,8 +16147,9 @@ FROM     d_Contact";
                     bool HoldNotification, 
                     bool LateOrderNotification, 
                     bool IncludeCOCInShippingNotifications, 
+                    bool OrderReceiptNotification, 
                     int Original_ContactID) {
-            return this.Update(CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications, Original_ContactID, Original_ContactID);
+            return this.Update(CustomerID, Name, PhoneNumber, EmailAddress, Notes, FaxNumber, PrimaryContact, ShippingNotification, ManufacturerID, InvoicePreference, PortalAuthorized, PortalAuthorizationSent, Active, COCNotification, ApprovalNotification, HoldNotification, LateOrderNotification, IncludeCOCInShippingNotifications, OrderReceiptNotification, Original_ContactID, Original_ContactID);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21980,10 +22043,11 @@ SELECT PriceUnitID, DisplayName, Active FROM d_PriceUnit WHERE (PriceUnitID = @P
             tableMapping.ColumnMappings.Add("IncludeInApprovalNotifications", "IncludeInApprovalNotifications");
             tableMapping.ColumnMappings.Add("IncludeInHoldNotifications", "IncludeInHoldNotifications");
             tableMapping.ColumnMappings.Add("IncludeInLateOrderNotifications", "IncludeInLateOrderNotifications");
+            tableMapping.ColumnMappings.Add("IncludeInOrderReceiptNotification", "IncludeInOrderReceiptNotification");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [ContactAdditionalCustomer] WHERE (([ContactAdditionalCustomerID] = @Original_ContactAdditionalCustomerID) AND ([ContactID] = @Original_ContactID) AND ([CustomerID] = @Original_CustomerID) AND ([IncludeInPortal] = @Original_IncludeInPortal) AND ([IncludeInShippingNotifications] = @Original_IncludeInShippingNotifications) AND ([IncludeInCocNotifications] = @Original_IncludeInCocNotifications) AND ([IncludeInAutomatedNotifications] = @Original_IncludeInAutomatedNotifications) AND ([IncludeInApprovalNotifications] = @Original_IncludeInApprovalNotifications) AND ([IncludeInHoldNotifications] = @Original_IncludeInHoldNotifications) AND ([IncludeInLateOrderNotifications] = @Original_IncludeInLateOrderNotifications))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [ContactAdditionalCustomer] WHERE (([ContactAdditionalCustomerID] = @Original_ContactAdditionalCustomerID) AND ([ContactID] = @Original_ContactID) AND ([CustomerID] = @Original_CustomerID) AND ([IncludeInPortal] = @Original_IncludeInPortal) AND ([IncludeInShippingNotifications] = @Original_IncludeInShippingNotifications) AND ([IncludeInCocNotifications] = @Original_IncludeInCocNotifications) AND ([IncludeInAutomatedNotifications] = @Original_IncludeInAutomatedNotifications) AND ([IncludeInApprovalNotifications] = @Original_IncludeInApprovalNotifications) AND ([IncludeInHoldNotifications] = @Original_IncludeInHoldNotifications) AND ([IncludeInLateOrderNotifications] = @Original_IncludeInLateOrderNotifications) AND ([IncludeInOrderReceiptNotification] = @Original_IncludeInOrderReceiptNotification))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactAdditionalCustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactAdditionalCustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -21995,10 +22059,11 @@ SELECT PriceUnitID, DisplayName, Active FROM d_PriceUnit WHERE (PriceUnitID = @P
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInApprovalNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInApprovalNotifications", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInHoldNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInHoldNotifications", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInLateOrderNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInLateOrderNotifications", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInOrderReceiptNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInOrderReceiptNotification", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [ContactAdditionalCustomer] ([ContactID], [CustomerID], [IncludeInPortal], [IncludeInShippingNotifications], [IncludeInCocNotifications], [IncludeInAutomatedNotifications], [IncludeInApprovalNotifications], [IncludeInHoldNotifications], [IncludeInLateOrderNotifications]) VALUES (@ContactID, @CustomerID, @IncludeInPortal, @IncludeInShippingNotifications, @IncludeInCocNotifications, @IncludeInAutomatedNotifications, @IncludeInApprovalNotifications, @IncludeInHoldNotifications, @IncludeInLateOrderNotifications);
-SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, IncludeInShippingNotifications, IncludeInCocNotifications, IncludeInAutomatedNotifications, IncludeInApprovalNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications FROM ContactAdditionalCustomer WHERE (ContactAdditionalCustomerID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [ContactAdditionalCustomer] ([ContactID], [CustomerID], [IncludeInPortal], [IncludeInShippingNotifications], [IncludeInCocNotifications], [IncludeInAutomatedNotifications], [IncludeInApprovalNotifications], [IncludeInHoldNotifications], [IncludeInLateOrderNotifications], [IncludeInOrderReceiptNotification]) VALUES (@ContactID, @CustomerID, @IncludeInPortal, @IncludeInShippingNotifications, @IncludeInCocNotifications, @IncludeInAutomatedNotifications, @IncludeInApprovalNotifications, @IncludeInHoldNotifications, @IncludeInLateOrderNotifications, @IncludeInOrderReceiptNotification);
+SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, IncludeInShippingNotifications, IncludeInCocNotifications, IncludeInAutomatedNotifications, IncludeInApprovalNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications, IncludeInOrderReceiptNotification FROM ContactAdditionalCustomer WHERE (ContactAdditionalCustomerID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -22009,6 +22074,7 @@ SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, Incl
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInApprovalNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInApprovalNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInHoldNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInHoldNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInLateOrderNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInLateOrderNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInOrderReceiptNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInOrderReceiptNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [ContactAdditionalCustomer] SET [ContactID] = @ContactID, [CustomerID] = @" +
@@ -22017,20 +22083,23 @@ SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, Incl
                 "cNotifications, [IncludeInAutomatedNotifications] = @IncludeInAutomatedNotificat" +
                 "ions, [IncludeInApprovalNotifications] = @IncludeInApprovalNotifications, [Inclu" +
                 "deInHoldNotifications] = @IncludeInHoldNotifications, [IncludeInLateOrderNotific" +
-                "ations] = @IncludeInLateOrderNotifications WHERE (([ContactAdditionalCustomerID]" +
-                " = @Original_ContactAdditionalCustomerID) AND ([ContactID] = @Original_ContactID" +
-                ") AND ([CustomerID] = @Original_CustomerID) AND ([IncludeInPortal] = @Original_I" +
-                "ncludeInPortal) AND ([IncludeInShippingNotifications] = @Original_IncludeInShipp" +
-                "ingNotifications) AND ([IncludeInCocNotifications] = @Original_IncludeInCocNotif" +
-                "ications) AND ([IncludeInAutomatedNotifications] = @Original_IncludeInAutomatedN" +
-                "otifications) AND ([IncludeInApprovalNotifications] = @Original_IncludeInApprova" +
-                "lNotifications) AND ([IncludeInHoldNotifications] = @Original_IncludeInHoldNotif" +
-                "ications) AND ([IncludeInLateOrderNotifications] = @Original_IncludeInLateOrderN" +
-                "otifications));\r\nSELECT ContactAdditionalCustomerID, ContactID, CustomerID, Incl" +
-                "udeInPortal, IncludeInShippingNotifications, IncludeInCocNotifications, IncludeI" +
-                "nAutomatedNotifications, IncludeInApprovalNotifications, IncludeInHoldNotificati" +
-                "ons, IncludeInLateOrderNotifications FROM ContactAdditionalCustomer WHERE (Conta" +
-                "ctAdditionalCustomerID = @ContactAdditionalCustomerID)";
+                "ations] = @IncludeInLateOrderNotifications, [IncludeInOrderReceiptNotification] " +
+                "= @IncludeInOrderReceiptNotification WHERE (([ContactAdditionalCustomerID] = @Or" +
+                "iginal_ContactAdditionalCustomerID) AND ([ContactID] = @Original_ContactID) AND " +
+                "([CustomerID] = @Original_CustomerID) AND ([IncludeInPortal] = @Original_Include" +
+                "InPortal) AND ([IncludeInShippingNotifications] = @Original_IncludeInShippingNot" +
+                "ifications) AND ([IncludeInCocNotifications] = @Original_IncludeInCocNotificatio" +
+                "ns) AND ([IncludeInAutomatedNotifications] = @Original_IncludeInAutomatedNotific" +
+                "ations) AND ([IncludeInApprovalNotifications] = @Original_IncludeInApprovalNotif" +
+                "ications) AND ([IncludeInHoldNotifications] = @Original_IncludeInHoldNotificatio" +
+                "ns) AND ([IncludeInLateOrderNotifications] = @Original_IncludeInLateOrderNotific" +
+                "ations) AND ([IncludeInOrderReceiptNotification] = @Original_IncludeInOrderRecei" +
+                "ptNotification));\r\nSELECT ContactAdditionalCustomerID, ContactID, CustomerID, In" +
+                "cludeInPortal, IncludeInShippingNotifications, IncludeInCocNotifications, Includ" +
+                "eInAutomatedNotifications, IncludeInApprovalNotifications, IncludeInHoldNotifica" +
+                "tions, IncludeInLateOrderNotifications, IncludeInOrderReceiptNotification FROM C" +
+                "ontactAdditionalCustomer WHERE (ContactAdditionalCustomerID = @ContactAdditional" +
+                "CustomerID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -22041,6 +22110,7 @@ SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, Incl
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInApprovalNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInApprovalNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInHoldNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInHoldNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInLateOrderNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInLateOrderNotifications", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IncludeInOrderReceiptNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInOrderReceiptNotification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactAdditionalCustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactAdditionalCustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -22051,6 +22121,7 @@ SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, Incl
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInApprovalNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInApprovalNotifications", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInHoldNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInHoldNotifications", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInLateOrderNotifications", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInLateOrderNotifications", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IncludeInOrderReceiptNotification", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IncludeInOrderReceiptNotification", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContactAdditionalCustomerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ContactAdditionalCustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -22067,8 +22138,9 @@ SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, Incl
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, IncludeInShippingNotifications, IncludeInCocNotifications, IncludeInAutomatedNotifications, IncludeInApprovalNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications
-FROM ContactAdditionalCustomer";
+            this._commandCollection[0].CommandText = @"SELECT   ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInPortal, IncludeInShippingNotifications, IncludeInCocNotifications, IncludeInAutomatedNotifications, 
+                         IncludeInApprovalNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications, IncludeInOrderReceiptNotification
+FROM         ContactAdditionalCustomer";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;

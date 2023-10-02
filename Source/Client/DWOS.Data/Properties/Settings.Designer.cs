@@ -33,5 +33,14 @@ namespace DWOS.Data.Properties {
                 return ((string)(this["DWOSDataConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.getdwos.com/Support/Help/{0}/")]
+        public string DWOSHelp {
+            get {
+                return ((string)(this["DWOSHelp"]));
+            }
+        }
     }
 }

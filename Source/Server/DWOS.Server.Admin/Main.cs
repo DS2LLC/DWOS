@@ -86,7 +86,7 @@ namespace DWOS.Server.Admin
         {
             try
             {
-                this.licenseStatus1.UpdateStatus();
+                //this.licenseStatus1.UpdateStatus();
                 this.databaseStatus1.BeginUpdateStatus();
                 this.serverStatus1.BeginUpdateStatus();
             }

@@ -42,6 +42,7 @@
             Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode23 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
             Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode24 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
             Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode22 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
+            Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode25 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
             Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode9 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
             Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode10 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
             Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode11 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
@@ -139,6 +140,9 @@
             ultraTreeNode22.LeftImages.Add(((object)(resources.GetObject("ultraTreeNode22.LeftImages"))));
             ultraTreeNode22.Tag = "OrderApprovalNotification";
             ultraTreeNode22.Text = "Order Approval Notification";
+            ultraTreeNode25.LeftImages.Add(((object)(resources.GetObject("ultraTreeNode25.LeftImages"))));
+            ultraTreeNode25.Tag = "OrderReceiptNotification";
+            ultraTreeNode25.Text = "Order Receipt Notification";
             ultraTreeNode9.LeftImages.Add(((object)(resources.GetObject("ultraTreeNode9.LeftImages"))));
             ultraTreeNode9.Tag = "Portal";
             ultraTreeNode9.Text = "Portal Notification";
@@ -153,6 +157,7 @@
             ultraTreeNode23,
             ultraTreeNode24,
             ultraTreeNode22,
+            ultraTreeNode25,
             ultraTreeNode9,
             ultraTreeNode10,
             ultraTreeNode11});
@@ -333,7 +338,7 @@
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1229, 653);
             this.Controls.Add(this.Settings_Fill_Panel);

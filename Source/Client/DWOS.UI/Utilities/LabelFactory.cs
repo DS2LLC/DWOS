@@ -250,6 +250,8 @@ namespace DWOS.UI.Utilities
                     tokens.Add(new LabelEditor.Token() { ID = LabelTokens.PROCESSDEPT8.ToString(), DisplayName = "Process Dept. 8", TokenType = LabelEditor.TokenType.Text, SampleValue = "Paint" });
                     tokens.Add(new LabelEditor.Token() { ID = LabelTokens.PROCESSFIXTURES8.ToString(), DisplayName = "Process Fixtures 8", TokenType = LabelEditor.TokenType.Text, SampleValue = "1122"} );
                     tokens.Add(new LabelEditor.Token() { ID = LabelTokens.PROCESSFIXTUREWEIGHT8.ToString(), DisplayName = "Process Fixture Weight 8", TokenType = LabelEditor.TokenType.Text, SampleValue = "1445"});
+                    tokens.Add(new LabelEditor.Token() { ID = LabelTokens.PARTREVISION.ToString(), DisplayName = "Part Revision", TokenType = LabelEditor.TokenType.Text, SampleValue = "A" });
+
 
                     break;
                 case LabelType.COC:

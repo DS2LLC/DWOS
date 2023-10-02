@@ -20,7 +20,7 @@ namespace DWOS.Data
         /// <summary>
         /// Address of the demo server.
         /// </summary>
-        public const string DemoServerAddress = "www.mydwos.com";
+        public const string DemoServerAddress = "localhost";
 
         /// <summary>
         /// Port of the demo server.

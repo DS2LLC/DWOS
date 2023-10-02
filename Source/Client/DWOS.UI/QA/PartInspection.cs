@@ -588,7 +588,7 @@ namespace DWOS.UI
             {
                 if (flowQuestions.Controls.Count > 0)
                 {
- //                   (flowQuestions.Controls[0] as ControlQuestion)?.SetFocus();
+                    (flowQuestions.Controls[0] as ControlQuestion)?.SetFocus();
                 }
             }
             catch (Exception exc)

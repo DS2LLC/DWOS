@@ -317,7 +317,19 @@ namespace DWOS.Server.Tasks
                 using (var dtCustomerContact = new CustomersDataset.ContactDataTable())
                 {
                     taCustomerContact.FillBy(dtCustomerContact, customer.CustomerID);
-                    return dtCustomerContact.Where(c => addresses.Contains(c.EmailAddress) && c.IncludeCOCInShippingNotifications).ToList();
+                    return dtCustomerContact.Where(c =>
+                        {
+                            try
+                            {
+                                return addresses.Contains(c.EmailAddress) && c.IncludeCOCInShippingNotifications;
+                            }
+                            catch (NullReferenceException)
+                            {
+                                // if email address is null in db we can skip that entry
+                                return false;
+                            }
+                        })
+                        .ToList();
                 }
             }
         }

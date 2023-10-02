@@ -37,6 +37,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upgradWizardMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,8 +48,6 @@
             this.webStatus1 = new DWOS.Server.Admin.StatusPanels.WebStatus();
             this.serverStatus1 = new DWOS.Server.Admin.StatusPanels.ServerStatus();
             this.databaseStatus1 = new DWOS.Server.Admin.StatusPanels.DatabaseStatus();
-            this.licenseStatus1 = new DWOS.Server.Admin.StatusPanels.LicenseStatus();
-            this.backupDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +77,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -96,7 +95,7 @@
             this.openLogsToolStripMenuItem,
             this.openServerLogsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // setupWizardToolStripMenuItem
@@ -112,6 +111,13 @@
             this.upgradWizardMenuItem.Size = new System.Drawing.Size(209, 22);
             this.upgradWizardMenuItem.Text = "Database Upgrade Wizard";
             this.upgradWizardMenuItem.Click += new System.EventHandler(this.upgradWizardMenuItem_Click);
+            // 
+            // backupDatabaseToolStripMenuItem
+            // 
+            this.backupDatabaseToolStripMenuItem.Name = "backupDatabaseToolStripMenuItem";
+            this.backupDatabaseToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.backupDatabaseToolStripMenuItem.Text = "Backup Database";
+            this.backupDatabaseToolStripMenuItem.Click += new System.EventHandler(this.backupDatabaseToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -161,7 +167,7 @@
             // webStatus1
             // 
             this.webStatus1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.webStatus1.Location = new System.Drawing.Point(9, 567);
+            this.webStatus1.Location = new System.Drawing.Point(9, 408);
             this.webStatus1.Name = "webStatus1";
             this.webStatus1.Size = new System.Drawing.Size(416, 142);
             this.webStatus1.TabIndex = 15;
@@ -171,7 +177,7 @@
             this.serverStatus1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.serverStatus1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serverStatus1.Location = new System.Drawing.Point(9, 371);
+            this.serverStatus1.Location = new System.Drawing.Point(9, 212);
             this.serverStatus1.Name = "serverStatus1";
             this.serverStatus1.Size = new System.Drawing.Size(416, 190);
             this.serverStatus1.TabIndex = 12;
@@ -181,37 +187,19 @@
             this.databaseStatus1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.databaseStatus1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.databaseStatus1.Location = new System.Drawing.Point(9, 185);
+            this.databaseStatus1.Location = new System.Drawing.Point(9, 26);
             this.databaseStatus1.Name = "databaseStatus1";
             this.databaseStatus1.Size = new System.Drawing.Size(416, 180);
             this.databaseStatus1.TabIndex = 11;
-            // 
-            // licenseStatus1
-            // 
-            this.licenseStatus1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.licenseStatus1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.licenseStatus1.Location = new System.Drawing.Point(9, 27);
-            this.licenseStatus1.Name = "licenseStatus1";
-            this.licenseStatus1.Size = new System.Drawing.Size(416, 152);
-            this.licenseStatus1.TabIndex = 10;
-            // 
-            // backupDatabaseToolStripMenuItem
-            // 
-            this.backupDatabaseToolStripMenuItem.Name = "backupDatabaseToolStripMenuItem";
-            this.backupDatabaseToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.backupDatabaseToolStripMenuItem.Text = "Backup Database";
-            this.backupDatabaseToolStripMenuItem.Click += new System.EventHandler(this.backupDatabaseToolStripMenuItem_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 715);
+            this.ClientSize = new System.Drawing.Size(437, 556);
             this.Controls.Add(this.webStatus1);
             this.Controls.Add(this.serverStatus1);
             this.Controls.Add(this.databaseStatus1);
-            this.Controls.Add(this.licenseStatus1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -231,7 +219,6 @@
 
         #endregion
         private Infragistics.Win.UltraWinToolTip.UltraToolTipManager tipManager;
-        private StatusPanels.LicenseStatus licenseStatus1;
         private StatusPanels.DatabaseStatus databaseStatus1;
         private StatusPanels.ServerStatus serverStatus1;
         private System.Windows.Forms.MenuStrip menuStrip1;

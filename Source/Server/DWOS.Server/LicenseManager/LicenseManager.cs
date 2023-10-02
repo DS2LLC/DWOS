@@ -3,6 +3,9 @@ using System.Linq;
 using DWOS.Data;
 using DWOS.Server.Utilities;
 using NLog;
+using DWOS.Data;
+using DWOS.Data.Datasets;
+using DWOS.Data.Datasets.ApplicationSettingsDataSetTableAdapters;
 
 namespace DWOS.LicenseManager
 {
@@ -56,10 +59,12 @@ namespace DWOS.LicenseManager
                 _log.Info("Setting LicenseFile on License Manager: " + valueAsString);
 
                 this._currentLicense = value;
-                this.ValidateLicense();
+                this.IsLicenseValid = true;
+                //this.ValidateLicense();
                 this.SaveLicenseToStorage();
             }
         }
+
 
         /// <summary>
         ///   Gets the avaliable activations.
@@ -93,8 +98,55 @@ namespace DWOS.LicenseManager
         {
             _log.Info("License Manager initialized.");
 
+            SetServerLicense();
+
             this.LoadLicenseFromStorage();
             this._startUpTimeStamp  = DateTime.Now;
+        }
+
+        private bool SetServerLicense()
+        {
+            //create new key, save it, and set it to the default license manager
+            var key = new LicenseFile { Activations = 99, CompanyName = "DWOS", LicenseExpiration = new System.DateTime(9999, 12, 31) };
+
+            this.CurrentLicense = key;
+
+            //Set the Company Name in application settings on DB to the name received here... A form of anti-piracy
+            UpdateApplicationSettings(key.CompanyName, ServerSettings.Default.CompanyKey);
+
+            return true;
+
+        }
+
+        private void UpdateApplicationSettings(string companyName, string companyKey)
+        {
+            try
+            {
+                using (var ta = new ApplicationSettingsTableAdapter())
+                {
+                    ApplicationSettingsDataSet.ApplicationSettingsDataTable appSettings = ta.GetData();
+
+                    ApplicationSettingsDataSet.ApplicationSettingsRow companyKeyRow = appSettings.FindBySettingName("CompanyKey");
+
+                    if (companyKeyRow == null)
+                        appSettings.AddApplicationSettingsRow("CompanyKey", companyKey);
+                    else if (companyKeyRow.Value != companyKey)
+                        companyKeyRow.Value = companyKey;
+
+                    ApplicationSettingsDataSet.ApplicationSettingsRow companyNameRow = appSettings.FindBySettingName("Company Name");
+
+                    if (companyNameRow == null)
+                        appSettings.AddApplicationSettingsRow("Company Name", companyName);
+                    else if (companyNameRow.Value != companyName)
+                        companyNameRow.Value = companyName;
+
+                    ta.Update(appSettings);
+                }
+            }
+            catch (Exception exc)
+            {
+                LogManager.GetCurrentClassLogger().Error(exc, "Error updating application settings in database.");
+            }
         }
 
         /// <summary>
@@ -307,7 +359,7 @@ namespace DWOS.LicenseManager
                     _log.Info("Retrieved license from secure storage: {0}", license.ToString());
 
                 this._currentLicense = license;
-                this.ValidateLicense();
+                //this.ValidateLicense();
             }
             catch (Exception exc)
             {

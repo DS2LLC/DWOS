@@ -1,6 +1,7 @@
 ﻿using DWOS.Data;
 using DWOS.Data.Datasets;
 using DWOS.Data.Datasets.OrdersDataSetTableAdapters;
+using DWOS.Data.Datasets.CustomersDatasetTableAdapters;
 using DWOS.Data.Datasets.PartsDatasetTableAdapters;
 using DWOS.Reports;
 using DWOS.Shared;
@@ -667,7 +668,7 @@ namespace DWOS.UI.Sales
                 this.dpOrder.PartsLoading = true;
                 this.dpBlanketPO.PartsLoading = true;
 
-                this.taPartSummary.ClearBeforeFill = false;
+                this.taPartSummary.ClearBeforeFill = true;
                 this.taPartSummary.FillByCustomerActive(this.dsOrders.PartSummary, customerID);
                 this._customerPartsLoaded.Add(customerID);
 
@@ -1878,7 +1879,7 @@ namespace DWOS.UI.Sales
             }
 
             //Add the custom fields and values for the customer
-            CustomFieldTableAdapter taCustomField = new CustomFieldTableAdapter();
+            DWOS.Data.Datasets.OrdersDataSetTableAdapters.CustomFieldTableAdapter taCustomField = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.CustomFieldTableAdapter();
 
             //Get the custom fields for customer
             taCustomField.FillByCustomer(this.dsOrders.CustomField, orderRow.CustomerID);
@@ -1965,10 +1966,21 @@ namespace DWOS.UI.Sales
         {
             _log.Info("Adding a new order from quote part: " + quotePartId);
 
-            var orderRow = this.dpOrder.AddOrderRowFromQuotePart(quotePartId, receivingQty);
+            var orderRow = this.dpOrder.AddOrderRowFromQuotePart(quotePartId, receivingId, receivingQty);
            
             if (orderRow != null)
             {
+                using (var ta = new ReceivingTableAdapter())
+                {
+                    var dt = ta.GetByID(receivingId.Value);
+
+                    if (dt != null && dt.Count == 1)
+                    {
+                        //attempt to load parts before the order is added to ensure part is located
+                        this.LoadParts(dt[0].CustomerID);
+                    }
+                }
+
                 if (receivingId.HasValue)
                         orderRow.ReceivingID = receivingId.Value;
 
@@ -8195,6 +8207,8 @@ namespace DWOS.UI.Sales
                                     : appSettings.WorkStatusChangingDepartment;
 
                                 _orderEntry._successfullyReviewedOrders.Add(orderNode.DataRow.OrderID);
+
+                                AddReceiptNotification(SecurityManager.Current.UserID, orderNode.DataRow.OrderID,orderNode);
                             }
 
                             var orderReviewTypeId = _orderEntry.Mode == OrderEntryMode.ImportExportReview
@@ -8251,6 +8265,53 @@ namespace DWOS.UI.Sales
                     LogManager.GetCurrentClassLogger().Error(exc, "Error adding order review status.");
                 }
             }
+
+
+
+            public void AddReceiptNotification(int UserID, int OrderID, OrderNode Order)
+            {
+                try 
+                { 
+                                
+                    var dsOrders = new OrdersDataSet
+                    {
+                        //EnforceConstraints = false
+                    };
+
+
+                    // Load Contacts
+                    using (var taContacts = new ContactTableAdapter())
+                    {
+                        var dsCustomer = new CustomersDataset()
+                        {
+                            EnforceConstraints = false
+                        };
+                        taContacts.FillBy(dsCustomer.Contact, Order.DataRow.CustomerID);
+
+                        var contacts = dsCustomer.Contact
+                            .Where(c => !c.IsNameNull() && !c.IsEmailAddressNull() && c.Active && c.OrderReceiptNotification)
+                            .ToList();
+
+                        if (contacts.Count > 0)
+                            foreach (var contact in contacts)
+                            {
+                                using (var taOrderReceipt = new OrderReceiptNotificationTableAdapter())
+                                {
+                                    //taOrderReceipt.Fill(dsOrders.OrderReceiptNotification);
+                                    taOrderReceipt.Insert(OrderID, contact.ContactID, UserID, null);
+                                }
+
+                            }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    LogManager.GetCurrentClassLogger().Error(exc, "Error adding order Receipt Notification.");
+                }
+
+            }
+
+
 
             public override void Dispose()
             {

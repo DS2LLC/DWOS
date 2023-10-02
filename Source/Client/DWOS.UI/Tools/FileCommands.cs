@@ -87,83 +87,83 @@ namespace DWOS.UI.Tools
             //hide unless an update is available
             base.Button.Visible = false;
             
-            ScheduledUpdateCheck();
+            //ScheduledUpdateCheck();
         }
 
         public override void OnClick()
         {
-            try
-            {
-                var version = new Version(About.ApplicationVersion);
+            //try
+            //{
+            //    var version = new Version(About.ApplicationVersion);
 
-                //check latest version with out the revision to force to get latest revision
-                Updater.CheckUpdates(version.Major + "." + version.Minor + "." + version.Build, false);
-            }
-            catch (Exception exc)
-            {
-                NLog.LogManager.GetCurrentClassLogger().Error(exc, "Error checking for new version.");
-            }
+            //    //check latest version with out the revision to force to get latest revision
+            //    Updater.CheckUpdates(version.Major + "." + version.Minor + "." + version.Build, false);
+            //}
+            //catch (Exception exc)
+            //{
+            //    NLog.LogManager.GetCurrentClassLogger().Error(exc, "Error checking for new version.");
+            //}
         }
 
-        private void UpdateCheckCompleted(DS2LicenseActivation.VersionInfo versionInfo)
-        {
-            try
-            {
-                if(DWOSApp.MainForm == null)
-                    return;
+        //private void UpdateCheckCompleted(DS2LicenseActivation.VersionInfo versionInfo)
+        //{
+        //    try
+        //    {
+        //        if(DWOSApp.MainForm == null)
+        //            return;
 
-                if (DWOSApp.MainForm.InvokeRequired)
-                {
-                    DWOSApp.MainForm.BeginInvoke(new Action<DS2LicenseActivation.VersionInfo>(UpdateCheckCompleted), versionInfo);
-                }
-                else
-                {
-                    if (versionInfo == null || versionInfo.Version == null)
-                        return;
+        //        if (DWOSApp.MainForm.InvokeRequired)
+        //        {
+        //            DWOSApp.MainForm.BeginInvoke(new Action<DS2LicenseActivation.VersionInfo>(UpdateCheckCompleted), versionInfo);
+        //        }
+        //        else
+        //        {
+        //            if (versionInfo == null || versionInfo.Version == null)
+        //                return;
 
-                    var currentVersion = new Version(About.ApplicationVersion);
-                    var newVersion = new Version(versionInfo.Version);
+        //            var currentVersion = new Version(About.ApplicationVersion);
+        //            var newVersion = new Version(versionInfo.Version);
 
-                    if(currentVersion.Major == newVersion.Major && currentVersion.Minor == newVersion.Minor && currentVersion.Build == newVersion.Build && newVersion.Revision > currentVersion.Revision)
-                    {
-                        this.Button.Visible = true;
-                        ((ToolBase) this.Button.Button).SharedProps.AppearancesSmall.Appearance.BackColor = System.Drawing.Color.Red;
-                        DWOSApp.MainForm.FlyoutManager.DisplayFlyout("New Version", "Version {0} of DWOS available.".FormatWith(newVersion.ToString()), DateTime.Now.Subtract(versionInfo.ReleaseDate).TotalDays > 3);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                NLog.LogManager.GetCurrentClassLogger().Error(exc, "Error checking for updated version of DWOS.");
-            }
-        }
+        //            if(currentVersion.Major == newVersion.Major && currentVersion.Minor == newVersion.Minor && currentVersion.Build == newVersion.Build && newVersion.Revision > currentVersion.Revision)
+        //            {
+        //                this.Button.Visible = true;
+        //                ((ToolBase) this.Button.Button).SharedProps.AppearancesSmall.Appearance.BackColor = System.Drawing.Color.Red;
+        //                DWOSApp.MainForm.FlyoutManager.DisplayFlyout("New Version", "Version {0} of DWOS available.".FormatWith(newVersion.ToString()), DateTime.Now.Subtract(versionInfo.ReleaseDate).TotalDays > 3);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        NLog.LogManager.GetCurrentClassLogger().Error(exc, "Error checking for updated version of DWOS.");
+        //    }
+        //}
 
-        private void ScheduledUpdateCheck()
-        {
-            try
-            {
-                //check for updates if not checked recently
-                var t = new Thread(ts =>
-                {
-                    Thread.Sleep(INITIAL_DELAY);
+        ////private void ScheduledUpdateCheck()
+        ////{
+        ////    try
+        ////    {
+        ////        //check for updates if not checked recently
+        ////        var t = new Thread(ts =>
+        ////        {
+        ////            Thread.Sleep(INITIAL_DELAY);
 
-                    var client = new DS2LicenseActivation.ActivationServiceClient();
-                    client.GetLatestVersionCompleted += (s, e) =>
-                    {
-                        if (e.Error == null)
-                            UpdateCheckCompleted(e.Result);
-                    };
+        ////            var client = new DS2LicenseActivation.ActivationServiceClient();
+        ////            client.GetLatestVersionCompleted += (s, e) =>
+        ////            {
+        ////                if (e.Error == null)
+        ////                    UpdateCheckCompleted(e.Result);
+        ////            };
 
-                    client.GetLatestVersionAsync("DWOS", DS2LicenseActivation.ReleaseGroup.Normal);
-                });
+        ////            client.GetLatestVersionAsync("DWOS", DS2LicenseActivation.ReleaseGroup.Normal);
+        ////        });
 
-                t.Start();
-            }
-            catch (Exception exc)
-            {
-                NLog.LogManager.GetCurrentClassLogger().Error(exc, "Error scheduling to check for new update.");
-            }
-        }
+        ////        t.Start();
+        ////    }
+        ////    catch (Exception exc)
+        ////    {
+        ////        NLog.LogManager.GetCurrentClassLogger().Error(exc, "Error scheduling to check for new update.");
+        ////    }
+        ////}
 
         #endregion
     }
@@ -518,41 +518,41 @@ namespace DWOS.UI.Tools
         #endregion
     }
 
-    internal class FeedbackCommand : UrlCommand
-    {
-        #region Methods
+    //internal class FeedbackCommand : UrlCommand
+    //{
+    //    #region Methods
 
-        public FeedbackCommand(ToolBase tool)
-            : base(tool, "http://feedback.getdwos.com")
-        {
-        }
+    //    public FeedbackCommand(ToolBase tool)
+    //        : base(tool, "")
+    //    {
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
-    internal class KnowledgeBaseCommand : UrlCommand
-    {
-        #region Methods
+    //internal class KnowledgeBaseCommand : UrlCommand
+    //{
+    //    #region Methods
 
-        public KnowledgeBaseCommand(ToolBase tool)
-            : base(tool, "http://knowledge.getdwos.com")
-        {
-        }
+    //    public KnowledgeBaseCommand(ToolBase tool)
+    //        : base(tool, "")
+    //    {
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
-    internal class AnnouncementsCommand : UrlCommand
-    {
-        #region Methods
+    //internal class AnnouncementsCommand : UrlCommand
+    //{
+    //    #region Methods
 
-        public AnnouncementsCommand(ToolBase tool)
-            : base(tool, "http://www.getdwos.com/Features/Articles.aspx")
-        {
-        }
+    //    public AnnouncementsCommand(ToolBase tool)
+    //        : base(tool, "")
+    //    {
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
     internal class TicketCommand : CommandBase
     {

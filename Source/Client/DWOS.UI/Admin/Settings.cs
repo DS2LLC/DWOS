@@ -74,6 +74,7 @@ namespace DWOS.UI.Admin
             _panels.Add(new SettingsPanels.SettingsContractReview());
             _panels.Add(new SettingsPanels.SettingsSalesOrderWizard());
             _panels.Add(new SettingsPanels.SettingsOrderApprovalNotification());
+            _panels.Add(new SettingsPanels.SettingsOrderReceiptNotification());
             _panels.Add(new SettingsPanels.SettingsHoldNotification());
             _panels.Add(new SettingsPanels.SettingsLateOrderNotification());
             _panels.Add(new SettingsPanels.SettingsShipping());

@@ -258,7 +258,7 @@
             // 
             // picLockImage
             // 
-            this.picLockImage.Location = new System.Drawing.Point(23556, 24063);
+            this.picLockImage.Location = new System.Drawing.Point(23764, 24232);
             // 
             // ultraLabel21
             // 
@@ -1120,6 +1120,7 @@
             this.basicSerialEditor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.basicSerialEditor.Dataset = null;
             this.basicSerialEditor.Location = new System.Drawing.Point(128, 3);
+            this.basicSerialEditor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.basicSerialEditor.Name = "basicSerialEditor";
             this.basicSerialEditor.ReadOnly = false;
             this.basicSerialEditor.Size = new System.Drawing.Size(285, 22);
@@ -1152,6 +1153,7 @@
             this.productClassWidget.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.productClassWidget.Dataset = null;
             this.productClassWidget.Location = new System.Drawing.Point(128, 5);
+            this.productClassWidget.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.productClassWidget.Name = "productClassWidget";
             this.productClassWidget.ReadOnly = false;
             this.productClassWidget.Size = new System.Drawing.Size(285, 22);
@@ -1234,6 +1236,7 @@
             // 
             this.workDescriptionWidget.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.workDescriptionWidget.Location = new System.Drawing.Point(128, 31);
+            this.workDescriptionWidget.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.workDescriptionWidget.Name = "workDescriptionWidget";
             this.workDescriptionWidget.ReadOnly = false;
             this.workDescriptionWidget.Size = new System.Drawing.Size(285, 21);
@@ -1350,7 +1353,7 @@
             this.chkRequireCoc.AutoSize = true;
             this.chkRequireCoc.Location = new System.Drawing.Point(8, 4);
             this.chkRequireCoc.Name = "chkRequireCoc";
-            this.chkRequireCoc.Size = new System.Drawing.Size(93, 18);
+            this.chkRequireCoc.Size = new System.Drawing.Size(102, 20);
             this.chkRequireCoc.TabIndex = 0;
             this.chkRequireCoc.Text = "Require COC";
             ultraToolTipInfo28.ToolTipTextFormatted = "If <b>checked</b>, this order will go through the COC workflow to generate a Cert" +

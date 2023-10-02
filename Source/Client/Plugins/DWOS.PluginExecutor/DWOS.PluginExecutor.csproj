@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetZip.Reduced.1.9.1.8\lib\net20\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>..\..\packages\DotNetZip.Reduced.1.9.1.8\lib\net20\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,7 +50,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.XML" />
     <Reference Include="XSockets.Plugin.Framework, Version=5.7.4.0, Culture=neutral, PublicKeyToken=78caf0c684a67943, processorArchitecture=MSIL">
-      <HintPath>..\packages\XSockets.Plugin.Framework.5.7.4\lib\net452\XSockets.Plugin.Framework.dll</HintPath>
+      <HintPath>..\..\packages\XSockets.Plugin.Framework.5.7.4\lib\net452\XSockets.Plugin.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

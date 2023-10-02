@@ -466,9 +466,9 @@ namespace DWOS.UI
             this._commands.AddCommand("ProcessingAnswersReport", new ProcessingAnswersReportCommand(this.toolbarManager.Tools["ProcessingAnswersReport"]));
             this._commands.AddCommand("TurnAroundTimeReport", new TurnAroundTimeReportCommand(this.toolbarManager.Tools["TurnAroundTimeReport"]));
 
-            this._commands.AddCommand("Feedback", new FeedbackCommand(this.toolbarManager.Tools["Feedback"]));
-            this._commands.AddCommand("KnowledgeBase", new KnowledgeBaseCommand(this.toolbarManager.Tools["KnowledgeBase"]));
-            this._commands.AddCommand("Announcements", new AnnouncementsCommand(this.toolbarManager.Tools["Announcements"]));
+            //this._commands.AddCommand("Feedback", new FeedbackCommand(this.toolbarManager.Tools["Feedback"]));
+           // this._commands.AddCommand("KnowledgeBase", new KnowledgeBaseCommand(this.toolbarManager.Tools["KnowledgeBase"]));
+           // this._commands.AddCommand("Announcements", new AnnouncementsCommand(this.toolbarManager.Tools["Announcements"]));
             this._commands.AddCommand("Tickets", new TicketCommand(this.toolbarManager.Tools["Tickets"]));
             this._commands.AddCommand("OpenOrderValues", new OpenOrderValuesReportCommand(this.toolbarManager.Tools["OpenOrderValues"]));
             this._commands.AddCommand("OrderStatusByCustomer", new OrderStatusByCustomerReportCommand(this.toolbarManager.Tools["OrderStatusByCustomer"]));

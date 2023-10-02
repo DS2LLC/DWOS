@@ -839,7 +839,7 @@ namespace DWOS.UI.Sales
             return cr;
         }
 
-        public OrdersDataSet.OrderRow AddOrderRowFromQuotePart(int quotePartId, int? receivingQty)
+        public OrdersDataSet.OrderRow AddOrderRowFromQuotePart(int quotePartId, int? receivingID, int? receivingQty)
         {
             //WORKFLOW
             //If part exists, match on name, and pull in part as normal but override with quote pricing?
@@ -851,6 +851,18 @@ namespace DWOS.UI.Sales
             //Do quotes have PO's?
 
             //How do we handle part marking?
+
+            PartsDataset.ReceivingRow receivingRow = null;
+
+            using (var taReceiving = new ReceivingTableAdapter())
+            {
+                var dtReceiving = taReceiving.GetByID(receivingID.Value);
+
+                if (dtReceiving != null && dtReceiving.Count == 1)
+                    receivingRow = dtReceiving[0];
+                else
+                    return null;
+            }
 
             int? customerId;
             QuoteDataSet.QuotePartDataTable quotePart;
@@ -947,7 +959,18 @@ namespace DWOS.UI.Sales
             cr.CustomerID = customerId.Value;
             cr.BasePrice = 0;
             cr.QuotePartId = quotePartId;
-            
+            if(receivingRow != null)
+            {
+                cr.ReceivingID = receivingRow.ReceivingID;
+                if (!receivingRow.IsPurchaseOrderNull())
+                    cr.PurchaseOrder = receivingRow.PurchaseOrder;
+                if (!receivingRow.IsCustomerWONull())
+                    cr.CustomerWO = receivingRow.CustomerWO;
+
+
+            }
+   
+
             //Get customer info
             var csr = Dataset.CustomerSummary.FindByCustomerID(customerId.Value);
             var defaultShipDate = DateTime.Now.AddBusinessDays(csr?.LeadTime ?? ApplicationSettings.Current.OrderLeadTime);
@@ -1569,6 +1592,7 @@ namespace DWOS.UI.Sales
         {
             try
             {
+                
                 var currentOrder = base.CurrentRecord as OrdersDataSet.OrderRow;
                 string currentPriceUnit = this.cboUnit.Value?.ToString();
 
@@ -1589,6 +1613,7 @@ namespace DWOS.UI.Sales
                         //    currentOrder.PartQuantity = Convert.ToInt32(this.numPartQty.Value); 
 
                         //Calculate the fees
+                        
                         this.curFeesTotal.Value = OrderPrice.CalculateFees(currentOrder, this.numUnitPrice.Value);
 
                         decimal weight = this.numWeight.Value == DBNull.Value ? 0M : Convert.ToDecimal(this.numWeight.Value);

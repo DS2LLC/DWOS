@@ -12,7 +12,7 @@ namespace DWOS.UI.Utilities
     {
         #region Fields
 
-        public static readonly string HELP_URL = @"http://www.getdwos.com/Support/Help/{0}/".FormatWith(About.ApplicationVersionMajorMinor);
+        public static readonly string HELP_URL = @DWOS.Data.Properties.Settings.Default.DWOSHelp.ToString().FormatWith(About.ApplicationVersionMajorMinor);
 
         #endregion
 

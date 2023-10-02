@@ -249,7 +249,7 @@ namespace DWOS.UI.Utilities
 
     public static class Updater
     {
-        public const string UPDATE_VERSION_URL = "http://apps.mydwos.com/DS2.AppManagement/updates.ashx?Product=DWOS.Client&Version={0}";
+        public const string UPDATE_VERSION_URL = "";
 
         public static string UpdaterPath
         {

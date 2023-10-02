@@ -19,7 +19,7 @@ namespace DWOS.UI.Utilities
         {
             try
             {
-                Process.Start("http://www.getdwos.com/ContactUs.aspx");
+                Process.Start("https://github.com/ContactUs.aspx");
             }
             catch (Exception exc)
             {

@@ -28,7 +28,7 @@ namespace DWOS.Server.Admin.Wizards.InstallWizard
             var wizard = new WizardDialog();
             var panels = new List <IWizardPanel>();
 
-            panels.Add(new InstallLicense());
+           // panels.Add(new InstallLicense());
             panels.Add(new InstallDatabase());
             panels.Add(new ConnectToDatabase());
             panels.Add(new InstallSQL());

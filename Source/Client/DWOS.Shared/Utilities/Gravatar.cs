@@ -93,7 +93,7 @@ namespace DWOS.Shared.Utilities
             var sb = new StringBuilder();
 
             if(emailAddress == string.Empty)
-                emailAddress = RandomUtils.GetRandomString(10) + "@getdwos.com";
+                emailAddress = RandomUtils.GetRandomString(10) + "";
 
             byte[] ss = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(emailAddress));
             

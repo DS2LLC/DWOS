@@ -202,7 +202,7 @@ namespace DWOS.UI.Utilities
 
             //IF Hack is set to always use my permissions
             if(ImpersonateMaster)
-                DoLogin(1); //set user to Richard
+                DoLogin(1); 
             else
             {
                 if(_authenticator != null && _authenticator.LogInType != ApplicationSettings.Current.LoginType)

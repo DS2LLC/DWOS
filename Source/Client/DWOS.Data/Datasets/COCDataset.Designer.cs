@@ -92,19 +92,19 @@ namespace DWOS.Data.Datasets {
         
         private global::System.Data.DataRelation relationFK_COCPart_Part_DocumentLink;
         
-        private global::System.Data.DataRelation relationFK_COCNotification_d_Contact;
-        
         private global::System.Data.DataRelation relationFK_COCNotification_COC;
         
-        private global::System.Data.DataRelation relationFK_BulkCOCNotification_BulkCOC;
+        private global::System.Data.DataRelation relationFK_COCNotification_d_Contact;
         
         private global::System.Data.DataRelation relationFK_BulkCOCNotification_d_Contact;
         
+        private global::System.Data.DataRelation relationFK_BulkCOCNotification_BulkCOC;
+        
         private global::System.Data.DataRelation relationFK_BatchCOCOrder_BatchCOC;
         
-        private global::System.Data.DataRelation relationFK_BatchCOCNotification_d_Contact;
-        
         private global::System.Data.DataRelation relationFK_BatchCOCNotification_BatchCOC;
+        
+        private global::System.Data.DataRelation relationFK_BatchCOCNotification_d_Contact;
         
         private global::System.Data.DataRelation relationFK_COC_Users;
         
@@ -956,13 +956,13 @@ namespace DWOS.Data.Datasets {
             this.relationFK_Part_Media_Media1 = this.Relations["FK_Part_Media_Media1"];
             this.relationFK_Order_Media_Media1 = this.Relations["FK_Order_Media_Media1"];
             this.relationFK_COCPart_Part_DocumentLink = this.Relations["FK_COCPart_Part_DocumentLink"];
-            this.relationFK_COCNotification_d_Contact = this.Relations["FK_COCNotification_d_Contact"];
             this.relationFK_COCNotification_COC = this.Relations["FK_COCNotification_COC"];
-            this.relationFK_BulkCOCNotification_BulkCOC = this.Relations["FK_BulkCOCNotification_BulkCOC"];
+            this.relationFK_COCNotification_d_Contact = this.Relations["FK_COCNotification_d_Contact"];
             this.relationFK_BulkCOCNotification_d_Contact = this.Relations["FK_BulkCOCNotification_d_Contact"];
+            this.relationFK_BulkCOCNotification_BulkCOC = this.Relations["FK_BulkCOCNotification_BulkCOC"];
             this.relationFK_BatchCOCOrder_BatchCOC = this.Relations["FK_BatchCOCOrder_BatchCOC"];
-            this.relationFK_BatchCOCNotification_d_Contact = this.Relations["FK_BatchCOCNotification_d_Contact"];
             this.relationFK_BatchCOCNotification_BatchCOC = this.Relations["FK_BatchCOCNotification_BatchCOC"];
+            this.relationFK_BatchCOCNotification_d_Contact = this.Relations["FK_BatchCOCNotification_d_Contact"];
             this.relationFK_COC_Users = this.Relations["FK_COC_Users"];
             this.relationProcess_ProcessSteps = this.Relations["Process_ProcessSteps"];
             this.relationProcessSteps_ProcessQuestion = this.Relations["ProcessSteps_ProcessQuestion"];
@@ -1082,13 +1082,6 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_COCNotification_d_Contact", new global::System.Data.DataColumn[] {
-                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOCNotification.ContactIDColumn});
-            this.tableCOCNotification.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_COCNotification_COC", new global::System.Data.DataColumn[] {
                         this.tableCOC.COCIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCOCNotification.COCIDColumn});
@@ -1096,16 +1089,23 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_BulkCOCNotification_BulkCOC", new global::System.Data.DataColumn[] {
-                        this.tableBulkCOC.BulkCOCIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableBulkCOCNotification.BulkCOCIDColumn});
-            this.tableBulkCOCNotification.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_COCNotification_d_Contact", new global::System.Data.DataColumn[] {
+                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOCNotification.ContactIDColumn});
+            this.tableCOCNotification.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_BulkCOCNotification_d_Contact", new global::System.Data.DataColumn[] {
                         this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableBulkCOCNotification.ContactIDColumn});
+            this.tableBulkCOCNotification.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_BulkCOCNotification_BulkCOC", new global::System.Data.DataColumn[] {
+                        this.tableBulkCOC.BulkCOCIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableBulkCOCNotification.BulkCOCIDColumn});
             this.tableBulkCOCNotification.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -1117,16 +1117,16 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_BatchCOCNotification_d_Contact", new global::System.Data.DataColumn[] {
-                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableBatchCOCNotification.ContactIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_BatchCOCNotification_BatchCOC", new global::System.Data.DataColumn[] {
+                        this.tableBatchCOC.BatchCOCIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableBatchCOCNotification.BatchCOCIDColumn});
             this.tableBatchCOCNotification.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_BatchCOCNotification_BatchCOC", new global::System.Data.DataColumn[] {
-                        this.tableBatchCOC.BatchCOCIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableBatchCOCNotification.BatchCOCIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_BatchCOCNotification_d_Contact", new global::System.Data.DataColumn[] {
+                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableBatchCOCNotification.ContactIDColumn});
             this.tableBatchCOCNotification.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -1147,34 +1147,34 @@ namespace DWOS.Data.Datasets {
                         this.tableCOCPart.PartIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePart_DocumentLink.LinkToKeyColumn}, false);
             this.Relations.Add(this.relationFK_COCPart_Part_DocumentLink);
-            this.relationFK_COCNotification_d_Contact = new global::System.Data.DataRelation("FK_COCNotification_d_Contact", new global::System.Data.DataColumn[] {
-                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOCNotification.ContactIDColumn}, false);
-            this.Relations.Add(this.relationFK_COCNotification_d_Contact);
             this.relationFK_COCNotification_COC = new global::System.Data.DataRelation("FK_COCNotification_COC", new global::System.Data.DataColumn[] {
                         this.tableCOC.COCIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCOCNotification.COCIDColumn}, false);
             this.Relations.Add(this.relationFK_COCNotification_COC);
-            this.relationFK_BulkCOCNotification_BulkCOC = new global::System.Data.DataRelation("FK_BulkCOCNotification_BulkCOC", new global::System.Data.DataColumn[] {
-                        this.tableBulkCOC.BulkCOCIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableBulkCOCNotification.BulkCOCIDColumn}, false);
-            this.Relations.Add(this.relationFK_BulkCOCNotification_BulkCOC);
+            this.relationFK_COCNotification_d_Contact = new global::System.Data.DataRelation("FK_COCNotification_d_Contact", new global::System.Data.DataColumn[] {
+                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOCNotification.ContactIDColumn}, false);
+            this.Relations.Add(this.relationFK_COCNotification_d_Contact);
             this.relationFK_BulkCOCNotification_d_Contact = new global::System.Data.DataRelation("FK_BulkCOCNotification_d_Contact", new global::System.Data.DataColumn[] {
                         this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableBulkCOCNotification.ContactIDColumn}, false);
             this.Relations.Add(this.relationFK_BulkCOCNotification_d_Contact);
+            this.relationFK_BulkCOCNotification_BulkCOC = new global::System.Data.DataRelation("FK_BulkCOCNotification_BulkCOC", new global::System.Data.DataColumn[] {
+                        this.tableBulkCOC.BulkCOCIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableBulkCOCNotification.BulkCOCIDColumn}, false);
+            this.Relations.Add(this.relationFK_BulkCOCNotification_BulkCOC);
             this.relationFK_BatchCOCOrder_BatchCOC = new global::System.Data.DataRelation("FK_BatchCOCOrder_BatchCOC", new global::System.Data.DataColumn[] {
                         this.tableBatchCOC.BatchCOCIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableBatchCOCOrder.BatchCOCIDColumn}, false);
             this.Relations.Add(this.relationFK_BatchCOCOrder_BatchCOC);
-            this.relationFK_BatchCOCNotification_d_Contact = new global::System.Data.DataRelation("FK_BatchCOCNotification_d_Contact", new global::System.Data.DataColumn[] {
-                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableBatchCOCNotification.ContactIDColumn}, false);
-            this.Relations.Add(this.relationFK_BatchCOCNotification_d_Contact);
             this.relationFK_BatchCOCNotification_BatchCOC = new global::System.Data.DataRelation("FK_BatchCOCNotification_BatchCOC", new global::System.Data.DataColumn[] {
                         this.tableBatchCOC.BatchCOCIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableBatchCOCNotification.BatchCOCIDColumn}, false);
             this.Relations.Add(this.relationFK_BatchCOCNotification_BatchCOC);
+            this.relationFK_BatchCOCNotification_d_Contact = new global::System.Data.DataRelation("FK_BatchCOCNotification_d_Contact", new global::System.Data.DataColumn[] {
+                        this.tabled_Contact.ContactIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableBatchCOCNotification.ContactIDColumn}, false);
+            this.Relations.Add(this.relationFK_BatchCOCNotification_d_Contact);
             this.relationFK_COC_Users = new global::System.Data.DataRelation("FK_COC_Users", new global::System.Data.DataColumn[] {
                         this.tableUsers.UserIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCOC.QAUserColumn}, false);
@@ -4370,6 +4370,8 @@ namespace DWOS.Data.Datasets {
             
             private global::System.Data.DataColumn columnNumericUntis;
             
+            private global::System.Data.DataColumn columnSamples;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PartInspectionAnswersDataTable() {
@@ -4493,6 +4495,14 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SamplesColumn {
+                get {
+                    return this.columnSamples;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4528,7 +4538,7 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PartInspectionAnswersRow AddPartInspectionAnswersRow(string Answer, string QuestionName, string TestReference, PartInspectionRow parentPartInspectionRowByFK_PartInspectionAnswer_PartInspection, string InputType, string Max, string Min, decimal Max1, decimal Min1, string NumericUntis) {
+            public PartInspectionAnswersRow AddPartInspectionAnswersRow(string Answer, string QuestionName, string TestReference, PartInspectionRow parentPartInspectionRowByFK_PartInspectionAnswer_PartInspection, string InputType, string Max, string Min, decimal Max1, decimal Min1, string NumericUntis, int Samples) {
                 PartInspectionAnswersRow rowPartInspectionAnswersRow = ((PartInspectionAnswersRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Answer,
@@ -4541,7 +4551,8 @@ namespace DWOS.Data.Datasets {
                         Min,
                         Max1,
                         Min1,
-                        NumericUntis};
+                        NumericUntis,
+                        Samples};
                 if ((parentPartInspectionRowByFK_PartInspectionAnswer_PartInspection != null)) {
                     columnValuesArray[3] = parentPartInspectionRowByFK_PartInspectionAnswer_PartInspection[2];
                 }
@@ -4585,6 +4596,7 @@ namespace DWOS.Data.Datasets {
                 this.columnMax1 = base.Columns["Max1"];
                 this.columnMin1 = base.Columns["Min1"];
                 this.columnNumericUntis = base.Columns["NumericUntis"];
+                this.columnSamples = base.Columns["Samples"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4612,6 +4624,8 @@ namespace DWOS.Data.Datasets {
                 base.Columns.Add(this.columnMin1);
                 this.columnNumericUntis = new global::System.Data.DataColumn("NumericUntis", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNumericUntis);
+                this.columnSamples = new global::System.Data.DataColumn("Samples", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSamples);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPartInspectionAnswer}, true));
                 this.columnAnswer.MaxLength = 255;
@@ -4634,6 +4648,7 @@ namespace DWOS.Data.Datasets {
                 this.columnMin1.ReadOnly = true;
                 this.columnMin1.Caption = "Min";
                 this.columnNumericUntis.MaxLength = 50;
+                this.columnSamples.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12658,6 +12673,22 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int Samples {
+                get {
+                    try {
+                        return ((int)(this[this.tablePartInspectionAnswers.SamplesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Samples\' in table \'PartInspectionAnswers\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePartInspectionAnswers.SamplesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PartInspectionRow PartInspectionRow {
                 get {
                     return ((PartInspectionRow)(this.GetParentRow(this.Table.ParentRelations["FK_PartInspectionAnswer_PartInspection"])));
@@ -12749,6 +12780,18 @@ namespace DWOS.Data.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetNumericUntisNull() {
                 this[this.tablePartInspectionAnswers.NumericUntisColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSamplesNull() {
+                return this.IsNull(this.tablePartInspectionAnswers.SamplesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSamplesNull() {
+                this[this.tablePartInspectionAnswers.SamplesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13992,23 +14035,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public d_ContactRow d_ContactRow {
-                get {
-                    return ((d_ContactRow)(this.GetParentRow(this.Table.ParentRelations["FK_COCNotification_d_Contact"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COCNotification_d_Contact"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public COCRow COCRow {
                 get {
                     return ((COCRow)(this.GetParentRow(this.Table.ParentRelations["FK_COCNotification_COC"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_COCNotification_COC"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public d_ContactRow d_ContactRow {
+                get {
+                    return ((d_ContactRow)(this.GetParentRow(this.Table.ParentRelations["FK_COCNotification_d_Contact"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COCNotification_d_Contact"]);
                 }
             }
             
@@ -14091,23 +14134,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public BulkCOCRow BulkCOCRow {
-                get {
-                    return ((BulkCOCRow)(this.GetParentRow(this.Table.ParentRelations["FK_BulkCOCNotification_BulkCOC"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_BulkCOCNotification_BulkCOC"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public d_ContactRow d_ContactRow {
                 get {
                     return ((d_ContactRow)(this.GetParentRow(this.Table.ParentRelations["FK_BulkCOCNotification_d_Contact"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_BulkCOCNotification_d_Contact"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public BulkCOCRow BulkCOCRow {
+                get {
+                    return ((BulkCOCRow)(this.GetParentRow(this.Table.ParentRelations["FK_BulkCOCNotification_BulkCOC"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_BulkCOCNotification_BulkCOC"]);
                 }
             }
             
@@ -14576,23 +14619,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public d_ContactRow d_ContactRow {
-                get {
-                    return ((d_ContactRow)(this.GetParentRow(this.Table.ParentRelations["FK_BatchCOCNotification_d_Contact"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_BatchCOCNotification_d_Contact"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public BatchCOCRow BatchCOCRow {
                 get {
                     return ((BatchCOCRow)(this.GetParentRow(this.Table.ParentRelations["FK_BatchCOCNotification_BatchCOC"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_BatchCOCNotification_BatchCOC"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public d_ContactRow d_ContactRow {
+                get {
+                    return ((d_ContactRow)(this.GetParentRow(this.Table.ParentRelations["FK_BatchCOCNotification_d_Contact"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_BatchCOCNotification_d_Contact"]);
                 }
             }
             
@@ -18008,6 +18051,7 @@ ORDER BY OrderProcesses.OrderID,
             tableMapping.ColumnMappings.Add("Max", "Max1");
             tableMapping.ColumnMappings.Add("Min", "Min1");
             tableMapping.ColumnMappings.Add("NumericUntis", "NumericUntis");
+            tableMapping.ColumnMappings.Add("Samples", "Samples");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -18024,15 +18068,15 @@ ORDER BY OrderProcesses.OrderID,
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        PartInspectionAnswer.Answer, PartInspectionQuestion.Name AS QuestionName, PartInspectionType.TestReference, PartInspectionAnswer.PartInspectionID, PartInspectionQuestion.InputType, 
-                         PartInspectionAnswer.PartInspectionAnswer, Samples.Max, Samples.Min, PartInspectionQuestion.NumericUntis
-FROM            PartInspectionAnswer INNER JOIN
-                         PartInspectionQuestion ON PartInspectionAnswer.PartInspectionQuestionID = PartInspectionQuestion.PartInspectionQuestionID INNER JOIN
-                         PartInspectionType ON PartInspectionQuestion.PartInspectionTypeID = PartInspectionType.PartInspectionTypeID LEFT OUTER JOIN
-                             (SELECT DISTINCT PartInspectionAnswer, MAX(SampleValue) AS Max, MIN(SampleValue) AS Min
-                               FROM            InspectionAnswerSample AS V
-                               GROUP BY PartInspectionAnswer) AS Samples ON PartInspectionAnswer.PartInspectionAnswer = Samples.PartInspectionAnswer
-WHERE        (PartInspectionAnswer.PartInspectionID = @partInspectionID)
+            this._commandCollection[0].CommandText = @"SELECT PartInspectionAnswer.Answer, PartInspectionQuestion.Name AS QuestionName, PartInspectionType.TestReference, PartInspectionAnswer.PartInspectionID, PartInspectionQuestion.InputType, 
+                  PartInspectionAnswer.PartInspectionAnswer, Samples.Max, Samples.Min, PartInspectionQuestion.NumericUntis, Samples.Samples
+FROM     PartInspectionAnswer INNER JOIN
+                  PartInspectionQuestion ON PartInspectionAnswer.PartInspectionQuestionID = PartInspectionQuestion.PartInspectionQuestionID INNER JOIN
+                  PartInspectionType ON PartInspectionQuestion.PartInspectionTypeID = PartInspectionType.PartInspectionTypeID LEFT OUTER JOIN
+                      (SELECT DISTINCT PartInspectionAnswer, MAX(SampleValue) AS Max, MIN(SampleValue) AS Min, COUNT(PartInspectionAnswer) AS Samples
+                       FROM      InspectionAnswerSample AS V
+                       GROUP BY PartInspectionAnswer) AS Samples ON PartInspectionAnswer.PartInspectionAnswer = Samples.PartInspectionAnswer
+WHERE  (PartInspectionAnswer.PartInspectionID = @partInspectionID)
 ORDER BY PartInspectionQuestion.StepOrder";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@partInspectionID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "PartInspectionID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

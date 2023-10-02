@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DWOS.Data;
-using DWOS.Server.Admin.LicenseActivation;
+//using DWOS.Server.Admin.LicenseActivation;
 using DWOS.Shared;
 using NLog;
 
@@ -15,7 +15,7 @@ namespace DWOS.Server.Admin.Tasks
     {
         #region Fields
 
-        private ActivationServiceClient _client;
+        //private ActivationServiceClient _client;
 
         #endregion
 
@@ -36,16 +36,15 @@ namespace DWOS.Server.Admin.Tasks
                 this.prgStatus.Visible = true;
                 this.txtStatus.Text    = null;
 
-                if(this._client == null)
-                {
-                    this._client                    = new ActivationServiceClient();
-                    this._client.ActivateCompleted  += this.client_ActivateCompleted;
-                }
+                //if(this._client == null)
+                //{
+                //    this._client                    = new ActivationServiceClient();
+                //    this._client.ActivateCompleted  += this.client_ActivateCompleted;
+                //}
 
-                this.txtStatus.Text = "Beginning activation...";
-                
-                
-                this._client.ActivateAsync(this.txtCustomerKey.Text, this.txtFingerprint.Text, this.txtLicenseKey.Text);
+                //this.txtStatus.Text = "Beginning activation...";
+
+                //this._client.ActivateAsync(this.txtCustomerKey.Text, this.txtFingerprint.Text, this.txtLicenseKey.Text);
             }
             catch(Exception exc)
             {
@@ -65,26 +64,26 @@ namespace DWOS.Server.Admin.Tasks
             this.txtLicenseKey.Text = ServerSettings.Default.LicenseKey;
         }
 
-        private void client_ActivateCompleted(object sender, ActivateCompletedEventArgs e)
+        private void client_ActivateCompleted(object sender)
         {
             try
             {
-                if(e.Error != null)
-                {
-                    this.txtStatus.Text += "\r\nError during activation...";
-                    this.txtStatus.Text += "\r\nError: " + e.Error.Message;
-                    return;
-                }
+                //if(e.Error != null)
+                //{
+                //    this.txtStatus.Text += "\r\nError during activation...";
+                //    this.txtStatus.Text += "\r\nError: " + e.Error.Message;
+                //    return;
+                //}
 
-                if(!String.IsNullOrEmpty(e.Result.ErrorInformation))
-                {
-                    this.txtStatus.Text += "\r\nError: " + e.Result.ErrorInformation;
-                    return;
-                }
+                //if(!String.IsNullOrEmpty(e.Result.ErrorInformation))
+                //{
+                //    this.txtStatus.Text += "\r\nError: " + e.Result.ErrorInformation;
+                //    return;
+                //}
 
-                if(e.Result.Successful)
-                    this.txtStatus.Text += "\r\nSuccesfully activated!";
-                else
+                //if(e.Result.Successful)
+                //    this.txtStatus.Text += "\r\nSuccesfully activated!";
+                //else
                     this.txtStatus.Text += "\r\nUnable to activate.";
             }
             catch(Exception exc)
@@ -116,17 +115,17 @@ namespace DWOS.Server.Admin.Tasks
 
         private void Registration_FormClosed(object sender, FormClosedEventArgs e)
         {
-            try
-            {
-                if(this._client != null)
-                    this._client.Close();
+            //try
+            //{
+            //    if(this._client != null)
+            //        this._client.Close();
 
-                this._client = null;
-            }
-            catch(Exception exc)
-            {
-                LogManager.GetCurrentClassLogger().Error(exc, "Error closing client.");
-            }
+            //    this._client = null;
+            //}
+            //catch(Exception exc)
+            //{
+            //    LogManager.GetCurrentClassLogger().Error(exc, "Error closing client.");
+            //}
         }
 
         #endregion

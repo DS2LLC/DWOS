@@ -45,8 +45,6 @@
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinToolbars.PopupControlContainerTool popupControlContainerTool1 = new Infragistics.Win.UltraWinToolbars.PopupControlContainerTool("Setttings");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool117 = new Infragistics.Win.UltraWinToolbars.ButtonTool("PrintGrid");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool60 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Feedback");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool87 = new Infragistics.Win.UltraWinToolbars.ButtonTool("cmdCheckForUpdates");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool15 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Exit");
             Infragistics.Win.UltraWinToolbars.ContextualTabGroup contextualTabGroup1 = new Infragistics.Win.UltraWinToolbars.ContextualTabGroup("Dashboard");
             Infragistics.Win.UltraWinToolbars.ContextualTabGroup contextualTabGroup2 = new Infragistics.Win.UltraWinToolbars.ContextualTabGroup("Batches");
@@ -238,20 +236,12 @@
             Infragistics.Win.UltraWinToolbars.RibbonTab ribbonTab9 = new Infragistics.Win.UltraWinToolbars.RibbonTab("ribbon6");
             Infragistics.Win.UltraWinToolbars.RibbonGroup ribbonGroup25 = new Infragistics.Win.UltraWinToolbars.RibbonGroup("ribbonGroup1");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool193 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Help");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool192 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Feedback");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool194 = new Infragistics.Win.UltraWinToolbars.ButtonTool("KnowledgeBase");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool195 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Tickets");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool220 = new Infragistics.Win.UltraWinToolbars.ButtonTool("LogFile");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool28 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Sort");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool34 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Refresh");
             Infragistics.Win.UltraWinToolbars.ComboBoxTool comboBoxTool3 = new Infragistics.Win.UltraWinToolbars.ComboBoxTool("DeptLocation");
             Infragistics.Win.UltraWinToolbars.ComboBoxTool comboBoxTool1 = new Infragistics.Win.UltraWinToolbars.ComboBoxTool("ProcessingLine");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool191 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Update");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool39 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Help");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool75 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Announcements");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool33 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Feedback");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool56 = new Infragistics.Win.UltraWinToolbars.ButtonTool("KnowledgeBase");
-            Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool82 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Tickets");
             Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool53 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Customers");
             Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
@@ -820,9 +810,9 @@
             this._frmMain_Toolbars_Dock_Area_Left.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Left;
             this._frmMain_Toolbars_Dock_Area_Left.ForeColor = System.Drawing.SystemColors.ControlText;
             this._frmMain_Toolbars_Dock_Area_Left.InitialResizeAreaExtent = 1;
-            this._frmMain_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 176);
+            this._frmMain_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 151);
             this._frmMain_Toolbars_Dock_Area_Left.Name = "_frmMain_Toolbars_Dock_Area_Left";
-            this._frmMain_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(1, 508);
+            this._frmMain_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(1, 533);
             this._frmMain_Toolbars_Dock_Area_Left.ToolbarsManager = this.toolbarManager;
             // 
             // toolbarManager
@@ -843,8 +833,6 @@
             this.toolbarManager.Ribbon.ApplicationMenu2010.NavigationMenu.NonInheritedTools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             popupControlContainerTool1,
             buttonTool117,
-            buttonTool60,
-            buttonTool87,
             buttonTool15});
             this.toolbarManager.Ribbon.FileMenuStyle = Infragistics.Win.UltraWinToolbars.FileMenuStyle.ApplicationMenu2010;
             this.toolbarManager.Ribbon.GroupSettings.CanCollapse = Infragistics.Win.DefaultableBoolean.False;
@@ -1212,9 +1200,6 @@
             ribbonGroup25.PreferredToolSize = Infragistics.Win.UltraWinToolbars.RibbonToolSize.Large;
             ribbonGroup25.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             buttonTool193,
-            buttonTool192,
-            buttonTool194,
-            buttonTool195,
             buttonTool220});
             ribbonTab9.Groups.AddRange(new Infragistics.Win.UltraWinToolbars.RibbonGroup[] {
             ribbonGroup25});
@@ -1234,12 +1219,7 @@
             comboBoxTool3,
             comboBoxTool1});
             this.toolbarManager.Ribbon.TabItemToolbar.NonInheritedTools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool191,
-            buttonTool39,
-            buttonTool75,
-            buttonTool33,
-            buttonTool56,
-            buttonTool82});
+            buttonTool39});
             this.toolbarManager.Ribbon.Visible = true;
             this.toolbarManager.SettingsKey = "Main.toolbarManager";
             this.toolbarManager.ShowFullMenusDelay = 500;
@@ -2804,9 +2784,9 @@
             this._frmMain_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
             this._frmMain_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
             this._frmMain_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 1;
-            this._frmMain_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(1369, 176);
+            this._frmMain_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(1369, 151);
             this._frmMain_Toolbars_Dock_Area_Right.Name = "_frmMain_Toolbars_Dock_Area_Right";
-            this._frmMain_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(1, 508);
+            this._frmMain_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(1, 533);
             this._frmMain_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManager;
             // 
             // _frmMain_Toolbars_Dock_Area_Top
@@ -2817,7 +2797,7 @@
             this._frmMain_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
             this._frmMain_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
             this._frmMain_Toolbars_Dock_Area_Top.Name = "_frmMain_Toolbars_Dock_Area_Top";
-            this._frmMain_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(1370, 176);
+            this._frmMain_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(1370, 151);
             this._frmMain_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManager;
             // 
             // _frmMain_Toolbars_Dock_Area_Bottom
@@ -2835,9 +2815,9 @@
             // mainWindowHost
             // 
             this.mainWindowHost.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainWindowHost.Location = new System.Drawing.Point(1, 176);
+            this.mainWindowHost.Location = new System.Drawing.Point(1, 151);
             this.mainWindowHost.Name = "mainWindowHost";
-            this.mainWindowHost.Size = new System.Drawing.Size(1368, 486);
+            this.mainWindowHost.Size = new System.Drawing.Size(1368, 511);
             this.inboxControlStyler1.SetStyleSettings(this.mainWindowHost, new Infragistics.Win.AppStyling.Runtime.InboxControlStyleSettings(Infragistics.Win.DefaultableBoolean.Default));
             this.mainWindowHost.TabIndex = 20;
             this.mainWindowHost.Child = null;

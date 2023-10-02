@@ -338,8 +338,8 @@ namespace DWOS.UI.QA
         private void OrderProcessQuestion_Leave(object sender, EventArgs e)
         {
             //Auto save the answer
-            if(!this._saved)
-                SaveAnswer();
+            //if(!this._saved)
+            //    SaveAnswer();
         }
 
         private void ControlTextChanged(object sender, EventArgs e)

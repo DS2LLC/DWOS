@@ -289,11 +289,13 @@
             // 
             // tvwTOC
             // 
-            this.tvwTOC.Location = new System.Drawing.Point(0, 22);
-            this.tvwTOC.Size = new System.Drawing.Size(238, 852);
+            this.tvwTOC.Location = new System.Drawing.Point(0, 26);
+            this.tvwTOC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tvwTOC.Size = new System.Drawing.Size(238, 1126);
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // splitContainer1.Panel1
             // 
@@ -308,8 +310,11 @@
             this.splitContainer1.Panel2.Controls.Add(this.dpPartMarking);
             this.splitContainer1.Panel2.Controls.Add(this.dpCustomerShipping);
             this.splitContainer1.Panel2.Controls.Add(this.dpCustomerContacts);
-            this.splitContainer1.Size = new System.Drawing.Size(1652, 874);
+            this.splitContainer1.Panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Size = new System.Drawing.Size(2165, 1152);
             this.splitContainer1.SplitterDistance = 238;
+            this.splitContainer1.SplitterWidth = 5;
             // 
             // helpLink1
             // 
@@ -423,10 +428,11 @@
             this.dpCustomerContacts.Editable = true;
             this.dpCustomerContacts.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpCustomerContacts.IsActivePanel = false;
-            this.dpCustomerContacts.Location = new System.Drawing.Point(24, 12);
+            this.dpCustomerContacts.Location = new System.Drawing.Point(31, 16);
+            this.dpCustomerContacts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpCustomerContacts.Name = "dpCustomerContacts";
-            this.dpCustomerContacts.Padding = new System.Windows.Forms.Padding(5);
-            this.dpCustomerContacts.Size = new System.Drawing.Size(387, 297);
+            this.dpCustomerContacts.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.dpCustomerContacts.Size = new System.Drawing.Size(498, 388);
             this.dpCustomerContacts.TabIndex = 0;
             // 
             // dpCustomerInformation
@@ -435,10 +441,11 @@
             this.dpCustomerInformation.Editable = true;
             this.dpCustomerInformation.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpCustomerInformation.IsActivePanel = false;
-            this.dpCustomerInformation.Location = new System.Drawing.Point(24, 333);
+            this.dpCustomerInformation.Location = new System.Drawing.Point(31, 435);
+            this.dpCustomerInformation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpCustomerInformation.Name = "dpCustomerInformation";
-            this.dpCustomerInformation.Padding = new System.Windows.Forms.Padding(5);
-            this.dpCustomerInformation.Size = new System.Drawing.Size(437, 457);
+            this.dpCustomerInformation.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.dpCustomerInformation.Size = new System.Drawing.Size(562, 598);
             this.dpCustomerInformation.TabIndex = 1;
             this.dpCustomerInformation.ToolbarsManager = this.toolbarManager;
             // 
@@ -448,10 +455,11 @@
             this.dpCustomerShipping.Editable = true;
             this.dpCustomerShipping.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpCustomerShipping.IsActivePanel = false;
-            this.dpCustomerShipping.Location = new System.Drawing.Point(24, 443);
+            this.dpCustomerShipping.Location = new System.Drawing.Point(31, 579);
+            this.dpCustomerShipping.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpCustomerShipping.Name = "dpCustomerShipping";
-            this.dpCustomerShipping.Padding = new System.Windows.Forms.Padding(5);
-            this.dpCustomerShipping.Size = new System.Drawing.Size(425, 173);
+            this.dpCustomerShipping.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.dpCustomerShipping.Size = new System.Drawing.Size(546, 226);
             this.dpCustomerShipping.TabIndex = 2;
             // 
             // taManufacturer
@@ -464,10 +472,11 @@
             this.dpPartMarking.Editable = true;
             this.dpPartMarking.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpPartMarking.IsActivePanel = false;
-            this.dpPartMarking.Location = new System.Drawing.Point(455, 25);
+            this.dpPartMarking.Location = new System.Drawing.Point(585, 33);
+            this.dpPartMarking.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpPartMarking.Name = "dpPartMarking";
-            this.dpPartMarking.Padding = new System.Windows.Forms.Padding(5);
-            this.dpPartMarking.Size = new System.Drawing.Size(323, 560);
+            this.dpPartMarking.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.dpPartMarking.Size = new System.Drawing.Size(415, 732);
             this.dpPartMarking.TabIndex = 3;
             // 
             // taAirframe
@@ -480,10 +489,11 @@
             this.dpCustomField.Editable = true;
             this.dpCustomField.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpCustomField.IsActivePanel = false;
-            this.dpCustomField.Location = new System.Drawing.Point(37, 333);
+            this.dpCustomField.Location = new System.Drawing.Point(48, 435);
+            this.dpCustomField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpCustomField.Name = "dpCustomField";
-            this.dpCustomField.Padding = new System.Windows.Forms.Padding(5);
-            this.dpCustomField.Size = new System.Drawing.Size(345, 310);
+            this.dpCustomField.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.dpCustomField.Size = new System.Drawing.Size(444, 405);
             this.dpCustomField.TabIndex = 4;
             // 
             // taFields
@@ -515,10 +525,10 @@
             this.txtNodeFilter.CausesValidation = false;
             this.txtNodeFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtNodeFilter.Location = new System.Drawing.Point(0, 0);
-            this.txtNodeFilter.Margin = new System.Windows.Forms.Padding(5);
+            this.txtNodeFilter.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.txtNodeFilter.Name = "txtNodeFilter";
             this.txtNodeFilter.NullText = "<None>";
-            this.txtNodeFilter.Size = new System.Drawing.Size(238, 22);
+            this.txtNodeFilter.Size = new System.Drawing.Size(238, 26);
             this.txtNodeFilter.TabIndex = 35;
             this.txtNodeFilter.EditorButtonClick += new Infragistics.Win.UltraWinEditors.EditorButtonEventHandler(this.txtNodeFilter_EditorButtonClick);
             this.txtNodeFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNodeFilter_KeyPress);
@@ -529,10 +539,11 @@
             this.dpRelatedContact.Editable = true;
             this.dpRelatedContact.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpRelatedContact.IsActivePanel = false;
-            this.dpRelatedContact.Location = new System.Drawing.Point(496, 620);
+            this.dpRelatedContact.Location = new System.Drawing.Point(638, 811);
+            this.dpRelatedContact.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpRelatedContact.Name = "dpRelatedContact";
-            this.dpRelatedContact.Padding = new System.Windows.Forms.Padding(3);
-            this.dpRelatedContact.Size = new System.Drawing.Size(452, 116);
+            this.dpRelatedContact.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dpRelatedContact.Size = new System.Drawing.Size(581, 152);
             this.dpRelatedContact.TabIndex = 5;
             this.dpRelatedContact.GoToContactClicked += new System.EventHandler<DWOS.UI.Sales.Customer.RelatedContactInformation.GoToContactEventArgs>(this.dpRelatedContact_GoToContactClicked);
             this.dpRelatedContact.GoToCustomerClicked += new System.EventHandler<DWOS.UI.Sales.Customer.RelatedContactInformation.GoToCustomerEventArgs>(this.dpRelatedContact_GoToCustomerClicked);
@@ -547,18 +558,20 @@
             this.dpPartCustomField.Editable = true;
             this.dpPartCustomField.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dpPartCustomField.IsActivePanel = false;
-            this.dpPartCustomField.Location = new System.Drawing.Point(717, 333);
+            this.dpPartCustomField.Location = new System.Drawing.Point(922, 435);
+            this.dpPartCustomField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dpPartCustomField.Name = "dpPartCustomField";
-            this.dpPartCustomField.Padding = new System.Windows.Forms.Padding(3);
-            this.dpPartCustomField.Size = new System.Drawing.Size(248, 232);
+            this.dpPartCustomField.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dpPartCustomField.Size = new System.Drawing.Size(319, 303);
             this.dpPartCustomField.TabIndex = 6;
             // 
             // Customers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1684, 1113);
+            this.ClientSize = new System.Drawing.Size(2183, 1372);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Customers";
             this.Text = "Customer Manager";
             this.Load += new System.EventHandler(this.Customers_Load);

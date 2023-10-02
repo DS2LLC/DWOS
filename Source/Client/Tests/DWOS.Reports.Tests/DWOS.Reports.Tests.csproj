@@ -56,13 +56,13 @@
     <Compile Include="Utilities\ReportStringUtilitiesTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\DWOS.Reports\DWOS.Reports.csproj">
       <Project>{28DE14C9-CA9D-4499-AD39-211AE4ED36AF}</Project>
       <Name>DWOS.Reports</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

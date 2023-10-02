@@ -11,6 +11,10 @@ namespace DWOS.Data.Datasets
 {
     public partial class OrdersDataSet
     {
+        partial class CustomerShippingSummaryDataTable
+        {
+        }
+
         public partial class OrderDataTable
         {
             public override void EndInit()

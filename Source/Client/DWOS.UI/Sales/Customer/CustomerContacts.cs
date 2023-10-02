@@ -89,6 +89,7 @@ namespace DWOS.UI.Sales.Customer
             BindValue(chkCertNotification, Dataset.Contact.COCNotificationColumn.ColumnName);
             BindValue(chkApprovalNotification, Dataset.Contact.ApprovalNotificationColumn.ColumnName);
             BindValue(chkLateOrderNotification, Dataset.Contact.LateOrderNotificationColumn.ColumnName);
+            BindValue(cbchkOrderReceiptNotification, Dataset.Contact.OrderReceiptNotificationColumn.ColumnName);
             BindValue(chkIsAuthorized, Dataset.Contact.PortalAuthorizedColumn.ColumnName);
             BindValue(dtePortalAuthDate, Dataset.Contact.PortalAuthorizationSentColumn.ColumnName);
             BindValue(cboManufacturer, Dataset.Contact.ManufacturerIDColumn.ColumnName);
@@ -578,7 +579,7 @@ namespace DWOS.UI.Sales.Customer
             }
             catch (Exception exc)
             {
-                _log.Error(exc, "Error changing checked value for include COC in shipping notification");
+                _log.Error(exc, "Error changing checked value for include Order Acknowledgement notification");
             }
 
         }
@@ -693,6 +694,7 @@ namespace DWOS.UI.Sales.Customer
                                 false,
                                 false,
                                 false,
+                                false,
                                 false);
 
                             _additionalCustomers.Add(new AdditionalCustomerItem(additionalCustomerRow));
@@ -730,6 +732,22 @@ namespace DWOS.UI.Sales.Customer
             {
                 _log.Error(exc, "Error removing an additional customer.");
             }
+        }
+
+        private void cbchkOrderReceiptNotification_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_recordLoading || !_panelLoaded || !IsActivePanel)
+                {
+                    return;
+                }
+            }
+            catch (Exception exc)
+            {
+                _log.Error(exc, "Error changing checked value for include COC in shipping notification");
+            }
+
         }
 
         #endregion
@@ -884,6 +902,7 @@ namespace DWOS.UI.Sales.Customer
         }
 
         #endregion
-     
+
+
     }
 }

@@ -171,7 +171,7 @@ namespace DWOS.Server
             this._scheduler.ScheduleJob(new JobDetailImpl("ReportNotification", null, typeof(ReportNotificationTask)), new SimpleTriggerImpl("ReportNotificationTrigger", new DateTimeOffset(DateTime.Now.AddSeconds(120)), null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromMinutes(10)) {MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy});
 
             // License check
-            this._scheduler.ScheduleJob(new JobDetailImpl("LicenseCheckTask", null, typeof(LicenseCheckTask)), new SimpleTriggerImpl("LicenseCheckTrigger", new DateTimeOffset(DateTime.Now.AddSeconds(15)), null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromHours(24)) {MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy});
+            // this._scheduler.ScheduleJob(new JobDetailImpl("LicenseCheckTask", null, typeof(LicenseCheckTask)), new SimpleTriggerImpl("LicenseCheckTrigger", new DateTimeOffset(DateTime.Now.AddSeconds(15)), null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromHours(24)) {MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy});
 
             // License prune
             this._scheduler.ScheduleJob(new JobDetailImpl("LicensePrune", null, typeof(LicensePruneTask)), new SimpleTriggerImpl("LicensePruneTrigger", new DateTimeOffset(DateTime.Now.AddSeconds(5)), null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromMinutes(3)) {MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy});
@@ -181,7 +181,7 @@ namespace DWOS.Server
 
             // Update statistics
             // Make the minute random to help prevent excessive server load at DS2 Servers
-            this._scheduler.ScheduleJob(new JobDetailImpl("UpdateStatsTask", null, typeof(UpdateStatsTask)), new CronTriggerImpl("UpdateStatsTaskTrigger", null, "0 " + rand.Next(0, 59).ToString() + " 23 ? * *"));
+            //this._scheduler.ScheduleJob(new JobDetailImpl("UpdateStatsTask", null, typeof(UpdateStatsTask)), new CronTriggerImpl("UpdateStatsTaskTrigger", null, "0 " + rand.Next(0, 59).ToString() + " 23 ? * *"));
 
             // Refresh settings
             this._scheduler.ScheduleJob(new JobDetailImpl("RefreshSettingsTask", null, typeof(RefreshSettingsTask)), new SimpleTriggerImpl("RefreshSettingsTrigger", new DateTimeOffset(DateTime.Now.AddMinutes(10)), null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromMinutes(10)) { MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy });
@@ -245,6 +245,15 @@ namespace DWOS.Server
             _scheduler.ScheduleJob(
                 new JobDetailImpl("OrderApprovalNotification", null, typeof(OrderApprovalNotificationTask)),
                 new SimpleTriggerImpl("OrderApprovalNotificationTrigger", new DateTimeOffset(DateTime.Now.AddMinutes(1)),
+                    null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromMinutes(Settings.Default.OrderApprovalNotificationsInterval))
+                {
+                    MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy
+                });
+
+            // Order Receipt notifications
+            _scheduler.ScheduleJob(
+                new JobDetailImpl("OrderReceiptNotification", null, typeof(OrderReceiptNotificationTask)),
+                new SimpleTriggerImpl("OrderReceiptNotificationTrigger", new DateTimeOffset(DateTime.Now.AddMinutes(1)),
                     null, SimpleTriggerImpl.RepeatIndefinitely, TimeSpan.FromMinutes(Settings.Default.OrderApprovalNotificationsInterval))
                 {
                     MisfireInstruction = MisfireInstruction.IgnoreMisfirePolicy

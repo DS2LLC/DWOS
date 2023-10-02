@@ -424,7 +424,22 @@ SELECT OrderID, CustomerID, OrderDate, RequiredDate, Status, CompletedDate, Prio
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.[Order]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillRecentByStatus" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillRecentByStatus" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillRecentByStatus">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.[Order]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillOrderReceiptNotification" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillOrderReceiptNotification" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillOrderReceiptNotification">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT   AdjustedEstShipDate, BasePrice, CompletedDate, ContractReviewed, CreatedBy, CurrentLine, CurrentLocation, CustomerAddressID, CustomerID, CustomerWO, EstShipDate, 
+                         FromShippingManifest, Hold, ImportedPrice, InitialPartQuantity, Invoice, OrderDate, OrderID, OrderTemplateID, OrderType, OriginalOrderType, PartID, PartQuantity, PriceUnit, Priority, 
+                         PurchaseOrder, QuotePartId, ReceivingID, RequireCoc, RequiredDate, SalesOrderID, SchedulePriority, ShippingMethod, Status, Weight, WorkStatus
+FROM         [Order]
+WHERE     (OrderID IN
+                             (SELECT   OrderID
+                                FROM         OrderReceiptNotification
+                                WHERE     (NotificationSent IS NULL)))</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.[Order]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillRecentByStatus" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillRecentByStatus" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="FillRecentByStatus">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT TOP (@topCount) AdjustedEstShipDate, BasePrice, CompletedDate, ContractReviewed, CreatedBy, CurrentLine, CurrentLocation, CustomerAddressID, CustomerID, CustomerWO, EstShipDate, FromShippingManifest, Hold, ImportedPrice, InitialPartQuantity, Invoice, OrderDate, OrderID, OrderTemplateID, OrderType, OriginalOrderType, PartID, PartQuantity, PriceUnit, Priority, PurchaseOrder, QuotePartId, ReceivingID, RequireCoc, RequiredDate, SalesOrderID, SchedulePriority, ShippingMethod, Status, Weight, WorkStatus FROM dbo.[Order] WHERE (Status = @status) ORDER BY OrderID DESC</CommandText>
@@ -445,7 +460,7 @@ SELECT OrderID, CustomerID, OrderDate, RequiredDate, Status, CompletedDate, Prio
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetAnswerCount" Modifier="Public" Name="GetAnswerCount" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="GetAnswerCount">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetAnswerCount" Modifier="Public" Name="GetAnswerCount" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="GetAnswerCount">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(*) AS Expr1
@@ -457,7 +472,7 @@ WHERE     (OrderID = @orderID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetCountByPart" Modifier="Public" Name="GetCountByPart" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="GetCountByPart">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetCountByPart" Modifier="Public" Name="GetCountByPart" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="GetCountByPart">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT COUNT(*)
@@ -469,7 +484,7 @@ WHERE PartID = @partId</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetInBatch" Modifier="Public" Name="GetInBatch" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="GetInBatch">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetInBatch" Modifier="Public" Name="GetInBatch" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="GetInBatch">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        dbo.fnGetInBatch(@orderID) AS InBatch</CommandText>
@@ -479,7 +494,7 @@ WHERE PartID = @partId</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetOpenOrdersCountBySalesOrderID" Modifier="Public" Name="GetOpenOrdersCountBySalesOrderID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="GetOpenOrdersCountBySalesOrderID">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetOpenOrdersCountBySalesOrderID" Modifier="Public" Name="GetOpenOrdersCountBySalesOrderID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="GetOpenOrdersCountBySalesOrderID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(*) AS OpenOrders
@@ -491,7 +506,7 @@ WHERE        (SalesOrderID = @salesOrderID) AND (Status = 'Open')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.[Order]" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetOrderCreatedDate" Modifier="Public" Name="GetOrderCreatedDate" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="GetOrderCreatedDate">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.[Order]" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetOrderCreatedDate" Modifier="Public" Name="GetOrderCreatedDate" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="GetOrderCreatedDate">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Created FROM [Order] WHERE (OrderID = @orderID)</CommandText>
@@ -501,7 +516,7 @@ WHERE        (SalesOrderID = @salesOrderID) AND (Status = 'Open')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Receiving" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetOrderRecievedDate" Modifier="Public" Name="GetOrderRecievedDate" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="GetOrderRecievedDate">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Receiving" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetOrderRecievedDate" Modifier="Public" Name="GetOrderRecievedDate" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="GetOrderRecievedDate">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Receiving.CheckedIn FROM [Order] INNER JOIN Receiving ON [Order].ReceivingID = Receiving.ReceivingID WHERE ([Order].OrderID = @orderID)</CommandText>
@@ -521,7 +536,7 @@ WHERE        (SalesOrderID = @salesOrderID) AND (Status = 'Open')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateSchedulePriority" Modifier="Public" Name="UpdateSchedulePriority" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="UpdateSchedulePriority">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateSchedulePriority" Modifier="Public" Name="UpdateSchedulePriority" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="UpdateSchedulePriority">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE [Order]
@@ -538,7 +553,7 @@ WHERE OrderId = @orderId</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PartSummaryTableAdapter" GeneratorDataComponentClassName="PartSummaryTableAdapter" Name="PartSummary" UserDataComponentName="PartSummaryTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Part" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.Part" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [Part] WHERE (([PartID] = @Original_PartID))</CommandText>
@@ -549,15 +564,15 @@ WHERE OrderId = @orderId</CommandText>
                 </DeleteCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        PartID, Name, CustomerID, Active, PartMarking, LotPrice, EachPrice, Weight, RequireCocByDefault
+                    <CommandText>SELECT        PartID, Name, CustomerID, Active, PartMarking, LotPrice, EachPrice, Weight, RequireCocByDefault, Description, Revision
 FROM            Part</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [Part] SET [Name] = @Name, [CustomerID] = @CustomerID, [Active] = @Active, [PartMarking] = @PartMarking, [LotPrice] = @LotPrice, [EachPrice] = @EachPrice, [Weight] = @Weight, [RequireCocByDefault] = @RequireCocByDefault WHERE (([PartID] = @Original_PartID));
-SELECT PartID, Name, CustomerID, Active, PartMarking, LotPrice, EachPrice, Weight, RequireCocByDefault FROM Part WHERE (PartID = @PartID)</CommandText>
+                    <CommandText>UPDATE [Part] SET [Name] = @Name, [CustomerID] = @CustomerID, [Active] = @Active, [PartMarking] = @PartMarking, [LotPrice] = @LotPrice, [EachPrice] = @EachPrice, [Weight] = @Weight, [RequireCocByDefault] = @RequireCocByDefault, [Description] = @Description, [Revision] = @Revision WHERE (([PartID] = @Original_PartID));
+SELECT PartID, Name, CustomerID, Active, PartMarking, LotPrice, EachPrice, Weight, RequireCocByDefault, Description, Revision FROM Part WHERE (PartID = @PartID)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Name" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@CustomerID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CustomerID" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -567,8 +582,10 @@ SELECT PartID, Name, CustomerID, Active, PartMarking, LotPrice, EachPrice, Weigh
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@EachPrice" Precision="11" ProviderType="Decimal" Scale="5" Size="0" SourceColumn="EachPrice" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Weight" Precision="12" ProviderType="Decimal" Scale="8" Size="0" SourceColumn="Weight" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@RequireCocByDefault" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="RequireCocByDefault" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Description" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Description" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Revision" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Revision" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_PartID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PartID" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="PartID" ColumnName="PartID" DataSourceName="DWOS.dbo.Part" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@PartID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="PartID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="PartID" ColumnName="PartID" DataSourceName="DWOS_DMF.dbo.Part" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@PartID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="PartID" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -584,6 +601,8 @@ SELECT PartID, Name, CustomerID, Active, PartMarking, LotPrice, EachPrice, Weigh
               <Mapping SourceColumn="EachPrice" DataSetColumn="EachPrice" />
               <Mapping SourceColumn="Weight" DataSetColumn="Weight" />
               <Mapping SourceColumn="RequireCocByDefault" DataSetColumn="RequireCocByDefault" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="Revision" DataSetColumn="Revision" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Part" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByBlanketPOActive" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByBlanketPOActive" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByBlanketPOActive">
@@ -643,12 +662,12 @@ WHERE        (Part_Media.DefaultMedia = 1) AND (Part.CustomerID = @customerID)</
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.Part" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByPart" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByPart" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByPart">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.Part" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByPart" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByPart" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByPart">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT Active, CustomerID, EachPrice, LotPrice, Name, PartID, PartMarking, RequireCocByDefault, Weight FROM Part WHERE (PartID = @partID)</CommandText>
+                    <CommandText>SELECT Active, CustomerID, Description, EachPrice, LotPrice, Name, PartID, PartMarking, RequireCocByDefault, Revision, Weight FROM Part WHERE (PartID = @partID)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="partID" ColumnName="PartID" DataSourceName="DPSData.dbo.Part" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@partID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="PartID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="partID" ColumnName="PartID" DataSourceName="DWOS_DMF.dbo.Part" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@partID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="PartID" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -1504,11 +1523,11 @@ WHERE ShipmentPackageID = @shipmentPackageId;</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CustomerShippingSummaryTableAdapter" GeneratorDataComponentClassName="CustomerShippingSummaryTableAdapter" Name="CustomerShippingSummary" UserDataComponentName="CustomerShippingSummaryTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.CustomerShipping" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.CustomerShipping" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT     CustomerShippingID, CustomerID, CarrierID + ' ' + CarrierCustomerNumber AS Name, DefaultShippingMethod, Active
-FROM         CustomerShipping</CommandText>
+                    <CommandText>SELECT        CustomerShippingID, CustomerID, CarrierID + ' ' + CarrierCustomerNumber AS Name, DefaultShippingMethod, Active
+FROM            CustomerShipping</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -1522,26 +1541,26 @@ FROM         CustomerShipping</CommandText>
               <Mapping SourceColumn="Active" DataSetColumn="Active" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.CustomerShipping" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByCustomer" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByCustomer" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByCustomer">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.CustomerShipping" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByCustomer" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByCustomer" GeneratorSourceName="FillByCustomer" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByCustomer" UserSourceName="FillByCustomer">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT Active, CustomerID, CustomerShippingID, DefaultShippingMethod, CarrierID + ' ' + CarrierCustomerNumber AS Name FROM CustomerShipping WHERE (CustomerID = @customerId)</CommandText>
+                    <CommandText>SELECT Active, CustomerID, CustomerShippingID, DefaultShippingMethod FROM CustomerShipping WHERE (CustomerID = @customerId)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="customerId" ColumnName="CustomerID" DataSourceName="DWOS.dbo.CustomerShipping" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@customerId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CustomerID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="customerId" ColumnName="CustomerID" DataSourceName="DWOS_DMF.dbo.CustomerShipping" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@customerId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CustomerID" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.CustomerShipping" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByOrder" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByOrder">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.CustomerShipping" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByOrder" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetByOrder" GeneratorSourceName="FillByOrder" GetMethodModifier="Public" GetMethodName="GetByOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetByOrder" UserSourceName="FillByOrder">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT     CustomerShipping.CustomerShippingID, CustomerShipping.CustomerID, 
-                      CustomerShipping.CarrierID + ' ' + CustomerShipping.CarrierCustomerNumber AS Name, CustomerShipping.DefaultShippingMethod, CustomerSHipping.Active
-FROM         CustomerShipping INNER JOIN
-                      [Order] ON CustomerShipping.CustomerID = [Order].CustomerID
-WHERE     ([Order].OrderID = @orderID)</CommandText>
+                    <CommandText>SELECT        CustomerShipping.CustomerShippingID, CustomerShipping.CustomerID, CustomerShipping.CarrierID + ' ' + CustomerShipping.CarrierCustomerNumber AS Name, CustomerShipping.DefaultShippingMethod, 
+                         CustomerShipping.Active
+FROM            CustomerShipping INNER JOIN
+                         [Order] ON CustomerShipping.CustomerID = [Order].CustomerID
+WHERE        ([Order].OrderID = @orderID)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="orderID" ColumnName="OrderID" DataSourceName="DWOS.dbo.[Order]" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@orderID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="orderID" ColumnName="OrderID" DataSourceName="DWOS_DMF.dbo.[Order]" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@orderID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -3289,7 +3308,7 @@ SELECT SalesOrderID, CustomerID, CustomerWO, PurchaseOrder, Invoice, OrderDate, 
               <Mapping SourceColumn="AdjustedEstShipDate" DataSetColumn="AdjustedEstShipDate" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.SalesOrder" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByClosedOrder" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByClosedOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByClosedOrder">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.SalesOrder" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByClosedOrder" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByClosedOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByClosedOrder">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SalesOrderID, CustomerID, CustomerWO, PurchaseOrder, Invoice, OrderDate, EstShipDate, RequiredDate, CreatedBy, Status, CompletedDate, AdjustedEstShipDate
@@ -3302,7 +3321,7 @@ WHERE        (SalesOrderID IN
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByCustomerID" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByCustomerID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByCustomerID">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByCustomerID" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByCustomerID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByCustomerID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SalesOrder.AdjustedEstShipDate, SalesOrder.CompletedDate, SalesOrder.CreatedBy, SalesOrder.CustomerID, SalesOrder.CustomerWO, SalesOrder.EstShipDate, SalesOrder.Invoice, SalesOrder.OrderDate, 
@@ -3316,7 +3335,7 @@ WHERE        (SalesOrder.CustomerID = @customerID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.SalesOrder" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByOrderID" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByOrderID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByOrderID">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.SalesOrder" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByOrderID" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByOrderID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByOrderID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT AdjustedEstShipDate, CompletedDate, CreatedBy, CustomerID, CustomerWO, EstShipDate, Invoice, OrderDate, PurchaseOrder, RequiredDate, SalesOrderID, Status FROM SalesOrder WHERE (SalesOrderID = (SELECT SalesOrderID FROM [Order] WHERE (OrderID = @orderId)))</CommandText>
@@ -3326,7 +3345,7 @@ WHERE        (SalesOrder.CustomerID = @customerID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.SalesOrder" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesOrder" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBySalesOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillBySalesOrder">
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS.dbo.SalesOrder" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesOrder" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBySalesOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillBySalesOrder">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT AdjustedEstShipDate, CompletedDate, CreatedBy, CustomerID, CustomerWO, EstShipDate, Invoice, OrderDate, PurchaseOrder, RequiredDate, SalesOrderID, Status FROM SalesOrder WHERE (SalesOrderID = @salesOrderID)</CommandText>
@@ -7524,6 +7543,71 @@ FROM        [Order] LEFT OUTER JOIN
               </DbSource>
             </Sources>
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="OrderReceiptNotificationTableAdapter" GeneratorDataComponentClassName="OrderReceiptNotificationTableAdapter" Name="OrderReceiptNotification" UserDataComponentName="OrderReceiptNotificationTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="DWOS_DMF.dbo.OrderReceiptNotification" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [OrderReceiptNotification] WHERE (([OrderReceiptNotificationID] = @Original_OrderReceiptNotificationID) AND ([OrderID] = @Original_OrderID) AND ([ContactID] = @Original_ContactID) AND ([UserID] = @Original_UserID) AND ((@IsNull_NotificationSent = 1 AND [NotificationSent] IS NULL) OR ([NotificationSent] = @Original_NotificationSent)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_OrderReceiptNotificationID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderReceiptNotificationID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ContactID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ContactID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_UserID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UserID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_NotificationSent" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="NotificationSent" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime2" Direction="Input" ParameterName="@Original_NotificationSent" Precision="0" ProviderType="DateTime2" Scale="0" Size="0" SourceColumn="NotificationSent" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [OrderReceiptNotification] ([OrderID], [ContactID], [UserID], [NotificationSent]) VALUES (@OrderID, @ContactID, @UserID, @NotificationSent);
+SELECT OrderReceiptNotificationID, OrderID, ContactID, UserID, NotificationSent FROM OrderReceiptNotification WHERE (OrderReceiptNotificationID = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ContactID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ContactID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UserID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UserID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime2" Direction="Input" ParameterName="@NotificationSent" Precision="0" ProviderType="DateTime2" Scale="0" Size="0" SourceColumn="NotificationSent" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT   OrderReceiptNotificationID, OrderID, ContactID, UserID, NotificationSent
+FROM         OrderReceiptNotification</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [OrderReceiptNotification] SET [OrderID] = @OrderID, [ContactID] = @ContactID, [UserID] = @UserID, [NotificationSent] = @NotificationSent WHERE (([OrderReceiptNotificationID] = @Original_OrderReceiptNotificationID) AND ([OrderID] = @Original_OrderID) AND ([ContactID] = @Original_ContactID) AND ([UserID] = @Original_UserID) AND ((@IsNull_NotificationSent = 1 AND [NotificationSent] IS NULL) OR ([NotificationSent] = @Original_NotificationSent)));
+SELECT OrderReceiptNotificationID, OrderID, ContactID, UserID, NotificationSent FROM OrderReceiptNotification WHERE (OrderReceiptNotificationID = @OrderReceiptNotificationID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ContactID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ContactID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UserID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UserID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime2" Direction="Input" ParameterName="@NotificationSent" Precision="0" ProviderType="DateTime2" Scale="0" Size="0" SourceColumn="NotificationSent" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_OrderReceiptNotificationID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderReceiptNotificationID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_OrderID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="OrderID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ContactID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ContactID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_UserID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UserID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_NotificationSent" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="NotificationSent" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime2" Direction="Input" ParameterName="@Original_NotificationSent" Precision="0" ProviderType="DateTime2" Scale="0" Size="0" SourceColumn="NotificationSent" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="OrderReceiptNotificationID" ColumnName="OrderReceiptNotificationID" DataSourceName="DWOS_DMF.dbo.OrderReceiptNotification" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@OrderReceiptNotificationID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="OrderReceiptNotificationID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OrderReceiptNotificationID" DataSetColumn="OrderReceiptNotificationID" />
+              <Mapping SourceColumn="OrderID" DataSetColumn="OrderID" />
+              <Mapping SourceColumn="ContactID" DataSetColumn="ContactID" />
+              <Mapping SourceColumn="UserID" DataSetColumn="UserID" />
+              <Mapping SourceColumn="NotificationSent" DataSetColumn="NotificationSent" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -7737,6 +7821,20 @@ FROM        [Order] LEFT OUTER JOIN
               <xs:element name="EachPrice" msprop:Generator_ColumnVarNameInTable="columnEachPrice" msprop:Generator_ColumnPropNameInRow="EachPrice" msprop:Generator_ColumnPropNameInTable="EachPriceColumn" msprop:Generator_UserColumnName="EachPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="Weight" msprop:Generator_ColumnVarNameInTable="columnWeight" msprop:Generator_ColumnPropNameInRow="Weight" msprop:Generator_ColumnPropNameInTable="WeightColumn" msprop:Generator_UserColumnName="Weight" type="xs:decimal" minOccurs="0" />
               <xs:element name="RequireCocByDefault" msprop:Generator_ColumnVarNameInTable="columnRequireCocByDefault" msprop:Generator_ColumnPropNameInRow="RequireCocByDefault" msprop:Generator_ColumnPropNameInTable="RequireCocByDefaultColumn" msprop:Generator_UserColumnName="RequireCocByDefault" type="xs:boolean" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Revision" msprop:Generator_ColumnVarNameInTable="columnRevision" msprop:Generator_ColumnPropNameInRow="Revision" msprop:Generator_ColumnPropNameInTable="RevisionColumn" msprop:Generator_UserColumnName="Revision" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -9461,6 +9559,17 @@ FROM        [Order] LEFT OUTER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="OrderReceiptNotification" msprop:Generator_TableClassName="OrderReceiptNotificationDataTable" msprop:Generator_TableVarName="tableOrderReceiptNotification" msprop:Generator_RowChangedName="OrderReceiptNotificationRowChanged" msprop:Generator_TablePropName="OrderReceiptNotification" msprop:Generator_RowDeletingName="OrderReceiptNotificationRowDeleting" msprop:Generator_RowChangingName="OrderReceiptNotificationRowChanging" msprop:Generator_RowEvHandlerName="OrderReceiptNotificationRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderReceiptNotificationRowDeleted" msprop:Generator_RowClassName="OrderReceiptNotificationRow" msprop:Generator_UserTableName="OrderReceiptNotification" msprop:Generator_RowEvArgName="OrderReceiptNotificationRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderReceiptNotificationID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderReceiptNotificationID" msprop:Generator_ColumnPropNameInRow="OrderReceiptNotificationID" msprop:Generator_ColumnPropNameInTable="OrderReceiptNotificationIDColumn" msprop:Generator_UserColumnName="OrderReceiptNotificationID" type="xs:int" />
+              <xs:element name="OrderID" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
+              <xs:element name="ContactID" msprop:Generator_ColumnVarNameInTable="columnContactID" msprop:Generator_ColumnPropNameInRow="ContactID" msprop:Generator_ColumnPropNameInTable="ContactIDColumn" msprop:Generator_UserColumnName="ContactID" type="xs:int" />
+              <xs:element name="UserID" msprop:Generator_ColumnVarNameInTable="columnUserID" msprop:Generator_ColumnPropNameInRow="UserID" msprop:Generator_ColumnPropNameInTable="UserIDColumn" msprop:Generator_UserColumnName="UserID" type="xs:int" />
+              <xs:element name="NotificationSent" msprop:Generator_ColumnVarNameInTable="columnNotificationSent" msprop:Generator_ColumnPropNameInRow="NotificationSent" msprop:Generator_ColumnPropNameInTable="NotificationSentColumn" msprop:Generator_UserColumnName="NotificationSent" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -9832,6 +9941,10 @@ FROM        [Order] LEFT OUTER JOIN
       <xs:selector xpath=".//mstns:OrderSummary" />
       <xs:field xpath="mstns:OrderID" />
     </xs:unique>
+    <xs:unique name="OrderReceiptNotification_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OrderReceiptNotification" />
+      <xs:field xpath="mstns:OrderReceiptNotificationID" />
+    </xs:unique>
     <xs:keyref name="FK_OrderApprovalMedia_OrderApproval" refer="OrderApproval_Constraint1" msprop:rel_Generator_UserChildTable="OrderApprovalMedia" msprop:rel_Generator_ChildPropName="GetOrderApprovalMediaRows" msprop:rel_Generator_UserRelationName="FK_OrderApprovalMedia_OrderApproval" msprop:rel_Generator_ParentPropName="OrderApprovalRow" msprop:rel_Generator_RelationVarName="relationFK_OrderApprovalMedia_OrderApproval" msprop:rel_Generator_UserParentTable="OrderApproval">
       <xs:selector xpath=".//mstns:OrderApprovalMedia" />
       <xs:field xpath="mstns:OrderApprovalID" />
@@ -10200,6 +10313,9 @@ FROM        [Order] LEFT OUTER JOIN
       <msdata:Relationship name="FK_ShipmentPackage_Customer1" msdata:parent="OrderSummary" msdata:child="ShipmentPackage" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="ShipmentPackage" msprop:Generator_ChildPropName="GetShipmentPackageRows" msprop:Generator_UserRelationName="FK_ShipmentPackage_Customer1" msprop:Generator_ParentPropName="OrderSummaryRow" msprop:Generator_RelationVarName="relationFK_ShipmentPackage_Customer1" msprop:Generator_UserParentTable="OrderSummary" />
       <msdata:Relationship name="FK_CustomerDefaultPrice_Customer1" msdata:parent="OrderSummary" msdata:child="CustomerDefaultPrice" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="CustomerDefaultPrice" msprop:Generator_ChildPropName="GetCustomerDefaultPriceRows" msprop:Generator_UserRelationName="FK_CustomerDefaultPrice_Customer1" msprop:Generator_ParentPropName="OrderSummaryRow" msprop:Generator_RelationVarName="relationFK_CustomerDefaultPrice_Customer1" msprop:Generator_UserParentTable="OrderSummary" />
       <msdata:Relationship name="FK_CustomerFee_Customer1" msdata:parent="OrderSummary" msdata:child="CustomerFee" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="CustomerFee" msprop:Generator_ChildPropName="GetCustomerFeeRows" msprop:Generator_UserRelationName="FK_CustomerFee_Customer1" msprop:Generator_ParentPropName="OrderSummaryRow" msprop:Generator_RelationVarName="relationFK_CustomerFee_Customer1" msprop:Generator_UserParentTable="OrderSummary" />
+      <msdata:Relationship name="FK_OrderReceiptNotification_d_Contact" msdata:parent="ContactSummary" msdata:child="OrderReceiptNotification" msdata:parentkey="ContactID" msdata:childkey="ContactID" msprop:Generator_UserChildTable="OrderReceiptNotification" msprop:Generator_ChildPropName="GetOrderReceiptNotificationRows" msprop:Generator_UserRelationName="FK_OrderReceiptNotification_d_Contact" msprop:Generator_RelationVarName="relationFK_OrderReceiptNotification_d_Contact" msprop:Generator_UserParentTable="ContactSummary" msprop:Generator_ParentPropName="ContactSummaryRow" />
+      <msdata:Relationship name="FK_OrderReceiptNotification_OrderReceipt" msdata:parent="Order" msdata:child="OrderReceiptNotification" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderReceiptNotification" msprop:Generator_ChildPropName="GetOrderReceiptNotificationRows" msprop:Generator_UserRelationName="FK_OrderReceiptNotification_OrderReceipt" msprop:Generator_RelationVarName="relationFK_OrderReceiptNotification_OrderReceipt" msprop:Generator_UserParentTable="Order" msprop:Generator_ParentPropName="OrderRow" />
+      <msdata:Relationship name="FK_OrderReceiptNotification_Users" msdata:parent="UserSummary" msdata:child="OrderReceiptNotification" msdata:parentkey="UserID" msdata:childkey="UserID" msprop:Generator_UserChildTable="OrderReceiptNotification" msprop:Generator_ChildPropName="GetOrderReceiptNotificationRows" msprop:Generator_UserRelationName="FK_OrderReceiptNotification_Users" msprop:Generator_RelationVarName="relationFK_OrderReceiptNotification_Users" msprop:Generator_UserParentTable="UserSummary" msprop:Generator_ParentPropName="UserSummaryRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

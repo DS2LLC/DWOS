@@ -243,6 +243,9 @@ namespace DWOS.UI.Reports
             var dtPart = new DWOS.Data.Datasets.PartsDataset.PartDataTable();
             var taParts = new DWOS.Data.Datasets.PartsDatasetTableAdapters.PartTableAdapter();
             taParts.FillByPartID(dtPart, order.PartID);
+            //var drPart = taParts.
+            var drPart = dtPart.AsEnumerable()
+                .SingleOrDefault(r => r.PartID == order.PartID);
 
             var tokens = new List<LabelFactory.TokenValue>();
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CUSTOMERNAME, order.CustomerSummaryRow.Name ));
@@ -252,6 +255,7 @@ namespace DWOS.UI.Reports
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTNAME, dtPart.Count > 0 ? dtPart[0].Name : "Unknown" ));
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTDESCRIPTION, dtPart.Count > 0 && !dtPart[0].IsDescriptionNull() ? dtPart[0].Description : String.Empty));
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTQUANTITY, order.IsPartQuantityNull() ? "Unknown" : order.PartQuantity.ToString() ));
+            tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTREVISION, drPart.IsRevisionNull() ? " " : drPart.Revision.ToString()));
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.USERNAME, SecurityManager.Current.UserName ));
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.DATE, DateTime.Now.ToShortDateString() ));
             tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PURCHASEORDER, order.IsPurchaseOrderNull() ? "NONE" : order.PurchaseOrder ));
@@ -1159,7 +1163,6 @@ namespace DWOS.UI.Reports
 
         public PartsDataset.ReceivingSummaryRow ReceivingRow { get; set; }
 
-        private int containerCount = 1;
 
         #endregion
 

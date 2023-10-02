@@ -795,58 +795,58 @@ IF NOT EXISTS (SELECT * FROM ApplicationSettings WHERE SettingName = 'CustomerPo
 <head><title>Customer Portal Authorization</title></head>
 <body style="font-family: verdana; font-size: 12px; padding: 3px; margin: 3px; width: 800px;">
     <div style="text-align: center; max-height: 200px;">
-        <img alt="Dynamic Paint Solutions" src="[%LOGO%]" width="400" />
+        <img alt="Company" src="[%LOGO%]" width="400" />
     </div>
     <br />
-    <div style="text-align: justify;"><strong>Congratulations</strong>! You have been authorized to use the <a href="https://dwos.dynamicpaintsolutions.com">Dynamic Paint Solutions Customer Portal</a>. The customer portal will allow us to communicate better with you and provide an overall better quality of service. Just another example of how Dynamic Paint Solutions is striving to provide you with the best service possible. Login to the  portal now to check orders status, print a COC, run reports, or check the real-time processing being performed on any order.</div>
+    <div style="text-align: justify;"><strong>Congratulations</strong>! You have been authorized to use the <a href="">Customer Portal</a>. The customer portal will allow us to communicate better with you and provide an overall better quality of service. Just another example of how our company is striving to provide you with the best service possible. Login to the  portal now to check orders status, print a COC, run reports, or check the real-time processing being performed on any order.</div>
     <br />
     <br />
     You can access our secure portal with the following information:   
     <br />
     <br />
-    <a href="https://dwos.dynamicpaintsolutions.com">https://dwos.dynamicpaintsolutions.com</a>
+    <a href="">Contact</a>
     <br />
     User Name: [%USERNAME%]   
     <br />
     Password: [%PASSWORD%]
     <br />
     <br />
-    If you have any questions or issues then please contact your DPS Sales Associate at <a href="mailto:sales@dynamicpaintsolutions.com">sales@dynamicpaintsolutions.com</a>.   
+    If you have any questions or issues then please contact your DPS Sales Associate at <a href="mailto:">sales</a>.   
     <br />
     <br />
     Thank You for being our customer,   
     <br />
     <br />
-    Dynamic Paint Solutions</body>
+    Our company</body>
 </html>')
 ELSE
 	UPDATE ApplicationSettings SET Value = '<html>
 <head><title>Customer Portal Authorization</title></head>
 <body style="font-family: verdana; font-size: 12px; padding: 3px; margin: 3px; width: 800px;">
     <div style="text-align: center; max-height: 200px;">
-        <img alt="Dynamic Paint Solutions" src="[%LOGO%]" width="400" />
+        <img alt="Our company" src="[%LOGO%]" width="400" />
     </div>
     <br />
-    <div style="text-align: justify;"><strong>Congratulations</strong>! You have been authorized to use the <a href="https://dwos.dynamicpaintsolutions.com">Dynamic Paint Solutions Customer Portal</a>. The customer portal will allow us to communicate better with you and provide an overall better quality of service. Just another example of how Dynamic Paint Solutions is striving to provide you with the best service possible. Login to the  portal now to check orders status, print a COC, run reports, or check the real-time processing being performed on any order.</div>
+    <div style="text-align: justify;"><strong>Congratulations</strong>! You have been authorized to use the <a href="">Customer Portal</a>. The customer portal will allow us to communicate better with you and provide an overall better quality of service. Just another example of how Our company is striving to provide you with the best service possible. Login to the  portal now to check orders status, print a COC, run reports, or check the real-time processing being performed on any order.</div>
     <br />
     <br />
     You can access our secure portal with the following information:   
     <br />
     <br />
-    <a href="https://dwos.dynamicpaintsolutions.com">https://dwos.dynamicpaintsolutions.com</a>
+    <a href="">Contact</a>
     <br />
     User Name: [%USERNAME%]   
     <br />
     Password: [%PASSWORD%]
     <br />
     <br />
-    If you have any questions or issues then please contact your DPS Sales Associate at <a href="mailto:sales@dynamicpaintsolutions.com">sales@dynamicpaintsolutions.com</a>.   
+    If you have any questions or issues then please contact your DPS Sales Associate at <a href="">Sales</a>.   
     <br />
     <br />
     Thank You for being our customer,   
     <br />
     <br />
-    Dynamic Paint Solutions</body>
+    Our company</body>
 </html>'
 	WHERE SettingName = 'CustomerPortalEmail'
 GO
@@ -912,7 +912,7 @@ INSERT INTO [dbo].[Templates]
            ,[Tokens])
      VALUES
 			('CustomerPortal'
-			,'<html><head><title>Customer Portal Authorization</title></head><body style="font-family: verdana;font-size: 12px;padding: 3px;margin: 3px;width: 800px;"><div style="text-align: center;max-height: 200px;"><img alt="Dynamic Paint Solutions" src="%LOGO%" width="400" /></div><br /><div style="text-align: justify;"><strong>Congratulations</strong>! You have been authorized to use the <a href="https://dwos.dynamicpaintsolutions.com">Dynamic Paint Solutions Customer Portal</a>. The customer portal will allow us to communicate better with you and provide an overall better quality of service. Just another example of how Dynamic Paint Solutions is striving to provide you with the best service possible. Login to the portal now to check orders status, print a COC, run reports, or check the real-time processing being performed on any order.</div><br /><br />You can access our secure portal with the following information:       <br /><br /><a href="https://dwos.dynamicpaintsolutions.com">https://dwos.dynamicpaintsolutions.com</a><br />User Name: %USERNAME%    <br />Password: %PASSWORD%    <br /><br />If you have any questions or issues then please contact your DPS Sales Associate at <a href="mailto:sales@dynamicpaintsolutions.com">sales@dynamicpaintsolutions.com</a>.       <br /><br />Thank You for being our customer, <br /><br />Dynamic Paint Solutions</body></html>'
+			,'<html><head><title>Customer Portal Authorization</title></head><body style="font-family: verdana;font-size: 12px;padding: 3px;margin: 3px;width: 800px;"><div style="text-align: center;max-height: 200px;"><img alt="Our company" src="%LOGO%" width="400" /></div><br /><div style="text-align: justify;"><strong>Congratulations</strong>! You have been authorized to use the <a href="">Our company Customer Portal</a>. The customer portal will allow us to communicate better with you and provide an overall better quality of service. Just another example of how Our company is striving to provide you with the best service possible. Login to the portal now to check orders status, print a COC, run reports, or check the real-time processing being performed on any order.</div><br /><br />You can access our secure portal with the following information:       <br /><br /><a href="">Our company</a><br />User Name: %USERNAME%    <br />Password: %PASSWORD%    <br /><br />If you have any questions or issues then please contact your DPS Sales Associate at <a href="">Our company</a>.       <br /><br />Thank You for being our customer, <br /><br />Our company</body></html>'
 			,'Email template to authorized users of the customer portal.'
 			,'%USERNAME%, %PASSWORD%, %LOGO%');
 GO
@@ -924,7 +924,7 @@ INSERT INTO [dbo].[Templates]
            ,[Tokens])
      VALUES
 			('ShipmentNotification'	
-			,'<html><head><title>Dynamic Paint Solutions - Order Shipment Notification</title></head><body><table style="width: 900px"><tr style="font-family: Arial;color: maroon;font-size: 22px;font-weight: bold;"><td><a href="http://www.dynamicpaintsolutions.com" style="color: maroon">Dynamic Paint Solutions</a></td><td rowspan="2"><img alt="Nadcap" src="Nadcap.jpg" width="200"></td><td style="text-align: right">Order Shipment Notification</td></tr><tr><td style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"> 415 Airport Road<br>Eastman, GA 31023<br>478.374.5402 Phone<br>478.374.5424 Fax</td><td colspan="2"> </td></tr></table><br><table style="width: 900px;"><tr style="font-family: Verdana;color: maroon;font-size: 14px;font-weight: bold;"><td style="width: 50%">Customer:</td><td>Shipping Information:</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"><td id="customerName">Sample Customer</td><td>Carrier:</td><td id="shippingCarrier">UPS</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"><td id="address1">123 Main St</td><td>Date Shipped:</td><td id="dateShipped">1/1/2012</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"><td id="cityStateZip">Eastman, GA 31023</td><td>Tracking Number:</td><td id="trackingNumber"><a href="http://ups.com">123456789</a></td></tr></table><br><table style="width: 900px;" id="shipmentTable"><thead><tr><td colspan="5" style="font-family: Verdana;color: maroon;font-size: 14px;font-weight: bold;height: 20px">Work Orders:</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;color: white;background-color: maroon;text-align: center;"><td>Work Order</td><td>Customer Work Order</td><td>Purchase Order</td><td>Part Number</td><td>Part Quantity</td></tr></thead><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;text-align: center;visibility: collapse;" id="shipmentTemplate"><td>12345</td><td>CW-12345</td><td>PO-12345</td><td>17P123523-234</td><td>25</td></tr></table><br><div style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: 3px;display: inline-block;width: 900px;background-position: center center;background-image: url("CompanyLogo.png");background-repeat: no-repeat;"><p style="text-align: justify">Do not reply to this email address. This is an automated notification generated by Dynamic Paint Solutions. Please direct all communications to your <a href="mailto:sales@dynamicpaintsolutions.com">DPS sales representative</a>. ITAR/EAR technical data is restricted by the Arms Export Control Act (Title 22, U.S.C., Sec 2751) or the Export Administration Act (Title 50, U.S.C., App. 2401), as amended. Violations of these export laws are subject to severe      criminal penalties. The preceding information may be confidential or privileged. It only should be used or disseminated for the purpose of conducting business with Dynamic Paint Solutions. If you are not an intended recipient, please delete the information from your system. Thank you for your cooperation. Delivery truck deliveries will be delivered on your next scheduled delivery date.</p><p>Please visit the <span style="font-weight: bold;color: #FF0000;font-style: italic">NEW</span><a href="https://dwos.dynamicpaintsolutions.com">Dynamic Paint      Solutions Customer Portal</a> to view order status, print COC, and run reports. If you have not registered for the portal, then please contact your <a href="mailto:sales@dynamicpaintsolutions.com">DPS sales representative</a>.</p></div></body></html>'
+			,'<html><head><title>Our company - Order Shipment Notification</title></head><body><table style="width: 900px"><tr style="font-family: Arial;color: maroon;font-size: 22px;font-weight: bold;"><td><a href="" style="color: maroon">Our company</a></td><td rowspan="2"><img alt="Nadcap" src="Nadcap.jpg" width="200"></td><td style="text-align: right">Order Shipment Notification</td></tr><tr><td style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"> 415 Airport Road<br>Eastman, GA 31023<br>478.374.5402 Phone<br>478.374.5424 Fax</td><td colspan="2"> </td></tr></table><br><table style="width: 900px;"><tr style="font-family: Verdana;color: maroon;font-size: 14px;font-weight: bold;"><td style="width: 50%">Customer:</td><td>Shipping Information:</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"><td id="customerName">Sample Customer</td><td>Carrier:</td><td id="shippingCarrier">UPS</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"><td id="address1">123 Main St</td><td>Date Shipped:</td><td id="dateShipped">1/1/2012</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;"><td id="cityStateZip">Eastman, GA 31023</td><td>Tracking Number:</td><td id="trackingNumber"><a href="http://ups.com">123456789</a></td></tr></table><br><table style="width: 900px;" id="shipmentTable"><thead><tr><td colspan="5" style="font-family: Verdana;color: maroon;font-size: 14px;font-weight: bold;height: 20px">Work Orders:</td></tr><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;color: white;background-color: maroon;text-align: center;"><td>Work Order</td><td>Customer Work Order</td><td>Purchase Order</td><td>Part Number</td><td>Part Quantity</td></tr></thead><tr style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: auto;text-align: center;visibility: collapse;" id="shipmentTemplate"><td>12345</td><td>CW-12345</td><td>PO-12345</td><td>17P123523-234</td><td>25</td></tr></table><br><div style="font-family: Verdana;font-size: 12px;font-weight: normal;padding: 3px;margin: 3px;display: inline-block;width: 900px;background-position: center center;background-image: url("CompanyLogo.png");background-repeat: no-repeat;"><p style="text-align: justify">Do not reply to this email address. This is an automated notification generated by Our company. Please direct all communications to your <a href="">sales representative</a>. ITAR/EAR technical data is restricted by the Arms Export Control Act (Title 22, U.S.C., Sec 2751) or the Export Administration Act (Title 50, U.S.C., App. 2401), as amended. Violations of these export laws are subject to severe      criminal penalties. The preceding information may be confidential or privileged. It only should be used or disseminated for the purpose of conducting business with Our company. If you are not an intended recipient, please delete the information from your system. Thank you for your cooperation. Delivery truck deliveries will be delivered on your next scheduled delivery date.</p><p>Please visit the <span style="font-weight: bold;color: #FF0000;font-style: italic">NEW</span><a href="">Our company Customer Portal</a> to view order status, print COC, and run reports. If you have not registered for the portal, then please contact your <a href="">sales representative</a>.</p></div></body></html>'
 			,'Email template to notify customer that an order has been shipped.'
 			,'')
 

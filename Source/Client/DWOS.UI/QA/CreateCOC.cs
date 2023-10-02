@@ -508,7 +508,7 @@ namespace DWOS.UI
                                 //Question
                                 orderProcessText.Append(FONT_START_TAG)
                                     //.Append( "- &nbsp;")
-                                    .Append("&nbsp;".Repeat(8),ValidateText(ans.QuestionName) + " - ")
+                                    .Append("&nbsp;".Repeat(8),ValidateText(ans.QuestionName) + ": ")
                                     .Append(FONT_END_TAG);
 
                                 //Answer
@@ -521,11 +521,12 @@ namespace DWOS.UI
 
                                 orderProcessText.Append(FONT_END_TAG);
 
-                                if ((ans.InputType == "SampleSet" )&&(ans.Max != null) &&(ans.Min != null))
+                                if ((ans.InputType == "SampleSet" )&&(!ans.IsMax1Null()) && (!ans.IsMin1Null()))
                                 {
                                     orderProcessText.Append(FONT_START_TAG)
-                                    .Append(" Max Value: ", ValidateText(ans.Max.ToString()))
-                                    .Append(" Min Value: ", ValidateText(ans.Min.ToString()))
+                                    .Append(", Max Value: ", ValidateText(ans.Max1.ToString()))
+                                    .Append(", Min Value: ", ValidateText(ans.Min1.ToString()))
+                                    .Append(", Samples Taken: ", ValidateText(ans.Samples.ToString()))
                                     .Append(FONT_END_TAG)
                                     .Append("<br/>");
 

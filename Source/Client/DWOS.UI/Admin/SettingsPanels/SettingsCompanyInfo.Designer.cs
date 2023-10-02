@@ -246,7 +246,7 @@
             this.txtPortalURL.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtPortalURL.MaxLength = 50;
             this.txtPortalURL.Name = "txtPortalURL";
-            this.txtPortalURL.NullText = "http://www.getdwos.com";
+            this.txtPortalURL.NullText = "http://loalhost";
             appearance5.FontData.ItalicAsString = "True";
             appearance5.ForeColor = System.Drawing.Color.Silver;
             this.txtPortalURL.NullTextAppearance = appearance5;
