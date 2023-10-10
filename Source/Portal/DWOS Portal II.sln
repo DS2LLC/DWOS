@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Portal", "DWOS.Portal II\DWOS.Portal.csproj", "{9BF980CF-4B8B-4992-837B-1FB76AFA4009}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2} = {1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Shared", "DWOS.Shared\DWOS.Shared.csproj", "{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Shared", "..\Client\DWOS.Shared\DWOS.Shared.csproj", "{1A332A66-4F1F-4A69-B3C2-0C7D363A77D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Data", "DWOS.Data\DWOS.Data.csproj", "{F83FFF1C-F805-40B1-A9A4-337EE53788B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Data", "..\Client\DWOS.Data\DWOS.Data.csproj", "{F83FFF1C-F805-40B1-A9A4-337EE53788B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Reports", "DWOS.Reports\DWOS.Reports.csproj", "{28DE14C9-CA9D-4499-AD39-211AE4ED36AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWOS.Reports", "..\Client\DWOS.Reports\DWOS.Reports.csproj", "{28DE14C9-CA9D-4499-AD39-211AE4ED36AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,22 +49,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://ds2corp.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = DWOS.Portal\u0020II\\DWOS.Portal.csproj
-		SccProjectName1 = DWOS.Portal\u0020II
-		SccLocalPath1 = DWOS.Portal\u0020II
-		SccProjectUniqueName2 = DWOS.Shared\\DWOS.Shared.csproj
-		SccProjectName2 = DWOS.Shared
-		SccLocalPath2 = DWOS.Shared
-		SccProjectUniqueName3 = DWOS.Data\\DWOS.Data.csproj
-		SccProjectName3 = DWOS.Data
-		SccLocalPath3 = DWOS.Data
-		SccProjectUniqueName4 = DWOS.Reports\\DWOS.Reports.csproj
-		SccProjectName4 = DWOS.Reports
-		SccLocalPath4 = DWOS.Reports
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03A3BC1F-E3FA-4DDE-8EE7-EA1A250C043F}
 	EndGlobalSection
 EndGlobal

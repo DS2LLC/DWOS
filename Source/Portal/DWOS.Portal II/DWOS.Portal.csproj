@@ -193,7 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="..\VersionInfo.cs">
+    <Compile Include="..\..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Models\Address.cs" />
@@ -277,15 +277,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DWOS.Data\DWOS.Data.csproj">
+    <ProjectReference Include="..\..\Client\DWOS.Data\DWOS.Data.csproj">
       <Project>{f83fff1c-f805-40b1-a9a4-337ee53788b9}</Project>
       <Name>DWOS.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWOS.Reports\DWOS.Reports.csproj">
+    <ProjectReference Include="..\..\Client\DWOS.Reports\DWOS.Reports.csproj">
       <Project>{28de14c9-ca9d-4499-ad39-211ae4ed36af}</Project>
       <Name>DWOS.Reports</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Client\DWOS.Shared\\DWOS.Shared.csproj">
+    <ProjectReference Include="..\..\Client\DWOS.Shared\DWOS.Shared.csproj">
       <Project>{1a332a66-4f1f-4a69-b3c2-0c7d363a77d2}</Project>
       <Name>DWOS.Shared</Name>
     </ProjectReference>
