@@ -285,7 +285,7 @@
       <Project>{28de14c9-ca9d-4499-ad39-211ae4ed36af}</Project>
       <Name>DWOS.Reports</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWOS.Shared\DWOS.Shared.csproj">
+    <ProjectReference Include="..\..\Client\DWOS.Shared\\DWOS.Shared.csproj">
       <Project>{1a332a66-4f1f-4a69-b3c2-0c7d363a77d2}</Project>
       <Name>DWOS.Shared</Name>
     </ProjectReference>
