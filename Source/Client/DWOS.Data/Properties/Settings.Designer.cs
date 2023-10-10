@@ -36,7 +36,7 @@ namespace DWOS.Data.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.getdwos.com/Support/Help/{0}/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ds2llc.github.io/DWOS/Help/DWOS_23_Help.pdf")]
         public string DWOSHelp {
             get {
                 return ((string)(this["DWOSHelp"]));
