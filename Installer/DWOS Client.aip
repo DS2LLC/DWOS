@@ -460,7 +460,7 @@
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
     <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1503"/>
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
-    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
     <ROW Action="AI_GetArpIconPath" Sequence="1401"/>
     <ROW Action="AI_ExpandExtractionPath" Condition="(REMOVE=&quot;ALL&quot;) AND (NOT AI_SETUPEXEPATH)" Sequence="1502" Builds="DefaultBuild"/>
     <ROW Action="AI_DeleteUninstallLzma" Condition="(REMOVE=&quot;ALL&quot;) AND (NOT AI_SETUPEXEPATH)" Sequence="5970" Builds="DefaultBuild"/>
