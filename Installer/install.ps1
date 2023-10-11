@@ -1,8 +1,8 @@
 # Installer
 # Assumption - version numbers & GUIDs were previously updated
 
-$sourcePath = if ($Env:BUILD_SOURCESDIRECTORY -And $Env:ProjectFolder) {
-    Join-Path $Env:BUILD_SOURCESDIRECTORY $Env:ProjectFolder
+$sourcePath = if ($Env:BUILD_SOURCESDIRECTORY -And $Env:InstallerFolder) {
+    Join-Path $Env:BUILD_SOURCESDIRECTORY $Env:InstallerFolder
 } else {
     "C:\Projects\DWOS\Source Code\Development"
 }
