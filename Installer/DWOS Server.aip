@@ -1601,13 +1601,13 @@
     <ROW RemoveReg="Web" InstallMode="2" Condition="(AI_CLEAN_RESOURCES_UNINSTALL = &quot;1&quot;) AND (NOT UPGRADINGPRODUCTCODE)"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
-    <ROW Name="DWOSImagesFolder" Path="..\..\Images" Type="2" Content="0"/>
-    <ROW Name="DocumentsFolder" Path="..\..\Documents" Type="2" Content="0"/>
+    <ROW Name="DWOSImages" Path="..\Images" Type="2" Content="0"/>
+    <ROW Name="DocumentsFolder" Path="Certs" Type="2" Content="0"/>
     <ROW Name="InfragisticsFolder" Path="C:\Program Files (x86)\Infragistics" Type="2" Content="0"/>
     <ROW Name="MainSource" Path=".." Type="2" Content="0"/>
     <ROW Name="PortalV1Folder" Path="..\DWOS Portal I\DWOS Portal I" Type="2" Content="0"/>
-    <ROW Name="ServerAdminFolder" Path="..\DWOS Server\DWOS.Server.Admin\bin\Release" Type="2" Content="0"/>
-    <ROW Name="ServerFolder" Path="..\DWOS Server\DWOS.Server\bin\Release" Type="2" Content="0"/>
+    <ROW Name="ServerAdminFolder" Path="..\Source\DWOS Server\DWOS.Server.Admin\bin\Release" Type="2" Content="0"/>
+    <ROW Name="ServerFolder" Path="..\Source\DWOS Server\DWOS.Server\bin\Release" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPoolComponent">
     <ROW AppPoolId="0" Name="DWOSAppPool" Condition="&amp;CustomerPortalv1 = 3" Flags="70001" ManagedRuntimeVersion="v4.0"/>
