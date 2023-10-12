@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="11.6" version="14.4.2" Modules="professional" RootPath="." Language="en" Id="{C6B5A49B-347C-4156-BD79-D6E7CE04C440}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="11.6" version="16.8.1" Modules="professional" RootPath="." Language="en" Id="{C6B5A49B-347C-4156-BD79-D6E7CE04C440}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
-    <ROW Name="HiddenItems" Value="MsiJavaComponent;MsiDriverPackagesComponent;UserAccountsComponent;ScheduledTasksComponent;SqlConnectionComponent;AutorunComponent;FirewallExceptionComponent;GameUxComponent;MsiDirectEditorComponent;SharePointSlnComponent;SilverlightSlnComponent;MultipleInstancesComponent;SccmComponent;ActSyncAppComponent;AppXAppDetailsComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent"/>
+    <ROW Name="HiddenItems" Value="AppXAppDetailsComponent;FixupComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
@@ -11,6 +11,7 @@
     <ROW Property="AI_PRODUCTNAME_ARP" Value="[|ProductName] [|ProductVersion]"/>
     <ROW Property="AI_REQUIRED_DOTNET_DISPLAY" MultiBuildValue="DefaultBuild:4.0" ValueLocId="-"/>
     <ROW Property="AI_REQUIRED_DOTNET_VERSION" MultiBuildValue="DefaultBuild:4.0.1" ValueLocId="-"/>
+    <ROW Property="AI_RUN_AS_ADMIN" Value="0"/>
     <ROW Property="AI_UNINSTALLER" Value="msiexec.exe"/>
     <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
@@ -28,14 +29,14 @@
     <ROW Property="REBOOT" MultiBuildValue="DefaultBuild:Suppress"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{9DD757E4-E9B5-44BC-98C9-CCEE947DA448}"/>
-    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
-    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003 RTM, Windows XP/2003 SP1, Windows XP SP2 x86" ValueLocId="-"/>
-    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003 RTM, Windows XP/2003 SP1, Windows XP SP2 x86" ValueLocId="-"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME#MsiBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME#MsiBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0#MsiBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0#MsiBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000#MsiBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000#MsiBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003#MsiBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003#MsiBuild:Windows XP/2003" ValueLocId="-"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
@@ -47,6 +48,7 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="AI_CustomARPName" ComponentId="{C82C779B-91EA-4598-8CD9-9788F8092064}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{D5F9EF48-6912-4A31-A74A-08779E5D3BDF}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
+    <ROW Component="APPDIR" ComponentId="{3D424CDF-B4ED-4187-945C-87675D0B7536}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="CommonServiceLocator.dll" ComponentId="{81EFA5AB-CE5A-4158-BD5E-F10AE42A2E7C}" Directory_="APPDIR" Attributes="0" KeyPath="CommonServiceLocator.dll"/>
     <ROW Component="ControlzEx.dll" ComponentId="{69F02D6D-5C4A-45DB-B51E-D9662C383BBB}" Directory_="APPDIR" Attributes="0" KeyPath="ControlzEx.dll"/>
     <ROW Component="Customers.xlsx" ComponentId="{6445E077-999A-4A90-AF96-498CFB125142}" Directory_="Template_Dir" Attributes="0" KeyPath="Customers.xlsx" Type="0"/>
@@ -76,58 +78,59 @@
     <ROW Component="System.Windows.Interactivity.dll" ComponentId="{A814A2B7-241D-462D-BA33-BD16EDB48DBB}" Directory_="APPDIR" Attributes="0" KeyPath="System.Windows.Interactivity.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="DWOSMigrationTool" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="16" Components="AI_CustomARPName AI_ExePath CommonServiceLocator.dll ControlzEx.dll Customers.xlsx DWOS.Data.dll DWOS.DataImporter.exe DWOS.DataImporter.exe.config DWOS.Shared.dll GalaSoft.MvvmLight.Extras.dll GalaSoft.MvvmLight.Platform.dll GalaSoft.MvvmLight.dll Infragistics4.Documents.Core.v17.1.dll Infragistics4.Documents.Excel.v17.1.dll Infragistics4.Documents.IO.v17.1.dll Infragistics4.Documents.Reports.v17.1.dl Infragistics4.Shared.v17.1.dll Infragistics4.Win.Misc.v17.1.dll Infragistics4.Win.v17.1.dll Ionic.Zip.Reduced.dll Itenso.TimePeriod.dll MahApps.Metro.dll Mindscape.Raygun4Net.dll Mindscape.Raygun4Net4.dll NLog.dll Newtonsoft.Json.dll ProductInformation SHORTCUTDIR System.Windows.Interactivity.dll"/>
+    <ROW Feature="DWOSMigrationTool" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="16"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
     <ATTRIBUTE name="CurrentFeature" value="DWOSMigrationTool"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="CommonServiceLocator.dll" Component_="CommonServiceLocator.dll" FileName="COMMON~1.DLL|CommonServiceLocator.dll" Attributes="0" SourcePath="..\DWOS.DataImporter\bin\Release\CommonServiceLocator.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.dll"/>
-    <ROW File="Contacts.xlsx" Component_="Customers.xlsx" FileName="CONTAC~1.XLS|Contacts.xlsx" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Template\Contacts.xlsx" SelfReg="false" NextFile="Mindscape.Raygun4Net4.dll"/>
-    <ROW File="ControlzEx.dll" Component_="ControlzEx.dll" FileName="CONTRO~1.DLL|ControlzEx.dll" Attributes="0" SourcePath="..\DWOS.DataImporter\bin\Release\ControlzEx.dll" SelfReg="false" NextFile="CommonServiceLocator.dll"/>
-    <ROW File="Customers.xlsx" Component_="Customers.xlsx" FileName="CUSTOM~1.XLS|Customers.xlsx" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Template\Customers.xlsx" SelfReg="false" NextFile="Parts.xlsx"/>
-    <ROW File="DWOS.Data.dll" Component_="DWOS.Data.dll" FileName="DWOSDA~1.DLL|DWOS.Data.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.Data.dll" SelfReg="false" NextFile="DWOS.DataImporter.exe"/>
-    <ROW File="DWOS.DataImporter.exe" Component_="DWOS.DataImporter.exe" FileName="DWOSDA~1.EXE|DWOS.DataImporter.exe" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.DataImporter.exe" SelfReg="false" NextFile="DWOS.DataImporter.exe.config" DigSign="true"/>
-    <ROW File="DWOS.DataImporter.exe.config" Component_="DWOS.DataImporter.exe.config" FileName="DWOSDA~1.CON|DWOS.DataImporter.exe.config" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.DataImporter.exe.config" SelfReg="false" NextFile="DWOS.Shared.dll"/>
-    <ROW File="DWOS.Shared.dll" Component_="DWOS.Shared.dll" FileName="DWOSSH~1.DLL|DWOS.Shared.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.Shared.dll" SelfReg="false" NextFile="Ionic.Zip.Reduced.dll"/>
-    <ROW File="GalaSoft.MvvmLight.Extras.dll" Component_="GalaSoft.MvvmLight.Extras.dll" FileName="GALASO~2.DLL|GalaSoft.MvvmLight.Extras.dll" Attributes="0" SourcePath="..\DWOS.DataImporter\bin\Release\GalaSoft.MvvmLight.Extras.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.Platform.dll"/>
-    <ROW File="GalaSoft.MvvmLight.Platform.dll" Component_="GalaSoft.MvvmLight.Platform.dll" FileName="GALASO~3.DLL|GalaSoft.MvvmLight.Platform.dll" Attributes="0" SourcePath="..\DWOS.DataImporter\bin\Release\GalaSoft.MvvmLight.Platform.dll" SelfReg="false"/>
-    <ROW File="GalaSoft.MvvmLight.dll" Component_="GalaSoft.MvvmLight.dll" FileName="GALASO~1.DLL|GalaSoft.MvvmLight.dll" Attributes="0" SourcePath="..\DWOS.DataImporter\bin\Release\GalaSoft.MvvmLight.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.Extras.dll"/>
-    <ROW File="Infragistics4.Documents.Core.v17.1.dll" Component_="Infragistics4.Documents.Core.v17.1.dll" FileName="INFRAG~8.DLL|Infragistics4.Documents.Core.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.Core.v17.1.dll" SelfReg="false" NextFile="Infragistics4.Documents.Excel.v17.1.dll"/>
-    <ROW File="Infragistics4.Documents.Excel.v17.1.dll" Component_="Infragistics4.Documents.Excel.v17.1.dll" FileName="INFRAG~9.DLL|Infragistics4.Documents.Excel.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.Excel.v17.1.dll" SelfReg="false" NextFile="Infragistics4.Documents.IO.v17.1.dll"/>
-    <ROW File="Infragistics4.Documents.IO.v17.1.dll" Component_="Infragistics4.Documents.IO.v17.1.dll" FileName="INFRA~10.DLL|Infragistics4.Documents.IO.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.IO.v17.1.dll" SelfReg="false" NextFile="Infragistics4.Documents.Reports.v17.1.dll"/>
-    <ROW File="Infragistics4.Documents.Reports.v17.1.dll" Component_="Infragistics4.Documents.Reports.v17.1.dl" FileName="INFRA~11.DLL|Infragistics4.Documents.Reports.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.Reports.v17.1.dll" SelfReg="false" NextFile="Infragistics4.Shared.v17.1.dll"/>
-    <ROW File="Infragistics4.Shared.v17.1.dll" Component_="Infragistics4.Shared.v17.1.dll" FileName="INFRA~12.DLL|Infragistics4.Shared.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Shared.v17.1.dll" SelfReg="false" NextFile="Infragistics4.Win.Misc.v17.1.dll"/>
-    <ROW File="Infragistics4.Win.Misc.v17.1.dll" Component_="Infragistics4.Win.Misc.v17.1.dll" FileName="INFRA~13.DLL|Infragistics4.Win.Misc.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Win.Misc.v17.1.dll" SelfReg="false" NextFile="Infragistics4.Win.v17.1.dll"/>
-    <ROW File="Infragistics4.Win.v17.1.dll" Component_="Infragistics4.Win.v17.1.dll" FileName="INFRA~14.DLL|Infragistics4.Win.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Win.v17.1.dll" SelfReg="false" NextFile="Contacts.xlsx"/>
-    <ROW File="Ionic.Zip.Reduced.dll" Component_="Ionic.Zip.Reduced.dll" FileName="IONICZ~1.DLL|Ionic.Zip.Reduced.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Ionic.Zip.Reduced.dll" SelfReg="false" NextFile="Itenso.TimePeriod.dll"/>
-    <ROW File="Itenso.TimePeriod.dll" Component_="Itenso.TimePeriod.dll" FileName="ITENSO~1.DLL|Itenso.TimePeriod.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Itenso.TimePeriod.dll" SelfReg="false" NextFile="MahApps.Metro.dll"/>
-    <ROW File="MahApps.Metro.dll" Component_="MahApps.Metro.dll" FileName="MAHAPP~1.DLL|MahApps.Metro.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;MahApps.Metro.dll" SelfReg="false" NextFile="Mindscape.Raygun4Net.dll"/>
-    <ROW File="Mindscape.Raygun4Net.dll" Component_="Mindscape.Raygun4Net.dll" FileName="MINDSC~1.DLL|Mindscape.Raygun4Net.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Mindscape.Raygun4Net.dll" SelfReg="false" NextFile="Newtonsoft.Json.dll"/>
-    <ROW File="Mindscape.Raygun4Net4.dll" Component_="Mindscape.Raygun4Net4.dll" FileName="MINDSC~2.DLL|Mindscape.Raygun4Net4.dll" Attributes="0" SourcePath="..\DWOS.DataImporter\bin\Release\Mindscape.Raygun4Net4.dll" SelfReg="false" NextFile="ControlzEx.dll"/>
-    <ROW File="NLog.config" Component_="DWOS.DataImporter.exe.config" FileName="NLOG~1.CON|NLog.config" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;NLog.config" SelfReg="false" NextFile="NLog.dll"/>
-    <ROW File="NLog.dll" Component_="NLog.dll" FileName="NLog.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;NLog.dll" SelfReg="false" NextFile="System.Windows.Interactivity.dll"/>
-    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Newtonsoft.Json.dll" SelfReg="false" NextFile="NLog.config"/>
-    <ROW File="Parts.xlsx" Component_="Customers.xlsx" FileName="PARTS~1.XLS|Parts.xlsx" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Template\Parts.xlsx" SelfReg="false" NextFile="Infragistics4.Documents.Core.v17.1.dll"/>
-    <ROW File="System.Windows.Interactivity.dll" Component_="System.Windows.Interactivity.dll" FileName="SYSTEM~1.DLL|System.Windows.Interactivity.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;System.Windows.Interactivity.dll" SelfReg="false" NextFile="Customers.xlsx"/>
+    <ROW File="DWOS.Data.dll" Component_="DWOS.Data.dll" FileName="DWOSDA~1.DLL|DWOS.Data.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.Data.dll" SelfReg="false"/>
+    <ROW File="DWOS.DataImporter.exe" Component_="DWOS.DataImporter.exe" FileName="DWOSDA~1.EXE|DWOS.DataImporter.exe" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.DataImporter.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="DWOS.DataImporter.exe.config" Component_="DWOS.DataImporter.exe.config" FileName="DWOSDA~1.CON|DWOS.DataImporter.exe.config" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.DataImporter.exe.config" SelfReg="false"/>
+    <ROW File="DWOS.Shared.dll" Component_="DWOS.Shared.dll" FileName="DWOSSH~1.DLL|DWOS.Shared.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;DWOS.Shared.dll" SelfReg="false"/>
+    <ROW File="Ionic.Zip.Reduced.dll" Component_="Ionic.Zip.Reduced.dll" FileName="IONICZ~1.DLL|Ionic.Zip.Reduced.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Ionic.Zip.Reduced.dll" SelfReg="false"/>
+    <ROW File="Itenso.TimePeriod.dll" Component_="Itenso.TimePeriod.dll" FileName="ITENSO~1.DLL|Itenso.TimePeriod.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Itenso.TimePeriod.dll" SelfReg="false"/>
+    <ROW File="MahApps.Metro.dll" Component_="MahApps.Metro.dll" FileName="MAHAPP~1.DLL|MahApps.Metro.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;MahApps.Metro.dll" SelfReg="false"/>
+    <ROW File="Mindscape.Raygun4Net.dll" Component_="Mindscape.Raygun4Net.dll" FileName="MINDSC~1.DLL|Mindscape.Raygun4Net.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Mindscape.Raygun4Net.dll" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="NLog.config" Component_="DWOS.DataImporter.exe.config" FileName="NLOG~1.CON|NLog.config" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;NLog.config" SelfReg="false"/>
+    <ROW File="NLog.dll" Component_="NLog.dll" FileName="NLog.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;NLog.dll" SelfReg="false"/>
+    <ROW File="System.Windows.Interactivity.dll" Component_="System.Windows.Interactivity.dll" FileName="SYSTEM~1.DLL|System.Windows.Interactivity.dll" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;System.Windows.Interactivity.dll" SelfReg="false"/>
+    <ROW File="Customers.xlsx" Component_="Customers.xlsx" FileName="CUSTOM~1.XLS|Customers.xlsx" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Template\Customers.xlsx" SelfReg="false"/>
+    <ROW File="Parts.xlsx" Component_="Customers.xlsx" FileName="PARTS~1.XLS|Parts.xlsx" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Template\Parts.xlsx" SelfReg="false"/>
+    <ROW File="Infragistics4.Documents.Core.v17.1.dll" Component_="Infragistics4.Documents.Core.v17.1.dll" FileName="INFRAG~8.DLL|Infragistics4.Documents.Core.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.Core.v17.1.dll" SelfReg="false"/>
+    <ROW File="Infragistics4.Documents.Excel.v17.1.dll" Component_="Infragistics4.Documents.Excel.v17.1.dll" FileName="INFRAG~9.DLL|Infragistics4.Documents.Excel.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.Excel.v17.1.dll" SelfReg="false"/>
+    <ROW File="Infragistics4.Documents.IO.v17.1.dll" Component_="Infragistics4.Documents.IO.v17.1.dll" FileName="INFRA~10.DLL|Infragistics4.Documents.IO.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.IO.v17.1.dll" SelfReg="false"/>
+    <ROW File="Infragistics4.Documents.Reports.v17.1.dll" Component_="Infragistics4.Documents.Reports.v17.1.dl" FileName="INFRA~11.DLL|Infragistics4.Documents.Reports.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Documents.Reports.v17.1.dll" SelfReg="false"/>
+    <ROW File="Infragistics4.Shared.v17.1.dll" Component_="Infragistics4.Shared.v17.1.dll" FileName="INFRA~12.DLL|Infragistics4.Shared.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Shared.v17.1.dll" SelfReg="false"/>
+    <ROW File="Infragistics4.Win.Misc.v17.1.dll" Component_="Infragistics4.Win.Misc.v17.1.dll" FileName="INFRA~13.DLL|Infragistics4.Win.Misc.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Win.Misc.v17.1.dll" SelfReg="false"/>
+    <ROW File="Infragistics4.Win.v17.1.dll" Component_="Infragistics4.Win.v17.1.dll" FileName="INFRA~14.DLL|Infragistics4.Win.v17.1.dll" Attributes="0" SourcePath="&lt;InfragisticsFolder&gt;2017.1\Windows Forms\CLR4.0\Bin\Infragistics4.Win.v17.1.dll" SelfReg="false"/>
+    <ROW File="Contacts.xlsx" Component_="Customers.xlsx" FileName="CONTAC~1.XLS|Contacts.xlsx" Attributes="0" SourcePath="&lt;DataImporterFolder&gt;Template\Contacts.xlsx" SelfReg="false"/>
+    <ROW File="Mindscape.Raygun4Net4.dll" Component_="Mindscape.Raygun4Net4.dll" FileName="MINDSC~2.DLL|Mindscape.Raygun4Net4.dll" Attributes="0" SourcePath="..\Source\Utilities\DWOS.DataImporter\bin\Release\Mindscape.Raygun4Net4.dll" SelfReg="false"/>
+    <ROW File="ControlzEx.dll" Component_="ControlzEx.dll" FileName="CONTRO~1.DLL|ControlzEx.dll" Attributes="0" SourcePath="..\Source\Utilities\DWOS.DataImporter\bin\Release\ControlzEx.dll" SelfReg="false"/>
+    <ROW File="CommonServiceLocator.dll" Component_="CommonServiceLocator.dll" FileName="COMMON~1.DLL|CommonServiceLocator.dll" Attributes="0" SourcePath="..\Source\Utilities\DWOS.DataImporter\bin\Release\CommonServiceLocator.dll" SelfReg="false"/>
+    <ROW File="GalaSoft.MvvmLight.dll" Component_="GalaSoft.MvvmLight.dll" FileName="GALASO~1.DLL|GalaSoft.MvvmLight.dll" Attributes="0" SourcePath="..\Source\Utilities\DWOS.DataImporter\bin\Release\GalaSoft.MvvmLight.dll" SelfReg="false"/>
+    <ROW File="GalaSoft.MvvmLight.Extras.dll" Component_="GalaSoft.MvvmLight.Extras.dll" FileName="GALASO~2.DLL|GalaSoft.MvvmLight.Extras.dll" Attributes="0" SourcePath="..\Source\Utilities\DWOS.DataImporter\bin\Release\GalaSoft.MvvmLight.Extras.dll" SelfReg="false"/>
+    <ROW File="GalaSoft.MvvmLight.Platform.dll" Component_="GalaSoft.MvvmLight.Platform.dll" FileName="GALASO~3.DLL|GalaSoft.MvvmLight.Platform.dll" Attributes="0" SourcePath="..\Source\Utilities\DWOS.DataImporter\bin\Release\GalaSoft.MvvmLight.Platform.dll" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
-    <ROW Name="DWOSImagesFolder" Path="..\..\Images" Type="2" Content="0"/>
-    <ROW Name="DataImporterFolder" Path="..\DWOS.DataImporter\bin\Release" Type="2" Content="0"/>
-    <ROW Name="DataImporterResources" Path="..\DWOS.DataImporter\Resources" Type="2" Content="0"/>
-    <ROW Name="DocumentsFolder" Path="..\..\Documents" Type="2" Content="0"/>
+    <ROW Name="DWOSImagesFolder" Path="..\Images" Type="2" Content="0"/>
+    <ROW Name="DataImporterFolder" Path="..\Source\Utilities\DWOS.DataImporter\bin\Release" Type="2" Content="0"/>
+    <ROW Name="DataImporterResources" Path="..\Source\Utilities\DWOS.DataImporter\Resources" Type="2" Content="0"/>
     <ROW Name="InfragisticsFolder" Path="C:\Program Files (x86)\Infragistics" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrapperUISequenceComponent">
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="DWOS.Migration" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExeIconPath="..\DWOS.DataImporter\Resources\Database.ico" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" Options="8" UseLargeSchema="true" ExeName="DWOS.Migration.[|ProductVersion]"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFolder="DWOS.Migration" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExeIconPath="..\Images\DWOS Logo\AWOT.ico" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" Options="8" UseLargeSchema="true" ExeName="DWOS.Migration.[|ProductVersion]"/>
+    <ROW BuildKey="MsiBuild" BuildName="MsiBuild" BuildOrder="2" BuildType="1" PackageFolder="MsiBuildSetupFiles" PackageFileName="DWOS Migration" Languages="en" InstallationType="4" UseLargeSchema="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
     <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW DigitalCertificate="..\..\Documents\DS2 Code Siging Key_10.12.21.pfx" TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="7" SignTool="0" UseSha256="1" Password="7C998CA49693CF032580BF53AB42A211C9FB2A7A"/>
+    <ROW DigitalCertificate="Certs\DS2 Code Siging Key_10.12.21.pfx" TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="7" SignTool="0" UseSha256="1" Password="7C998CA49693CF032580BF53AB42A211C9FB2A7A"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
@@ -262,6 +265,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
+    <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
@@ -297,6 +301,38 @@
     <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
     <ROW Action="UninstallPreviousVersions" Type="1" Source="aicustact.dll" Target="UninstallPreviousVersions" Options="1"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
+    <ROW Feature_="DWOSMigrationTool" Component_="AI_CustomARPName"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="AI_ExePath"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="CommonServiceLocator.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="ControlzEx.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Customers.xlsx"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="DWOS.Data.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="DWOS.DataImporter.exe"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="DWOS.DataImporter.exe.config"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="DWOS.Shared.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="GalaSoft.MvvmLight.Extras.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="GalaSoft.MvvmLight.Platform.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="GalaSoft.MvvmLight.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Documents.Core.v17.1.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Documents.Excel.v17.1.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Documents.IO.v17.1.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Documents.Reports.v17.1.dl"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Shared.v17.1.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Win.Misc.v17.1.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Infragistics4.Win.v17.1.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Ionic.Zip.Reduced.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Itenso.TimePeriod.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="MahApps.Metro.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Mindscape.Raygun4Net.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Mindscape.Raygun4Net4.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="NLog.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="Newtonsoft.Json.dll"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="ProductInformation"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="SHORTCUTDIR"/>
+    <ROW Feature_="DWOSMigrationTool" Component_="System.Windows.Interactivity.dll"/>
+    <ROW Feature_="MainFeature" Component_="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="Database.exe" SourcePath="&lt;DataImporterResources&gt;Database.ico" Index="0"/>
@@ -340,12 +376,12 @@
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
-    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNT40Display]" DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild;MsiBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild;MsiBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild;MsiBuild"/>
     <ROW Condition="AI_DETECTED_DOTNET_VERSION &gt;= AI_REQUIRED_DOTNET_VERSION" Description="[ProductName] cannot be installed on systems with .NET Framework version lower than [AI_REQUIRED_DOTNET_DISPLAY]." DescriptionLocId="AI.LaunchCondition.DotNET" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="SETUPEXEDIR OR (REMOVE=&quot;ALL&quot;)" Description="This package can only be run from a bootstrapper." DescriptionLocId="AI.LaunchCondition.RequireBootstrapper" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild;MsiBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
     <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
@@ -403,7 +439,7 @@
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
-    <ROW PrereqKey="E275424811B28D95B40CAB85CC" DisplayName=".NET Framework 4.5.2" SetupFileUrl="http://download.microsoft.com/download/B/4/1/B4119C11-0423-477B-80EE-7A474314B347/NDP452-KB2901954-Web.exe" Location="1" ExactSize="1118920" WinNTVersions="Windows XP SP3 x86, Windows Server 2003 SP2 x86, Windows 10 x86" WinNT64Versions="Windows XP SP2 x64, Windows Server 2003 SP2 x64, Windows 10 x64, Windows Server 2016 x64" Operator="1" NoUiComLine="/q /norestart" Options="xym" MD5="ca41dba55a727f01104871b160cd5b1d" TargetName=".NET Framework 4.5.2"/>
+    <ROW PrereqKey="E275424811B28D95B40CAB85CC" DisplayName=".NET Framework 4.5.2" SetupFileUrl="http://download.microsoft.com/download/B/4/1/B4119C11-0423-477B-80EE-7A474314B347/NDP452-KB2901954-Web.exe" Location="1" ExactSize="1118920" WinNTVersions="Windows 10 x86" WinNT64Versions="Windows 10 x64, Windows Server 2016 x64" Operator="1" NoUiComLine="/q /norestart" Options="xym" MD5="ca41dba55a727f01104871b160cd5b1d" TargetName=".NET Framework 4.5.2"/>
     <ATTRIBUTE name="PrereqsOrder" value="E275424811B28D95B40CAB85CC"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
