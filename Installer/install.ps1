@@ -15,6 +15,11 @@ $migrationInstaller = Join-Path $installerPath "DWOS Migration.aip"
 $serverInstaller = Join-Path $installerPath "DWOS Server.aip"
 $archiverInstaller = Join-Path $installerPath "DWOS Data Archiver.aip"
 
+
+Copy-Item -Path "D:\Projects\DWOS\Installer\*" -Destination $installerPath -Recurse
+
+
+
 if ($Env:AdvancedInstallerPath) {
     $advInstaller = $Env:AdvancedInstallerPath
 } else {
