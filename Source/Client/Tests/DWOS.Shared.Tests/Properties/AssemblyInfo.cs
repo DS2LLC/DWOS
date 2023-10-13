@@ -3,4 +3,4 @@
 [assembly: AssemblyTitle("DWOS.Shared.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("DWOS.Shared.Tests")]
-[assembly: DWOS.Shared.AssemblyReleaseDate("2023-05-17")]
+[assembly: DWOS.Shared.AssemblyReleaseDate("2023-10-13")]

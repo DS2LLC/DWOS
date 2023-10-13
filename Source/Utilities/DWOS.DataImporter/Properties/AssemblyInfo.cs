@@ -10,7 +10,7 @@ using DWOS.Shared;
 [assembly: AssemblyProduct("DWOS.Migration")]
 [assembly: Guid("6eec2673-0088-4167-8a63-073a7e5ad32a")]
 [assembly: RaygunApiKey("zl6AJPTAvf8KRtT4dKvfOg==")]
-[assembly: AssemblyReleaseDate("2023-05-17")]
+[assembly: AssemblyReleaseDate("2023-10-13")]
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 

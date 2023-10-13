@@ -6,4 +6,4 @@ using DWOS.Shared;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("DWOS")]
 [assembly: Guid("AF77BF36-8C92-4016-9414-29B3511DD71A")]
-[assembly: AssemblyReleaseDate("2023-05-17")]
+[assembly: AssemblyReleaseDate("2023-10-13")]
