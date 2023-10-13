@@ -342,7 +342,7 @@ namespace DWOS.Server
                                 }
                                 else
                                 {
-                                    LogManager.GetCurrentClassLogger().Warn("Database version {0} does not match application's required version.".FormatWith(actualDbVersion, requiredDbVersion));
+                                    LogManager.GetCurrentClassLogger().Warn("Database version {0} does not match application's required version {1}".FormatWith(actualDbVersion, requiredDbVersion));
                                 }
                             }
                             else
