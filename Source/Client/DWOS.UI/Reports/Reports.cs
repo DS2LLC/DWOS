@@ -1251,7 +1251,7 @@ namespace DWOS.UI.Reports
         {
             set { _labelCount = value; } 
         }
-        public OrdersDataSet.OrderSummaryRow Order { get; set; }
+        public OrdersDataSet.RackOrdersRow Order { get; set; }
 
         private int _labelCount = 1;
 
@@ -1292,28 +1292,28 @@ namespace DWOS.UI.Reports
             //Order = null;
         }
 
-        private LabelFactory.LabelData GetData(OrdersDataSet.OrderSummaryRow orderRow, int ContainerNo)
+        private LabelFactory.LabelData GetData(OrdersDataSet.RackOrdersRow rackOrderRow, int ContainerNo)
         {
 
             try
             {
                 var tokens = new List<LabelFactory.TokenValue>();
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.WORKORDER, orderRow.OrderID.ToString())); 
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.WORKORDER, rackOrderRow.OrderID.ToString())); 
             
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PURCHASEORDER, orderRow.IsPurchaseOrderNull() ? "NONE" : orderRow.PurchaseOrder));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CUSTOMERNAME, orderRow.CustomerName.ToString()));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTNAME, orderRow.PartName.ToString()));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTDESCRIPTION, (orderRow.IsPartDescNull()) ?"":orderRow.PartDesc.ToString()));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.ORDERPRIORITY, orderRow.Priority));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CUSTOMERWO, orderRow.IsCustomerWONull() ? "NONE" : orderRow.CustomerWO));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTQUANTITY, orderRow.PartQuantity.ToString()));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PURCHASEORDER, rackOrderRow.IsPurchaseOrderNull() ? "NONE" : rackOrderRow.PurchaseOrder));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CUSTOMERNAME, rackOrderRow.CustomerName.ToString()));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTNAME, rackOrderRow.PartName.ToString()));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTDESCRIPTION, (rackOrderRow.IsPartDescNull()) ?"": rackOrderRow.PartDesc.ToString()));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.ORDERPRIORITY, rackOrderRow.Priority));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CUSTOMERWO, rackOrderRow.IsCustomerWONull() ? "NONE" : rackOrderRow.CustomerWO));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.PARTQUANTITY, rackOrderRow.PartQuantity.ToString()));
                 tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.DATE, DateTime.Now.ToShortDateString()));
                 tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CONTAINERNUMBER, ContainerNo.ToString()));
-                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.ADDORDERCOMMAND, string.Format("{0}{1}{0}", Report.BARCODE_ORDER_ACTION_PREFFIX, orderRow.OrderID)));
+                tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.ADDORDERCOMMAND, string.Format("{0}{1}{0}", Report.BARCODE_ORDER_ACTION_PREFFIX, rackOrderRow.OrderID)));
                 //Get the current process from OrderProcesses
                 using (var daOrderProcess = new Data.Datasets.OrdersDataSetTableAdapters.OrderProcessesTableAdapter())
                 {
-                    Data.Datasets.OrdersDataSet.OrderProcessesRow drOrderProcesses = (Data.Datasets.OrdersDataSet.OrderProcessesRow)daOrderProcess.GetCurrentProcess(orderRow.OrderID).Rows[0];
+                    Data.Datasets.OrdersDataSet.OrderProcessesRow drOrderProcesses = (Data.Datasets.OrdersDataSet.OrderProcessesRow)daOrderProcess.GetCurrentProcess(rackOrderRow.OrderID).Rows[0];
                     using (var daProcessAlias = new Data.Datasets.OrdersDataSetTableAdapters.ProcessAliasSummaryTableAdapter())
                     {
                         Data.Datasets.OrdersDataSet.ProcessAliasSummaryDataTable dtProcessAliasSummary = new OrdersDataSet.ProcessAliasSummaryDataTable();
@@ -1323,7 +1323,7 @@ namespace DWOS.UI.Reports
                         tokens.Add(LabelFactory.TokenValue.From(LabelFactory.LabelTokens.CURRENTPROCESSALIAS, drProcessAlias.Name));
                     }
                 }
-                return LabelFactory.LabelData.GetLabelForCustomer(LabelFactory.LabelType.Racking, orderRow.CustomerID, tokens) ??
+                return LabelFactory.LabelData.GetLabelForCustomer(LabelFactory.LabelType.Racking, rackOrderRow.CustomerID, tokens) ??
                 LabelFactory.LabelData.CreateDefault();
             }
             catch (LabelPrinterException exc)

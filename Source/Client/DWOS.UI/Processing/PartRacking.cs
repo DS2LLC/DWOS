@@ -27,13 +27,12 @@ namespace DWOS.UI.Processing
     {
         #region Fields
         private OrdersDataSet.MediaDataTable _mediaDT;
-        private OrdersDataSet.OrderSummaryDataTable _orderDT;
+        private OrdersDataSet.RackOrdersDataTable _rackDT;
         private int _userSelectedWO = -1;
 
         private string _SelectedDept;
 
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
-
 
         #endregion
         #region Properties
@@ -57,34 +56,34 @@ namespace DWOS.UI.Processing
         
         #endregion
 
-
         private void LoadData()
         {
             try
             {
                 //load all orders that are changing departments
-                this._orderDT = this.taOrder.GetData();
-                DataView dv = this._orderDT.DefaultView;
-                dv.RowFilter = $"((CurrentLocation = '{_SelectedDept.ToString()}' ) and (WorkStatus = 'In Process' ))";
-
- 
-                this.cboOrder.DataSource = dv.OfType<DataRowView>().Select(dr => dr["OrderID"].ToString()).ToList(); 
-                this.cboOrder.DataBind();
-                  
-
-                OrdersDataSet.OrderSummaryRow row = (OrdersDataSet.OrderSummaryRow)this.taOrder.GetDataBy(_userSelectedWO).Rows[0];
-
-                _log.Info($"Racking Form Loaded with Order {row.OrderID.ToString()}.");
+                using (var taRackOrders = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.RackOrdersTableAdapter() )
+                {
+                    taRackOrders.Fill(this._rackDT, _SelectedDept.ToString());
+                    //fill the orderID combobox
+                    this.cboOrder.DataSource = _rackDT.Select(dr => dr["OrderID"].ToString()).ToList();
+                    this.cboOrder.DataBind();
 
 
-                this.lbCustomer.Text       = row.CustomerName;
-                this.lbPart.Text           = row.PartName;
-                this.lbPO.Text             = row.PurchaseOrder.ToString();
-                this.numPartQty.Value      = row.PartQuantity;
-                this.numPartQty.MaxValue   = row.PartQuantity;
-                this.lbDueDate.Text        = row.RequiredDate.ToShortDateString();
-                this.tePartNotes.Text      = (row.IsPartNotesNull())?"":row.PartNotes.ToString();
-                this.txtOrderNotes.Text    = (row.IsCustomerNotesNull()) ? "":row.CustomerNotes.ToString();
+                    OrdersDataSet.RackOrdersRow row = (OrdersDataSet.RackOrdersRow)taRackOrders.GetDataByOrderID(_userSelectedWO).Rows[0];
+
+                    _log.Info($"Racking Form Loaded with Order {row.OrderID.ToString()}.");
+               
+
+                    this.lbCustomer.Text       = row.CustomerName;
+                    this.lbPart.Text           = row.PartName;
+                    this.lbPO.Text             = row.PurchaseOrder.ToString();
+                    this.numPartQty.Value      = row.PartQuantity;
+                    this.numPartQty.MaxValue   = row.PartQuantity;
+                    this.lbDueDate.Text        = row.RequiredDate.ToShortDateString();
+                    this.tePartNotes.Text      = (row.IsPartNotesNull())?"":row.PartNotes.ToString();
+                    this.txtOrderNotes.Text    = (row.IsCustomerNotesNull()) ? "":row.CustomerNotes.ToString();
+
+                }
 
                 using (var taMedia = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.MediaTableAdapter())
                 {
@@ -152,7 +151,7 @@ namespace DWOS.UI.Processing
 
             var rptPartRacking = new PartRackingLabelReport();
             rptPartRacking.LabelCount = Convert.ToInt32(numPrintQty.Value);
-            OrdersDataSet.OrderSummaryRow row = _orderDT.FindByOrderID(Convert.ToInt32(cboOrder.SelectedItem.DataValue));
+            OrdersDataSet.RackOrdersRow row = _rackDT.FindByOrderID(Convert.ToInt32(cboOrder.SelectedItem.DataValue));
 
             //update value from form
             row.SetField<int>("PartQuantity", (Int32)numPartQty.Value);
@@ -171,7 +170,7 @@ namespace DWOS.UI.Processing
             {
                 this.Width = 550;
                 this.Height = 550;
-                this._orderDT = new OrdersDataSet.OrderSummaryDataTable();
+                this._rackDT = new OrdersDataSet.RackOrdersDataTable();
                 this._mediaDT = new OrdersDataSet.MediaDataTable();
 
                 LoadData();
