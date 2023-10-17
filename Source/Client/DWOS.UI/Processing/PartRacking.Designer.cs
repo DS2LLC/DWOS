@@ -59,6 +59,7 @@ namespace DWOS.UI.Processing
             this.taOrder = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.OrderSummaryTableAdapter();
             this.inboxControlStyler1 = new Infragistics.Win.AppStyling.Runtime.InboxControlStyler(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cbPrintPreview = new Infragistics.Win.UltraWinEditors.UltraCheckEditor();
             this.ultraToolTipManager1 = new Infragistics.Win.UltraWinToolTip.UltraToolTipManager(this.components);
             this.tePartNotes = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.gbFixture = new Infragistics.Win.Misc.UltraGroupBox();
@@ -66,14 +67,13 @@ namespace DWOS.UI.Processing
             this.gbPart = new Infragistics.Win.Misc.UltraGroupBox();
             this.lbPart = new Infragistics.Win.Misc.UltraLabel();
             this.gbOrder = new Infragistics.Win.Misc.UltraGroupBox();
-            this.lbDueDate = new Infragistics.Win.Misc.UltraLabel();
+            this.dtDueDate = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
             this.ultraLabel7 = new Infragistics.Win.Misc.UltraLabel();
             this.lbCustomer = new Infragistics.Win.Misc.UltraLabel();
             this.ultraLabel6 = new Infragistics.Win.Misc.UltraLabel();
             this.lbPO = new Infragistics.Win.Misc.UltraLabel();
             this.gbBatch = new Infragistics.Win.Misc.UltraGroupBox();
             this.lbBatch = new Infragistics.Win.Misc.UltraLabel();
-            this.cbPrintPreview = new Infragistics.Win.UltraWinEditors.UltraCheckEditor();
             this.helpLink1 = new DWOS.UI.Utilities.HelpLink();
             ((System.ComponentModel.ISupportInitialize)(this.cboOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrintQty)).BeginInit();
@@ -82,6 +82,7 @@ namespace DWOS.UI.Processing
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboEditor2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inboxControlStyler1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPrintPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tePartNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbFixture)).BeginInit();
             this.gbFixture.SuspendLayout();
@@ -91,9 +92,9 @@ namespace DWOS.UI.Processing
             this.gbPart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbOrder)).BeginInit();
             this.gbOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtDueDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbBatch)).BeginInit();
             this.gbBatch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbPrintPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // cboOrder
@@ -226,6 +227,7 @@ namespace DWOS.UI.Processing
             this.numPartQty.PromptChar = ' ';
             this.numPartQty.Size = new System.Drawing.Size(117, 23);
             this.numPartQty.SpinButtonDisplayStyle = Infragistics.Win.ButtonDisplayStyle.OnMouseEnter;
+            this.numPartQty.SpinWrapBehavior = Infragistics.Win.UltraWinEditors.SpinWrapBehavior.NoWrapping;
             this.numPartQty.TabIndex = 89;
             // 
             // txtOrderNotes
@@ -282,6 +284,14 @@ namespace DWOS.UI.Processing
             this.panel2.Size = new System.Drawing.Size(400, 38);
             this.inboxControlStyler1.SetStyleSettings(this.panel2, new Infragistics.Win.AppStyling.Runtime.InboxControlStyleSettings(Infragistics.Win.DefaultableBoolean.Default));
             this.panel2.TabIndex = 95;
+            // 
+            // cbPrintPreview
+            // 
+            this.cbPrintPreview.Location = new System.Drawing.Point(81, 8);
+            this.cbPrintPreview.Name = "cbPrintPreview";
+            this.cbPrintPreview.Size = new System.Drawing.Size(71, 20);
+            this.cbPrintPreview.TabIndex = 34;
+            this.cbPrintPreview.Text = "Preview";
             // 
             // ultraToolTipManager1
             // 
@@ -364,7 +374,7 @@ namespace DWOS.UI.Processing
             // 
             this.gbOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbOrder.Controls.Add(this.lbDueDate);
+            this.gbOrder.Controls.Add(this.dtDueDate);
             this.gbOrder.Controls.Add(this.ultraLabel7);
             this.gbOrder.Controls.Add(this.lbCustomer);
             this.gbOrder.Controls.Add(this.ultraLabel6);
@@ -380,15 +390,15 @@ namespace DWOS.UI.Processing
             this.gbOrder.TabIndex = 96;
             this.gbOrder.Text = "Order";
             // 
-            // lbDueDate
+            // dtDueDate
             // 
-            this.lbDueDate.AutoSize = true;
-            this.lbDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDueDate.Location = new System.Drawing.Point(74, 93);
-            this.lbDueDate.Name = "lbDueDate";
-            this.lbDueDate.Size = new System.Drawing.Size(56, 16);
-            this.lbDueDate.TabIndex = 95;
-            this.lbDueDate.Text = "Unknown";
+            this.dtDueDate.Enabled = false;
+            this.dtDueDate.Location = new System.Drawing.Point(74, 90);
+            this.dtDueDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtDueDate.Name = "dtDueDate";
+            this.dtDueDate.ReadOnly = true;
+            this.dtDueDate.Size = new System.Drawing.Size(118, 23);
+            this.dtDueDate.TabIndex = 96;
             // 
             // ultraLabel7
             // 
@@ -458,14 +468,6 @@ namespace DWOS.UI.Processing
             this.lbBatch.TabIndex = 31;
             this.lbBatch.Text = "N/A";
             // 
-            // cbPrintPreview
-            // 
-            this.cbPrintPreview.Location = new System.Drawing.Point(81, 8);
-            this.cbPrintPreview.Name = "cbPrintPreview";
-            this.cbPrintPreview.Size = new System.Drawing.Size(71, 20);
-            this.cbPrintPreview.TabIndex = 34;
-            this.cbPrintPreview.Text = "Preview";
-            // 
             // helpLink1
             // 
             this.helpLink1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -504,6 +506,7 @@ namespace DWOS.UI.Processing
             ((System.ComponentModel.ISupportInitialize)(this.inboxControlStyler1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbPrintPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tePartNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbFixture)).EndInit();
             this.gbFixture.ResumeLayout(false);
@@ -516,10 +519,10 @@ namespace DWOS.UI.Processing
             ((System.ComponentModel.ISupportInitialize)(this.gbOrder)).EndInit();
             this.gbOrder.ResumeLayout(false);
             this.gbOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtDueDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gbBatch)).EndInit();
             this.gbBatch.ResumeLayout(false);
             this.gbBatch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbPrintPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,8 +558,8 @@ namespace DWOS.UI.Processing
         private Infragistics.Win.Misc.UltraLabel ultraLabel6;
         private Infragistics.Win.Misc.UltraLabel lbPO;
         private Infragistics.Win.Misc.UltraLabel lbBatch;
-        private Infragistics.Win.Misc.UltraLabel lbDueDate;
         private Infragistics.Win.Misc.UltraLabel ultraLabel7;
         private Infragistics.Win.UltraWinEditors.UltraCheckEditor cbPrintPreview;
+        private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor dtDueDate;
     }
 }

@@ -32,6 +32,8 @@ namespace DWOS.UI.Processing
 
         private string _SelectedDept;
 
+        private BindingSource _RackOrderBS;
+
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         #endregion
@@ -61,40 +63,56 @@ namespace DWOS.UI.Processing
             try
             {
                 //load all orders that are changing departments
-                using (var taRackOrders = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.RackOrdersTableAdapter() )
+                using (var taRackOrders = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.RackOrdersTableAdapter())
                 {
                     taRackOrders.Fill(this._rackDT, _SelectedDept.ToString());
-                    //fill the orderID combobox
-                    this.cboOrder.DataSource = _rackDT.Select(dr => dr["OrderID"].ToString()).ToList();
-                    this.cboOrder.DataBind();
-
-
-                    OrdersDataSet.RackOrdersRow row = (OrdersDataSet.RackOrdersRow)taRackOrders.GetDataByOrderID(_userSelectedWO).Rows[0];
-
-                    _log.Info($"Racking Form Loaded with Order {row.OrderID.ToString()}.");
-               
-
-                    this.lbCustomer.Text       = row.CustomerName;
-                    this.lbPart.Text           = row.PartName;
-                    this.lbPO.Text             = row.PurchaseOrder.ToString();
-                    this.numPartQty.Value      = row.PartQuantity;
-                    this.numPartQty.MaxValue   = row.PartQuantity;
-                    this.lbDueDate.Text        = row.RequiredDate.ToShortDateString();
-                    this.tePartNotes.Text      = (row.IsPartNotesNull())?"":row.PartNotes.ToString();
-                    this.txtOrderNotes.Text    = (row.IsCustomerNotesNull()) ? "":row.CustomerNotes.ToString();
-
+                    _RackOrderBS = new BindingSource();
+                    _RackOrderBS.DataSource = _rackDT.DefaultView;
                 }
 
+                //fill the orderID combobox
+                List<String> orders =  _rackDT.Select(dr => dr["OrderID"].ToString()).ToList();
+                foreach (string o in orders)
+                    this.cboOrder.Items.Add(o.ToString());
+
+
+                //this.cboOrder.DataBindings.Add("Text", _RackOrderBS, "OrderID");
+                this.lbCustomer.DataBindings.Add("Text", _RackOrderBS, "CustomerName");
+                this.lbPart.DataBindings.Add("Text", _RackOrderBS, "PartName");
+                this.lbPO.DataBindings.Add("Text", _RackOrderBS, "PurchaseOrder");
+                this.numPartQty.DataBindings.Add("Value", _RackOrderBS, "PartQuantity",false);
+                this.dtDueDate.DataBindings.Add("Value", _RackOrderBS, "RequiredDate");
+                this.tePartNotes.DataBindings.Add("Text", _RackOrderBS, "PartNotes");
+                this.txtOrderNotes.DataBindings.Add("Text", _RackOrderBS, "CustomerNotes");
+      
+
+            }
+            catch (Exception exc)
+            {
+                var errorMsg = "Error loading data.";
+                _log.Error(exc, errorMsg);
+            }
+        }
+
+        private void LoadMedia(int OrderID)
+        {
+            try
+            {
                 using (var taMedia = new DWOS.Data.Datasets.OrdersDataSetTableAdapters.MediaTableAdapter())
                 {
-                    this._mediaDT = taMedia.GetPartsWOMediaByOrder(_userSelectedWO);
-                    DWOS.Data.Datasets.OrdersDataSet.MediaRow mr = (DWOS.Data.Datasets.OrdersDataSet.MediaRow)taMedia.GetPartsWOMediaByOrder(_userSelectedWO).Rows[0];
+                    this._mediaDT = taMedia.GetPartsWOMediaByOrder(OrderID);
+
                     //dispose current image first
                     if (this.picPartImage.Image != null)
                     {
                         ((Image)this.picPartImage.Image).Dispose();
                         this.picPartImage.Image = null;
                     }
+
+                    if (_mediaDT.Rows.Count==0)
+                        return;
+
+                    DWOS.Data.Datasets.OrdersDataSet.MediaRow mr = (DWOS.Data.Datasets.OrdersDataSet.MediaRow)taMedia.GetPartsWOMediaByOrder(OrderID).Rows[0];
 
                     //get image from media id
                     this._mediaDT = taMedia.GetPartsWOMediaByOrder(_userSelectedWO);
@@ -108,16 +126,38 @@ namespace DWOS.UI.Processing
                     if (this.picPartImage.Image == null)
                         this.picPartImage.Image = Properties.Resources.NoImage;
                     //FormLoad = false;
-                 
+
                 }
+            }
+            catch (Exception exc)
+            {
+                string errorMsg = "Error Loading Media Record.";
+                ErrorMessageBox.ShowDialog(errorMsg, exc);
+            }
+        }
+
+        private void moveToOrder(int OrderID)
+        {
+            Int32 index = _RackOrderBS.Find("OrderID", OrderID);
+            try
+            {
+                if (index >= 0)
+                {
+                    _RackOrderBS.Position = index;
+                    this.numPartQty.MaxValue = this.numPartQty.Value;
+                    LoadMedia(OrderID);
+                }
+
 
 
             }
             catch (Exception exc)
             {
-                var errorMsg = "Error loading data.";
-                _log.Error(exc, errorMsg);
+                string errorMsg = "Error Moving to Selected Rack Order Record.";
+                ErrorMessageBox.ShowDialog(errorMsg, exc);
             }
+
+
         }
 
         public PartRacking()
@@ -156,7 +196,6 @@ namespace DWOS.UI.Processing
             //update value from form
             row.SetField<int>("PartQuantity", (Int32)numPartQty.Value);
 
-
             rptPartRacking.Order = row;
 
             if (cbPrintPreview.Checked){rptPartRacking.DisplayReport();}
@@ -174,8 +213,11 @@ namespace DWOS.UI.Processing
                 this._mediaDT = new OrdersDataSet.MediaDataTable();
 
                 LoadData();
-                this.cboOrder.SelectedText = _userSelectedWO.ToString(); 
-                this.cboOrder.Focus();
+
+                moveToOrder(_userSelectedWO);
+                int OrdItem = cboOrder.Items.ValueList.FindString(_userSelectedWO.ToString());
+                if(OrdItem > 0)
+                    cboOrder.SelectedIndex = OrdItem;
             }
             catch (Exception exc)
             {
@@ -188,9 +230,21 @@ namespace DWOS.UI.Processing
 
         private void cboOrder_SelectionChanged(object sender, EventArgs e)
         {
-            if(this.cboOrder.SelectedText != "")
-                _userSelectedWO = Convert.ToInt32(this.cboOrder.SelectedText);
-            LoadData();
+            try
+            {
+                if(this.cboOrder.SelectedText != "")
+                { 
+                    //need to set the Max Value high so selected record can set value if higher that previously set.
+                    this.numPartQty.MaxValue = 100000; 
+                    moveToOrder(Convert.ToInt32(this.cboOrder.SelectedText));
+                }
+            }
+            catch (Exception exc)
+            {
+                string errorMsg = "Error Selecting Rack Order.";
+                ErrorMessageBox.ShowDialog(errorMsg, exc);
+            }
+
         }
     }
 }
