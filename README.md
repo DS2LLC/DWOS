@@ -9,6 +9,7 @@ This is a quick guide to DWOS development.
 1. Install the following on your system:
    - Visual Studio
    - SQL Server Management Studio (database development & occasional debugging)
+   - Microsoft .NET Framework 4.5.2
    - Infragistics Ultimate - Windows Forms, WPF, and ASP .NET are used
    - /n software IP*Works! for server/email development
    - /n software QuickBooks Integrator for accounting development
