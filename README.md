@@ -36,6 +36,8 @@ This is a quick guide to DWOS development.
   - These files contain licensing information that, when removed, prevents end-users from using certain parts of DWOS
 - For Windows Forms controls, check tab order and tooltips
 - For WPF controls, check tooltips and styling
+- Depending on the location of your cloned repository, NuGit packages required as part of the projects may need to be reinstalled.
+  This can be accomplished by running the following cammond at the Nuget package manager commandline. "Update-Package –reinstall".
 
 ## General Overview of the DWOS Product Suite
 
