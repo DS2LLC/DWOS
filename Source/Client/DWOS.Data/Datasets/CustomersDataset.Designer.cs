@@ -22144,12 +22144,12 @@ FROM         ContactAdditionalCustomer";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInApprovalNotifications, IncludeInAutomatedNotifications, IncludeInCocNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications, IncludeInPortal, IncludeInShippingNotifications FROM ContactAdditionalCustomer WHERE (ContactID IN (SELECT ContactID FROM d_Contact WHERE (CustomerID = @customerId)))";
+            this._commandCollection[1].CommandText = @"SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInApprovalNotifications, IncludeInAutomatedNotifications, IncludeInCocNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications, IncludeInPortal, IncludeInShippingNotifications, IncludeInOrderReceiptNotification FROM ContactAdditionalCustomer WHERE (ContactID IN (SELECT ContactID FROM d_Contact WHERE (CustomerID = @customerId)))";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@customerId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInApprovalNotifications, IncludeInAutomatedNotifications, IncludeInCocNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications, IncludeInPortal, IncludeInShippingNotifications FROM ContactAdditionalCustomer WHERE (CustomerID = @customerId)";
+            this._commandCollection[2].CommandText = @"SELECT ContactAdditionalCustomerID, ContactID, CustomerID, IncludeInApprovalNotifications, IncludeInAutomatedNotifications, IncludeInCocNotifications, IncludeInHoldNotifications, IncludeInLateOrderNotifications, IncludeInPortal, IncludeInShippingNotifications, IncludeInOrderReceiptNotification FROM ContactAdditionalCustomer WHERE (CustomerID = @customerId)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@customerId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }

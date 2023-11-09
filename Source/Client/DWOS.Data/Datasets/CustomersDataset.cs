@@ -46,3 +46,10 @@ namespace DWOS.Data.Datasets.CustomersDatasetTableAdapters
     public partial class ContactTableAdapter {
     }
 }
+
+namespace DWOS.Data.CustomersDatasetTableAdapters {
+    
+    
+    public partial class ContactAdditionalCustomerTableAdapter {
+    }
+}
