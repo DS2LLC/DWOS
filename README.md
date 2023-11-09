@@ -9,6 +9,7 @@ This is a quick guide to DWOS development.
 1. Install the following on your system:
    - Visual Studio
    - SQL Server Management Studio (database development & occasional debugging)
+   - Microsoft .NET Framework 4.5.2
    - Infragistics Ultimate - Windows Forms, WPF, and ASP .NET are used
    - /n software IP*Works! for server/email development
    - /n software QuickBooks Integrator for accounting development
@@ -35,6 +36,8 @@ This is a quick guide to DWOS development.
   - These files contain licensing information that, when removed, prevents end-users from using certain parts of DWOS
 - For Windows Forms controls, check tab order and tooltips
 - For WPF controls, check tooltips and styling
+- Depending on the location of your cloned repository, NuGit packages required as part of the projects may need to be reinstalled.
+  This can be accomplished by running the following cammond at the Nuget package manager commandline. "Update-Package –reinstall".
 
 ## General Overview of the DWOS Product Suite
 
