@@ -62,9 +62,9 @@ namespace DWOS.Data.Datasets {
         
         private global::System.Data.DataRelation relationFK_Part_Order;
         
-        private global::System.Data.DataRelation relationFK_SysproInvoiceOrder_SysproInvoice;
-        
         private global::System.Data.DataRelation relationFK_OrderInvoice_SysproInvoiceOrder;
+        
+        private global::System.Data.DataRelation relationFK_SysproInvoiceOrder_SysproInvoice;
         
         private global::System.Data.DataRelation relationCustomer_OrderInvoice;
         
@@ -653,8 +653,8 @@ namespace DWOS.Data.Datasets {
                 }
             }
             this.relationFK_Part_Order = this.Relations["FK_Part_Order"];
-            this.relationFK_SysproInvoiceOrder_SysproInvoice = this.Relations["FK_SysproInvoiceOrder_SysproInvoice"];
             this.relationFK_OrderInvoice_SysproInvoiceOrder = this.Relations["FK_OrderInvoice_SysproInvoiceOrder"];
+            this.relationFK_SysproInvoiceOrder_SysproInvoice = this.Relations["FK_SysproInvoiceOrder_SysproInvoice"];
             this.relationCustomer_OrderInvoice = this.Relations["Customer_OrderInvoice"];
             this.relationOrderInvoice_OrderFees = this.Relations["OrderInvoice_OrderFees"];
             this.relationOrderInvoice_OrderShipment = this.Relations["OrderInvoice_OrderShipment"];
@@ -731,16 +731,16 @@ namespace DWOS.Data.Datasets {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_SysproInvoiceOrder_SysproInvoice", new global::System.Data.DataColumn[] {
-                        this.tableSysproInvoice.SysproInvoiceIdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSysproInvoiceOrder.SysproInvoiceIdColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_OrderInvoice_SysproInvoiceOrder", new global::System.Data.DataColumn[] {
+                        this.tableOrderInvoice.OrderIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSysproInvoiceOrder.OrderIdColumn});
             this.tableSysproInvoiceOrder.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_OrderInvoice_SysproInvoiceOrder", new global::System.Data.DataColumn[] {
-                        this.tableOrderInvoice.OrderIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSysproInvoiceOrder.OrderIdColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_SysproInvoiceOrder_SysproInvoice", new global::System.Data.DataColumn[] {
+                        this.tableSysproInvoice.SysproInvoiceIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSysproInvoiceOrder.SysproInvoiceIdColumn});
             this.tableSysproInvoiceOrder.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -749,14 +749,14 @@ namespace DWOS.Data.Datasets {
                         this.tablePartSummary.PartIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableOrderInvoice.PartIDColumn}, false);
             this.Relations.Add(this.relationFK_Part_Order);
-            this.relationFK_SysproInvoiceOrder_SysproInvoice = new global::System.Data.DataRelation("FK_SysproInvoiceOrder_SysproInvoice", new global::System.Data.DataColumn[] {
-                        this.tableSysproInvoice.SysproInvoiceIdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSysproInvoiceOrder.SysproInvoiceIdColumn}, false);
-            this.Relations.Add(this.relationFK_SysproInvoiceOrder_SysproInvoice);
             this.relationFK_OrderInvoice_SysproInvoiceOrder = new global::System.Data.DataRelation("FK_OrderInvoice_SysproInvoiceOrder", new global::System.Data.DataColumn[] {
                         this.tableOrderInvoice.OrderIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableSysproInvoiceOrder.OrderIdColumn}, false);
             this.Relations.Add(this.relationFK_OrderInvoice_SysproInvoiceOrder);
+            this.relationFK_SysproInvoiceOrder_SysproInvoice = new global::System.Data.DataRelation("FK_SysproInvoiceOrder_SysproInvoice", new global::System.Data.DataColumn[] {
+                        this.tableSysproInvoice.SysproInvoiceIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSysproInvoiceOrder.SysproInvoiceIdColumn}, false);
+            this.Relations.Add(this.relationFK_SysproInvoiceOrder_SysproInvoice);
             this.relationCustomer_OrderInvoice = new global::System.Data.DataRelation("Customer_OrderInvoice", new global::System.Data.DataColumn[] {
                         this.tableOrderInvoiceCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableOrderInvoice.CustomerIDColumn}, false);
@@ -1121,6 +1121,10 @@ namespace DWOS.Data.Datasets {
             
             private global::System.Data.DataColumn columnImportedPrice;
             
+            private global::System.Data.DataColumn columnPartName;
+            
+            private global::System.Data.DataColumn columnPartDesc;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public OrderInvoiceDataTable() {
@@ -1356,6 +1360,22 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn PartNameColumn {
+                get {
+                    return this.columnPartName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn PartDescColumn {
+                get {
+                    return this.columnPartDesc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1415,7 +1435,9 @@ namespace DWOS.Data.Datasets {
                         int CustomerAddressID, 
                         int ShipmentPackageID, 
                         decimal TotalPrice, 
-                        decimal ImportedPrice) {
+                        decimal ImportedPrice, 
+                        string PartName, 
+                        string PartDesc) {
                 OrderInvoiceRow rowOrderInvoiceRow = ((OrderInvoiceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1442,7 +1464,9 @@ namespace DWOS.Data.Datasets {
                         CustomerAddressID,
                         ShipmentPackageID,
                         TotalPrice,
-                        ImportedPrice};
+                        ImportedPrice,
+                        PartName,
+                        PartDesc};
                 if ((parentOrderInvoiceCustomerRowByCustomer_OrderInvoice != null)) {
                     columnValuesArray[1] = parentOrderInvoiceCustomerRowByCustomer_OrderInvoice[0];
                 }
@@ -1503,6 +1527,8 @@ namespace DWOS.Data.Datasets {
                 this.columnShipmentPackageID = base.Columns["ShipmentPackageID"];
                 this.columnTotalPrice = base.Columns["TotalPrice"];
                 this.columnImportedPrice = base.Columns["ImportedPrice"];
+                this.columnPartName = base.Columns["PartName"];
+                this.columnPartDesc = base.Columns["PartDesc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1558,6 +1584,10 @@ namespace DWOS.Data.Datasets {
                 base.Columns.Add(this.columnTotalPrice);
                 this.columnImportedPrice = new global::System.Data.DataColumn("ImportedPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnImportedPrice);
+                this.columnPartName = new global::System.Data.DataColumn("PartName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPartName);
+                this.columnPartDesc = new global::System.Data.DataColumn("PartDesc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPartDesc);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnOrderID}, true));
                 this.columnOrderID.AutoIncrement = true;
@@ -1579,6 +1609,8 @@ namespace DWOS.Data.Datasets {
                 this.columnShippingCarrier.MaxLength = 50;
                 this.columnShipmentPackageID.ReadOnly = true;
                 this.columnTotalPrice.ReadOnly = true;
+                this.columnPartName.MaxLength = 50;
+                this.columnPartDesc.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7995,6 +8027,38 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string PartName {
+                get {
+                    try {
+                        return ((string)(this[this.tableOrderInvoice.PartNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PartName\' in table \'OrderInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOrderInvoice.PartNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string PartDesc {
+                get {
+                    try {
+                        return ((string)(this[this.tableOrderInvoice.PartDescColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PartDesc\' in table \'OrderInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOrderInvoice.PartDescColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PartSummaryRow PartSummaryRow {
                 get {
                     return ((PartSummaryRow)(this.GetParentRow(this.Table.ParentRelations["FK_Part_Order"])));
@@ -8277,6 +8341,30 @@ namespace DWOS.Data.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetImportedPriceNull() {
                 this[this.tableOrderInvoice.ImportedPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsPartNameNull() {
+                return this.IsNull(this.tableOrderInvoice.PartNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetPartNameNull() {
+                this[this.tableOrderInvoice.PartNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsPartDescNull() {
+                return this.IsNull(this.tableOrderInvoice.PartDescColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetPartDescNull() {
+                this[this.tableOrderInvoice.PartDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10919,23 +11007,23 @@ namespace DWOS.Data.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SysproInvoiceRow SysproInvoiceRow {
-                get {
-                    return ((SysproInvoiceRow)(this.GetParentRow(this.Table.ParentRelations["FK_SysproInvoiceOrder_SysproInvoice"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SysproInvoiceOrder_SysproInvoice"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public OrderInvoiceRow OrderInvoiceRow {
                 get {
                     return ((OrderInvoiceRow)(this.GetParentRow(this.Table.ParentRelations["FK_OrderInvoice_SysproInvoiceOrder"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_OrderInvoice_SysproInvoiceOrder"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public SysproInvoiceRow SysproInvoiceRow {
+                get {
+                    return ((SysproInvoiceRow)(this.GetParentRow(this.Table.ParentRelations["FK_SysproInvoiceOrder_SysproInvoice"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SysproInvoiceOrder_SysproInvoice"]);
                 }
             }
             
@@ -12014,6 +12102,8 @@ namespace DWOS.Data.Datasets.OrderInvoiceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("ShipmentPackageID", "ShipmentPackageID");
             tableMapping.ColumnMappings.Add("TotalPrice", "TotalPrice");
             tableMapping.ColumnMappings.Add("ImportedPrice", "ImportedPrice");
+            tableMapping.ColumnMappings.Add("PartName", "PartName");
+            tableMapping.ColumnMappings.Add("PartDesc", "PartDesc");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12030,47 +12120,61 @@ namespace DWOS.Data.Datasets.OrderInvoiceDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [Order].OrderID,\r\n    [Order].CustomerID,\r\n    [Order].OrderDate,\r\n    [Or" +
-                "der].RequiredDate,\r\n    [Order].Status,\r\n    [Order].CompletedDate,\r\n    [Order]" +
-                ".Priority,\r\n    [Order].PurchaseOrder,\r\n    [Order].CreatedBy,\r\n    [Order].Cont" +
-                "ractReviewed,\r\n    [Order].WorkStatus,\r\n    [Order].BasePrice,\r\n    [Order].Pric" +
-                "eUnit,\r\n    Customer.Name AS CustomerName,\r\n    [Order].PartID,\r\n    [Order].Par" +
-                "tQuantity,\r\n    [Order].Weight,\r\n    [Order].Invoice,\r\n    [Order].CustomerWO,\r\n" +
-                "    CustomerShipping.CarrierID AS ShippingCarrier,\r\n    [Order].SalesOrderID,\r\n " +
-                "   [Order].CustomerAddressID,\r\n    ShipmentData.ShipmentPackageID,\r\n    RevenueI" +
-                "nfo.Revenue AS TotalPrice,\r\n    [Order].ImportedPrice\r\nFROM [Order]\r\nINNER JOIN " +
-                "Customer ON [Order].CustomerID = Customer.CustomerID\r\nLEFT OUTER JOIN CustomerSh" +
-                "ipping ON [Order].ShippingMethod = CustomerShipping.CustomerShippingID\r\nLEFT OUT" +
-                "ER JOIN (\r\n    SELECT OrderID,\r\n        MAX(ShipmentPackageID) AS ShipmentPackag" +
-                "eID\r\n    FROM OrderShipment\r\n    GROUP BY OrderID\r\n    ) AS ShipmentData ON [Ord" +
-                "er].OrderID = ShipmentData.OrderID\r\nINNER JOIN (\r\n    SELECT [Order].OrderID,\r\n " +
-                "       ISNULL(FixedFeeTotal.Result, 0) + ISNULL(PercentageFeeTotal.Result, 0) + " +
-                "ISNULL(Subtotal.Val, 0) AS Revenue\r\n    FROM [Order]\r\n    INNER JOIN (\r\n        " +
-                "SELECT [Order].OrderID,\r\n            CASE \r\n                WHEN PriceUnit = \'Ea" +
-                "ch\'\r\n                    THEN ISNULL(BasePrice, 0) * ISNULL(PartQuantity, 0)\r\n  " +
-                "              WHEN PriceUnit = \'EachByWeight\'\r\n                    THEN ISNULL(B" +
-                "asePrice, 0) * ISNULL(Weight, 0)\r\n                ELSE BasePrice\r\n              " +
-                "  END AS Val\r\n        FROM [Order]\r\n        ) AS Subtotal ON Subtotal.OrderID = " +
-                "[Order].OrderID\r\n    LEFT OUTER JOIN (\r\n        SELECT OrderFees.OrderID,\r\n     " +
-                "       SUM(OrderFees.Charge) AS Result\r\n        FROM OrderFees\r\n        INNER JO" +
-                "IN OrderFeeType ON OrderFeeType.OrderFeeTypeID = OrderFees.OrderFeeTypeID\r\n     " +
-                "   WHERE OrderFeeType.FeeType = \'Fixed\'\r\n        GROUP BY OrderFees.OrderID\r\n   " +
-                "     ) AS FixedFeeTotal ON FixedFeeTotal.OrderID = [Order].OrderID\r\n    LEFT OUT" +
-                "ER JOIN (\r\n        SELECT OrderFees.OrderID,\r\n            SUM((OrderFees.Charge " +
-                "/ 100) * Subtotal.Val) AS Result\r\n        FROM OrderFees\r\n        INNER JOIN (\r\n" +
-                "            SELECT [Order].OrderID,\r\n                CASE \r\n                    " +
-                "WHEN PriceUnit = \'Each\'\r\n                        THEN ISNULL(BasePrice, 0) * ISN" +
-                "ULL(PartQuantity, 0)\r\n                    WHEN PriceUnit = \'EachByWeight\'\r\n     " +
-                "                   THEN ISNULL(BasePrice, 0) * ISNULL(Weight, 0)\r\n              " +
-                "      ELSE BasePrice\r\n                    END AS Val\r\n            FROM [Order]\r\n" +
-                "            ) AS Subtotal ON Subtotal.OrderID = OrderFees.OrderID\r\n        INNER" +
-                " JOIN OrderFeeType ON OrderFeeType.OrderFeeTypeID = OrderFees.OrderFeeTypeID\r\n  " +
-                "      WHERE OrderFeeType.FeeType = \'Percentage\'\r\n        GROUP BY OrderFees.Orde" +
-                "rID\r\n        ) AS PercentageFeeTotal ON PercentageFeeTotal.OrderID = [Order].Ord" +
-                "erID\r\n    ) AS RevenueInfo ON [Order].OrderID = RevenueInfo.OrderID\r\nWHERE ([Ord" +
-                "er].Status = N\'Closed\')\r\n    AND (\r\n        [Order].Invoice IS NULL\r\n        OR " +
-                "[Order].Invoice = \'\'\r\n        )\r\nORDER BY CustomerName,\r\n    [Order].SalesOrderI" +
-                "D,\r\n    [Order].OrderID";
+            this._commandCollection[0].CommandText = "SELECT        [Order].OrderID, [Order].CustomerID, [Order].OrderDate, [Order].Req" +
+                "uiredDate, [Order].Status, [Order].CompletedDate, [Order].Priority, [Order].Purc" +
+                "haseOrder, [Order].CreatedBy, [Order].ContractReviewed, [Order].WorkStatus, \r\n  " +
+                "                       [Order].BasePrice, [Order].PriceUnit, Customer.Name AS Cu" +
+                "stomerName, [Order].PartID, [Order].PartQuantity, [Order].Weight, [Order].Invoic" +
+                "e, [Order].CustomerWO, CustomerShipping.CarrierID AS ShippingCarrier, \r\n        " +
+                "                 [Order].SalesOrderID, [Order].CustomerAddressID, ShipmentData.S" +
+                "hipmentPackageID, RevenueInfo.Revenue AS TotalPrice, [Order].ImportedPrice, Part" +
+                ".Name AS PartName, Part.Description AS PartDesc\r\nFROM            [Order] INNER J" +
+                "OIN\r\n                         Customer ON [Order].CustomerID = Customer.Customer" +
+                "ID LEFT OUTER JOIN\r\n                         CustomerShipping ON [Order].Shippin" +
+                "gMethod = CustomerShipping.CustomerShippingID LEFT OUTER JOIN\r\n                 " +
+                "            (SELECT        OrderID, MAX(ShipmentPackageID) AS ShipmentPackageID\r" +
+                "\n                               FROM            OrderShipment\r\n                 " +
+                "              GROUP BY OrderID) AS ShipmentData ON [Order].OrderID = ShipmentDat" +
+                "a.OrderID INNER JOIN\r\n                             (SELECT        Order_3.OrderI" +
+                "D, ISNULL(FixedFeeTotal.Result, 0) + ISNULL(PercentageFeeTotal.Result, 0) + ISNU" +
+                "LL(Subtotal.Val, 0) AS Revenue\r\n                               FROM            [" +
+                "Order] AS Order_3 INNER JOIN\r\n                                                  " +
+                "           (SELECT        OrderID, CASE WHEN PriceUnit = \'Each\' THEN ISNULL(Base" +
+                "Price, 0) * ISNULL(PartQuantity, 0) WHEN PriceUnit = \'EachByWeight\' THEN ISNULL(" +
+                "BasePrice, 0) * ISNULL(Weight, 0) \r\n                                            " +
+                "                                             ELSE BasePrice END AS Val\r\n        " +
+                "                                                       FROM            [Order] A" +
+                "S Order_2) AS Subtotal ON Subtotal.OrderID = Order_3.OrderID LEFT OUTER JOIN\r\n  " +
+                "                                                           (SELECT        OrderF" +
+                "ees.OrderID, SUM(OrderFees.Charge) AS Result\r\n                                  " +
+                "                             FROM            OrderFees INNER JOIN\r\n             " +
+                "                                                                            Orde" +
+                "rFeeType ON OrderFeeType.OrderFeeTypeID = OrderFees.OrderFeeTypeID\r\n            " +
+                "                                                   WHERE        (OrderFeeType.Fe" +
+                "eType = \'Fixed\')\r\n                                                              " +
+                " GROUP BY OrderFees.OrderID) AS FixedFeeTotal ON FixedFeeTotal.OrderID = Order_3" +
+                ".OrderID LEFT OUTER JOIN\r\n                                                      " +
+                "       (SELECT        OrderFees_1.OrderID, SUM(OrderFees_1.Charge / 100 * Subtot" +
+                "al_1.Val) AS Result\r\n                                                           " +
+                "    FROM            OrderFees AS OrderFees_1 INNER JOIN\r\n                       " +
+                "                                                                      (SELECT   " +
+                "     OrderID, CASE WHEN PriceUnit = \'Each\' THEN ISNULL(BasePrice, 0) * ISNULL(Pa" +
+                "rtQuantity, 0) WHEN PriceUnit = \'EachByWeight\' THEN ISNULL(BasePrice, 0) * ISNUL" +
+                "L(Weight, 0) \r\n                                                                 " +
+                "                                                        ELSE BasePrice END AS Va" +
+                "l\r\n                                                                             " +
+                "                  FROM            [Order] AS Order_1) AS Subtotal_1 ON Subtotal_" +
+                "1.OrderID = OrderFees_1.OrderID INNER JOIN\r\n                                    " +
+                "                                                     OrderFeeType AS OrderFeeTyp" +
+                "e_1 ON OrderFeeType_1.OrderFeeTypeID = OrderFees_1.OrderFeeTypeID\r\n             " +
+                "                                                  WHERE        (OrderFeeType_1.F" +
+                "eeType = \'Percentage\')\r\n                                                        " +
+                "       GROUP BY OrderFees_1.OrderID) AS PercentageFeeTotal ON PercentageFeeTotal" +
+                ".OrderID = Order_3.OrderID) AS RevenueInfo ON [Order].OrderID = RevenueInfo.Orde" +
+                "rID LEFT OUTER JOIN\r\n                         Part ON [Order].PartID = Part.Part" +
+                "ID\r\nWHERE        ([Order].Status = N\'Closed\') AND ([Order].Invoice IS NULL OR\r\n " +
+                "                        [Order].Invoice = \'\')\r\nORDER BY CustomerName, [Order].Sa" +
+                "lesOrderID, [Order].OrderID";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;

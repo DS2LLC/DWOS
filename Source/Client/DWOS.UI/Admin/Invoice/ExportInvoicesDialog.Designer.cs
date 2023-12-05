@@ -149,7 +149,7 @@
             this.grdExport.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdExport.Location = new System.Drawing.Point(0, 0);
             this.grdExport.Name = "grdExport";
-            this.grdExport.Size = new System.Drawing.Size(1294, 350);
+            this.grdExport.Size = new System.Drawing.Size(1296, 369);
             this.grdExport.TabIndex = 0;
             this.grdExport.InitializeLayout += new Infragistics.Win.UltraWinGrid.InitializeLayoutEventHandler(this.grdExport_InitializeLayout);
             this.grdExport.InitializeRow += new Infragistics.Win.UltraWinGrid.InitializeRowEventHandler(this.grdExport_InitializeRow);
@@ -183,9 +183,9 @@
             this.ExportToQuickbooks_Fill_Panel.ClientArea.Controls.Add(this.grdExport);
             this.ExportToQuickbooks_Fill_Panel.Cursor = System.Windows.Forms.Cursors.Default;
             this.ExportToQuickbooks_Fill_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ExportToQuickbooks_Fill_Panel.Location = new System.Drawing.Point(9, 170);
+            this.ExportToQuickbooks_Fill_Panel.Location = new System.Drawing.Point(8, 151);
             this.ExportToQuickbooks_Fill_Panel.Name = "ExportToQuickbooks_Fill_Panel";
-            this.ExportToQuickbooks_Fill_Panel.Size = new System.Drawing.Size(1294, 350);
+            this.ExportToQuickbooks_Fill_Panel.Size = new System.Drawing.Size(1296, 369);
             this.ExportToQuickbooks_Fill_Panel.TabIndex = 14;
             // 
             // _ExportToQuickbooks_Toolbars_Dock_Area_Left
@@ -194,10 +194,10 @@
             this._ExportToQuickbooks_Toolbars_Dock_Area_Left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
             this._ExportToQuickbooks_Toolbars_Dock_Area_Left.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Left;
             this._ExportToQuickbooks_Toolbars_Dock_Area_Left.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Left.InitialResizeAreaExtent = 9;
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 170);
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Left.InitialResizeAreaExtent = 8;
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 151);
             this._ExportToQuickbooks_Toolbars_Dock_Area_Left.Name = "_ExportToQuickbooks_Toolbars_Dock_Area_Left";
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(9, 350);
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(8, 369);
             this._ExportToQuickbooks_Toolbars_Dock_Area_Left.ToolbarsManager = this.ultraToolbarsManager1;
             // 
             // ultraToolbarsManager1
@@ -256,10 +256,10 @@
             this._ExportToQuickbooks_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
             this._ExportToQuickbooks_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
             this._ExportToQuickbooks_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 9;
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(1303, 170);
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 8;
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(1304, 151);
             this._ExportToQuickbooks_Toolbars_Dock_Area_Right.Name = "_ExportToQuickbooks_Toolbars_Dock_Area_Right";
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(9, 350);
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(8, 369);
             this._ExportToQuickbooks_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
             // 
             // _ExportToQuickbooks_Toolbars_Dock_Area_Top
@@ -270,7 +270,7 @@
             this._ExportToQuickbooks_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
             this._ExportToQuickbooks_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
             this._ExportToQuickbooks_Toolbars_Dock_Area_Top.Name = "_ExportToQuickbooks_Toolbars_Dock_Area_Top";
-            this._ExportToQuickbooks_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(1312, 170);
+            this._ExportToQuickbooks_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(1312, 151);
             this._ExportToQuickbooks_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
             // 
             // _ExportToQuickbooks_Toolbars_Dock_Area_Bottom
@@ -295,7 +295,7 @@
             // 
             // ExportInvoicesDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 543);
             this.Controls.Add(this.ExportToQuickbooks_Fill_Panel);

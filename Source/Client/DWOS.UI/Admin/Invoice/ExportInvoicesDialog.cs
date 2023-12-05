@@ -678,18 +678,18 @@ namespace DWOS.UI.Admin
                 grdExport.DisplayLayout.Bands[0].Columns["TotalPrice"].Hidden = false;
                 grdExport.DisplayLayout.Bands[0].Columns["TotalPrice"].Header.Caption = "Total Price";
 
-                grdExport.DisplayLayout.Bands[0].Columns["Processes"].Header.VisiblePosition = 14;
-                grdExport.DisplayLayout.Bands[0].Columns["Processes"].CellActivation = Activation.NoEdit;
-                grdExport.DisplayLayout.Bands[0].Columns["Processes"].Hidden = false;
-                grdExport.DisplayLayout.Bands[0].Columns["Processes"].Header.Caption = "Processes";
+                //grdExport.DisplayLayout.Bands[0].Columns["Processes"].Header.VisiblePosition = 14;
+                //grdExport.DisplayLayout.Bands[0].Columns["Processes"].CellActivation = Activation.NoEdit;
+                //grdExport.DisplayLayout.Bands[0].Columns["Processes"].Hidden = false;
+                //grdExport.DisplayLayout.Bands[0].Columns["Processes"].Header.Caption = "Processes";
 
-                grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].Header.VisiblePosition = 14;
-                grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].CellActivation = Activation.NoEdit;
-                grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].Hidden = false;
-                grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].Header.Caption = "Process Aliases";
+                //grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].Header.VisiblePosition = 14;
+                //grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].CellActivation = Activation.NoEdit;
+                //grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].Hidden = false;
+                //grdExport.DisplayLayout.Bands[0].Columns["ProcessAliases"].Header.Caption = "Process Aliases";
 
-                grdExport.DisplayLayout.Bands[0].Columns["Issues"].Header.VisiblePosition = 15;
-                grdExport.DisplayLayout.Bands[0].Columns["Issues"].CellActivation = Activation.NoEdit;
+                //grdExport.DisplayLayout.Bands[0].Columns["Issues"].Header.VisiblePosition = 15;
+                //grdExport.DisplayLayout.Bands[0].Columns["Issues"].CellActivation = Activation.NoEdit;
 
                 grdExport.DisplayLayout.Bands[0].Columns["BasePrice"].CellAppearance.TextHAlign = Infragistics.Win.HAlign.Right;
                 grdExport.DisplayLayout.Bands[0].Columns["BasePrice"].Format = currencyFormat;

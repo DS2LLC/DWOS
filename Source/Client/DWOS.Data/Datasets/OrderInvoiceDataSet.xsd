@@ -12,91 +12,37 @@
               <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Fill" GenerateShortCommands="false" GeneratorSourceName="Fill" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT [Order].OrderID,
-    [Order].CustomerID,
-    [Order].OrderDate,
-    [Order].RequiredDate,
-    [Order].Status,
-    [Order].CompletedDate,
-    [Order].Priority,
-    [Order].PurchaseOrder,
-    [Order].CreatedBy,
-    [Order].ContractReviewed,
-    [Order].WorkStatus,
-    [Order].BasePrice,
-    [Order].PriceUnit,
-    Customer.Name AS CustomerName,
-    [Order].PartID,
-    [Order].PartQuantity,
-    [Order].Weight,
-    [Order].Invoice,
-    [Order].CustomerWO,
-    CustomerShipping.CarrierID AS ShippingCarrier,
-    [Order].SalesOrderID,
-    [Order].CustomerAddressID,
-    ShipmentData.ShipmentPackageID,
-    RevenueInfo.Revenue AS TotalPrice,
-    [Order].ImportedPrice
-FROM [Order]
-INNER JOIN Customer ON [Order].CustomerID = Customer.CustomerID
-LEFT OUTER JOIN CustomerShipping ON [Order].ShippingMethod = CustomerShipping.CustomerShippingID
-LEFT OUTER JOIN (
-    SELECT OrderID,
-        MAX(ShipmentPackageID) AS ShipmentPackageID
-    FROM OrderShipment
-    GROUP BY OrderID
-    ) AS ShipmentData ON [Order].OrderID = ShipmentData.OrderID
-INNER JOIN (
-    SELECT [Order].OrderID,
-        ISNULL(FixedFeeTotal.Result, 0) + ISNULL(PercentageFeeTotal.Result, 0) + ISNULL(Subtotal.Val, 0) AS Revenue
-    FROM [Order]
-    INNER JOIN (
-        SELECT [Order].OrderID,
-            CASE 
-                WHEN PriceUnit = 'Each'
-                    THEN ISNULL(BasePrice, 0) * ISNULL(PartQuantity, 0)
-                WHEN PriceUnit = 'EachByWeight'
-                    THEN ISNULL(BasePrice, 0) * ISNULL(Weight, 0)
-                ELSE BasePrice
-                END AS Val
-        FROM [Order]
-        ) AS Subtotal ON Subtotal.OrderID = [Order].OrderID
-    LEFT OUTER JOIN (
-        SELECT OrderFees.OrderID,
-            SUM(OrderFees.Charge) AS Result
-        FROM OrderFees
-        INNER JOIN OrderFeeType ON OrderFeeType.OrderFeeTypeID = OrderFees.OrderFeeTypeID
-        WHERE OrderFeeType.FeeType = 'Fixed'
-        GROUP BY OrderFees.OrderID
-        ) AS FixedFeeTotal ON FixedFeeTotal.OrderID = [Order].OrderID
-    LEFT OUTER JOIN (
-        SELECT OrderFees.OrderID,
-            SUM((OrderFees.Charge / 100) * Subtotal.Val) AS Result
-        FROM OrderFees
-        INNER JOIN (
-            SELECT [Order].OrderID,
-                CASE 
-                    WHEN PriceUnit = 'Each'
-                        THEN ISNULL(BasePrice, 0) * ISNULL(PartQuantity, 0)
-                    WHEN PriceUnit = 'EachByWeight'
-                        THEN ISNULL(BasePrice, 0) * ISNULL(Weight, 0)
-                    ELSE BasePrice
-                    END AS Val
-            FROM [Order]
-            ) AS Subtotal ON Subtotal.OrderID = OrderFees.OrderID
-        INNER JOIN OrderFeeType ON OrderFeeType.OrderFeeTypeID = OrderFees.OrderFeeTypeID
-        WHERE OrderFeeType.FeeType = 'Percentage'
-        GROUP BY OrderFees.OrderID
-        ) AS PercentageFeeTotal ON PercentageFeeTotal.OrderID = [Order].OrderID
-    ) AS RevenueInfo ON [Order].OrderID = RevenueInfo.OrderID
-WHERE ([Order].Status = N'Closed')
-    AND (
-        [Order].Invoice IS NULL
-        OR [Order].Invoice = ''
-        )
-ORDER BY CustomerName,
-    [Order].SalesOrderID,
-    [Order].OrderID</CommandText>
+                    <CommandText>SELECT        [Order].OrderID, [Order].CustomerID, [Order].OrderDate, [Order].RequiredDate, [Order].Status, [Order].CompletedDate, [Order].Priority, [Order].PurchaseOrder, [Order].CreatedBy, [Order].ContractReviewed, [Order].WorkStatus, 
+                         [Order].BasePrice, [Order].PriceUnit, Customer.Name AS CustomerName, [Order].PartID, [Order].PartQuantity, [Order].Weight, [Order].Invoice, [Order].CustomerWO, CustomerShipping.CarrierID AS ShippingCarrier, 
+                         [Order].SalesOrderID, [Order].CustomerAddressID, ShipmentData.ShipmentPackageID, RevenueInfo.Revenue AS TotalPrice, [Order].ImportedPrice, Part.Name AS PartName, Part.Description AS PartDesc
+FROM            [Order] INNER JOIN
+                         Customer ON [Order].CustomerID = Customer.CustomerID LEFT OUTER JOIN
+                         CustomerShipping ON [Order].ShippingMethod = CustomerShipping.CustomerShippingID LEFT OUTER JOIN
+                             (SELECT        OrderID, MAX(ShipmentPackageID) AS ShipmentPackageID
+                               FROM            OrderShipment
+                               GROUP BY OrderID) AS ShipmentData ON [Order].OrderID = ShipmentData.OrderID INNER JOIN
+                             (SELECT        Order_3.OrderID, ISNULL(FixedFeeTotal.Result, 0) + ISNULL(PercentageFeeTotal.Result, 0) + ISNULL(Subtotal.Val, 0) AS Revenue
+                               FROM            [Order] AS Order_3 INNER JOIN
+                                                             (SELECT        OrderID, CASE WHEN PriceUnit = 'Each' THEN ISNULL(BasePrice, 0) * ISNULL(PartQuantity, 0) WHEN PriceUnit = 'EachByWeight' THEN ISNULL(BasePrice, 0) * ISNULL(Weight, 0) 
+                                                                                         ELSE BasePrice END AS Val
+                                                               FROM            [Order] AS Order_2) AS Subtotal ON Subtotal.OrderID = Order_3.OrderID LEFT OUTER JOIN
+                                                             (SELECT        OrderFees.OrderID, SUM(OrderFees.Charge) AS Result
+                                                               FROM            OrderFees INNER JOIN
+                                                                                         OrderFeeType ON OrderFeeType.OrderFeeTypeID = OrderFees.OrderFeeTypeID
+                                                               WHERE        (OrderFeeType.FeeType = 'Fixed')
+                                                               GROUP BY OrderFees.OrderID) AS FixedFeeTotal ON FixedFeeTotal.OrderID = Order_3.OrderID LEFT OUTER JOIN
+                                                             (SELECT        OrderFees_1.OrderID, SUM(OrderFees_1.Charge / 100 * Subtotal_1.Val) AS Result
+                                                               FROM            OrderFees AS OrderFees_1 INNER JOIN
+                                                                                             (SELECT        OrderID, CASE WHEN PriceUnit = 'Each' THEN ISNULL(BasePrice, 0) * ISNULL(PartQuantity, 0) WHEN PriceUnit = 'EachByWeight' THEN ISNULL(BasePrice, 0) * ISNULL(Weight, 0) 
+                                                                                                                         ELSE BasePrice END AS Val
+                                                                                               FROM            [Order] AS Order_1) AS Subtotal_1 ON Subtotal_1.OrderID = OrderFees_1.OrderID INNER JOIN
+                                                                                         OrderFeeType AS OrderFeeType_1 ON OrderFeeType_1.OrderFeeTypeID = OrderFees_1.OrderFeeTypeID
+                                                               WHERE        (OrderFeeType_1.FeeType = 'Percentage')
+                                                               GROUP BY OrderFees_1.OrderID) AS PercentageFeeTotal ON PercentageFeeTotal.OrderID = Order_3.OrderID) AS RevenueInfo ON [Order].OrderID = RevenueInfo.OrderID LEFT OUTER JOIN
+                         Part ON [Order].PartID = Part.PartID
+WHERE        ([Order].Status = N'Closed') AND ([Order].Invoice IS NULL OR
+                         [Order].Invoice = '')
+ORDER BY CustomerName, [Order].SalesOrderID, [Order].OrderID</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -128,6 +74,8 @@ ORDER BY CustomerName,
               <Mapping SourceColumn="ShipmentPackageID" DataSetColumn="ShipmentPackageID" />
               <Mapping SourceColumn="TotalPrice" DataSetColumn="TotalPrice" />
               <Mapping SourceColumn="ImportedPrice" DataSetColumn="ImportedPrice" />
+              <Mapping SourceColumn="PartName" DataSetColumn="PartName" />
+              <Mapping SourceColumn="PartDesc" DataSetColumn="PartDesc" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="DWOSDataConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="AddInvoice" Modifier="Public" Name="AddInvoice" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="AddInvoice">
@@ -1329,6 +1277,20 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
               <xs:element name="ShipmentPackageID" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnShipmentPackageID" msprop:Generator_ColumnPropNameInRow="ShipmentPackageID" msprop:Generator_ColumnPropNameInTable="ShipmentPackageIDColumn" msprop:Generator_UserColumnName="ShipmentPackageID" type="xs:int" minOccurs="0" />
               <xs:element name="TotalPrice" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalPrice" msprop:Generator_ColumnPropNameInRow="TotalPrice" msprop:Generator_ColumnPropNameInTable="TotalPriceColumn" msprop:Generator_UserColumnName="TotalPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="ImportedPrice" msprop:Generator_ColumnVarNameInTable="columnImportedPrice" msprop:Generator_ColumnPropNameInRow="ImportedPrice" msprop:Generator_ColumnPropNameInTable="ImportedPriceColumn" msprop:Generator_UserColumnName="ImportedPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PartName" msprop:Generator_ColumnVarNameInTable="columnPartName" msprop:Generator_ColumnPropNameInRow="PartName" msprop:Generator_ColumnPropNameInTable="PartNameColumn" msprop:Generator_UserColumnName="PartName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PartDesc" msprop:Generator_ColumnVarNameInTable="columnPartDesc" msprop:Generator_ColumnPropNameInRow="PartDesc" msprop:Generator_ColumnPropNameInTable="PartDescColumn" msprop:Generator_UserColumnName="PartDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1512,7 +1474,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InvoiceCompare" msprop:Generator_TableClassName="InvoiceCompareDataTable" msprop:Generator_TableVarName="tableInvoiceCompare" msprop:Generator_RowChangedName="InvoiceCompareRowChanged" msprop:Generator_TablePropName="InvoiceCompare" msprop:Generator_RowDeletingName="InvoiceCompareRowDeleting" msprop:Generator_RowChangingName="InvoiceCompareRowChanging" msprop:Generator_RowEvHandlerName="InvoiceCompareRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceCompareRowDeleted" msprop:Generator_RowClassName="InvoiceCompareRow" msprop:Generator_UserTableName="InvoiceCompare" msprop:Generator_RowEvArgName="InvoiceCompareRowChangeEvent">
+        <xs:element name="InvoiceCompare" msprop:Generator_TableClassName="InvoiceCompareDataTable" msprop:Generator_TableVarName="tableInvoiceCompare" msprop:Generator_TablePropName="InvoiceCompare" msprop:Generator_RowDeletingName="InvoiceCompareRowDeleting" msprop:Generator_RowChangingName="InvoiceCompareRowChanging" msprop:Generator_RowEvHandlerName="InvoiceCompareRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceCompareRowDeleted" msprop:Generator_UserTableName="InvoiceCompare" msprop:Generator_RowChangedName="InvoiceCompareRowChanged" msprop:Generator_RowEvArgName="InvoiceCompareRowChangeEvent" msprop:Generator_RowClassName="InvoiceCompareRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msdata:Caption="WO" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
@@ -1570,7 +1532,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderFeeType" msprop:Generator_TableClassName="OrderFeeTypeDataTable" msprop:Generator_TableVarName="tableOrderFeeType" msprop:Generator_TablePropName="OrderFeeType" msprop:Generator_RowDeletingName="OrderFeeTypeRowDeleting" msprop:Generator_RowChangingName="OrderFeeTypeRowChanging" msprop:Generator_RowEvHandlerName="OrderFeeTypeRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderFeeTypeRowDeleted" msprop:Generator_UserTableName="OrderFeeType" msprop:Generator_RowChangedName="OrderFeeTypeRowChanged" msprop:Generator_RowEvArgName="OrderFeeTypeRowChangeEvent" msprop:Generator_RowClassName="OrderFeeTypeRow">
+        <xs:element name="OrderFeeType" msprop:Generator_TableClassName="OrderFeeTypeDataTable" msprop:Generator_TableVarName="tableOrderFeeType" msprop:Generator_RowChangedName="OrderFeeTypeRowChanged" msprop:Generator_TablePropName="OrderFeeType" msprop:Generator_RowDeletingName="OrderFeeTypeRowDeleting" msprop:Generator_RowChangingName="OrderFeeTypeRowChanging" msprop:Generator_RowEvHandlerName="OrderFeeTypeRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderFeeTypeRowDeleted" msprop:Generator_RowClassName="OrderFeeTypeRow" msprop:Generator_UserTableName="OrderFeeType" msprop:Generator_RowEvArgName="OrderFeeTypeRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderFeeTypeID" msprop:Generator_ColumnVarNameInTable="columnOrderFeeTypeID" msprop:Generator_ColumnPropNameInRow="OrderFeeTypeID" msprop:Generator_ColumnPropNameInTable="OrderFeeTypeIDColumn" msprop:Generator_UserColumnName="OrderFeeTypeID">
@@ -1598,7 +1560,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderInvoiceCustomerAddress" msprop:Generator_TableClassName="OrderInvoiceCustomerAddressDataTable" msprop:Generator_TableVarName="tableOrderInvoiceCustomerAddress" msprop:Generator_RowChangedName="OrderInvoiceCustomerAddressRowChanged" msprop:Generator_TablePropName="OrderInvoiceCustomerAddress" msprop:Generator_RowDeletingName="OrderInvoiceCustomerAddressRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceCustomerAddressRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceCustomerAddressRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceCustomerAddressRowDeleted" msprop:Generator_RowClassName="OrderInvoiceCustomerAddressRow" msprop:Generator_UserTableName="OrderInvoiceCustomerAddress" msprop:Generator_RowEvArgName="OrderInvoiceCustomerAddressRowChangeEvent">
+        <xs:element name="OrderInvoiceCustomerAddress" msprop:Generator_TableClassName="OrderInvoiceCustomerAddressDataTable" msprop:Generator_TableVarName="tableOrderInvoiceCustomerAddress" msprop:Generator_TablePropName="OrderInvoiceCustomerAddress" msprop:Generator_RowDeletingName="OrderInvoiceCustomerAddressRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceCustomerAddressRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceCustomerAddressRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceCustomerAddressRowDeleted" msprop:Generator_UserTableName="OrderInvoiceCustomerAddress" msprop:Generator_RowChangedName="OrderInvoiceCustomerAddressRowChanged" msprop:Generator_RowEvArgName="OrderInvoiceCustomerAddressRowChangeEvent" msprop:Generator_RowClassName="OrderInvoiceCustomerAddressRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CustomerAddressID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnCustomerAddressID" msprop:Generator_ColumnPropNameInRow="CustomerAddressID" msprop:Generator_ColumnPropNameInTable="CustomerAddressIDColumn" msprop:Generator_UserColumnName="CustomerAddressID" type="xs:int" />
@@ -1649,7 +1611,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderProcessingDetail" msprop:Generator_TableClassName="OrderProcessingDetailDataTable" msprop:Generator_TableVarName="tableOrderProcessingDetail" msprop:Generator_TablePropName="OrderProcessingDetail" msprop:Generator_RowDeletingName="OrderProcessingDetailRowDeleting" msprop:Generator_RowChangingName="OrderProcessingDetailRowChanging" msprop:Generator_RowEvHandlerName="OrderProcessingDetailRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderProcessingDetailRowDeleted" msprop:Generator_UserTableName="OrderProcessingDetail" msprop:Generator_RowChangedName="OrderProcessingDetailRowChanged" msprop:Generator_RowEvArgName="OrderProcessingDetailRowChangeEvent" msprop:Generator_RowClassName="OrderProcessingDetailRow">
+        <xs:element name="OrderProcessingDetail" msprop:Generator_TableClassName="OrderProcessingDetailDataTable" msprop:Generator_TableVarName="tableOrderProcessingDetail" msprop:Generator_RowChangedName="OrderProcessingDetailRowChanged" msprop:Generator_TablePropName="OrderProcessingDetail" msprop:Generator_RowDeletingName="OrderProcessingDetailRowDeleting" msprop:Generator_RowChangingName="OrderProcessingDetailRowChanging" msprop:Generator_RowEvHandlerName="OrderProcessingDetailRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderProcessingDetailRowDeleted" msprop:Generator_RowClassName="OrderProcessingDetailRow" msprop:Generator_UserTableName="OrderProcessingDetail" msprop:Generator_RowEvArgName="OrderProcessingDetailRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
@@ -1680,7 +1642,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="d_Department" msprop:Generator_TableClassName="d_DepartmentDataTable" msprop:Generator_TableVarName="tabled_Department" msprop:Generator_TablePropName="d_Department" msprop:Generator_RowDeletingName="d_DepartmentRowDeleting" msprop:Generator_RowChangingName="d_DepartmentRowChanging" msprop:Generator_RowEvHandlerName="d_DepartmentRowChangeEventHandler" msprop:Generator_RowDeletedName="d_DepartmentRowDeleted" msprop:Generator_UserTableName="d_Department" msprop:Generator_RowChangedName="d_DepartmentRowChanged" msprop:Generator_RowEvArgName="d_DepartmentRowChangeEvent" msprop:Generator_RowClassName="d_DepartmentRow">
+        <xs:element name="d_Department" msprop:Generator_TableClassName="d_DepartmentDataTable" msprop:Generator_TableVarName="tabled_Department" msprop:Generator_RowChangedName="d_DepartmentRowChanged" msprop:Generator_TablePropName="d_Department" msprop:Generator_RowDeletingName="d_DepartmentRowDeleting" msprop:Generator_RowChangingName="d_DepartmentRowChanging" msprop:Generator_RowEvHandlerName="d_DepartmentRowChangeEventHandler" msprop:Generator_RowDeletedName="d_DepartmentRowDeleted" msprop:Generator_RowClassName="d_DepartmentRow" msprop:Generator_UserTableName="d_Department" msprop:Generator_RowEvArgName="d_DepartmentRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="DepartmentID" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_UserColumnName="DepartmentID">
@@ -1708,7 +1670,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderCustomFieldsSummary" msprop:Generator_TableClassName="OrderCustomFieldsSummaryDataTable" msprop:Generator_TableVarName="tableOrderCustomFieldsSummary" msprop:Generator_TablePropName="OrderCustomFieldsSummary" msprop:Generator_RowDeletingName="OrderCustomFieldsSummaryRowDeleting" msprop:Generator_RowChangingName="OrderCustomFieldsSummaryRowChanging" msprop:Generator_RowEvHandlerName="OrderCustomFieldsSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderCustomFieldsSummaryRowDeleted" msprop:Generator_UserTableName="OrderCustomFieldsSummary" msprop:Generator_RowChangedName="OrderCustomFieldsSummaryRowChanged" msprop:Generator_RowEvArgName="OrderCustomFieldsSummaryRowChangeEvent" msprop:Generator_RowClassName="OrderCustomFieldsSummaryRow">
+        <xs:element name="OrderCustomFieldsSummary" msprop:Generator_TableClassName="OrderCustomFieldsSummaryDataTable" msprop:Generator_TableVarName="tableOrderCustomFieldsSummary" msprop:Generator_RowChangedName="OrderCustomFieldsSummaryRowChanged" msprop:Generator_TablePropName="OrderCustomFieldsSummary" msprop:Generator_RowDeletingName="OrderCustomFieldsSummaryRowDeleting" msprop:Generator_RowChangingName="OrderCustomFieldsSummaryRowChanging" msprop:Generator_RowEvHandlerName="OrderCustomFieldsSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderCustomFieldsSummaryRowDeleted" msprop:Generator_RowClassName="OrderCustomFieldsSummaryRow" msprop:Generator_UserTableName="OrderCustomFieldsSummary" msprop:Generator_RowEvArgName="OrderCustomFieldsSummaryRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderID" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
@@ -1729,7 +1691,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderInvoiceSalesOrder" msprop:Generator_TableClassName="OrderInvoiceSalesOrderDataTable" msprop:Generator_TableVarName="tableOrderInvoiceSalesOrder" msprop:Generator_RowChangedName="OrderInvoiceSalesOrderRowChanged" msprop:Generator_TablePropName="OrderInvoiceSalesOrder" msprop:Generator_RowDeletingName="OrderInvoiceSalesOrderRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceSalesOrderRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceSalesOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceSalesOrderRowDeleted" msprop:Generator_RowClassName="OrderInvoiceSalesOrderRow" msprop:Generator_UserTableName="OrderInvoiceSalesOrder" msprop:Generator_RowEvArgName="OrderInvoiceSalesOrderRowChangeEvent">
+        <xs:element name="OrderInvoiceSalesOrder" msprop:Generator_TableClassName="OrderInvoiceSalesOrderDataTable" msprop:Generator_TableVarName="tableOrderInvoiceSalesOrder" msprop:Generator_TablePropName="OrderInvoiceSalesOrder" msprop:Generator_RowDeletingName="OrderInvoiceSalesOrderRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceSalesOrderRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceSalesOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceSalesOrderRowDeleted" msprop:Generator_UserTableName="OrderInvoiceSalesOrder" msprop:Generator_RowChangedName="OrderInvoiceSalesOrderRowChanged" msprop:Generator_RowEvArgName="OrderInvoiceSalesOrderRowChangeEvent" msprop:Generator_RowClassName="OrderInvoiceSalesOrderRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SalesOrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSalesOrderID" msprop:Generator_ColumnPropNameInRow="SalesOrderID" msprop:Generator_ColumnPropNameInTable="SalesOrderIDColumn" msprop:Generator_UserColumnName="SalesOrderID" type="xs:int" />
@@ -1769,7 +1731,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderInvoiceSerialNumber" msprop:Generator_TableClassName="OrderInvoiceSerialNumberDataTable" msprop:Generator_TableVarName="tableOrderInvoiceSerialNumber" msprop:Generator_TablePropName="OrderInvoiceSerialNumber" msprop:Generator_RowDeletingName="OrderInvoiceSerialNumberRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceSerialNumberRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceSerialNumberRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceSerialNumberRowDeleted" msprop:Generator_UserTableName="OrderInvoiceSerialNumber" msprop:Generator_RowChangedName="OrderInvoiceSerialNumberRowChanged" msprop:Generator_RowEvArgName="OrderInvoiceSerialNumberRowChangeEvent" msprop:Generator_RowClassName="OrderInvoiceSerialNumberRow">
+        <xs:element name="OrderInvoiceSerialNumber" msprop:Generator_TableClassName="OrderInvoiceSerialNumberDataTable" msprop:Generator_TableVarName="tableOrderInvoiceSerialNumber" msprop:Generator_RowChangedName="OrderInvoiceSerialNumberRowChanged" msprop:Generator_TablePropName="OrderInvoiceSerialNumber" msprop:Generator_RowDeletingName="OrderInvoiceSerialNumberRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceSerialNumberRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceSerialNumberRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceSerialNumberRowDeleted" msprop:Generator_RowClassName="OrderInvoiceSerialNumberRow" msprop:Generator_UserTableName="OrderInvoiceSerialNumber" msprop:Generator_RowEvArgName="OrderInvoiceSerialNumberRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderSerialNumberID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderSerialNumberID" msprop:Generator_ColumnPropNameInRow="OrderSerialNumberID" msprop:Generator_ColumnPropNameInTable="OrderSerialNumberIDColumn" msprop:Generator_UserColumnName="OrderSerialNumberID" type="xs:int" />
@@ -1786,7 +1748,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SysproInvoice" msprop:Generator_TableClassName="SysproInvoiceDataTable" msprop:Generator_TableVarName="tableSysproInvoice" msprop:Generator_TablePropName="SysproInvoice" msprop:Generator_RowDeletingName="SysproInvoiceRowDeleting" msprop:Generator_RowChangingName="SysproInvoiceRowChanging" msprop:Generator_RowEvHandlerName="SysproInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="SysproInvoiceRowDeleted" msprop:Generator_UserTableName="SysproInvoice" msprop:Generator_RowChangedName="SysproInvoiceRowChanged" msprop:Generator_RowEvArgName="SysproInvoiceRowChangeEvent" msprop:Generator_RowClassName="SysproInvoiceRow">
+        <xs:element name="SysproInvoice" msprop:Generator_TableClassName="SysproInvoiceDataTable" msprop:Generator_TableVarName="tableSysproInvoice" msprop:Generator_RowChangedName="SysproInvoiceRowChanged" msprop:Generator_TablePropName="SysproInvoice" msprop:Generator_RowDeletingName="SysproInvoiceRowDeleting" msprop:Generator_RowChangingName="SysproInvoiceRowChanging" msprop:Generator_RowEvHandlerName="SysproInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="SysproInvoiceRowDeleted" msprop:Generator_RowClassName="SysproInvoiceRow" msprop:Generator_UserTableName="SysproInvoice" msprop:Generator_RowEvArgName="SysproInvoiceRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SysproInvoiceId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSysproInvoiceId" msprop:Generator_ColumnPropNameInRow="SysproInvoiceId" msprop:Generator_ColumnPropNameInTable="SysproInvoiceIdColumn" msprop:Generator_UserColumnName="SysproInvoiceId" type="xs:int" />
@@ -1822,7 +1784,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SysproInvoiceOrder" msprop:Generator_TableClassName="SysproInvoiceOrderDataTable" msprop:Generator_TableVarName="tableSysproInvoiceOrder" msprop:Generator_TablePropName="SysproInvoiceOrder" msprop:Generator_RowDeletingName="SysproInvoiceOrderRowDeleting" msprop:Generator_RowChangingName="SysproInvoiceOrderRowChanging" msprop:Generator_RowEvHandlerName="SysproInvoiceOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="SysproInvoiceOrderRowDeleted" msprop:Generator_UserTableName="SysproInvoiceOrder" msprop:Generator_RowChangedName="SysproInvoiceOrderRowChanged" msprop:Generator_RowEvArgName="SysproInvoiceOrderRowChangeEvent" msprop:Generator_RowClassName="SysproInvoiceOrderRow">
+        <xs:element name="SysproInvoiceOrder" msprop:Generator_TableClassName="SysproInvoiceOrderDataTable" msprop:Generator_TableVarName="tableSysproInvoiceOrder" msprop:Generator_RowChangedName="SysproInvoiceOrderRowChanged" msprop:Generator_TablePropName="SysproInvoiceOrder" msprop:Generator_RowDeletingName="SysproInvoiceOrderRowDeleting" msprop:Generator_RowChangingName="SysproInvoiceOrderRowChanging" msprop:Generator_RowEvHandlerName="SysproInvoiceOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="SysproInvoiceOrderRowDeleted" msprop:Generator_RowClassName="SysproInvoiceOrderRow" msprop:Generator_UserTableName="SysproInvoiceOrder" msprop:Generator_RowEvArgName="SysproInvoiceOrderRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SysproInvoiceId" msprop:Generator_ColumnVarNameInTable="columnSysproInvoiceId" msprop:Generator_ColumnPropNameInRow="SysproInvoiceId" msprop:Generator_ColumnPropNameInTable="SysproInvoiceIdColumn" msprop:Generator_UserColumnName="SysproInvoiceId" type="xs:int" />
@@ -1830,7 +1792,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderInvoiceProductClass" msprop:Generator_TableClassName="OrderInvoiceProductClassDataTable" msprop:Generator_TableVarName="tableOrderInvoiceProductClass" msprop:Generator_TablePropName="OrderInvoiceProductClass" msprop:Generator_RowDeletingName="OrderInvoiceProductClassRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceProductClassRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceProductClassRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceProductClassRowDeleted" msprop:Generator_UserTableName="OrderInvoiceProductClass" msprop:Generator_RowChangedName="OrderInvoiceProductClassRowChanged" msprop:Generator_RowEvArgName="OrderInvoiceProductClassRowChangeEvent" msprop:Generator_RowClassName="OrderInvoiceProductClassRow">
+        <xs:element name="OrderInvoiceProductClass" msprop:Generator_TableClassName="OrderInvoiceProductClassDataTable" msprop:Generator_TableVarName="tableOrderInvoiceProductClass" msprop:Generator_RowChangedName="OrderInvoiceProductClassRowChanged" msprop:Generator_TablePropName="OrderInvoiceProductClass" msprop:Generator_RowDeletingName="OrderInvoiceProductClassRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceProductClassRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceProductClassRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceProductClassRowDeleted" msprop:Generator_RowClassName="OrderInvoiceProductClassRow" msprop:Generator_UserTableName="OrderInvoiceProductClass" msprop:Generator_RowEvArgName="OrderInvoiceProductClassRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderProductClassID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderProductClassID" msprop:Generator_ColumnPropNameInRow="OrderProductClassID" msprop:Generator_ColumnPropNameInTable="OrderProductClassIDColumn" msprop:Generator_UserColumnName="OrderProductClassID" type="xs:int" />
@@ -1845,7 +1807,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OrderInvoiceDetails" msprop:Generator_TableClassName="OrderInvoiceDetailsDataTable" msprop:Generator_TableVarName="tableOrderInvoiceDetails" msprop:Generator_RowChangedName="OrderInvoiceDetailsRowChanged" msprop:Generator_TablePropName="OrderInvoiceDetails" msprop:Generator_RowDeletingName="OrderInvoiceDetailsRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceDetailsRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceDetailsRowDeleted" msprop:Generator_RowClassName="OrderInvoiceDetailsRow" msprop:Generator_UserTableName="OrderInvoiceDetails" msprop:Generator_RowEvArgName="OrderInvoiceDetailsRowChangeEvent">
+        <xs:element name="OrderInvoiceDetails" msprop:Generator_TableClassName="OrderInvoiceDetailsDataTable" msprop:Generator_TableVarName="tableOrderInvoiceDetails" msprop:Generator_TablePropName="OrderInvoiceDetails" msprop:Generator_RowDeletingName="OrderInvoiceDetailsRowDeleting" msprop:Generator_RowChangingName="OrderInvoiceDetailsRowChanging" msprop:Generator_RowEvHandlerName="OrderInvoiceDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderInvoiceDetailsRowDeleted" msprop:Generator_UserTableName="OrderInvoiceDetails" msprop:Generator_RowChangedName="OrderInvoiceDetailsRowChanged" msprop:Generator_RowEvArgName="OrderInvoiceDetailsRowChangeEvent" msprop:Generator_RowClassName="OrderInvoiceDetailsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="StepOrder" msprop:Generator_ColumnVarNameInTable="columnStepOrder" msprop:Generator_ColumnPropNameInRow="StepOrder" msprop:Generator_ColumnPropNameInTable="StepOrderColumn" msprop:Generator_UserColumnName="StepOrder" type="xs:int" />
@@ -1866,7 +1828,7 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="InvoiceProcesses" msprop:Generator_TableClassName="InvoiceProcessesDataTable" msprop:Generator_TableVarName="tableInvoiceProcesses" msprop:Generator_TablePropName="InvoiceProcesses" msprop:Generator_RowDeletingName="InvoiceProcessesRowDeleting" msprop:Generator_RowChangingName="InvoiceProcessesRowChanging" msprop:Generator_RowEvHandlerName="InvoiceProcessesRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceProcessesRowDeleted" msprop:Generator_UserTableName="InvoiceProcesses" msprop:Generator_RowChangedName="InvoiceProcessesRowChanged" msprop:Generator_RowEvArgName="InvoiceProcessesRowChangeEvent" msprop:Generator_RowClassName="InvoiceProcessesRow">
+        <xs:element name="InvoiceProcesses" msprop:Generator_TableClassName="InvoiceProcessesDataTable" msprop:Generator_TableVarName="tableInvoiceProcesses" msprop:Generator_RowChangedName="InvoiceProcessesRowChanged" msprop:Generator_TablePropName="InvoiceProcesses" msprop:Generator_RowDeletingName="InvoiceProcessesRowDeleting" msprop:Generator_RowChangingName="InvoiceProcessesRowChanging" msprop:Generator_RowEvHandlerName="InvoiceProcessesRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceProcessesRowDeleted" msprop:Generator_RowClassName="InvoiceProcessesRow" msprop:Generator_UserTableName="InvoiceProcesses" msprop:Generator_RowEvArgName="InvoiceProcessesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:int" />
@@ -1956,43 +1918,43 @@ WHERE Status = 'Closed' and OrderID = @OrderID</CommandText>
       <xs:selector xpath=".//mstns:InvoiceProcesses" />
       <xs:field xpath="mstns:OrderID" />
     </xs:unique>
-    <xs:keyref name="FK_SysproInvoiceOrder_SysproInvoice" refer="SysproInvoice_Constraint1" msprop:rel_Generator_UserChildTable="SysproInvoiceOrder" msprop:rel_Generator_ChildPropName="GetSysproInvoiceOrderRows" msprop:rel_Generator_UserRelationName="FK_SysproInvoiceOrder_SysproInvoice" msprop:rel_Generator_ParentPropName="SysproInvoiceRow" msprop:rel_Generator_RelationVarName="relationFK_SysproInvoiceOrder_SysproInvoice" msprop:rel_Generator_UserParentTable="SysproInvoice">
-      <xs:selector xpath=".//mstns:SysproInvoiceOrder" />
-      <xs:field xpath="mstns:SysproInvoiceId" />
-    </xs:keyref>
-    <xs:keyref name="FK_OrderInvoice_SysproInvoiceOrder" refer="Constraint1" msprop:rel_Generator_UserChildTable="SysproInvoiceOrder" msprop:rel_Generator_ChildPropName="GetSysproInvoiceOrderRows" msprop:rel_Generator_UserRelationName="FK_OrderInvoice_SysproInvoiceOrder" msprop:rel_Generator_ParentPropName="OrderInvoiceRow" msprop:rel_Generator_RelationVarName="relationFK_OrderInvoice_SysproInvoiceOrder" msprop:rel_Generator_UserParentTable="OrderInvoice">
+    <xs:keyref name="FK_OrderInvoice_SysproInvoiceOrder" refer="Constraint1" msprop:rel_Generator_UserChildTable="SysproInvoiceOrder" msprop:rel_Generator_ChildPropName="GetSysproInvoiceOrderRows" msprop:rel_Generator_UserRelationName="FK_OrderInvoice_SysproInvoiceOrder" msprop:rel_Generator_RelationVarName="relationFK_OrderInvoice_SysproInvoiceOrder" msprop:rel_Generator_UserParentTable="OrderInvoice" msprop:rel_Generator_ParentPropName="OrderInvoiceRow">
       <xs:selector xpath=".//mstns:SysproInvoiceOrder" />
       <xs:field xpath="mstns:OrderId" />
     </xs:keyref>
-    <xs:keyref name="FK_Part_Order" refer="PartSummary_Constraint1" msprop:rel_Generator_UserChildTable="OrderInvoice" msprop:rel_Generator_ChildPropName="GetOrderInvoiceRows" msprop:rel_Generator_UserRelationName="FK_Part_Order" msprop:rel_Generator_ParentPropName="PartSummaryRow" msprop:rel_Generator_RelationVarName="relationFK_Part_Order" msprop:rel_Generator_UserParentTable="PartSummary" msdata:UpdateRule="None" msdata:DeleteRule="None">
+    <xs:keyref name="FK_SysproInvoiceOrder_SysproInvoice" refer="SysproInvoice_Constraint1" msprop:rel_Generator_UserChildTable="SysproInvoiceOrder" msprop:rel_Generator_ChildPropName="GetSysproInvoiceOrderRows" msprop:rel_Generator_UserRelationName="FK_SysproInvoiceOrder_SysproInvoice" msprop:rel_Generator_RelationVarName="relationFK_SysproInvoiceOrder_SysproInvoice" msprop:rel_Generator_UserParentTable="SysproInvoice" msprop:rel_Generator_ParentPropName="SysproInvoiceRow">
+      <xs:selector xpath=".//mstns:SysproInvoiceOrder" />
+      <xs:field xpath="mstns:SysproInvoiceId" />
+    </xs:keyref>
+    <xs:keyref name="FK_Part_Order" refer="PartSummary_Constraint1" msprop:rel_Generator_UserChildTable="OrderInvoice" msprop:rel_Generator_ChildPropName="GetOrderInvoiceRows" msprop:rel_Generator_UserRelationName="FK_Part_Order" msprop:rel_Generator_RelationVarName="relationFK_Part_Order" msprop:rel_Generator_UserParentTable="PartSummary" msprop:rel_Generator_ParentPropName="PartSummaryRow" msdata:UpdateRule="None" msdata:DeleteRule="None">
       <xs:selector xpath=".//mstns:OrderInvoice" />
       <xs:field xpath="mstns:PartID" />
     </xs:keyref>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="Customer_OrderInvoice" msdata:parent="OrderInvoiceCustomer" msdata:child="OrderInvoice" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoice" msprop:Generator_ChildPropName="GetOrderInvoiceRows" msprop:Generator_UserRelationName="Customer_OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" msprop:Generator_RelationVarName="relationCustomer_OrderInvoice" msprop:Generator_UserParentTable="OrderInvoiceCustomer" />
-      <msdata:Relationship name="OrderInvoice_OrderFees" msdata:parent="OrderInvoice" msdata:child="OrderFees" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderFees" msprop:Generator_ChildPropName="GetOrderFeesRows" msprop:Generator_UserRelationName="OrderInvoice_OrderFees" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_OrderFees" msprop:Generator_UserParentTable="OrderInvoice" />
-      <msdata:Relationship name="OrderInvoice_OrderShipment" msdata:parent="OrderInvoice" msdata:child="OrderShipment" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderShipment" msprop:Generator_ChildPropName="GetOrderShipmentRows" msprop:Generator_UserRelationName="OrderInvoice_OrderShipment" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_OrderShipment" msprop:Generator_UserParentTable="OrderInvoice" />
-      <msdata:Relationship name="FK_Part_Customer" msdata:parent="OrderInvoiceCustomer" msdata:child="PartSummary" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="PartSummary" msprop:Generator_ChildPropName="GetPartSummaryRows" msprop:Generator_UserRelationName="FK_Part_Customer" msprop:Generator_RelationVarName="relationFK_Part_Customer" msprop:Generator_UserParentTable="OrderInvoiceCustomer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" />
-      <msdata:Relationship name="FK_Part_Customer1" msdata:parent="OrderInvoice" msdata:child="PartSummary" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="PartSummary" msprop:Generator_ChildPropName="GetPartSummaryRows" msprop:Generator_UserRelationName="FK_Part_Customer1" msprop:Generator_RelationVarName="relationFK_Part_Customer1" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
-      <msdata:Relationship name="OrderFees_OrderFeeType" msdata:parent="OrderFeeType" msdata:child="OrderFees" msdata:parentkey="OrderFeeTypeID" msdata:childkey="OrderFeeTypeID" msprop:Generator_UserChildTable="OrderFees" msprop:Generator_ChildPropName="GetOrderFeesRows" msprop:Generator_UserRelationName="OrderFees_OrderFeeType" msprop:Generator_RelationVarName="relationOrderFees_OrderFeeType" msprop:Generator_UserParentTable="OrderFeeType" msprop:Generator_ParentPropName="OrderFeeTypeRow" />
-      <msdata:Relationship name="FK_CustomerAddress_Customer" msdata:parent="OrderInvoiceCustomer" msdata:child="OrderInvoiceCustomerAddress" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceCustomerAddress" msprop:Generator_ChildPropName="GetOrderInvoiceCustomerAddressRows" msprop:Generator_UserRelationName="FK_CustomerAddress_Customer" msprop:Generator_RelationVarName="relationFK_CustomerAddress_Customer" msprop:Generator_UserParentTable="OrderInvoiceCustomer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" />
-      <msdata:Relationship name="FK_CustomerAddress_Customer1" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceCustomerAddress" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceCustomerAddress" msprop:Generator_ChildPropName="GetOrderInvoiceCustomerAddressRows" msprop:Generator_UserRelationName="FK_CustomerAddress_Customer1" msprop:Generator_RelationVarName="relationFK_CustomerAddress_Customer1" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
-      <msdata:Relationship name="d_Department_OrderProcessingDetail" msdata:parent="d_Department" msdata:child="OrderProcessingDetail" msdata:parentkey="DepartmentID" msdata:childkey="Department" msprop:Generator_UserChildTable="OrderProcessingDetail" msprop:Generator_ChildPropName="GetOrderProcessingDetailRows" msprop:Generator_UserRelationName="d_Department_OrderProcessingDetail" msprop:Generator_RelationVarName="relationd_Department_OrderProcessingDetail" msprop:Generator_UserParentTable="d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" />
-      <msdata:Relationship name="OrderInvoice_OrderCustomFieldsSummary" msdata:parent="OrderInvoice" msdata:child="OrderCustomFieldsSummary" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderCustomFieldsSummary" msprop:Generator_ChildPropName="GetOrderCustomFieldsSummaryRows" msprop:Generator_UserRelationName="OrderInvoice_OrderCustomFieldsSummary" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_OrderCustomFieldsSummary" msprop:Generator_UserParentTable="OrderInvoice" />
-      <msdata:Relationship name="FK_SalesOrder_Customer" msdata:parent="OrderInvoiceCustomer" msdata:child="OrderInvoiceSalesOrder" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceSalesOrder" msprop:Generator_ChildPropName="GetOrderInvoiceSalesOrderRows" msprop:Generator_UserRelationName="FK_SalesOrder_Customer" msprop:Generator_RelationVarName="relationFK_SalesOrder_Customer" msprop:Generator_UserParentTable="OrderInvoiceCustomer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" />
-      <msdata:Relationship name="OrderInvoice_SalesOrder" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceSalesOrder" msdata:parentkey="SalesOrderID" msdata:childkey="SalesOrderID" msprop:Generator_UserChildTable="OrderInvoiceSalesOrder" msprop:Generator_ChildPropName="GetOrderInvoiceSalesOrderRows" msprop:Generator_UserRelationName="OrderInvoice_SalesOrder" msprop:Generator_RelationVarName="relationOrderInvoice_SalesOrder" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
-      <msdata:Relationship name="OrderInvoice_OrderInvoiceSerialNumber" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceSerialNumber" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceSerialNumber" msprop:Generator_ChildPropName="GetOrderInvoiceSerialNumberRows" msprop:Generator_UserRelationName="OrderInvoice_OrderInvoiceSerialNumber" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_OrderInvoiceSerialNumber" msprop:Generator_UserParentTable="OrderInvoice" />
-      <msdata:Relationship name="FK_OrderShipment_CustomerAddress" msdata:parent="OrderInvoiceCustomerAddress" msdata:child="OrderShipment" msdata:parentkey="CustomerAddressID" msdata:childkey="CustomerAddressID" msprop:Generator_UserChildTable="OrderShipment" msprop:Generator_ChildPropName="GetOrderShipmentRows" msprop:Generator_UserRelationName="FK_OrderShipment_CustomerAddress" msprop:Generator_ParentPropName="OrderInvoiceCustomerAddressRow" msprop:Generator_RelationVarName="relationFK_OrderShipment_CustomerAddress" msprop:Generator_UserParentTable="OrderInvoiceCustomerAddress" />
-      <msdata:Relationship name="FK_SalesOrder_Customer1" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceSalesOrder" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceSalesOrder" msprop:Generator_ChildPropName="GetOrderInvoiceSalesOrderRowsByFK_SalesOrder_Customer1" msprop:Generator_UserRelationName="FK_SalesOrder_Customer1" msprop:Generator_RelationVarName="relationFK_SalesOrder_Customer1" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRowByFK_SalesOrder_Customer1" />
-      <msdata:Relationship name="OrderInvoice_OrderProductClass" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceProductClass" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceProductClass" msprop:Generator_ChildPropName="GetOrderInvoiceProductClassRows" msprop:Generator_UserRelationName="OrderInvoice_OrderProductClass" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_OrderProductClass" msprop:Generator_UserParentTable="OrderInvoice" />
-      <msdata:Relationship name="OrderInvoice_OrderProcessingDetail" msdata:parent="OrderInvoice" msdata:child="OrderProcessingDetail" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderProcessingDetail" msprop:Generator_ChildPropName="GetOrderProcessingDetailRows" msprop:Generator_UserRelationName="OrderInvoice_OrderProcessingDetail" msprop:Generator_RelationVarName="relationOrderInvoice_OrderProcessingDetail" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
-      <msdata:Relationship name="FK_OrderProcesses_d_Department" msdata:parent="d_Department" msdata:child="OrderInvoiceDetails" msdata:parentkey="DepartmentID" msdata:childkey="Department" msprop:Generator_UserChildTable="OrderInvoiceDetails" msprop:Generator_ChildPropName="GetOrderInvoiceDetailsRows" msprop:Generator_UserRelationName="FK_OrderProcesses_d_Department" msprop:Generator_RelationVarName="relationFK_OrderProcesses_d_Department" msprop:Generator_UserParentTable="d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" />
-      <msdata:Relationship name="FK_OrderFees_Order" msdata:parent="InvoiceProcesses" msdata:child="OrderFees" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderFees" msprop:Generator_ChildPropName="GetOrderFeesRows" msprop:Generator_UserRelationName="FK_OrderFees_Order" msprop:Generator_RelationVarName="relationFK_OrderFees_Order" msprop:Generator_UserParentTable="InvoiceProcesses" msprop:Generator_ParentPropName="InvoiceProcessesRow" />
-      <msdata:Relationship name="FK_OrderSerialNumber_Order" msdata:parent="InvoiceProcesses" msdata:child="OrderInvoiceSerialNumber" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceSerialNumber" msprop:Generator_ChildPropName="GetOrderInvoiceSerialNumberRows" msprop:Generator_UserRelationName="FK_OrderSerialNumber_Order" msprop:Generator_RelationVarName="relationFK_OrderSerialNumber_Order" msprop:Generator_UserParentTable="InvoiceProcesses" msprop:Generator_ParentPropName="InvoiceProcessesRow" />
-      <msdata:Relationship name="FK_SysproInvoiceOrder_Order" msdata:parent="InvoiceProcesses" msdata:child="SysproInvoiceOrder" msdata:parentkey="OrderID" msdata:childkey="OrderId" msprop:Generator_UserChildTable="SysproInvoiceOrder" msprop:Generator_ChildPropName="GetSysproInvoiceOrderRows" msprop:Generator_UserRelationName="FK_SysproInvoiceOrder_Order" msprop:Generator_RelationVarName="relationFK_SysproInvoiceOrder_Order" msprop:Generator_UserParentTable="InvoiceProcesses" msprop:Generator_ParentPropName="InvoiceProcessesRow" />
-      <msdata:Relationship name="FK_OrderProductClass_Order" msdata:parent="InvoiceProcesses" msdata:child="OrderInvoiceProductClass" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceProductClass" msprop:Generator_ChildPropName="GetOrderInvoiceProductClassRows" msprop:Generator_UserRelationName="FK_OrderProductClass_Order" msprop:Generator_RelationVarName="relationFK_OrderProductClass_Order" msprop:Generator_UserParentTable="InvoiceProcesses" msprop:Generator_ParentPropName="InvoiceProcessesRow" />
+      <msdata:Relationship name="Customer_OrderInvoice" msdata:parent="OrderInvoiceCustomer" msdata:child="OrderInvoice" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoice" msprop:Generator_ChildPropName="GetOrderInvoiceRows" msprop:Generator_UserRelationName="Customer_OrderInvoice" msprop:Generator_RelationVarName="relationCustomer_OrderInvoice" msprop:Generator_UserParentTable="OrderInvoiceCustomer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" />
+      <msdata:Relationship name="OrderInvoice_OrderFees" msdata:parent="OrderInvoice" msdata:child="OrderFees" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderFees" msprop:Generator_ChildPropName="GetOrderFeesRows" msprop:Generator_UserRelationName="OrderInvoice_OrderFees" msprop:Generator_RelationVarName="relationOrderInvoice_OrderFees" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
+      <msdata:Relationship name="OrderInvoice_OrderShipment" msdata:parent="OrderInvoice" msdata:child="OrderShipment" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderShipment" msprop:Generator_ChildPropName="GetOrderShipmentRows" msprop:Generator_UserRelationName="OrderInvoice_OrderShipment" msprop:Generator_RelationVarName="relationOrderInvoice_OrderShipment" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
+      <msdata:Relationship name="FK_Part_Customer" msdata:parent="OrderInvoiceCustomer" msdata:child="PartSummary" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="PartSummary" msprop:Generator_ChildPropName="GetPartSummaryRows" msprop:Generator_UserRelationName="FK_Part_Customer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" msprop:Generator_RelationVarName="relationFK_Part_Customer" msprop:Generator_UserParentTable="OrderInvoiceCustomer" />
+      <msdata:Relationship name="FK_Part_Customer1" msdata:parent="OrderInvoice" msdata:child="PartSummary" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="PartSummary" msprop:Generator_ChildPropName="GetPartSummaryRows" msprop:Generator_UserRelationName="FK_Part_Customer1" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationFK_Part_Customer1" msprop:Generator_UserParentTable="OrderInvoice" />
+      <msdata:Relationship name="OrderFees_OrderFeeType" msdata:parent="OrderFeeType" msdata:child="OrderFees" msdata:parentkey="OrderFeeTypeID" msdata:childkey="OrderFeeTypeID" msprop:Generator_UserChildTable="OrderFees" msprop:Generator_ChildPropName="GetOrderFeesRows" msprop:Generator_UserRelationName="OrderFees_OrderFeeType" msprop:Generator_ParentPropName="OrderFeeTypeRow" msprop:Generator_RelationVarName="relationOrderFees_OrderFeeType" msprop:Generator_UserParentTable="OrderFeeType" />
+      <msdata:Relationship name="FK_CustomerAddress_Customer" msdata:parent="OrderInvoiceCustomer" msdata:child="OrderInvoiceCustomerAddress" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceCustomerAddress" msprop:Generator_ChildPropName="GetOrderInvoiceCustomerAddressRows" msprop:Generator_UserRelationName="FK_CustomerAddress_Customer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" msprop:Generator_RelationVarName="relationFK_CustomerAddress_Customer" msprop:Generator_UserParentTable="OrderInvoiceCustomer" />
+      <msdata:Relationship name="FK_CustomerAddress_Customer1" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceCustomerAddress" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceCustomerAddress" msprop:Generator_ChildPropName="GetOrderInvoiceCustomerAddressRows" msprop:Generator_UserRelationName="FK_CustomerAddress_Customer1" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationFK_CustomerAddress_Customer1" msprop:Generator_UserParentTable="OrderInvoice" />
+      <msdata:Relationship name="d_Department_OrderProcessingDetail" msdata:parent="d_Department" msdata:child="OrderProcessingDetail" msdata:parentkey="DepartmentID" msdata:childkey="Department" msprop:Generator_UserChildTable="OrderProcessingDetail" msprop:Generator_ChildPropName="GetOrderProcessingDetailRows" msprop:Generator_UserRelationName="d_Department_OrderProcessingDetail" msprop:Generator_ParentPropName="d_DepartmentRow" msprop:Generator_RelationVarName="relationd_Department_OrderProcessingDetail" msprop:Generator_UserParentTable="d_Department" />
+      <msdata:Relationship name="OrderInvoice_OrderCustomFieldsSummary" msdata:parent="OrderInvoice" msdata:child="OrderCustomFieldsSummary" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderCustomFieldsSummary" msprop:Generator_ChildPropName="GetOrderCustomFieldsSummaryRows" msprop:Generator_UserRelationName="OrderInvoice_OrderCustomFieldsSummary" msprop:Generator_RelationVarName="relationOrderInvoice_OrderCustomFieldsSummary" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
+      <msdata:Relationship name="FK_SalesOrder_Customer" msdata:parent="OrderInvoiceCustomer" msdata:child="OrderInvoiceSalesOrder" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceSalesOrder" msprop:Generator_ChildPropName="GetOrderInvoiceSalesOrderRows" msprop:Generator_UserRelationName="FK_SalesOrder_Customer" msprop:Generator_ParentPropName="OrderInvoiceCustomerRow" msprop:Generator_RelationVarName="relationFK_SalesOrder_Customer" msprop:Generator_UserParentTable="OrderInvoiceCustomer" />
+      <msdata:Relationship name="OrderInvoice_SalesOrder" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceSalesOrder" msdata:parentkey="SalesOrderID" msdata:childkey="SalesOrderID" msprop:Generator_UserChildTable="OrderInvoiceSalesOrder" msprop:Generator_ChildPropName="GetOrderInvoiceSalesOrderRows" msprop:Generator_UserRelationName="OrderInvoice_SalesOrder" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_SalesOrder" msprop:Generator_UserParentTable="OrderInvoice" />
+      <msdata:Relationship name="OrderInvoice_OrderInvoiceSerialNumber" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceSerialNumber" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceSerialNumber" msprop:Generator_ChildPropName="GetOrderInvoiceSerialNumberRows" msprop:Generator_UserRelationName="OrderInvoice_OrderInvoiceSerialNumber" msprop:Generator_RelationVarName="relationOrderInvoice_OrderInvoiceSerialNumber" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
+      <msdata:Relationship name="FK_OrderShipment_CustomerAddress" msdata:parent="OrderInvoiceCustomerAddress" msdata:child="OrderShipment" msdata:parentkey="CustomerAddressID" msdata:childkey="CustomerAddressID" msprop:Generator_UserChildTable="OrderShipment" msprop:Generator_ChildPropName="GetOrderShipmentRows" msprop:Generator_UserRelationName="FK_OrderShipment_CustomerAddress" msprop:Generator_RelationVarName="relationFK_OrderShipment_CustomerAddress" msprop:Generator_UserParentTable="OrderInvoiceCustomerAddress" msprop:Generator_ParentPropName="OrderInvoiceCustomerAddressRow" />
+      <msdata:Relationship name="FK_SalesOrder_Customer1" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceSalesOrder" msdata:parentkey="CustomerID" msdata:childkey="CustomerID" msprop:Generator_UserChildTable="OrderInvoiceSalesOrder" msprop:Generator_ChildPropName="GetOrderInvoiceSalesOrderRowsByFK_SalesOrder_Customer1" msprop:Generator_UserRelationName="FK_SalesOrder_Customer1" msprop:Generator_ParentPropName="OrderInvoiceRowByFK_SalesOrder_Customer1" msprop:Generator_RelationVarName="relationFK_SalesOrder_Customer1" msprop:Generator_UserParentTable="OrderInvoice" />
+      <msdata:Relationship name="OrderInvoice_OrderProductClass" msdata:parent="OrderInvoice" msdata:child="OrderInvoiceProductClass" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceProductClass" msprop:Generator_ChildPropName="GetOrderInvoiceProductClassRows" msprop:Generator_UserRelationName="OrderInvoice_OrderProductClass" msprop:Generator_RelationVarName="relationOrderInvoice_OrderProductClass" msprop:Generator_UserParentTable="OrderInvoice" msprop:Generator_ParentPropName="OrderInvoiceRow" />
+      <msdata:Relationship name="OrderInvoice_OrderProcessingDetail" msdata:parent="OrderInvoice" msdata:child="OrderProcessingDetail" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderProcessingDetail" msprop:Generator_ChildPropName="GetOrderProcessingDetailRows" msprop:Generator_UserRelationName="OrderInvoice_OrderProcessingDetail" msprop:Generator_ParentPropName="OrderInvoiceRow" msprop:Generator_RelationVarName="relationOrderInvoice_OrderProcessingDetail" msprop:Generator_UserParentTable="OrderInvoice" />
+      <msdata:Relationship name="FK_OrderProcesses_d_Department" msdata:parent="d_Department" msdata:child="OrderInvoiceDetails" msdata:parentkey="DepartmentID" msdata:childkey="Department" msprop:Generator_UserChildTable="OrderInvoiceDetails" msprop:Generator_ChildPropName="GetOrderInvoiceDetailsRows" msprop:Generator_UserRelationName="FK_OrderProcesses_d_Department" msprop:Generator_ParentPropName="d_DepartmentRow" msprop:Generator_RelationVarName="relationFK_OrderProcesses_d_Department" msprop:Generator_UserParentTable="d_Department" />
+      <msdata:Relationship name="FK_OrderFees_Order" msdata:parent="InvoiceProcesses" msdata:child="OrderFees" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderFees" msprop:Generator_ChildPropName="GetOrderFeesRows" msprop:Generator_UserRelationName="FK_OrderFees_Order" msprop:Generator_ParentPropName="InvoiceProcessesRow" msprop:Generator_RelationVarName="relationFK_OrderFees_Order" msprop:Generator_UserParentTable="InvoiceProcesses" />
+      <msdata:Relationship name="FK_OrderSerialNumber_Order" msdata:parent="InvoiceProcesses" msdata:child="OrderInvoiceSerialNumber" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceSerialNumber" msprop:Generator_ChildPropName="GetOrderInvoiceSerialNumberRows" msprop:Generator_UserRelationName="FK_OrderSerialNumber_Order" msprop:Generator_ParentPropName="InvoiceProcessesRow" msprop:Generator_RelationVarName="relationFK_OrderSerialNumber_Order" msprop:Generator_UserParentTable="InvoiceProcesses" />
+      <msdata:Relationship name="FK_SysproInvoiceOrder_Order" msdata:parent="InvoiceProcesses" msdata:child="SysproInvoiceOrder" msdata:parentkey="OrderID" msdata:childkey="OrderId" msprop:Generator_UserChildTable="SysproInvoiceOrder" msprop:Generator_ChildPropName="GetSysproInvoiceOrderRows" msprop:Generator_UserRelationName="FK_SysproInvoiceOrder_Order" msprop:Generator_ParentPropName="InvoiceProcessesRow" msprop:Generator_RelationVarName="relationFK_SysproInvoiceOrder_Order" msprop:Generator_UserParentTable="InvoiceProcesses" />
+      <msdata:Relationship name="FK_OrderProductClass_Order" msdata:parent="InvoiceProcesses" msdata:child="OrderInvoiceProductClass" msdata:parentkey="OrderID" msdata:childkey="OrderID" msprop:Generator_UserChildTable="OrderInvoiceProductClass" msprop:Generator_ChildPropName="GetOrderInvoiceProductClassRows" msprop:Generator_UserRelationName="FK_OrderProductClass_Order" msprop:Generator_ParentPropName="InvoiceProcessesRow" msprop:Generator_RelationVarName="relationFK_OrderProductClass_Order" msprop:Generator_UserParentTable="InvoiceProcesses" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

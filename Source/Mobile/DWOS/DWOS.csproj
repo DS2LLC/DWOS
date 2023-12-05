@@ -13,25 +13,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\ApplicationMessages.cs" Link="Web Service Messages\ApplicationMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\BatchInspectionMessages.cs" Link="Web Service Messages\BatchInspectionMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\BatchMessages.cs" Link="Web Service Messages\BatchMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\BatchProcessAnswerMessages.cs" Link="Web Service Messages\BatchProcessAnswerMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\BatchProcessMessages.cs" Link="Web Service Messages\BatchProcessMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\DocumentMessages.cs" Link="Web Service Messages\DocumentMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\LogMessages.cs" Link="Web Service Messages\LogMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\MediaMessages.cs" Link="Web Service Messages\MediaMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\OrderInspectionMessages.cs" Link="Web Service Messages\OrderInspectionMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\OrderMessages.cs" Link="Web Service Messages\OrderMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\OrderNoteMessages.cs" Link="Web Service Messages\OrderNoteMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\OrderProcessAnswerMessages.cs" Link="Web Service Messages\OrderProcessAnswerMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\OrderProcessMessages.cs" Link="Web Service Messages\OrderProcessMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\PartMessages.cs" Link="Web Service Messages\PartMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\ProcessMessages.cs" Link="Web Service Messages\ProcessMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\RequestBase.cs" Link="Web Service Messages\RequestBase.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\ResponseBase.cs" Link="Web Service Messages\ResponseBase.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\TimerMessages.cs" Link="Web Service Messages\TimerMessages.cs" />
-    <Compile Include="..\..\DWOS Server\DWOS.Services\Messages\UserProfileMessages.cs" Link="Web Service Messages\UserProfileMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\ApplicationMessages.cs" Link="Web Service Messages\ApplicationMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\BatchInspectionMessages.cs" Link="Web Service Messages\BatchInspectionMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\BatchMessages.cs" Link="Web Service Messages\BatchMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\BatchProcessAnswerMessages.cs" Link="Web Service Messages\BatchProcessAnswerMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\BatchProcessMessages.cs" Link="Web Service Messages\BatchProcessMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\DocumentMessages.cs" Link="Web Service Messages\DocumentMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\LogMessages.cs" Link="Web Service Messages\LogMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\MediaMessages.cs" Link="Web Service Messages\MediaMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\OrderInspectionMessages.cs" Link="Web Service Messages\OrderInspectionMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\OrderMessages.cs" Link="Web Service Messages\OrderMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\OrderNoteMessages.cs" Link="Web Service Messages\OrderNoteMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\OrderProcessAnswerMessages.cs" Link="Web Service Messages\OrderProcessAnswerMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\OrderProcessMessages.cs" Link="Web Service Messages\OrderProcessMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\PartMessages.cs" Link="Web Service Messages\PartMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\ProcessMessages.cs" Link="Web Service Messages\ProcessMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\RequestBase.cs" Link="Web Service Messages\RequestBase.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\ResponseBase.cs" Link="Web Service Messages\ResponseBase.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\TimerMessages.cs" Link="Web Service Messages\TimerMessages.cs" />
+    <Compile Include="..\..\Server\DWOS.Services\Messages\UserProfileMessages.cs" Link="Web Service Messages\UserProfileMessages.cs" />
     <Compile Include="..\..\VersionInfo.cs" Link="Properties\VersionInfo.cs" />
   </ItemGroup>
 

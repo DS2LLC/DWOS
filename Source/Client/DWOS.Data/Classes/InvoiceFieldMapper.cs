@@ -152,6 +152,8 @@ namespace DWOS.Data
                             case enumTokens.PARTDESC:
                                 token.Header = "Part Desc";
                                 break;
+                            case enumTokens.FEES:
+                                break;
                             case enumTokens.PROCESSES:
                                  token.Header = "Processes";
                                 break;
@@ -164,8 +166,8 @@ namespace DWOS.Data
                             default:
                                 break;
                         }
-
-                        _invoiceTokens.Add(token);
+                        if (token.Header != null)
+                            _invoiceTokens.Add(token);
                     }
                     else
                     {
