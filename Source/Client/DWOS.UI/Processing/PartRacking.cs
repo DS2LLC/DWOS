@@ -235,7 +235,7 @@ namespace DWOS.UI.Processing
                 if(this.cboOrder.SelectedText != "")
                 { 
                     //need to set the Max Value high so selected record can set value if higher that previously set.
-                    this.numPartQty.MaxValue = 100000; 
+                    this.numPartQty.MaxValue = 10000000; 
                     moveToOrder(Convert.ToInt32(this.cboOrder.SelectedText));
                 }
             }

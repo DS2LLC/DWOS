@@ -4979,5 +4979,13 @@ namespace DWOS.UI.Sales
 
         }
 
+        private void numPartQty_ValidationError(object sender, ValidationErrorEventArgs e)
+        {
+            UltraNumericEditor control = (UltraNumericEditor)sender;
+            int qty = (int)control.Value;
+            var txt = e.InvalidText;
+            if (txt.Right(2) == " 0")
+                control.Value = control.MinValue;
+        }
     }
 }

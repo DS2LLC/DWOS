@@ -258,7 +258,7 @@
             // 
             // picLockImage
             // 
-            this.picLockImage.Location = new System.Drawing.Point(23764, 24232);
+            this.picLockImage.Location = new System.Drawing.Point(24180, 24570);
             // 
             // ultraLabel21
             // 
@@ -540,10 +540,10 @@
             // 
             this.numPartQty.Location = new System.Drawing.Point(128, 30);
             this.numPartQty.MaskInput = "nnn,nnn,nnn";
-            this.numPartQty.MaxValue = 100000;
-            this.numPartQty.MinValue = 0;
+            this.numPartQty.MaxValue = 10000000;
+            this.numPartQty.MinValue = 1;
             this.numPartQty.Name = "numPartQty";
-            this.numPartQty.NullText = "0";
+            this.numPartQty.NullText = "1";
             this.numPartQty.PromptChar = ' ';
             this.numPartQty.Size = new System.Drawing.Size(109, 22);
             this.numPartQty.SpinButtonDisplayStyle = Infragistics.Win.ButtonDisplayStyle.OnMouseEnter;
@@ -555,6 +555,7 @@
             this.numPartQty.Value = 1;
             this.numPartQty.ValueChanged += new System.EventHandler(this.numPartQty_ValueChanged);
             this.numPartQty.AfterEnterEditMode += new System.EventHandler(this.numPartQty_AfterEnterEditMode);
+            this.numPartQty.ValidationError += new Infragistics.Win.UltraWinEditors.UltraNumericEditorBase.ValidationErrorEventHandler(this.numPartQty_ValidationError);
             this.numPartQty.Leave += new System.EventHandler(this.QuantityField_Leave);
             // 
             // ultraLabel15
@@ -749,8 +750,8 @@
             this.numWeight.Location = new System.Drawing.Point(322, 30);
             this.numWeight.MaskInput = "nnnnnn.nn lbs";
             this.numWeight.MaxValue = new decimal(new int[] {
-            276447231,
-            23283,
+            -1530494977,
+            232830,
             0,
             524288});
             this.numWeight.MinValue = 0D;
