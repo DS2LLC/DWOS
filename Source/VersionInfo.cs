@@ -2,13 +2,13 @@
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCompany("Dynamic Software Solutions")]
+[assembly: AssemblyCompany("DWOS")]
 [assembly: AssemblyCopyright("Copyright © 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyVersion("23.1.1.4")]
+[assembly: AssemblyVersion("23.1.1.2")]
 [assembly: NeutralResourcesLanguage("en-US")]
 
 /**************************************************************************************************************************
