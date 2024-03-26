@@ -44,7 +44,18 @@ namespace DWOS.LicenseManager
                 var formatter = new BinaryFormatter();
                 using (var fileStream = File.OpenRead(LicenseInfoFile))
                 {
-                    var users = formatter.Deserialize(fileStream) as List<UserActivation>;
+                    var users = new List<UserActivation>(0);
+                    try
+                    {
+                        users = formatter.Deserialize(fileStream) as List<UserActivation>;
+                    }
+                    catch (Exception)
+                    {
+                        //delete file
+                        fileStream.Close();
+                        File.Delete(LicenseInfoFile);
+                    }
+                   
 
                     lock (_userSyncObject)
                     {

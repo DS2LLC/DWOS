@@ -106,8 +106,12 @@ namespace DWOS.LicenseManager
 
         private bool SetServerLicense()
         {
+            var currentCompanyName = ApplicationSettings.Current.CompanyName;
+            if(currentCompanyName == "" || currentCompanyName is null)
+                currentCompanyName = "DWOS";
+
             //create new key, save it, and set it to the default license manager
-            var key = new LicenseFile { Activations = 99, CompanyName = "DWOS", LicenseExpiration = new System.DateTime(9999, 12, 31) };
+            var key = new LicenseFile { Activations = 99, CompanyName = currentCompanyName, LicenseExpiration = new System.DateTime(9999, 12, 31) };
 
             this.CurrentLicense = key;
 
